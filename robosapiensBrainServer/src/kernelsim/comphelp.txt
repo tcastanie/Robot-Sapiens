@@ -1,0 +1,32 @@
+g++ getpart.cpp -o getpart
+./getpart top_nasamap_east.raw 10000 5000 400 300 croptest.raw
+rawtoppm -rgb 400 299 croptest.raw | ppmtojpeg -quality=60 > croptest.jpg
+
+g++ getpart.cpp -o getpart
+./getpart top_nasamap_east.raw 5000 5000 1280 1024 croptest.raw
+rawtoppm -rgb 1280 1024 croptest.raw | ppmtojpeg -quality=60 > croptest.jpg
+
+g++ getpart.cpp -o getpart
+./getpart top_nasamap_east.raw 2000 2000 800 600 croptest.raw
+rawtoppm -rgb 800 600 croptest.raw | ppmtojpeg -quality=60 > croptest.jpg
+
+g++ getpart.cpp -o getpart
+./getpart top_nasamap_east.raw 10000 10000 2048 768 croptest.raw
+rawtoppm -rgb 2048 768 croptest.raw | ppmtojpeg -quality=60 > croptest.jpg
+
+
+rawtoppm -rgb 256 256 rawtest.raw | ppmtojpeg -quality=60 > rawtest.jpg
+
+g++ getpart.cpp -o getpart
+./getpart top_nasamap_east.raw 10000 10000 16 16 croptest.raw
+rawtoppm -rgb 16 16 croptest.raw | ppmtojpeg -quality=60 > croptest.jpg
+
+
+g++ getpart.cpp -o getpart
+./getpart top_nasamap_east.raw 1000 1000 16 16 croptest.raw
+rawtoppm -rgb 16 16 croptest.raw | ppmtojpeg -quality=60 > croptest.jpg
+
+g++ getpart.cpp -o getpart
+./getpart top_nasamap_east.raw 1000 1000 2 2 croptest.raw
+rawtoppm -rgb 16 16 croptest.raw | ppmtojpeg -quality=60 > croptest.jpg
+
