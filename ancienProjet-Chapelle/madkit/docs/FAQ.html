@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>MadKit FAQ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<h1 align="center">MadKit FAQ</h1>
+<h2 align="center">Frequently Asked Questions, Tips and Tricks</h2>
+<p align="center"><font size="+1">The MadKit team</font></p>
+<p align="center"><font size="+1">This FAQ may not be up to date, please get the 
+  last FAQ file at <a href="http://www.madkit.org">www.madkit.org</a></font></p>
+<p>&nbsp;</p>
+<h2>Content</h2>
+<ol>
+  <li><a href="#General">General</a> 
+    <ol>
+      <li><a href="#DISTRIB">Could I use MadKit to create a distributed application?</a></li>
+      <li><a href="#simulation">Could I use MadKit to make Agent Based Simulation 
+        software?</a></li>
+    </ol>
+  </li>
+  <li><a href="#installation">Installation and running MadKit for the first time</a> 
+    <ol>
+      <li><a href="#nothing">I could not install MadKit at all. Nothing happens 
+        when I try to to use the installer.</a></li>
+      <li><a href="#install_linux">I had a bug when installing MadKit on Linux.</a></li>
+      <li><a href="#hang_python">When I run MadKit and I click on some applications, 
+        MadKit hangs...</a></li>
+    </ol>
+  </li>
+  <li><a href="#desktop">Desktop</a> 
+    <ol>
+      <li>How could I build my own toolbar and launch my agents from it?</li>
+      <li>I made a new script file and I don't see it in the MadKit explorator?</li>
+    </ol>
+  </li>
+  <li><a href="#develop">Agents development </a> 
+    <ol>
+      <li><a href="#request">I did a 'requestRole' (or 'createGroup'..) in the 
+        constructor of the agent but it sends me error messages...</a></li>
+      <li><a href="#seconds">When I send a message to another agent, it seems 
+        to take seconds to be taken into account by the receiver</a></li>
+    </ol>
+  </li>
+  <li><a href="#remote">Communications with distant kernels</a> 
+    <ol>
+      <li><a href="#sockets">I would like to make remote agents communicate. Do 
+        I have to use Java sockets or RMI?</a></li>
+      <li><a href="#serializable">I could send messages between agents in the 
+        same virtual machine, but nothing happens when I connected two distant 
+        kernels.</a></li>
+    </ol>
+  </li>
+  <li><a href="#GUI">GUI</a> 
+    <ol>
+      <li><a href="#JPanel">I added a GUI to an agent as a JPanel. Could I change 
+        it dynamically. Can MadKit agents change their GUI on the fly?</a></li>
+      <li>I would like to see the GUI of several agents in the same window. How 
+        could I do it?</li>
+    </ol>
+  </li>
+  <li><a href="#develop">Developping agents under MadKit </a> 
+    <ol>
+      <li><a href="#tutorial">I tried to run the tutorial, but I had errors when 
+        I put the jars into the autoload directory and I started the Desktop..</a></li>
+      <li><a href="#reload">Do I have to reload MadKit each time I compile my 
+        Java agents to use them? </a></li>
+    </ol>
+  </li>
+  <li><a href="#adapting">Adapting and extending MadKit </a> 
+    <ol>
+      <li><a href="#console">How could I start MadKit without the Desktop, with 
+        only one or two agents? </a> </li>
+      <li><a href="#embedding_madkit">I would like to embed MadKit into my application 
+        written in Java</a></li>
+      <li><a href="#CPLUSPLUS">Can MadKit use agents written in C or C++</a></li>
+    </ol>
+  </li>
+</ol>
+<h2>Answers</h2>
+<h3><a name="General"></a>General</h3>
+<h4><a name="DISTRIB"></a>Could I use MadKit to create a distributed application</h4>
+<p>Yes, MadKit is an agent oriented middleware with which you may build distributed 
+  applications. One of the most interesting feature of MadKit is that distribution 
+  is done transparently. You do not have to take care of which agent is remote 
+  or not, Madkit, is handling all the necessary communications and connections 
+  to make agents situated on different platforms work together transparently. 
+  All you have to care is 1) Use the message passing technique of communication 
+  between agents, 2) Run MadKit on the two remote kernels (let us call the computers 
+  <code>toto.org</code> and <code>riri.net</code>), and open a <code>Communicator</code> 
+  agent on both of them. On one of them (<code>toto.org</code> for instance) you 
+  type the name of the other one (<code>riri.net</code> then) and the two will 
+  be connected. This means that the organization of <code>toto.org</code> will 
+  be seen by <code>riri.net</code> (and vice-versa) except for local groups and 
+  some communities, and that agents of both platforms may communicate. Test a 
+  demo program (for instance <code>ping-pong</code> or <code>travel</code>) with 
+  some agents on one kernel and some agents on the other one... See the <a href="userguide/userguide.html">User 
+  Guide</a> and the <a href="agents/systempack/systempack.html#IDALEKYG">description 
+  of the Communicator agent</a> to get some details about it. You have to be aware 
+  that MadKit works on a 'peer to peer' basis, i.e. there is no &quot;server&quot; 
+  and &quot;client&quot;. Every kernel is both a server and a client...</p>
+<h4><a name="simulation"></a>Could I use MadKit to build agent based simulations?</h4>
+<p>Yes MadKit has been widely used for agent based simulations. {{to be detailed}}. 
+  See the <a href="devguide/devguide.html#IDA4SHKG">synchronous engine</a> to 
+  get information about the basic tools and techniques of agent based simulation 
+  (scheduling and observation essentially), and see the Turtle kits manuals (<a href="agents/turtlekit/t1.html">TurtleKit</a> 
+  and <a href="agents/turtlepack/t1.html">Turtle packs</a>), a more &quot;high 
+  level&quot; development context for building simple reactive agents acting in 
+  a two dimension environment. <a href="warbot/index.htm">Warbot</a> is also a 
+  simulation context for testing coordination schemes, which is based on the synchronous 
+  engine. </p>
+<hr>
+<h2><a name="installation"></a>Installing and running MadKit for the first time</h2>
+<h4><a name="nothing"></a>I have not been able to install MadKit at all. Nothing 
+  happens when I try to to use the installer</h4>
+<p>Do you have a Java virtual machine installed. MadKit uses a Java 1.3. It uses 
+  only the JRE (run time support) for its own purpose, but if you want to develop 
+  your agents in Java, you should have a JDK 1.3 (or higher, we use JDK 1.4 for 
+  our own purposes) installed...</p>
+<h4><a name="install_linux"></a>I had a bug when installing MadKit to Linux, the 
+  install did not work</h4>
+<p>We have been aware of a very strange bug which may appear on some Linux distribution. 
+  We use the InstallAnywhere program for installing MadKit. But this Java based 
+  program does not use the command Java, and tries to guess what Java to run. 
+  Unfortunately some Linux distribution comes with a very old Java virtual machine 
+  (called Kaffe) and InstallAnywhere may use it by mistake. Thus, if the install 
+  does not work, check your Java installation. Be sure that you have at least 
+  a jdk 1.3 (type<code> java -version</code> to know the version of your JVM) 
+  installed and remove all obsolete JVM (and remove Kaffe!).</p>
+<h4><a name="hang_python"></a>When I run MadKit and I click on some applications, 
+  MadKit hangs...</h4>
+<p>MadKit may hangs the first time you use it when you click on a Python agent. 
+  The first time Python is used, it creates a <code>cachedir</code> directory 
+  in the install directory of MadKit. This may takes between 10 s to 30 s dependings 
+  on your computer. But this will happen only once. Afterwards, you will be able 
+  to use Python agents quite smoothly and quickly.</p>
+<hr>
+<h3><a name="desktop"></a>Desktop</h3>
+<h4>How could I build my own toolbar and launch my agents from it?</h4>
+<p>This is quite simple. You just have to modify the <code>desktop.ini</code> 
+  file. See the User Guide, <a href="userguide/userguide.html#desktopconfig">configuring 
+  the Desktop</a>.</p>
+<h4>I made a new script file and I don't see it in the MadKit explorator?</h4>
+<p>For the moment you have to quit MadKit and start it back. The construction 
+  of the whole tree is done at launch time. This is a bug which will be solved 
+  very soon. We are really sorry about it...</p>
+<hr>
+<h3><a name="develop"></a>Agents development </h3>
+<h4><a name="request"></a>I did a 'requestRole' (or 'createGroup'..) in the constructor 
+  of the agent but it sends me error messages...</h4>
+<p>You may only use the agent stuff (all the primitives concerning groups and 
+  roles) of an agent AFTER its launch time. Thus, the best way to put all these 
+  things is in its <code>activate()</code> method not in its constructor. When 
+  executing its constructor, and agent is still an object and not an agent yet.</p>
+<h4><a name="seconds"></a>When I send a message to another agent, it seems to 
+  take a lot of time to be taken into account by the receiver</h4>
+<p>This is not normal. Check the connection between the two computers, and use 
+  a demo program which uses the connection (for instance you connect the two computers 
+  using the communicator, and start a 'PingPong' agent on both computers). </p>
+<p>If this test succeeds, then you must suppose that your agent is responsible 
+  for it. Maybe you use a <code>while</code> loop in the activate() or live() 
+  methods in which your agent is trapped.</p>
+<p>If it fails, check the connection between the computers. Make sure that the 
+  version of MadKit in the two computers are not too different (version 2.x and 
+  versions 3.x are not compatible, but all versions 3.1bx are compatibles). Try 
+  some 'pings' between the two computers. Check if they are connected by a network 
+  (sometimes a cable is simply missing... ;-) this happens to everybody..).</p>
+<hr>
+<h3><a name="remote"></a>Communications with distant kernels </h3>
+<h4><a name="sockets"></a>I would like to make remote agents communicate. Do I 
+  have to use Java sockets or RMI?</h4>
+<p>No you do not have to. MadKit is taking care of all the low level communications. 
+  You only have to concentrate on your application. If your agents may communicate 
+  inside the same kernel (the same MadKit application if you prefer), then they 
+  may communicate and interact through a network (local network or Internet). 
+  Sockets are handled by MadKit. RMI is good for client/server applications, but 
+  much too slow to be used a basis for building peer-to-peer applications. See 
+  the <a href="#DISTRIB">answer on distributed applications</a>.</p>
+<h4><a name="serializable"></a>I could send messages between agents in the same 
+  virtual machine, but nothing happens when I connected two distant kernels.</h4>
+<p>This may be due to an important point: if your messages have to transport objects, 
+  these objects have to be declared as 'serializable'. Just make your objects 
+  implements the <code>java.io.serializable</code> interface.</p>
+<p><strong>Note</strong>: be aware that serialization of objects is time consuming 
+  and that serialization copy ALL the objects that are referenced by this object. 
+  Thus you should take care of not transporting &quot;heavy&quot; objects. Objects 
+  having only attributes of primitive types (such as numbers or booleans), or 
+  strings, or collections of such things are OK. </p>
+<hr>
+<h3><a name="GUI"></a>GUI </h3>
+<h4><a name="JPanel"></a>I added a GUI to an agent as a JPanel. Could I change 
+  it dynamically. Can MadKit agents change their GUI on the fly?</h4>
+<p>No you cannot. An agent should get its GUI object permanently. But if your 
+  GUI is a JPanel, you may add and remove graphic component to this JPanel dynamically.</p>
+<h4>I would like to see the GUI of several agents in the same window. How could 
+  I do it?</h4>
+<p>&nbsp;</p>
+<hr>
+<h3><a name="develop"></a>Developping agents under MadKit </h3>
+<h4><a name="tutorial"></a>I tried to run the tutorial, but I had errors when 
+  I put the jars into the autoload directory and I started the Desktop..</h4>
+<p>To compile the tutorial, you have two solutions: the first one consists in 
+  using the <code>compile.bat</code> (there is no <code>compile.sh</code>, but 
+  this should be staightforward to make one from the <code>compile.bat</code> 
+  for any Unix user). This file compiles the .java files, build the .class, makes 
+  a jar and copy this jar into the autoload directory.</p>
+<p>The second one, which is the best one I think, is to use the <strong>Ant</strong> 
+  program, which is a kind a 'make' program written in Java. <strong>Ant</strong> 
+  is very popular amond Java developper and if you plan to develop all your agents 
+  in Java, you should consider Ant. We have placed a build.xml file (the kind 
+  of file ant uses) in the all tutorial folders. This file does the same as the 
+  compile.bat above, but does in a better way ;-). Open a shell (also called terminal, 
+  DOS or command prompt) go to your tutorial directory and type: <code>ant</code>. 
+  That's all: the java files are compiled, the jar is made and placed in the autoload 
+  folder automatically.</p>
+<h4><a name="reload"></a>Do I have to reload MadKit each time I compile my Java 
+  agents to use them? </h4>
+<p>Unfortunately yes! Well, for the moment, If you want to use the Desktop, you 
+  have to reload MadKit each time you develop a recompile a Java agent, because 
+  Java does not like very much to remove and/or modify classes that have already 
+  been loaded. We work on that subject, and we hope that this will be possible 
+  in a near future....</p>
+<h3><a name="adapting"></a>Adapting and extending MadKit </h3>
+<h4><a name="console"></a>How could I start MadKit without the Desktop, with only 
+  one or two agents? </h4>
+<p>Start with console, using the console.bat or console.sh command and define 
+  a config.file (a config file is a XML file which contains a set of agents) which 
+  will contain the agents you want to launch at startup. See the <a href="userguide/userguide.html#console">Console 
+  container in the user guide</a> to get more details and look at the <code>testconfig.cfg</code> 
+  file to get the structure of a configuration file (see also the <a href="userguide/userguide.html#configfile">User 
+  Guide, configuring the Desktop</a>).</p>
+<h4><a name="embedding_madkit"></a>I would like to embed MadKit into my application 
+  written in Java</h4>
+<p>This is quite easy. If you do not use any of the provided agents (for instance 
+  only the communicator and your specific agents) you just have to put <strong>boot.jar</strong> 
+  with the jars of your application, and make your classpath application points 
+  to these files. You must have some directories (at least <code>libs/madkit</code> 
+  and <code>libs/support</code>) to contains all the jars of MadKit that you want 
+  to use (<strong>madkit.jar</strong> is required, but you may also use <code>communicator.jar</code> 
+  if you want to connect to other kernels, <strong>system.jar</strong> if you 
+  plan to use some of the system agents, etc.). You may need also to add some 
+  support files (ex: <strong>xerces.jar</strong>) as third party support.</p>
+<p>Then, in your applications you must have a line to start and initialize MadKit. 
+  In this line you should pass the argument to MadKit and express, that for instance 
+  you want to use the agents GUI, and the communicator. In this case, this line 
+  should look like:</p>
+<table border="0" bgcolor="#E0E0E0"><pre class="synopsis">
+  <tr>
+    <td>
+		Vector c = new Vector();
+		c.add(&quot;--communicator-on&quot;);
+		c.add(&quot;--graphics&quot;);
+		c.add(&quot;--config&quot;);
+		c.add(&quot;myConfigFile.cfg&quot;);<br>       c.insertElementAt(&quot;madkit.platform.console.Booter&quot;,0);
+       madkit.boot.Madkit.main((String[]) c.toArray(new String[0]));<br></td>
+  </tr> </pre>
+</table>
+<p>The console booter is the simplest init program to use for launching MadKit. 
+  You may create your own by deriving your boot program from <code>madkit.kernel.AbstractMadkitBooter</code>. 
+  You may use a configuration file (here called myConfig.file) to launch agents 
+  while starting your application.</p>
+<p><strong>Caution</strong>: you do not need to (and should not do it!) add the 
+  jar files to your classpath. You only have to make sure that your classpath 
+  points to the boot.jar. You may use the config.file to launch agents at start 
+  time. </p>
+<h4><a name="CPLUSPLUS"></a>Can MadKit use agents written in C or C++</h4>
+<p>MadKit may be developped in all languages that are compiled into Java (there 
+  are a great number of such languages. See the site {{}} to get a list of all 
+  these languages. For the moment, MadKit comes with 4 scripting languages which 
+  are executed in the Java Virtual Machine: Scheme (Kawa), Jess (rule based language), 
+  BeanShell (Java interpreted) and Python (jython). Using the JNI (Java Native 
+  Interface) technique, it should be possible to develop agents written in C or 
+  C++. It is also possible to embed Java agents in C/C++ applications using the 
+  same technique, using JNI as a glue between the two worlds.</p>
+</body>
+</html>

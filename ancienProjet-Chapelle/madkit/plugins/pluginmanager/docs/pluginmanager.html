@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>Plugin Manager</TITLE>
+<META NAME="description" CONTENT="Plugin Manager">
+<META NAME="keywords" CONTENT="pluginmanager, madkit, plugins, install">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+</HEAD>
+
+<BODY >
+<H1 ALIGN="CENTER">Plugin Manager</H1>
+<DIV CLASS="author_info">
+
+<P ALIGN="CENTER"><STRONG>Sebastian Rodriguez</STRONG></P>
+<P ALIGN="CENTER"><I>email: sebastian.rodriguez@utbm.fr</I></P>
+</DIV>
+<BR>
+
+<H2><A NAME="sec_contents">
+Contents</A>
+</H2>
+<!--Table of Contents-->
+
+<UL>
+<LI><A HREF="pluginmanager.html#sec_whatisit">What is it?</A>
+<LI><A HREF="pluginmanager.html#sec_install">Installing Plugins</A>
+<UL>
+<LI><A  HREF="pluginmanager.html#sec_upgrade">Upgrading your plugins</A>
+</UL>
+<BR>
+<LI><A HREF="pluginmanager.html#sec_developers">Developers</A>
+<UL>
+<LI><A HREF="pluginmanager.html#sec_categories">Categories?</A>
+<LI><A HREF="pluginmanager.html#sec_ant_file">Ant Build file</A>
+<LI><A HREF="pluginmanager.html#sec_actions">Adding actions to your plugins</A>
+	<ul>
+	<LI><A HREF="pluginmanager.html#sec_actions_docref">DocRef</A></LI>
+	</ul>
+</UL>
+<LI><A HREF="pluginmanager.html#sec_troubles">Troubleshooting</A>
+</UL>
+<!--End of Table of Contents-->
+<P>
+
+<H1><A NAME="sec_whatisit">
+What is it?</A>
+</H1>
+The plugin Manager keeps track of the installed plugins to make it easier to upgrade your
+system. It also lets you install only those plugins that you want.
+It will download the plugin, remove the old version and, finally, install the new one.
+
+<P>
+
+<H1><A NAME="sec_install">Installing Plugins</A></H1>
+
+<p>You can also install madkit with the plugin manager. There are two way to install madkit with the plugin manger, from the network, via http, and from your local system.
+The advantage of installing madkit with the plugin manager is that it keeps track of plugins you installed and their versions. With this information upgrading your madkit installation is just a few clicks away. You can also install only the plugins that you need.</p>
+
+<p>Here is a small step by step description to install madkit</p>
+
+<UL>
+<LI>Get a copy of the installer version, usually named plugininstaller-x.y.z.zip. Where x.y.z is the plugin installer's version.
+<BR>
+<P>
+</LI>
+<LI>Run the installer
+
+<P>
+$ unzip plugininstaller-x.y.z.zip
+<BR>$ cd plugininstaller-x.y.z
+
+<P>
+Then run the script to launch the installer, either plugininstaller.sh or madkit-install.exe
+<BR>
+The installer will show you the GPL license and ask you to select the installation
+directory.
+<BR>
+Then click "Done".
+<br>
+You will see a window asking for you name and email. <strong>IMPORTANT:</strong>
+This information will be sent to the Download Source as your username (your name) and password (your email).<br>
+If you are behind a proxy you can also enter the information here. Please use only the server's name: proxy.yourdomain.com and not http://proxy.yourdomain.com. <br>
+<P>
+<IMG src="images/plug-install-info.png" width="542" height="245" border="0">
+<P>
+Once you accept, will see the plugin manager window. You can always change your information in "Settings" -> "Options" -> "Settings" <br>
+<P>
+<IMG
+  WIDTH="199" HEIGHT="250" ALIGN="BOTTOM" BORDER="0"
+ SRC="./images/new-install.png"
+ ALT="Image new-install">
+
+<P>
+</LI>
+<Li>As I mentioned, here you have to different possibilities:
+	<ol>
+	<li><strong>From the network:</strong>
+		<ul>
+		<LI>Set the download server. You need to download the available plugins list from a server.
+		To set the server's address you can click on <SPAN  CLASS="textbf">Settings</SPAN> -&gt; <SPAN  CLASS="textbf">Options</SPAN> -&gt; <SPAN  CLASS="textbf">Change Download Server</SPAN>
+		
+		<P>
+		</LI>
+		
+		<LI>Download the plugins list. Click on <SPAN  CLASS="textbf">Settings</SPAN> -&gt; <SPAN  CLASS="textbf">Update Plugin List</SPAN>.
+		<BR>
+		This will download the plugin list from the server and show you all the available plugins.
+		
+		<P>
+		<IMG
+		WIDTH="285" HEIGHT="244" ALIGN="BOTTOM" BORDER="0"
+		SRC="./images/no-installed.png"
+		ALT="Image not installed">
+		
+		<P>
+		The plugins are divided into categories to make them easier to find. Click on the tabs to change
+		the category. You can find a small description about the categories <A HREF="#sec_categories">here</A>
+		
+		<P>
+		</LI>
+		</ul>
+		<li><strong>From your local system:</strong> </li>
+			<ul>
+				<LI>First you need to download the full madkit bundle from <a href="http://www.madkit.org"> www.madkit.org</a>
+					
+				</LI>
+				<li>Then go to <strong>Tools</strong> -> <strong>Install From local system</strong> -> <strong>Full Madkit Bundle</strong>, this will open a file selection box where you can choose the full madkit bundle zip file. Notice that the plugin manager will copy the plugins into a local repository, so you don't have to install all the plugins.
+				</li>
+			</ul>
+	</li>
+	</ol>
+<br>
+</Li>
+
+<LI>Select the plugins you want to install.<p> To select a plugin just click on the checkbox on
+the right of each plugin, don't worry about dependencies, the plugin manager will select them
+for you. Some "Bundle packages" exist so you don't have to click all plugins one by one.</p> <p><strong>If you want
+a full install</strong>, select madkit-full in the Bundle category.</p>
+<BR>
+You can see a small description of a plugin by selecting the plugin and clicking on "Details".
+
+<P>
+<SPAN  CLASS="textbf">Note :</SPAN> If you want a default configuration for the madkit Desktop, select desktop2-commons.
+
+<P>
+</LI>
+<LI>Install. When you are done selecting plugins. Simply click on "Install", the plugin manager
+will download all the selected plugins and install them. The next time you launch the plugin
+manager you will find all the installed plugins as "Up to date" or "Needs Update" is a new
+version is available.
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="sec_upgrade">
+Upgrading your plugins</A>
+</H2>
+<p>Note: This section is only valid if you installed madkit from the network</p>
+When you want to check if a new release is available, click on Settings -&gt; Update Plugin List. And
+then look plugins where the status in shown as "Needs Update".You can also directly click on "Upgrade" and let
+the plugin manager select the plugins that need an update. Finally click on "install"
+
+<P>
+
+<H1><A NAME="sec_developers">
+Developers</A>
+</H1>
+
+<P>
+
+<H2><A NAME="sec_categories"></A>
+<BR>
+Categories?
+</H2>
+The plugin manager divides the plugins into categories. These categories are only used to show
+the plugins in a more order manner to the user and have no direct effect over the plugin it
+self. It can even change in the future.
+<BR>
+For the moment the following categories exist:
+<DL>
+<DT><STRONG>Sources</STRONG></DT>
+<DD>contains only the plugins sources packages
+</DD>
+<DT><STRONG>Docs</STRONG></DT>
+<DD>Contains the plugin's documentations and, in the future, tutorials, technical papers, etc.
+</DD>
+<DT><STRONG>Bundle </STRONG></DT>
+<DD>Contains some bundle packages. Bundle packages are not plugins, but empty packages that
+depend on a set of plugins to make it easier to install. For instance, Madkit-full provides a full install of madkit.
+</DD>
+<DT><STRONG>demos</STRONG></DT>
+<DD>Contains Madkit demo plugins.
+</DD>
+<DT><STRONG>utils</STRONG></DT>
+<DD>utility plugins (e.g. plugin manager)
+</DD>
+<DT><STRONG>main</STRONG></DT>
+<DD>Contains the most important plugins in madkit, for example the Madkit Kernel plugin.
+</DD>
+<DT><STRONG>Turtlekit</STRONG></DT>
+<DD>TurtleKit is a development environment for building simple reactive agents. Loosely based on StarLogo.
+</DD>
+<DT><STRONG>Warbot</STRONG></DT>
+<DD>Warbot is a test bench for analyzing multi-agent coordination in a robot-like simulated war.
+</DD>
+</DL>
+
+<P>
+
+<H2><A NAME="sec_ant_file">
+Ant Build file</A>
+</H2>
+Ant will generate  for you all needed information to include your plugin in the "web
+distribution". Your plugin will be separated into three different packages: a binary package,
+a source package and a documentation package.
+
+<P>
+<DL>
+<DT><STRONG>Binary</STRONG></DT>
+<DD>It includes all necessary files to ensure the proper execution of your plugin. (jar file, scripts etc.)
+</DD>
+<DT><STRONG>Source</STRONG></DT>
+<DD>Contains your plugin sources. (includes only the src directory)
+</DD>
+<DT><STRONG>Documentation</STRONG></DT>
+<DD>Contains the plugin's documentation as generated by the "doc" target
+</DD>
+</DL>
+
+<P>
+Properties used to generate the plugins packages:
+
+<P>
+<SPAN ><strong>project.name</strong></SPAN> name of your plugin.
+
+<P>
+<SPAN> <strong>project.category</strong> </SPAN> It places your plugin to the specified category. If it is not defined your plugin will fall into the "unknown" category. This category is used only as a reference to make the plugin easier to find and its only used for the binary package. The
+source and documentation are in the "sources" and "docs" categories respectively.
+<P>
+
+<SPAN  CLASS="textbf">depend</SPAN>: probably the most important property, here you define on which plugins your
+plugin depends on. It is a list of comma separated plugin names.
+<P>
+&lt;property name="depend" value="madkitkernel, pythonlib"/&gt;
+
+<P>
+<SPAN  CLASS="textbf">zip.extra.inc.bin and zip.extra.inc.prefix</SPAN> if you need to and more than one jar file to your binary package, you can define these to properties. The first one is the jar
+file to include and zip.extra.inc.prefix is the prefix to use in the zip file. For example:
+
+<P>
+<PRE>
+	&lt;target name="web-dist" depends="jar"&gt;
+		&lt;property name="zip.extra.inc.bin" value="boot.jar"/&gt;
+		&lt;property name="zip.extra.inc.bin.prefix" value="lib"/&gt;
+		&lt;ant antfile="${generic.file}" dir="." target="web-dist" inheritrefs="true"/&gt;
+	&lt;/target&gt;
+</PRE>
+
+<P>
+
+<h2>Adding actions to your plugin</h2>
+<A name="sec_actions"></A>
+<p>
+The plugin manager lets you also specify certain action to configure your plugin after the installation process.
+</p>
+<p>To define the actions to use on a particular type of package (bin, src or doc) you must define a property on the web-dist target of the plugin's ant build file. The properties are:</p>
+<ul>
+<LI> <strong>madkit.plugin.actions.bin</strong>: for the binary package</LI>
+<LI> <strong>madkit.plugin.actions.src</strong>: for the source package</LI>
+<LI> <strong>madkit.plugin.actions.doc</strong>: for the documentation package</LI>
+</ul>
+
+<p>
+For the moment only one action is available, docref.
+</p>
+
+
+<h3>DocRef Action</h3>
+<A name="sec_actions_docref"></A>
+<p>
+The DocRef action lets you add references to html documents. These references will be mainly used by the DocBrowers plugin.
+</p>
+<p> The DocBrowser divides the references into sections, the main ones are:</p>
+<ul>
+ <li><b>api</b>: used when adding a link to an agent or MAS api </li>
+ <li><b>manual</b>: when adding a Manual</li>
+ <li><b>demo</b>:when adding a demo</li>
+ <li><b>tech</b>: when adding specifications or technical reports for Madkit</li>
+ </ul>
+
+<p>
+The attributes of this action are:
+</p>
+<ul>
+<LI><strong>name</strong>: defines the name to display in the madkit documentation index</LI>
+<LI><strong>url</strong>: defines the url of the file. This url can be absolute (e.g. http://java.sun.com) or relative to the madkit installation directory </LI>
+<LI><strong>section</strong>: defines the section of document</LI>
+<LI><strong>absolute</strong>: defines if the url is absolute or relative to the madkit directory. This is an optional attribute, and by default is false.</LI>
+</ul>
+
+<p><strong>Important</strong>: You don't need to add a docref action for the plugin API, this is automatically done by the ant generic file.</p>
+
+Here is an example taken from the communicator's build file.
+<pre>
+&lt;property name="madkit.plugin.actions.doc" 
+<br>value='&lt;action id="docref" url="plugins/communicator/docs/communicator.html" name="Communicator Manual" section="manual"/>'/>
+</pre>
+
+<h2>Troubleshooting</h2>
+<A name="sec_troubles"></A>
+
+<h3>The Plugin manager crashes with a ZipException while updating the plugins list</h3>
+<p>
+While the plugins are checked with a md5sum, the plugins.zip file is not. So the plugin manager will try to open the downloaded file as a zip. However, the server might not allways send the zip.
+To verify if the plugins.zip is really being downloaded, try wget http://download.url/download.php?file=plugins.zip and check if the downloaded file is really a zip file. Normally you will find instead a html page, just look for the real url and use it as you Server Download url.
+</p>
+</BODY>
+</HTML>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formalism class="SEdit.Formalisms.OrgGrapher.StructureGrapher" name="OrgGrapher">
+  <formalism-info>
+    <author>J.Ferber</author>
+  </formalism-info>
+  <node-types>
+    <node-desc class="SEdit.Formalisms.OrgGrapher.AgentGrapher" name="Agent">
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/agent4.gif</property>
+		<property name="width">14</property>
+		<property name="height">25</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+	</node-desc>
+	<node-desc class="SEdit.Formalisms.OrgGrapher.ManyAgentGrapher" name="ManyAgents">
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/agents/manyagents.gif</property>
+		<property name="width">24</property>
+		<property name="height">25</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+	</node-desc>
+    <node-desc class="SEdit.Formalisms.OrgGrapher.RoleGrapher" name="Role">
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/org_role16.gif</property>
+		<property name="width">23</property>
+		<property name="height">16</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+	</node-desc>
+    <node-desc class="SEdit.Formalisms.OrgGrapher.GroupGrapher" name="Group">
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/org_group16.gif</property>
+		<property name="width">24</property>
+		<property name="height">18</property>
+		<property name="labelLocation">4</property>
+	  </graphic-element>
+    </node-desc>
+    <node-desc class="SEdit.Formalisms.OrgGrapher.CommunityGrapher" name="Community">
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/community.gif</property>
+		<property name="width">25</property>
+		<property name="height">16</property>
+		<property name="labelLocation">4</property>
+	  </graphic-element>
+    </node-desc>
+  </node-types>
+  <arrow-types>
+    <arrow-desc name="Link" class="SEdit.Formalisms.OrgGrapher.LinkGrapher">
+      <graphic-element>
+		<property name="lineStyle">1</property>
+		<property name="endingForm">0</property>
+		<property name="displayLabel">false</property>
+      </graphic-element>
+    </arrow-desc>
+  </arrow-types>
+  <action description="dump">
+    <java-method name="dumpCommunities"/>
+  </action>
+  <action description="Start">
+    <icon url="images/run.gif"/>
+    <java-method name="start"/>
+  </action>
+  <action description="Stop">
+    <icon url="images/stop.gif"/>
+    <java-method name="stop"/>
+  </action>
+  <action description="Shake">
+    <java-method name="shake"/>
+  </action>
+  <action description="Scramble">
+    <java-method name="scramble"/>
+    <icon url="images/world/dynamite.gif"/>
+  </action>
+</formalism>

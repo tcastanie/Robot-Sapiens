@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<madkitdocs>
+    <section display="API" name="api">
+        <docref absolute="false" name="warbot API" plugin="warbot-doc"
+            url="plugins/warbot/docs/api/index.html" version="2.2.0"/>
+        <docref absolute="false" name="madkitapplet API"
+            plugin="madkitapplet-doc"
+            url="plugins/madkitapplet/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="turtlekit API"
+            plugin="turtlekit-doc"
+            url="plugins/turtlekit/docs/api/index.html" version="2.0.0"/>
+        <docref absolute="false" name="schemelib API"
+            plugin="schemelib-doc"
+            url="plugins/schemelib/docs/api/index.html" version="2.0.0"/>
+        <docref absolute="false" name="messages API"
+            plugin="messages-doc"
+            url="plugins/messages/docs/api/index.html" version="4.0.0"/>
+        <docref absolute="false" name="madkitutils API"
+            plugin="madkitutils-doc"
+            url="plugins/madkitutils/docs/api/index.html" version="4.0.0"/>
+        <docref absolute="false" name="system API" plugin="system-doc"
+            url="plugins/system/docs/api/index.html" version="4.1.0"/>
+        <docref absolute="false" name="communicator API"
+            plugin="communicator-doc"
+            url="plugins/communicator/docs/api/index.html" version="2.1.0"/>
+        <docref absolute="false" name="pluginmanager API"
+            plugin="pluginmanager-doc"
+            url="plugins/pluginmanager/docs/api/index.html" version="0.1.4"/>
+        <docref absolute="false" name="madkitkernel API"
+            plugin="madkitkernel-doc"
+            url="plugins/madkitkernel/docs/api/index.html" version="4.0.8"/>
+        <docref absolute="false" name="SEdit API" plugin="SEdit-doc"
+            url="plugins/SEdit/docs/api/index.html" version="3.2.0"/>
+        <docref absolute="false" name="warbot04 API"
+            plugin="warbot04-doc"
+            url="plugins/warbot04/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="share API" plugin="share-doc"
+            url="plugins/share/docs/api/index.html" version="2.1.0"/>
+        <docref absolute="false" name="marketorg API"
+            plugin="marketorg-doc"
+            url="plugins/marketorg/docs/api/index.html" version="4.0.0"/>
+        <docref absolute="false" name="template API"
+            plugin="template-doc"
+            url="plugins/template/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="simulation API"
+            plugin="simulation-doc"
+            url="plugins/simulation/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="bshlib API" plugin="bshlib-doc"
+            url="plugins/bshlib/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="chat API" plugin="chat-doc"
+            url="plugins/chat/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="treetools API"
+            plugin="treetools-doc"
+            url="plugins/treetools/docs/api/index.html" version="2.0.0"/>
+        <docref absolute="false" name="distributedbees API"
+            plugin="distributedbees-doc"
+            url="plugins/distributedbees/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="pythonlib API"
+            plugin="pythonlib-doc"
+            url="plugins/pythonlib/docs/api/index.html" version="2.0.0"/>
+        <docref absolute="false" name="explorer API"
+            plugin="explorer-doc"
+            url="plugins/explorer/docs/api/index.html" version="2.0.0"/>
+        <docref absolute="false" name="jsynedit API"
+            plugin="jsynedit-doc"
+            url="plugins/jsynedit/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="netcomm API" plugin="netcomm-doc"
+            url="plugins/netcomm/docs/api/index.html" version="0.1.1"/>
+        <docref absolute="false" name="desktop2 API"
+            plugin="desktop2-doc"
+            url="plugins/desktop2/docs/api/index.html" version="1.1.3"/>
+        <docref absolute="false" name="demos API" plugin="demos-doc"
+            url="plugins/demos/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="analysistools API"
+            plugin="analysistools-doc"
+            url="plugins/analysistools/docs/api/index.html" version="1.0.0"/>
+        <docref absolute="false" name="turtlesimulation API"
+            plugin="turtlesimulation-doc"
+            url="plugins/turtlesimulation/docs/api/index.html" version="2.0.0"/>
+        <docref absolute="false" name="jesslib API" plugin="jesslib-doc"
+            url="plugins/jesslib/docs/api/index.html" version="2.0.0"/>
+    </section>
+    <section display="Manuals" name="manual"/>
+    <section display="Technical Reports" name="tech"/>
+    <section display="Demos" name="demo"/>
+</madkitdocs>

@@ -1,0 +1,160 @@
+<html>
+<head>
+<title>Madkit network</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="madkit.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<div class="titlepage">
+  <div>
+    <h1 class="title" style="clear: both">Using MadKit in a distributed environment</h1>
+  </div>
+</div>
+<p>MadKit is a powerful system-independent distributed computing platform. Each 
+  MadKit kernel may act as a node of a complex distributed environment. Connections 
+  betweens kernels are done by a specific agent called the <span class="emphasis"><i>Communicator</i></span> 
+  which handles distributed communications between agents situated in different 
+  kernels and synchronization of distributed groupes, i.e. groups that span across 
+  multiple kernels. </p>
+<p> When multiple kernels are connected, the resulting MadKit network forms a 
+  distributed platform for building and running distributed applications using 
+  agents as the main components. Agents may be used to connect users, share MadKit 
+  applications, services, and documents of any kind. </p>
+<div class="sect2">
+  <div class="titlepage">
+    <div>
+      <h2 class="title">Communities</h2>
+    </div>
+  </div>
+  <p> It is important to be aware of the concept of <span class="emphasis"><i>Community</i></span>, 
+    when one is either designing a MadKit application or simply executing and 
+    deploying such an application. A "community" is simply a group of connected 
+    MadKit kernels. This concept is used to partition a whole MadKit network in 
+    order to: 
+  <div class="orderedlist">
+    <ol type="1">
+      <li>
+        <p>To speed it up,</p>
+      </li>
+      <li>
+        <p>To propose a conceptual repartition of resources and services,</p>
+      </li>
+      <li>
+        <p>To provide a framework for securizing distributed applications.</p>
+      </li>
+    </ol>
+  </div>
+  When designing an application in MadKit, you may create groups that belong to 
+  specific communities {{see the createGroup function}}. A community, from a programmer's 
+  point of view may be seen as a space for arranging several groups that are used 
+  in the same application. For instance, the Chat application, which implements 
+  a simple but realistic Chat in a <span class="emphasis"><i>peer-to-peer</i></span>, 
+  is organized along a <tt>chat</tt> community, in which groups represent the 
+  topics of the Chat. When a Chat agent creates a "topic" with name <tt>myTopic</tt>, 
+  a <tt>myTopic</tt> group is created within the <tt>chat</tt> community. When 
+  a kernel M wants to join the Chat application, it simply connects itself to 
+  another kernel by specifying its hostname and port number, and its personal 
+  Chat agent join the community Chat (See the {{link}} Chat application to get 
+  an overwiew of its features and mode of operation). 
+  <p></p>
+  <p> The following figure shows a diagram which represents an example of communities 
+
+    
+  <p><img src="images/communities.gif" align="center"></p>
+    <p><b>Figure 6. Communities with different kernels</b></p>
+
+  with 3 communities (commnity1, community2 and public), 3 kernels (A, B and C) 
+  and a set of groups and agents. A kernel is represented by a specific agent, 
+  the <tt>SiteAgent</tt>. This agent dialogs with the kernel to synchronize information 
+  about groups, roles and agents that belong to communities. One can see the following 
+  properties: 
+  <div class="itemizedlist">
+    <ul type="disc">
+      <li>
+        <p>A group may appear in only one community. </p>
+      </li>
+      <li>
+        <p>A kernel (a SiteAgent) may belong to several communities. </p>
+      </li>
+      <li>
+        <p>The community <tt>public</tt> is global and all kernels belong to this 
+          community. </p>
+      </li>
+      <li>
+        <p>An agent may belong to several communities. But a kernel sees only 
+          an agent from the community to which this kernel belongs. </p>
+      </li>
+    </ul>
+  </div>
+  <p></p>
+  <p> A MadKit network is both an open and securized network. It is an opened 
+    network because any MadKit kernel may join such a network, by connecting to 
+    a kernel which is part of it. But it is also a protected network, because 
+    communities may be restricted to specific kernels, using the authorization 
+    mechanism of groups. </p>
+</div>
+<div class="sect2">
+  <div class="titlepage">
+    <div>
+      <h2 class="title">Connecting a kernel to a MadKit network</h2>
+    </div>
+  </div>
+  <p>Connection of a kernel to a MadKit network is done with the help of the <b>NetAgent</b>. 
+    To make a connection, follow these steps: </p>
+  <div class="orderedlist">
+    <ol type="1">
+      <li>
+        <p>Launch a <tt>Communicator</tt> agent, by clicking on the <b>Agents</b><b>&gt;Communicator</b> 
+          for instance. This will open two windows: the window of the <tt>Communicator 
+          </tt>itself, and a window corresponding to the <tt>SiteAgent</tt> which 
+          lists all communities to which this kernel may belong. A green led indicates 
+          that the <tt>Communicator</tt> is working. 
+        <p><img src="../../plugins/documentation/docs/agents/systempack/communicator1.gif"></p>
+        <p></p>
+      </li>
+      <li>
+        <p>In the texfields of the <tt>Communicator</tt>, type the name of the 
+          host computer (and its port number, if it different from the default 
+          port 4444) where another kernel is already running. This remote kernel 
+          must have its <tt>Communicator</tt> already launched and active. If 
+          everything is correct, you will see the name of the host computer inside 
+          the list of connected hosts. </p>
+        <p>If the remote host is already connected to a set of hosts, you will 
+          see the name of all hosts in the list of connected hosts of the <tt>SiteAgent</tt> 
+          window. 
+        <p><img src="../../plugins/documentation/docs/agents/systempack/communicator3_bis.gif"></p>
+        <p></p>
+      </li>
+      <li>
+        <p>If there are new communities, you may ask your kernel to belong to 
+          them by clicking on the <tt>connected</tt> checkbox. 
+        <p><img src="../../plugins/documentation/docs/agents/systempack/communicator4.gif"></p>
+        <p></p>
+      </li>
+    </ol>
+  </div>
+  <p>Once you have performed these steps, your kernel is connected directly to 
+    all kernels and is now now part of a bigger network. It is said that the configuration 
+    of the network is <span class="emphasis"><i>complete</i></span>, because each 
+    kernel is connected directly to all other kernels. There is no dedicated &#8220;server&#8221; 
+    (and thus no &#8220;clients&#8221;). MadKit networks behave in a &#8220;peer-to-peer&#8221; 
+    mode where all kernels are both server and client in the same time. </p>
+  <p><span class="bold"><b>Note:</b></span> A complete network is fast and reliable 
+    but use a lot of resources for connection and it is not possible to build 
+    large networks with this configuration schema. Thus, in the near future, a 
+    new <tt>Communicator</tt> will be soon available. It which diminishes the 
+    number of connection while preserving most of the speed and reliability of 
+    the network. The configuration mode will still be &#8220;peer-to-peer&#8221;. 
+  </p>
+  <p>The <a href="../../plugins/documentation/docs/agents/systempack/systempack.html#groupobserver" target="_top"><tt>GroupObserver</tt> 
+    agent </a>shows all groups and roles belonging to communities to which the 
+    local kernel is connected. The community called <tt>Communities</tt> contain 
+    the set of communities to which the local kernel belongs. Each community is 
+    then seen as a group in the <tt>Communities</tt> community. The <tt>site</tt> 
+    role shows all kernels (i.e. all <tt>SiteAgent</tt>) which belongs to a given 
+    community. 
+  <p><img src="../../plugins/documentation/docs/agents/systempack/groupobserver.gif"></p>
+</div>
+<p>&nbsp;</p></body>
+</html>

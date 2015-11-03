@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<!--
+     This is build.xml file for building the dynamic bees demo
+-->
+
+<project name="dynamicbees" default="jar" basedir=".">
+
+	<property file="../madkit.properties"/> <!-- using madkit project's default properties -->
+
+	<!--
+	     Specify the required plugin jar files and third party resources (madkitkernel.jar at least)
+	-->
+	<fileset id="project.class.path" dir="${jars.dir}">
+		<include name="madkitkernel.jar"/>
+		<include name="simulation.jar"/>
+	</fileset>
+
+	<property name="src.dir" value="src"/>
+	<property name="version"  value="1.0"/>
+	<property name="author"  value="MadKit Team"/>
+	<property name="depend"  value="madkitkernel,simulation"/> <!-- value="madkitkernel.jar,other1.jar,other2.jar" for instance (madkitkernel at least) -->
+	<property name="description"  value="This plugin is an example of use of the madkit simulation utilities"/>
+	<property name="project.label"  value="The Dynamic bees project"/>
+	<property name="agents"  value="dynamicbees.BeeLauncher"/>
+	<property name="project.category" value="demos"/>
+
+<!-- 
+     GENERIC PART (edit to achieve more functionalities or delete unused targets)
+-->
+
+	<target name="jar" description="Jars the plugin into the jars.dir directory and create launch file if a cfg file available">
+		<ant antfile="${generic.file}" dir="." target="jar" inheritrefs="true"/>
+	</target>
+
+	<target name="docs">
+		<ant antfile="${generic.file}" dir="." target="docs" inheritrefs="true"/>
+	</target>
+
+	<target name="clean">
+		<ant antfile="${generic.file}" dir="." target="clean" inheritrefs="true"/>
+	</target>
+
+	<target name="real-clean">
+		<ant antfile="${generic.file}" dir="." target="real-clean" inheritrefs="true"/>
+	</target>
+
+	<target name="all">
+		<ant antfile="${generic.file}" dir="." target="all" inheritrefs="true"/>
+	</target>
+
+	<target name="src-dist">
+		<ant antfile="${generic.file}" dir="." target="src-dist" inheritrefs="true"/>
+	</target>
+
+	<target name="bin-dist">
+		<ant antfile="${generic.file}" dir="." target="bin-dist" inheritrefs="true"/>
+	</target>
+
+	<target name="doc-dist">
+		<ant antfile="${generic.file}" dir="." target="doc-dist" inheritrefs="true"/>
+	</target>
+
+	<target name="standalone-dist">
+		<ant antfile="${generic.file}" dir="." target="standalone-dist" inheritrefs="true"/>
+	</target>
+	
+	<target name="plugin-dist">
+		<ant antfile="${generic.file}" dir="." target="plugin-dist" inheritrefs="true"/>
+	</target>
+	<target name="web-dist">
+		<ant antfile="${generic.file}" dir="." target="web-dist" inheritrefs="true"/>
+	</target>
+
+</project>

@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>MadKit host containers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="madkit.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<div class="sect1">
+  <div class="titlepage">
+    <div>
+      <h1 class="title" style="clear: both">MadKit host containers</h1>
+    </div>
+  </div>
+  <p>In the MadKit platform, the user interface is decoupled from the agents and 
+    runtime support. Thus, it possible to build various &#8220;host containers&#8221; 
+    that will embed a MadKit kernel and control agents. In this distribution, 
+    we include three standard containers: the <a href="desktop.html" title="3. The MadKit desktop  environment">MadKit 
+    desktop</a>, a lightweight console booter, and an Applet container. There 
+    are other container available such as the JSP container.</p>
+  <p>The Desktop is presented <a href="desktop.html">here</a>, let us see the 
+    two others.</p>
+  <div class="sect2">
+    <div class="titlepage">
+      <div>
+        <h2 class="title">The console booter</h2>
+      </div>
+    </div>
+    <div class="sect3">
+      <div class="titlepage">
+        <div></div>
+      </div>
+      <p>{{<b>Note</b>: this section has been slightly changed in MadKit 4}}
+      <p>It is possible to test the kernel only with the console-mode booter. 
+        Two scripts (functionally equivalent) are provided: <tt>console.sh</tt> 
+        for Unix and <tt>console.bat</tt> for Windows. You can test the kernel 
+        with: 
+      <p>&nbsp;
+      <table border="1" bgcolor="#E0E0E0">
+        <tr>
+          <td>
+            <pre class="screen"><tt>$</tt><b><tt>console.sh</tt></b>
+&lt;Kernel&gt; : MadKit/Aalaadin - by Ol. Gutknecht, J. Ferber and F. Michel (c) 1997-2002
+&lt;Kernel&gt; :   version: 3.1 - 
+&lt;Kernel&gt; : --------------------
+&lt;Kernel&gt; : Please file bug reports on http://bugs.madkit.org
+&lt;Kernel&gt; : MadKit Agent microKernel is up and running
+&lt;Kernel&gt; : [pong-java] PingPong agent Activated
+&lt;Kernel&gt; : [pong-java] Looking for a ping-pong group...
+&lt;Kernel&gt; : [pong-java] Nope ! I create one
+&lt;Kernel&gt; : [pong-java] Looking for a sport partner...
+&lt;Kernel&gt; : [provider-1] Ticket: plane
+&lt;Kernel&gt; : [provider-2] Ticket: train
+&lt;Kernel&gt; : [provider-3] Ticket: train
+&lt;Kernel&gt; : [provider-4] Ticket: plane
+&lt;Kernel&gt; : [provider-5] Ticket: plane
+&lt;Kernel&gt; : [provider-6] Ticket: train
+&lt;Kernel&gt; : [provider-7] Ticket: train
+&lt;Kernel&gt; : [provider-8] Ticket: train
+&lt;Kernel&gt; : [provider-9] Ticket: plane
+...
+</pre>
+          </td>
+        </tr>
+      </table>
+      <p></p>
+    </div>
+    <div class="sect3">
+      <div class="titlepage">
+        <div></div>
+      </div>
+      <p> To start MadKit as console, you should write a configuration file which 
+        details the agent to be launched at startup. The structure of the configuration 
+        file is the same as for the <a href="desktop.html">desktop</a>.</p>
+    </div>
+    <div class="sect3"> 
+      <div class="titlepage"> 
+        <div></div>
+      </div>
+      <div class="sidebar"> 
+        <div class="cmdsynopsis"></div>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <div class="sect2">
+    <div class="titlepage">
+      <div>
+        <h2 class="title">Applet kernel </h2>
+      </div>
+    </div>
+    <p> To test this mode, you <span class="emphasis"><i>must</i></span> have 
+      a web browser that implements correctly the Java 1.2 specification. You 
+      must use a recent browser to make it work (it has been tested with Internet 
+      Explorer 5.0 and above and with Netscapte 4.xx and above). </p>
+    <p> Open the <tt>applet_madkit.html</tt> in your browser. you will get something 
+      like this: 
+    <div class="figure">
+      <p><b>Figure 7. Madkit in an applet</b></p>
+      <p><img src="images/applet.gif" align="center"></p>
+    </div>
+    <p></p>
+    <p> The applet interface presents a two fields panel: <b>class</b> and <b>name</b>. 
+      The first one is the fully qualified Java class name for the agent, (for 
+      instance <tt>agents.PingPong</tt>), the other is the usual name, which can 
+      be left blank. Agents are launched in independent windows, and closing a 
+      window kill the related agent. </p>
+    <p>You may also use the <b>quick launch</b> menu which contains a set of predefined 
+      agents. For instance you can launch a <tt>GroupObserver</tt> agent to observe 
+      the organization of the agents in the applet. You may also communicate with 
+      other kernels by launching the <tt>Communicatior</tt>. By defining your 
+      own Applet, it is possible to provide a very convenient and portable application 
+      framework. </p>
+  </div>
+  <div class="sect2">
+    <div class="titlepage"> 
+      <div></div>
+    </div>
+  </div>
+</div>
+<div class="sect1"> 
+  <div class="sect2"></div>
+</div>
+</body>
+</html>

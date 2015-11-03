@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<META NAME="VPSiteProject" CONTENT="file:///D|/madkit/devs/madkit/tools/JessDistrib/doc/add-ons/Project.vpp">
+
+	<META NAME="GENERATOR" Content="Visual Page 2.0 for Windows - Trial Version">
+	<TITLE>untitled</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>Types of agents</H1>
+<P>Three types of agents are provided with the JessAgentLib library.</P>
+<H2>JessAgent</H2>
+<P>JessAgent are simple JessAgents that embed a Jess engine. They load an init file associated to their &quot;loadFile&quot;
+property when launched. JessAgent may be monitored by a JessMonitor. JessAgents are provided to explain how one
+can build its own JessAgent and embed a JessEngine into a Madkit Agent.</P>
+<P ALIGN="CENTER"><IMG SRC="images/JessAgent.gif" WIDTH="352" HEIGHT="184" ALIGN="BOTTOM" BORDER="0"></P>
+<P>
+<H2>JessMonitor</H2>
+<P>A JessMonitor is an agent which DOES NOT embed a Jess engine, but may monitors any JessAgent whose AgentAddress
+is placed in its recipient property. The recipient property can be modified using the property box of the G-box.
+This agent is used for controlling simple JessAgents using ControlMessages.</P>
+<P ALIGN="CENTER"><IMG SRC="images/JessMonitor.gif" WIDTH="374" HEIGHT="454" ALIGN="BOTTOM" BORDER="0"></P>
+<P>
+<H2>EditJessAgent</H2>
+<P>EditJessAgents are special kind of JessAgents that are combined with an editor:</P>
+<P ALIGN="CENTER"><IMG SRC="images/EditJessAgent1.gif" WIDTH="492" HEIGHT="422" ALIGN="BOTTOM" BORDER="0"></P>
+<P>Inputs from the top buffer may be evaluated. Their results is displayed in the bottom editing area.</P>
+<H4>Run</H4>
+<P>Run the Jess engine associated to the agent.</P>
+<H4>Halt</H4>
+<P>Stops the Jess engine.</P>
+<H4>Facts</H4>
+<P>Displays the list of facts.</P>
+<H4>Rules</H4>
+<P>Displays the list of rules.</P>
+<H4>Reset</H4>
+<P>Reset the Jess engine, deleting all facts and asserting an initial-fact.</P>
+<H4>Re-init</H4>
+<P>Clear the Jess engine, deleting all rules, defined functions and facts. Then, loads again the file associated
+to the &quot;loadFile&quot; field displayed in the property editor.</P>
+<H4>Watch</H4>
+<P>Opens a dialog</P>
+<H4>Eval selection</H4>
+<P>Evaluate the selection from the input area (top editor) and returns the result in the output area (bottom editor).</P>
+<H4>Eval buffer</H4>
+<P>Evaluate the whole input area (top editor) and returns the result in the output area (bottom editor).</P>
+<H4>Load</H4>
+<P>Open a dialog box to load a file and evaluate it.</P>
+<H4>Open</H4>
+<P>Open dialog box to open a file in the top editor</P>
+<H4>Save</H4>
+<P>Save the content of the top editor into a text file.
+
+</BODY>
+
+</HTML>

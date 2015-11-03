@@ -1,0 +1,215 @@
+<html><head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>MadKit User's Guide</title><meta name="generator" content="DocBook XSL Stylesheets V1.49">
+<link rel="stylesheet" href="../../plugins/documentation/docs/userguide/madkit.css" type="text/css">
+</head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="article">
+  <div class="titlepage">
+    <div>
+      <h1 class="title"><a name="IDA3DIQF"></a>MadKit User's Guide </h1>
+    </div>
+    <div></div>
+    <div></div>
+    <div>
+      <div class="abstract">
+        <p><b>Abstract</b></p>
+        <p>This document describes the installation of the MadKit 4.0 agent platform 
+          and the use of the MadKit desktop environment</p>
+        <p><b>Note</b>: this is still an alpha version. Many features are still 
+          lacking... Comments, bugs, critics about this guide are welcome. Please 
+          send an email to <a href="mailto:team@madkit.org">team@madkit.org</a>. 
+          Thank you.</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="toc"> 
+    <h2><b>Table of Contents</b></h2>
+  </div>
+</div>
+<ul>
+  <li>
+    <div class="article">
+      <div class="toc"><a href="#gene">General information</a></div>
+    </div>
+  </li>
+  <li>
+    <div class="article">
+      <div class="toc"><a href="../../plugins/documentation/docs/userguide/desktop.html">The MadKit desktop environment</a></div>
+    </div>
+  </li>
+  <li>
+    <div class="article">
+      <div class="toc"><a href="../../plugins/documentation/docs/userguide/distributed.html">Using MadKit in a distributed 
+        environment</a></div>
+    </div>
+  </li>
+  <li>
+    <div class="article">
+      <div class="toc"><a href="../../plugins/documentation/docs/userguide/launchers.html">MadKit host containers</a></div>
+    </div>
+  </li>
+</ul>
+<div class="article">
+  <div class="toc"></div>
+  <div class="sect1">
+    <div class="titlepage"> 
+      <div> 
+        <h2 class="title" style="clear: both"><a name="gene"></a>General information</h2>
+      </div>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div> 
+          <h3 class="title">What is MadKit</h3>
+        </div>
+      </div>
+      <p>MadKit is an multi-agent platform for developing and running application 
+        based on an organizational oriented paradigm. This multi-agent paradigms 
+        uses agents, groups and roles as the basic standpoint for building complex 
+        applications. MadKit does not enforce any consideration about the internal 
+        structure of agents, thus allowing a developper to freely implements its 
+        own agent architectures. </p>
+      <p>MadKit is also a distributed platform which allows for the development 
+        of efficient distributed applications. For the programmers, all considerations 
+        about basic distributed components such as &#8220;sockets&#8221; and &#8220;ports&#8221;, 
+        are totally transparent. An application developped in a multi-agent way 
+        can be runned in a distributed way without changing a line of code. The 
+        MadKitdistribution mechanisms does not use the quite rather slow techniques 
+        of RMI or CORBA remote access, thus allowing for an efficient mode of 
+        communication. </p>
+      <p>MadKit is built around the concept of &#8220;micro-kernel&#8221; and 
+        &#8220;agentification of services&#8221;. The MadKit kernel is rather 
+        small, but agents offer the important services one needs for its own application. 
+        Distribution and remote message passing, monitoring and observation of 
+        agents, edition, etc.. are all performed by agents. Moreover, MadKit comes 
+        with a set of &#8220;containers&#8221;, i.e. execution environment for 
+        running application, to make MadKit work in different situations: as an 
+        development environment, but also as an embedded tool for applications. 
+      </p>
+      <p>MadKitis a free software which comes with a mix of GPL/LPGL licenses 
+        (LGPL for the basic libraries, and GPL for development tools). Thus one 
+        may develop easily in MadKit and use it as a basic product for commercial 
+        applications. </p>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div> 
+          <h3 class="title">MadKit on the net</h3>
+        </div>
+      </div>
+      <div class="sect3">
+        <div class="titlepage">
+          <div> 
+            <h4 class="title">Web pages</h4>
+          </div>
+        </div>
+        <p> The MadKit home-page, at <a href="http://www.madkit.org" target="_top">http://www.madkit.org</a> 
+          is the place where new software releases, documentation or additional 
+          agent packs can be downloaded. There is also a project database you 
+          can use for your own projects or agents at <a href="http://community.madkit.org" target="_top">http://community.madkit.org</a></p>
+        <p> Please feel free to send your comments about MadKit to: <tt>&lt;<a href="mailto:team@madkit.org">team@madkit.org</a>&gt;</tt>. 
+        </p>
+        <p>If you find a bug, or have some specific feature request, please use 
+          <a href="http://bugs.madkit.org" target="_top">http://bugs.madkit.org</a>, 
+          so we can track it easily.</p>
+        <h4>SourceForge</h4>
+        <p>MadKit development is hosted by <a href="http://sourceforge.net">sourceforge</a>. 
+          See the <a href="http://sourceforge.net/projects/madkit">madkit project</a> 
+          at source forge. If you want to join the team, ask J. Ferber (<a href="mailto:ferber@madkit.org">ferber@madkit.org</a>), 
+          who is, for the moment, in charge of the coordination of the MadKit 
+          project, to join it. </p>
+        <p><b>Note</b>: this is a 'free' software, this means that cannot pay 
+          people to develop MadKit. </p>
+      </div>
+      <div class="sect3">
+        <div class="titlepage"> 
+          <div></div>
+        </div>
+        <div class="itemizedlist"></div>
+      </div>
+    </div>
+    <div class="sect2"></div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div> 
+          <h3 class="title">License</h3>
+        </div>
+      </div>
+      <p>MadKit is free software and you are welcome to redistributed it under 
+        the terms of the GNU General Public License (version 2 or later versions). 
+        See the file <a href="../licenses/GPL_license.txt" target="_top"><tt>documentation/licenses/GPL_license.txt</tt></a></p>
+      <p> In order to allow the development of commercial applications with MadKit, 
+        all classes defined in the core packages (i.e. madkitkernel, messages, 
+        madkitutils, bshlib, schemelib and pythonlib) are provided with a LGPL 
+        License. See the file <a href="../licenses/LGPL_license.txt" target="_top"><tt>documentation/licenses/LGPL_license.txt</tt></a></p>
+      <p> The <span class="emphasis"><i>Communicator</i></span> and the <i>NetComm</i> 
+        package, which are distributed respectively in the <tt>communicator.jar</tt> 
+        and the <tt>netcomm.jar</tt> files and which corresponds to the package 
+        <tt>network.communicator</tt> is also distributed with a <a href="../licenses/LGPL_license.txt" target="_top">LGPL 
+        license</a>. </p>
+      <p> This means that you may use MadKit freely and develop non-commercial 
+        applications based on GPL license without any trouble. However, when you 
+        want to develop commercial applications, you are restricted to the classes 
+        that are provided in the core classes libraries. Desktop, development 
+        tools, system agents, turtlekit, SEdit, examples, tutorials, etc. are 
+        restricted to non-commercial applications. Third party software and tools 
+        are provided with their own license, see below. </p>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div> 
+          <h3 class="title">Third-party software</h3>
+        </div>
+      </div>
+      <p>MadKit uses several third party libraries and software: Kawa, Jess, Jython, 
+        BeanShell, jEdit. Each have their own license: 
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li> 
+            <p>The Scheme agent library uses the amazing <a href="http://www.gnu.org/software/kawa/" target="_top">Kawa 
+              </a> implementation by Per Bothner. Please check its license in 
+              <a href="../licenses/kawa_license.txt" target="_top"><tt>documentation/licenses/kawa_license.txt</tt></a></p>
+          </li>
+          <li> 
+            <p>The Jess agent library uses the fantastic <a href="http://herzberg.ca.sandia.gov/jess/" target="_top"> 
+              Jess </a> rule based language. Please check its license in <a href="../licenses/Jess_License.txt" target="_top"><tt>documentation/licenses/jess_license.txt</tt></a></p>
+          </li>
+          <li> 
+            <p>The BeanShell agent library uses the great <a href="http://www.beanshell.org" target="_top"> 
+              BeanShell </a> Java interpreter language. Please check its license 
+              in <a href="../../plugins/documentation/docs/licenses/beanshell_license.txt" target="_top"><tt>documentation/licenses/beanshell_license.txt</tt></a></p>
+          </li>
+          <li> 
+            <p>The Python agent library uses the fabulous <a href="http://www.jython.org" target="_top"> 
+              jython </a> interpreter language. Please check its license in <a href="../licenses/Jython_License.txt" target="_top"><tt>documentation/licenses/jython_license.txt</tt></a></p>
+          </li>
+          <li> 
+            <p>MadKit is provided with the incredible <a href="http://www.jedit.org" target="_top"> 
+              jEdit </a> editor, which comes with a GPL license. see <a href="../licenses/GPL_license.txt" target="_top"><tt>documentation/licenses/GPL_license.txt</tt></a></p>
+          </li>
+          <li> 
+            <p>MadKit includes the wonderful Xerces XML parser developed by the 
+              Apache Group for use in the Apache HTTP server project (<a href="http://www.apache.org" target="_top"> 
+              http://www.apache.org/</a>). Please read its license in <a href="../../plugins/documentation/docs/licenses/apache_license.txt" target="_top"><tt>documentation/licenses/apache_license.txt</tt></a>. 
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sect1"> 
+    <div class="titlepage"> 
+      <div></div>
+    </div>
+  </div>
+  <div class="sect1"> 
+    <div class="titlepage"> 
+      <div> 
+        <p class="title" style="clear: both">&nbsp;</p>
+      </div>
+    </div>
+  </div>
+  <div class="sect1"></div>
+</div>
+</body></html>

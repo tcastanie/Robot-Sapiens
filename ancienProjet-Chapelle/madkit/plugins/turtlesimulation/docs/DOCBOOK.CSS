@@ -1,0 +1,47 @@
+.BOOK .TITLE          { text-align: center }
+.BOOK .SUBTITLE       { text-align: center }
+.BOOK .CORPAUTHOR     { text-align: center }
+.BOOK .AUTHOR         { text-align: center }
+.BOOK .AFFILIATION    { text-align: center }
+.BOOK .EDITEDBY       { text-align: center }
+.BOOK .EDITOR         { text-align: center }
+.BOOK .GRAPHIC        { text-align: center }
+
+.ARTICLE .TITLE          { text-align: center }
+.ARTICLE .SUBTITLE       { text-align: center }
+.ARTICLE .CORPAUTHOR     { text-align: center }
+.ARTICLE .AUTHOR         { text-align: center }
+.ARTICLE .AFFILIATION    { text-align: center }
+.ARTICLE .EDITEDBY       { text-align: center }
+.ARTICLE .EDITOR         { text-align: center }
+.ARTICLE .GRAPHIC        { text-align: center }
+.ARTICLE .ABSTRACT       { margin-left: 0.5in;
+                           margin-right: 0.5in;
+                           font-style: italic }
+
+SPAN.PRODUCTNAME  { font-weight: bold;
+                                color: #ff0000
+                              }
+            
+            TT.TYPE                   { background-color: #dddddd;
+                                color: #00b700; }
+            TT.FUNCTION               { background-color: #dddddd;
+                                color: #a020f0; }
+            TT.MACRO          { background-color: #dddddd;
+                                color: #9400d63 }
+            TT.LITERAL                { background-color: #dddddd;
+                                font-weight: bold;
+                                color: #b8860b;
+                              }
+            TT.FILENAME               { background-color: #dddddd;
+                                font-weight: bold;
+                                color: #cd5c5c;
+                              }
+	TT.SIGNAL         { background-color: #dddddd;
+                                font-weight: bold;
+                                color: #00008b;
+                              }
+            TT.DEFINITION             { background-color: #dddddd;
+                                font-weight: bold;
+                                color: #ee3a8c;
+                              }

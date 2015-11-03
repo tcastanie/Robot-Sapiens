@@ -1,0 +1,59 @@
+/*
+* LogMessage.bsh - An agent which logs all StringMessage received...
+* Copyright (C) 2002 Jacques Ferber
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+import madkit.utils.common.*;
+import java.io.*;
+
+boolean living=true;
+
+String fileName=System.getProperty("madkit.dir")+File.separatorChar+"OutputListener.log";
+PrintWriter outWriter=null;
+
+void activate(){
+	group="output-"+me.getKernel().getHost();
+    self.println("LogListener launched");
+	self.createGroup(true,group,null,null);
+    r = self.requestRole(group,"listener",null);
+	if (r == 1){
+		try {
+			global.outWriter=new PrintWriter(new FileWriter(fileName,true));
+		} catch(IOException ex){
+			self.println("Error: got problems when trying to open file "+fileName);
+			living=false;
+		}
+		
+	} else {
+		self.println("cannot listen into group "+group);
+		living=false;
+	}
+}
+	
+void live(){
+	while (living){
+		m = self.waitNextMessage();
+		if (m instanceof StringMessage) {
+			outWriter.print(m.getString());
+			outWriter.flush();
+		}
+	}
+}
+
+void end(){
+	outWriter.close();
+}
+		

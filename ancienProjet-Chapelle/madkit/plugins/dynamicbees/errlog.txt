@@ -1,0 +1,31 @@
+Buildfile: build.xml
+
+jar:
+
+compile:
+
+copy-images:
+
+copy-resources:
+
+jar:
+     [echo] ****** Creating jar : dynamicbees **********
+[propertyfile] Updating property file: C:\madkit\plugins\dynamicbees\build\dynamicbees.properties
+     [copy] Copying 1 file to C:\madkit\plugins\dynamicbees
+      [jar] Building jar: C:\madkit\lib\dynamicbees.jar
+
+runners:
+
+runners-files:
+
+applet:
+   [delete] Deleting: C:\madkit\plugins\dynamicbees\dynamicbees.html
+    [unzip] Expanding: C:\madkit\lib\madkitapplet.jar into C:\madkit\plugins\dynamicbees\build
+     [move] Moving 1 files to C:\madkit\plugins\dynamicbees
+
+desktop-runners:
+
+runners-files:
+
+BUILD SUCCESSFUL
+Total time: 2 seconds

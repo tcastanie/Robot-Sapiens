@@ -1,0 +1,194 @@
+<HTML
+><HEAD
+><TITLE
+>Soccer</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="HOME"
+TITLE='The "Turtles" simulation Pack
+    '
+HREF="index.html">
+<LINK
+REL="PREVIOUS"
+TITLE="Gas simulation"
+HREF="gas.html">
+<LINK
+REL="NEXT"
+TITLE=" Patch variable diffusions"
+HREF="diffusion.html">
+</HEAD
+><BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The "Turtles" simulation Pack</TH
+></TR
+><TR
+>
+      <TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="gas.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+>
+      <TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="diffusion.html"
+>Next</A
+></TD
+>
+    </TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN152"
+>6. Soccer</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN154"
+>6.1. Synopsis</A
+></H2
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 10. Turtles like soccer too !</B
+></P
+>
+      <P
+><IMG
+SRC="images/tp_soccer.gif"></P
+>
+    </DIV
+><P
+>	This simulation is the most complex one and is not achieved. For now, the turtles' "internal AI" is very poor. But we will try to increase it :).</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN160"
+>6.2. About the code</A
+></H2
+><P
+>	Although the code is not very explicit, You can try modify the behavior of the players by modifying the following classes: <TT
+CLASS="CLASSNAME"
+>Player</TT
+>, the super class of all soccer players, <TT
+CLASS="CLASSNAME"
+>RedPlayer</TT
+> and <TT
+CLASS="CLASSNAME"
+>BluePlayer</TT
+> that define particular behavior for each team. The ball is also a turtle <TT
+CLASS="CLASSNAME"
+>Ball</TT
+>. The turtles are created in such a way that the red team is composed by the turtles 0 to 10 (blue 11 to 21). This is done by adding the turtles in the right order in the <TT
+CLASS="FUNCTION"
+>addSimulationAgents</TT
+> of the Launcher (<TT
+CLASS="CLASSNAME"
+>Soccer</TT
+>). A turtle's ID corresponds to the number of invocations of the <TT
+CLASS="FUNCTION"
+>addTurtle</TT
+> method made by the Launcher.
+	</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="gas.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="diffusion.html"
+>Next</A
+></TD
+>
+    </TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Gas simulation</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Patch variable diffusions</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

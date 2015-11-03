@@ -1,0 +1,99 @@
+<?xml encoding="US-ASCII"?>
+<!-- This SEdit-Formalisms DTD (c) 1999 by MadKit/SEdit Development Team  -->
+
+<!-- Element descriptions -->
+
+<!ELEMENT java-method EMPTY>
+<!ELEMENT scheme-function (#PCDATA)>
+<!ELEMENT action (icon?,(java-method|scheme-function))>
+<!ELEMENT property (#PCDATA)>
+
+<!ELEMENT arrow-desc (icon?,graphic-element?,property*,action*)>
+<!ELEMENT arrow-types (arrow-desc+)>
+
+<!ELEMENT connector-desc (icon?,graphic-element?,property*)>
+<!ELEMENT connector-types (connector-desc+)>
+
+<!ELEMENT connector (property*)>
+<!ELEMENT module (connector*,property*)>
+
+<!ELEMENT icon EMPTY>
+<!ELEMENT graphic-element (property*)>
+<!ELEMENT node-desc (icon?,graphic-element?,module?,property*,action*)>
+<!ELEMENT node-types (node-desc+)>
+
+<!ELEMENT doc EMPTY>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT formalism-info (author+,date?,doc?,icon?)>
+
+<!ELEMENT formalism (formalism-info,graphic-element?,connector-types?,node-types,arrow-types?,action*)>
+
+<!-- Attributes. This section is quite unstable now -->
+
+<!ATTLIST icon
+	url CDATA #REQUIRED
+>
+
+<!ATTLIST java-method
+	name NMTOKEN #REQUIRED>
+<!ATTLIST scheme-function
+	name NMTOKEN #REQUIRED>
+
+<!ATTLIST action 
+        name NMTOKEN #IMPLIED
+	description CDATA #REQUIRED
+>
+
+<!ATTLIST property
+  name NMTOKEN #REQUIRED>
+
+<!ATTLIST arrow-desc 
+	name ID #REQUIRED
+        description CDATA #IMPLIED
+	class NMTOKEN #IMPLIED
+        to IDREF #IMPLIED
+        from IDREF #IMPLIED
+        category NMTOKEN #IMPLIED
+>
+
+<!ATTLIST node-desc
+	name ID #REQUIRED
+	description CDATA #IMPLIED
+	class NMTOKEN #IMPLIED
+        category NMTOKEN #IMPLIED
+>
+
+<!ATTLIST connector-desc
+	name ID #REQUIRED
+	description CDATA #IMPLIED
+	class NMTOKEN #IMPLIED
+        mode (In | Out) #REQUIRED
+        category NMTOKEN #IMPLIED
+>
+
+<!ATTLIST module
+        type (Free | Fixed) #REQUIRED
+        layout (Auto | Justified | Manual) "Auto"
+>
+
+<!ATTLIST connector
+        type  IDREF #REQUIRED
+	name  NMTOKEN #IMPLIED
+        side (Left | Top | Right | Bottom) #IMPLIED
+        ratio CDATA #IMPLIED
+>
+
+<!ATTLIST graphic-element
+	class NMTOKEN #IMPLIED
+>
+
+<!ATTLIST doc
+        url CDATA #REQUIRED
+>
+
+<!ATTLIST formalism
+	name ID #REQUIRED
+	description CDATA #IMPLIED
+	class NMTOKEN #IMPLIED
+>

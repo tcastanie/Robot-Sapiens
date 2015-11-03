@@ -1,0 +1,204 @@
+<HTML
+><HEAD
+><TITLE
+>SimplePlotAgent</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="HOME"
+TITLE='The "Demo" Agent Pack
+    '
+HREF="index.html">
+<LINK
+REL="PREVIOUS"
+TITLE="LiveScheme"
+HREF="livescheme.html">
+<LINK
+REL="NEXT"
+TITLE="BeeWorldViewer / BeeScheduler"
+HREF="beeworld.html">
+</HEAD
+><BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The "Demo" Agent Pack</TH
+></TR
+><TR
+>
+      <TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="livescheme.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+>
+      <TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="beeworld.html"
+>Next</A
+></TD
+>
+    </TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN106"
+>5. SimplePlotAgent</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN108"
+>5.1. Synopsis</A
+></H2
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 4. A plotted plotter</B
+></P
+>
+      <P
+><IMG
+SRC="images/PLOTTER.GIF"></P
+>
+    </DIV
+><P
+>	This agent shows how to write a simple GUI as a Java Bean and
+	make it react to messages.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN114"
+>5.2. Using the agent</A
+></H2
+><P
+>	This is described in the MadKit user's guide, section G-Box,
+	as the example for 
+	<I
+CLASS="CITETITLE"
+>direct manipulation of agent acquaintances</I
+>
+	</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN118"
+>5.3. About the code</A
+></H2
+><P
+>	The important part here is the 
+ <TT
+CLASS="FUNCTION"
+>initGUI()</TT
+> method, which
+	instantiates a specialized JavaBean that will execute the
+	actual plotting and makes it the agent graphical interface.
+	</P
+><P
+>The agent itself just waits for messages, accepts only
+	<TT
+CLASS="CLASSNAME"
+>StringMessage</TT
+> and tries to extract an
+	integer in the message content before giving to the plotter.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="livescheme.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="beeworld.html"
+>Next</A
+></TD
+>
+    </TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>LiveScheme</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>BeeWorldViewer / BeeScheduler</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,312 @@
+<HTML
+><HEAD
+><TITLE
+>Virus</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="HOME"
+TITLE='The "Turtles" simulation Pack
+    '
+HREF="index.html">
+<LINK
+REL="PREVIOUS"
+TITLE="Demo simulations"
+HREF="demos.html">
+<LINK
+REL="NEXT"
+TITLE="Gravity"
+HREF="gravity.html">
+</HEAD
+><BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The "Turtles" simulation Pack</TH
+></TR
+><TR
+>
+      <TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="demos.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+>
+      <TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="gravity.html"
+>Next</A
+></TD
+>
+    </TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN87"
+>3. Virus</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN89"
+>3.1. Synopsis</A
+></H2
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 5. The green turtles are contaminated by the red ones</B
+></P
+>
+      <P
+><IMG
+SRC="images/tp_virus1.gif"></P
+>
+    </DIV
+><P
+>    In this simulation, we want to simulate the transmission of a virus in a population and observe it. To do this, we have created a kind of turtle (Virus class) that can take two behaviors: infected or non infected (red and green). The all turtles just walk around and the red ones contaminate the others when cross them on a patch.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN95"
+>3.2. Virus transmission simulation</A
+></H2
+><P
+> We have created two classes of Virus to simulate two ways to transmit the virus. The first way is to use real MadKit agent messages: when a red turtle cross  turtles that are green, it gets their AgentAddress and sends them a VirusMessage. So if a sane turtle has its mailbox not empty, it changes of behavior and becomes a red turtle. (Just like an email virus: we can imagine another version of this simulation where a turtle might be capable of being careful when reading its mailbox.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>public String red()
+  {
+	 wiggle();
+	 Turtle[] ts = turtlesHere(); //returns the other turtles that are on the same patch 
+	 if (ts != null)
+		 for (int i=0; i &#60; ts.length;i++)
+			 if (ts[i].getColor() == Color.green)
+				 sendMessage(ts[i].getAddress(),new VirusMessage());
+	 return("red");
+ }
+}
+
+public String green()
+  {
+  if (nextMessage() != null) //check mailbox
+  {
+	  setColor(Color.red);
+	  playRole("infected");
+	  return ("red");
+  }
+  else
+  {
+	  wiggle();
+	  return ("green");
+  }
+ }</PRE
+></TD
+></TR
+></TABLE
+><p></P
+><P
+> The second way (Virus2) consists in directly interact with the other turtles by changing their color to simulate the transmission. So a sane turtle always check its color and adopts the corresponding behavior: red or green.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>public String red()
+  {
+	 wiggle();
+	 Turtle[] ts = turtlesHere();
+	 if (ts != null)
+		 for (int i=0; i &#60; ts.length;i++)
+			 if (ts[i].getColor() == Color.green)
+				 ts[i].setColor(Color.red);
+	 return("red");
+ }
+
+public String green()
+  {
+  if (getColor() == Color.red)
+  {
+	  playRole("infected");
+	  return ("red");
+  }
+  else
+  {
+	  wiggle();
+	  return ("green");
+  }
+ }</PRE
+></TD
+></TR
+></TABLE
+>
+In each case, an infected turtle plays the role "infected" in order to be distinguished by the observer.<p></P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN101"
+>3.3. Observe the simulation</A
+></H2
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 6. The curve looks like an exponential one</B
+></P
+>
+      <P
+><IMG
+SRC="images/tp_virus2.gif"></P
+>
+    </DIV
+><P
+>The Observer of this simulation, the VirusWatcher, just creates a TurtleTable with the role infected and displays the corresponding number using a special GUI (a madkit.lib.simulation.SimplePlotPanel) suited to draw mathematic curves.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>/** initialize the variable infectedTurtles (a Turtle[]) using getTurtleWithRole*/
+public void initializeTurtleTables()
+{
+    infectedTurtles = getTurtleWithRole("infected");
+}	  
+/**this method overrides watch in the class Observer. So it will be invoked for each simulation step*/
+ step public void watch()
+{
+	plot.addPoint(infectedTurtles.length); //plot is the GUI
+}</PRE
+></TD
+></TR
+></TABLE
+><p></P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN108"
+>3.4. About the code</A
+></H2
+><P
+> A Turtle is a real MadKit agent: it owns all the possibilities of any <TT
+CLASS="CLASSNAME"
+>AbstractAgent</TT
+> of MadKit. Specially, interesting points are the usage of group, roles and <TT
+CLASS="CLASSNAME"
+>AgentAddress</TT
+> concepts to structure the application logics and identify the agents.
+	</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="demos.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gravity.html"
+>Next</A
+></TD
+>
+    </TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Demo simulations</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Gravity</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

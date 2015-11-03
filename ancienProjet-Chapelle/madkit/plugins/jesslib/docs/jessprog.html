@@ -1,0 +1,591 @@
+<html>
+<head>
+<title>Jess Programming</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<div class="chapter">
+  <div class="section">
+    <p></p>
+  </div>
+  <div class="section"> 
+    <div class="titlepage"> 
+      <div></div>
+    </div>
+  </div>
+</div>
+<div class="chapter"> 
+  <div class="titlepage"> 
+    <div></div>
+  </div>
+  <div class="sect1"> 
+    <div class="sect2"> 
+      <div class="titlepage"> 
+        <div></div>
+      </div>
+      <div class="sect1"></div>
+      <div class="sect1"> 
+        <div class="titlepage"> 
+          <div> 
+            <h1 class="title" style="clear: both">Programming MadKit agents in 
+              Jess, a rule based language</h1>
+            <h2 class="title" style="clear: both">Content</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ol>
+  <li> 
+    <div class="chapter"> 
+      <div class="sect1"> 
+        <div class="sect2"> 
+          <div class="sect1"> 
+            <div class="titlepage"> 
+              <div><a href="#Intro">Introduction</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li><a href="#Using">How to use Jess scripts in MadKit</a></li>
+  <li>Programming Jess scripts</li>
+  <li>Jess functions used to program MadKit</li>
+</ol>
+<div class="chapter"> 
+  <div class="sect1"> 
+    <div class="sect2"> 
+      <div class="sect1"> 
+        <div class="sect2"> 
+          <div class="titlepage"> 
+            <div> 
+              <h2 class="title"><a name="Intro"></a>Introduction</h2>
+            </div>
+          </div>
+          <p>Jess is a rule based language written by Ernest Friedman-Hill and 
+            is available at the <a href="http://herzberg.ca.sandia.gov/jess/">Sandia 
+            Corp site</a>. Jess is an expert system shell and scripting language 
+            written in Java which is based on the Clips rule system (which was 
+            itself a rewriting in C of the OPS5 rule based system). Jess is very 
+            powerful and has most of the features one can expect from a rule based 
+            system. Moreover, its implementation in Java makes it suitable to 
+            be fairly portable among platforms. See the <a href="http://herzberg.ca.sandia.gov/jess/">Jess 
+            web page</a> for more informations about the Jess system, its functionalities 
+            and its use.</p>
+          <p>Its incorporation into Madkit makes the development of rule based 
+            agents easy. A JessAgent is simply a Madkit agent which uses the power 
+            of rule inferencing of Jess. A single JessAgent behaves exactly like 
+            the Jess engine. But its interest in Madkit does not come from its 
+            usage as an isolated system, but as an agent which can interact with 
+            other agents. JessAgents can enter and leave groups, play and leave 
+            roles, send and receive messages to and from agents of any kind (not 
+            necesserily JessAgents), create and launch any Madkit agents, etc. 
+            Thus JessAgents have the full power of Java based Madkit agents.</p>
+          <p>Thus, using Jess in MadKit, you can create agents that have some 
+            reasoning capacities using knowledge you supply in the form of declarative 
+            rules.</p>
+          <p>You may find some documentation about Jess at the<a href="http://herzberg.ca.sandia.gov/jess/docs/index.shtml"> 
+            Jess site documentation pages</a> (there is no general documentation 
+            about Jess in the MadKit package). In the following you will find 
+            information about how to use Jess within MadKit and how to build agents 
+            using the Jess language.</p>
+          <p>JessAgents come in two formats:</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ol>
+  <li>
+    <div class="chapter">
+      <div class="sect1">
+        <div class="sect2">
+          <div class="sect1">
+            <div class="sect2">as JessAgents</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="chapter">
+      <div class="sect1">
+        <div class="sect2">
+          <div class="sect1">
+            <div class="sect2">as EditJessAgents which come with their own interface, 
+              a simple editor in which Jess expression can be evaluated. <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</ol>
+<div class="chapter">
+  <div class="sect1">
+    <div class="sect2">
+      <div class="sect1">
+        <div class="sect2">
+          <h2><a name="Using"></a>How to use Jess scripts in MadKit</h2>
+          <p>The Jess language may be used to script specific MadKit agents called 
+            <tt>JessAgent</tt>. When a JessAgent is instanciated, it comes with 
+            a file called its scripts which defines its behavior using the Jess 
+            rule programming language.</p>
+          <p>The behavior of a JessAgent is given as a set of rules. A rule is 
+            fired when its precondition part (the part before the '=&gt;' symbol) 
+            is verified, and then its action part (the part after the '=&gt;' 
+            symbol) is activated. A rule with no precondition is always verified 
+            and thus is activated first.</p>
+          <p>The following listing gives the the definition of the written in 
+            Jess (the file is given <a href="../scripts/madkit%20standard/Hello.clp">here</a>). 
+            The startup rule, with no precondition, is used to initiate the behavior 
+            of the Helllo agent, by asserting a social goal, i.e. trying to play 
+            the role &quot;myRole&quot; in the group &quot;myGroup&quot; of the 
+            community &quot;myCommunity&quot;. The 'enteringGroup' rule implements 
+            the previous social goal. Note that the goal is retracted at the end 
+            of the rule, once it has been achieved. The last rule 'receivingStringMessage' 
+            is simply used to display all received messages of type StringMessage.</p>
+          <table border="0" bgcolor="#E0E0E0">
+            <tr> 
+              <td> 
+                <pre class="programlisting">
+defrule startup ""
+     =>
+	(println "Hello I'm an agent !" crlf)
+	(assert (social-goal "myCommunity" "myGroup" "myRole"))
+)
+
+(defrule enteringGroup ""
+	?goal <- (social-goal ?com ?group ?role)
+	=>
+	(bind ?r (createGroup TRUE ?com ?group ))
+	(if (= ?r 1)
+		then
+		   (requestRole ?com ?group ?role)
+		   (retract ?goal)
+	)
+)
+
+;; add rules for handling messages here:
+(defrule receivingStringMessage ""
+    ?mess <- (StringMessage (sender ?sender)(string ?str))
+        =>
+        (printout t "Received message: " ?str " from " ?sender crlf)
+        (retract ?mess)
+)
+
+
+(reset)
+(run)
+ </pre>
+              </td>
+            </tr>
+          </table>
+          <p>To launch this agent, start the Explorer and double click on the 
+            file <b>Hello.clp</b> situated in the directory<b> plugins/jesslib/scripts/madkit 
+            standard:</b></p>
+          <p align="center"><img src="images/hello.png" width="507" height="473"></p>
+          <p>(requestRole &quot;myCommunity&quot; &quot;myGroup&quot; &quot;ed&quot;)<br>
+            (broadcastMessage &quot;myCommunity&quot; &quot;myGroup&quot; &quot;myRole&quot; 
+            (new &quot;madkit.kernel.StringMessage&quot; &quot;Hello world!&quot;))</p>
+        </div>
+        <div class="sect2"> 
+          <div class="titlepage"> 
+            <div> 
+              <h3 class="title"><a name="Functions"></a>Jess functions used to 
+                program MadKit</h3>
+            </div>
+          </div>
+          <div class="sect3"> 
+            <div class="titlepage"> 
+              <div> 
+                <h4 class="title"><a name="IDAAHHKG"></a>Basic agent functions</h4>
+              </div>
+            </div>
+            <p> JessAgent is a language agent. As such the user can develop Madkit 
+              applications without writing any Java code. Here are the main functions 
+              which are available to JessAgent. 
+            <div class="variablelist"> 
+              <dl> 
+                <dt><span class="term"><tt>(me)</tt></span></dt>
+                <dd> 
+                  <p> Returns a reference to the current agent. </p>
+                </dd>
+                <dt><span class="term"><tt>(pause ms)</tt></span></dt>
+                <dd> 
+                  <p> Pause the agent for the amount of time in milliseconds </p>
+                </dd>
+                <dt><span class="term"><tt>(println s)</tt></span></dt>
+                <dd> 
+                  <p> Displays the string s in the standard output of the agent.</p>
+                </dd>
+                <dt><span class="term"><tt>(getAddress a)</tt></span></dt>
+                <dd> 
+                  <p> Returns the AgentAddres of the agent <tt>a</tt>.</p>
+                </dd>
+                <dt><span class="term"><tt>(setName a s), (getName a)</tt></span></dt>
+                <dd> 
+                  <p> Set (or returns) the name of an agent </p>
+                  <p><span class="bold"><b>Caution: </b></span>this function takes 
+                    an AbstractAgent as its argument, not an AgentAddress. This 
+                    will be fixed in a future release.. <tt>getAgentsWithRole 
+                    </tt>.</p>
+                </dd>
+                <dt><span class="term"><tt>(createGroup c g), (createGroup g)</tt></span></dt>
+                <dd> 
+                  <p> Create a group <tt>g</tt> in the community <tt>c</tt> if 
+                    it is present, or in the community <tt>"public"</tt> otherwise. 
+                  </p>
+                  <p><span class="bold"><b>Note: </b></span>limitation of JessAgent 
+                    1.1: the created group is necessarily a "free" group, i.e. 
+                    a group in which there is no limitations and no permission 
+                    required to join it.</p>
+                </dd>
+                <dt><span class="term"><tt>(requestRole c g r), (requestRole g 
+                  r)</tt></span></dt>
+                <dd> 
+                  <p> Request to play the role <tt>r</tt> into the a group <tt>g</tt> 
+                    in the community <tt>c</tt> if it is present, or in the community 
+                    <tt>"public"</tt> otherwise. As usual, groups, roles and communities 
+                    are passed as strings. </p>
+                  <p><span class="bold"><b>Note: </b></span>limitation of JessAgent 
+                    1.1: the created group is necessarily a "free" group, i.e. 
+                    a group in which there is no limitations and no permission 
+                    required to join it.</p>
+                  <p><span class="bold"><b>Note: </b></span>limitation of JessAgent 
+                    1.1: Jess agents may only join "free" groups, i.e. a group 
+                    in which there is no limitations and no permission required 
+                    to join it.</p>
+                </dd>
+                <dt><span class="term"><tt>(leaveRole c g r), (leaveRole g r)</tt></span></dt>
+                <dd> 
+                  <p> Leaves the role <tt>r</tt> which exists in the group <tt>g</tt> 
+                    of community <tt>c</tt> if the parameter is present, or of 
+                    community <tt>"public"</tt> if not. If the current agent plays 
+                    only the role <tt>r</tt> in <tt>g</tt>, then it leaves the 
+                    group. </p>
+                </dd>
+                <dt><span class="term"><tt>(leaveGroup c g), (leaveGroup g)</tt></span></dt>
+                <dd> 
+                  <p> Leaves the group <tt>g</tt> of community <tt>c</tt> if the 
+                    parameter is present, or of community <tt>"public"</tt> if 
+                    not. </p>
+                </dd>
+                <dt><span class="term"><tt>(getAgentsWithRole c g r), (getAgentsWithRole 
+                  g r)</tt></span></dt>
+                <dd> 
+                  <p> Returns a list of all agents (represented by their <tt>AgentAddress</tt>) 
+                    playing the role <tt>r</tt> in the group <tt>g</tt>. The group 
+                    is taken from the community <tt>c</tt> if the parameter is 
+                    present or of the community <tt>"public"</tt> if not. <span class="bold"><b>Note:</b></span> 
+                    The current agent MUST be a member of the group <tt>g</tt> 
+                    to get this information</p>
+                </dd>
+                <dt><span class="term"><tt>(getAgentWithRole c g r), (getAgentWithRole 
+                  g r)</tt></span></dt>
+                <dd> 
+                  <p> Returns one agent taken at random from the list returned 
+                    by <tt>getAgentsWithRole </tt>.</p>
+                </dd>
+                <dt><span class="term"><tt>(isCommunity c)</tt></span></dt>
+                <dd> 
+                  <p> Returns <tt>TRUE</tt> if the community <tt>c</tt> exists, 
+                    i.e. if the kernel (represented by the <tt>SiteAgent</tt>) 
+                    is present in this community. Returns FALSE otherwise. </p>
+                </dd>
+                <dt><span class="term"><tt>(isGroup c g), (isGroup g)</tt></span></dt>
+                <dd> 
+                  <p> Returns <tt>TRUE</tt> if the group <tt>g</tt> exists in 
+                    the community <tt>c</tt> if the parameter is present, or exists 
+                    in the community <tt>"public"</tt> if not. Returns <tt>FALSE</tt> 
+                    otherwise.</p>
+                </dd>
+                <dt><span class="term"><tt>(isRole c g r), (isRole g r)</tt></span></dt>
+                <dd> 
+                  <p>Returns <tt>TRUE</tt> if the role <tt>r</tt> of the group 
+                    <tt></tt> exists in the community <tt>c</tt> if the parameter 
+                    is present, or exists in the community <tt>"public"</tt> if 
+                    not. Returns <tt>FALSE</tt> otherwise.</p>
+                </dd>
+                <dt><span class="term"><tt>(getMyGroups? c), (getMyGroups)</tt></span></dt>
+                <dd> 
+                  <p> Returns the list of all groups of which the current agent 
+                    is a member. Groups are taken from the community <tt>c</tt> 
+                    if the parameter is present or of the community <tt>"public"</tt> 
+                    if not. </p>
+                </dd>
+                <dt><span class="term"><tt>(getExistingGroups? c), (getExistingGroups)</tt></span></dt>
+                <dd> 
+                  <p> Returns the list of all groups existing in the community 
+                    <tt>c</tt> if the parameter is present, or existing in the 
+                    community <tt>"public"</tt> if not. </p>
+                </dd>
+                <dt><span class="term"><tt>(getMyRoles? c g), (getMyRoles g)</tt></span></dt>
+                <dd> 
+                  <p> Returns the list of all roles played by the current agent 
+                    in the group <tt>g</tt>. The group is taken from the community 
+                    <tt>c</tt> if the parameter is present or of the community 
+                    <tt>"public"</tt> if not. </p>
+                </dd>
+                <dt><span class="term"><tt>(getExistingRoles? c g), (getExistingRoles 
+                  g)</tt></span></dt>
+                <dd> 
+                  <p> Returns the list of all roles existing in the group <tt>g</tt>. 
+                    The group is taken from the community <tt>c</tt> if the parameter 
+                    is present or of the community <tt>"public"</tt> if not. <span class="bold"><b>Note:</b></span> 
+                    The current agent MUST be a member of the group <tt>g</tt> 
+                    to get this information</p>
+                </dd>
+                <dt><span class="term"><tt>(getAvailableCommunities)</tt></span></dt>
+                <dd> 
+                  <p> Returns the list of all communities in which the current 
+                    kernel (through its <tt>SiteAgent</tt>) is present. By default, 
+                    contains at least one element, the <tt>"public"</tt> community.</p>
+                </dd>
+              </dl>
+            </div>
+            <p></p>
+          </div>
+          <div class="sect3"> 
+            <div class="titlepage"> 
+              <div> 
+                <h4 class="title"><a name="IDAKOHKG"></a>Sending and receiving 
+                  messages</h4>
+              </div>
+            </div>
+            <div class="variablelist"> 
+              <dl> 
+                <dt><span class="term"><tt>(sendMessage a m)</tt></span></dt>
+                <dd> 
+                  <p> Sends the message <tt>m</tt> to the agent represented by 
+                    its agent address <tt>a</tt>.Exemple: 
+                  <table border="0" bgcolor="#E0E0E0">
+                    <tr> 
+                      <td> 
+                        <pre class="programlisting">
+(foreach ?x (getAgentsWithRole "brain-stormers" "genius")
+	(sendMessage ?x (new "madkit.lib.messages.StringMessage" "Hello world!")))
+sends a StringMessage to all agents with the role "genius" in the group "brain-stormers".
+</pre>
+                      </td>
+                    </tr>
+                  </table>
+                  <p></p>
+                </dd>
+                <dt><span class="term"><tt>(broadcastMessage c g r m), (broadcastMessage 
+                  g r m)</tt></span></dt>
+                <dd> 
+                  <p> Sends the message <tt>m</tt> to all agents playing role 
+                    <tt>r</tt> within group <tt>g</tt> in community <tt>c</tt> 
+                    (or in community <tt>"public"</tt> if this parameter is not 
+                    present).</p>
+                </dd>
+              </dl>
+            </div>
+            <p>When a Jess agent receives a message, it add the message to its 
+              facts base. Thus you do not have to write a <tt>live()</tt> function: 
+              the whole rule based describes the "live" behavior of a JessAgent. 
+            </p>
+            <p> To be evaluted correctly, standard types of messages (i.e. all 
+              messages except ControlMessages) should be known by the receiver. 
+              To do so, a new type of message has to be declared using the function 
+              defineMessageType which associate a symbol to the name of message 
+              class. For example, <tt>StringMessages </tt>are declared in the 
+              following way: </p>
+            <p> 
+            <table border="0" bgcolor="#E0E0E0">
+              <tr> 
+                <td> 
+                  <pre class="programlisting">
+(defineMessageType StringMessage madkit.lib.messages.StringMessage)
+</pre>
+                </td>
+              </tr>
+            </table>
+            This command tells the Jess engine to create a specific template (a 
+            defclass template in the terminology of Jess). This template is used 
+            upon reception of messages to transform messages into facts. Then 
+            rules may use this facts and behave accordingly. 
+            <p></p>
+            <p> The following message types are already declared: 
+            <table border="0" bgcolor="#E0E0E0">
+              <tr> 
+                <td> 
+                  <pre class="programlisting">
+(defineMessageType ActMessage madkit.lib.messages.ActMessage)
+(defineMessageType StringMessage madkit.lib.messages.StringMessage)
+(defineMessageType ObjectMessage madkit.lib.messages.ObjectMessage)
+(defineMessageType KQMLMessage madkit.lib.messages.KQMLMessage)
+(defineMessageType ACLMessage madkit.lib.messages.ACLMessage)
+</pre>
+                </td>
+              </tr>
+            </table>
+            Standard messages are evaluated in two different ways: 
+            <p></p>
+            <p> If the Jess engine of a JessAgent does not work, then the message 
+              is added to the facts of the receiver and the Jess engine is reactivated. 
+              If the Jess engine runs, it is necessary to repeatedly use the function 
+              readMessages to tell the agent to take its incoming messages and 
+              add them into the fact list. Here is an example of an agent's behavior 
+              that continuously loops and interpret incoming messages: </p>
+            <table border="0" bgcolor="#E0E0E0">
+              <tr> 
+                <td> 
+                  <pre class="programlisting">
+(createGroup "testloop")
+(requestRole "testloop" "performer")
+
+(assert (ok))
+
+;; rules R1 and R2 should be evaluated before
+;; thus the use of salience in other rules
+(defrule R1 ""
+	?ok &lt;- (ok)
+	=&gt;
+	(retract ?ok)
+	(pause 500)
+	(printout t ".")
+	(readMessages)
+	(assert (ko))
+)
+
+(defrule R2 ""
+	?ko &lt;- (ko)
+	=&gt;
+	(retract ?ko)
+	(pause 500)
+	(printout t "-")
+	(readMessages)
+	(assert (ok))
+)
+
+(defrule MessageReading "Reads messages and do nothing"
+	(declare (salience 100))
+	?m &lt;- (ActMessage 
+			(sender ?sender)
+			(action ?act&amp;:(not (member$ ?act (create$ "halt" "eval"))))
+			(content ?cont))
+	=&gt;
+	(printout t  "got a message : " ?act " with content: " ?cont crlf)
+	(retract ?m)
+)
+
+(defrule MessageHalting "Halt the loop when receiving such a message"
+	(declare (salience 100))
+	?m &lt;- (ActMessage (sender ?sender)(action "halt") (content ?cont))
+	=&gt;
+	(printout t  "got a halt message! " crlf)
+	(retract ?m)
+	(halt)
+)
+
+(defrule MessageEvaluating "Evaluate the content of the incoming message"
+	(declare (salience 100))
+	?m &lt;- (ActMessage (sender ?sender)(action "eval") (content ?cont))
+	=&gt;
+	(printout t  "got an eval message! " crlf)
+	(retract ?m)
+	(printout t "=&gt; " (eval ?cont) crlf)
+)
+
+(defrule EvalStringMessage "Evaluate the content of a StringMessage"
+	(declare (salience 100))
+	?m &lt;- (StringMessage (sender ?sender)(string ?cont))
+	=&gt;
+	(printout t  "got a StringMessage! " crlf)
+	(retract ?m)
+	(printout t "=s=&gt; " (eval ?cont) crlf)
+) </pre>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="sect3"> 
+            <div class="titlepage"> 
+              <div> 
+                <h4 class="title"><a name="IDAVPHKG"></a>Control messages</h4>
+              </div>
+            </div>
+            <p> JessAgents may be controlled from the outside via <tt>ControlMessages</tt>. 
+              <tt>ControlMessages</tt>are used as system messages and should not 
+              be used as application messages. A <tt>ControlMessage</tt>contains 
+              two fields: an action field which dictates the kind of action the 
+              receiver should do, and a content field which is used for some messages. 
+              Here is the list of already available <tt>ControlMessages</tt>: 
+            <div class="table"> 
+              <p><b>Table 4.1. Control messages</b></p>
+              <table summary="Control messages" border="1">
+                <colgroup><col><col><col></colgroup><tbody> 
+                <tr> 
+                  <td>Action</td>
+                  <td>Content</td>
+                  <td>Behavior</td>
+                </tr>
+                <tr> 
+                  <td>run</td>
+                  <td> </td>
+                  <td>run the engine</td>
+                </tr>
+                <tr> 
+                  <td>facts</td>
+                  <td> </td>
+                  <td>stops the engine</td>
+                </tr>
+                <tr> 
+                  <td>rules</td>
+                  <td> </td>
+                  <td>print the rules</td>
+                </tr>
+                <tr> 
+                  <td>reset</td>
+                  <td> </td>
+                  <td>prints the facts</td>
+                </tr>
+                <tr> 
+                  <td>reinit</td>
+                  <td> </td>
+                  <td>clear and load again the initialization file (stored in 
+                    the "loadFile" property)</td>
+                </tr>
+                <tr> 
+                  <td>eval</td>
+                  <td>the string which is evaluated by the receiver</td>
+                  <td>eval a string</td>
+                </tr>
+                <tr> 
+                  <td>load </td>
+                  <td>the address of a file which is loaded by the receiver</td>
+                  <td>load a file</td>
+                </tr>
+                <tr> 
+                  <td>watch</td>
+                  <td>a keyword taken from facts, rules, activations, compilations 
+                    which are known by Jess engines and are used to show its activity</td>
+                  <td>set the kind of trace</td>
+                </tr>
+                <tr> 
+                  <td>unwatch</td>
+                  <td>a keyword taken from facts, rules, activations, compilations 
+                    which are known by Jess engines and are used to show its activity</td>
+                  <td>unset the kind of trace</td>
+                </tr>
+                <tr> 
+                  <td>clear</td>
+                  <td> </td>
+                  <td>clear all functions, rules and facts</td>
+                </tr>
+                </tbody> 
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

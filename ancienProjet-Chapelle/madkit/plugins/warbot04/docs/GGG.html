@@ -1,0 +1,813 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="GGG_fichiers/filelist.xml">
+<link rel=Edit-Time-Data href="GGG_fichiers/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Système Multi Agents</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Anaelathor</o:Author>
+  <o:LastAuthor>Jaco</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>186</o:TotalTime>
+  <o:Created>2004-03-13T15:33:00Z</o:Created>
+  <o:LastSaved>2004-03-13T15:33:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>716</o:Words>
+  <o:Characters>3939</o:Characters>
+  <o:Company>Rebellion</o:Company>
+  <o:Lines>32</o:Lines>
+  <o:Paragraphs>9</o:Paragraphs>
+  <o:CharactersWithSpaces>4646</o:CharactersWithSpaces>
+  <o:Version>10.4219</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:ActiveWritingStyle Lang="FR" VendorID="9" DLLVersion="512" NLCheck="0">1</w:ActiveWritingStyle>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:HyphenationZone>21</w:HyphenationZone>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:0pt;}
+h2
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:36.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	text-decoration:underline;
+	text-underline:wavy-double;}
+h3
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:36.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";}
+h4
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:22.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:normal;}
+h5
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	font-size:16.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:normal;}
+h6
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:6;
+	font-size:24.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:normal;}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:7;
+	font-size:14.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-GB;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:8;
+	font-size:14.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:9;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:27.0pt;
+	mso-pagination:widow-orphan;
+	tab-stops:list 71.4pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBodyTextIndent2, li.MsoBodyTextIndent2, div.MsoBodyTextIndent2
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:26.95pt;
+	line-height:18.0pt;
+	mso-line-height-rule:exactly;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBodyTextIndent3, li.MsoBodyTextIndent3, div.MsoBodyTextIndent3
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-indent:26.95pt;
+	line-height:18.0pt;
+	mso-line-height-rule:exactly;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 70.85pt 70.85pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:1577592550;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-458091140 67895311 67895321 67895323 67895311 67895321 67895323 67895311 67895321 67895323;}
+@list l0:level1
+	{mso-level-tab-stop:71.4pt;
+	mso-level-number-position:left;
+	margin-left:71.4pt;
+	text-indent:-18.0pt;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Tableau Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+  <o:regrouptable v:ext="edit">
+   <o:entry new="1" old="0"/>
+   <o:entry new="2" old="0"/>
+  </o:regrouptable>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=FR style='tab-interval:35.4pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<h2><u><span style='font-size:48.0pt;mso-bidi-font-size:12.0pt'>Système Multi
+Agents<o:p></o:p></span></u></h2>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:44.25pt;
+ height:44.25pt'>
+ <v:imagedata src="GGG_fichiers/image001.png" o:title="Home"/>
+</v:shape><![endif]--><![if !vml]><img width=59 height=59
+src="GGG_fichiers/image002.gif" v:shapes="_x0000_i1025"><![endif]></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<h3 style='tab-stops:list 36.0pt'><!--[if gte vml 1]><v:shape id="_x0000_i1026"
+ type="#_x0000_t75" style='width:46.5pt;height:46.5pt' o:bullet="t">
+ <v:imagedata src="GGG_fichiers/image003.png" o:title="Explorer"/>
+</v:shape><![endif]--><![if !vml]><img width=62 height=62
+src="GGG_fichiers/image004.gif" alt="*" v:shapes="_x0000_i1026"><![endif]><span
+style='mso-spacerun:yes'> </span><span style='font-size:48.0pt;mso-bidi-font-size:
+12.0pt'>Projet <span class=SpellE>Warbot</span><span style='mso-spacerun:yes'> 
+</span></span><!--[if gte vml 1]><v:shape id="_x0000_i1027" type="#_x0000_t75"
+ style='width:50.25pt;height:50.25pt'>
+ <v:imagedata src="GGG_fichiers/image005.png" o:title="RocketLauncher"/>
+</v:shape><![endif]--><![if !vml]><img width=67 height=67
+src="GGG_fichiers/image006.jpg" v:shapes="_x0000_i1027"><![endif]></h3>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='mso-spacerun:yes'>                                         </span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<h4><span style='font-size:26.0pt;mso-bidi-font-size:12.0pt'>DEA Informatique –
+19 Février 2004<o:p></o:p></span></h4>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<h5><span style='font-size:20.0pt;mso-bidi-font-size:12.0pt'>Par<o:p></o:p></span></h5>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<h6><span style='font-size:36.0pt;mso-bidi-font-size:12.0pt'>COUSY Guilhem<o:p></o:p></span></h6>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:36.0pt;mso-bidi-font-size:12.0pt'>MOIROD Guillaume<o:p></o:p></span></p>
+
+<h6><span style='font-size:36.0pt;mso-bidi-font-size:12.0pt'>RAYMOND Gilles</span></h6>
+
+<span style='font-size:12.0pt;font-family:"Times New Roman";mso-fareast-font-family:
+"Times New Roman";mso-ansi-language:FR;mso-fareast-language:FR;mso-bidi-language:
+AR-SA'><br clear=all style='page-break-before:always'>
+</span>
+
+<p class=MsoBodyTextIndent3>Dans le cadre du projet <span class=SpellE>Warbot</span>,
+<span class=GramE>notre soucis</span> a été de réaliser une architecture multi
+agents la plus souple possible afin de gérer des tactiques de combat. Nous
+avons ajouté au modèle groupe, agent, rôle une architecture de buts et de
+tactiques la plus exhaustive possible ainsi qu’un automate de détermination de
+rôle s’appuyant sur cette architecture.</p>
+
+<p class=MsoBodyTextIndent2 style='text-align:justify'>Ainsi, le comportement
+d’un agent est déterminé par son rôle, ses tactiques et ses buts qui évoluent
+en fonction de ses percepts et ses communications inter agents.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:26.95pt;line-height:
+18.0pt;mso-line-height-rule:exactly'>Nous avons respecté une convention de
+codage et de <span class=SpellE>nommage</span> lors du développement en nous
+autorisant une liberté au niveau de la complexité des algorithmes.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoHeading7><span style='mso-ansi-language:FR'>Conception objet<o:p></o:p></span></p>
+
+<p class=MsoHeading8>Schéma des classes</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><!--[if gte vml 1]><v:shapetype id="_x0000_t202"
+ coordsize="21600,21600" o:spt="202" path="m,l,21600r21600,l21600,xe">
+ <v:stroke joinstyle="miter"/>
+ <v:path gradientshapeok="t" o:connecttype="rect"/>
+</v:shapetype><v:shape id="_x0000_s1032" type="#_x0000_t202" style='position:absolute;
+ margin-left:18pt;margin-top:7.8pt;width:99pt;height:27pt;z-index:1'>
+ <v:textbox style='mso-next-textbox:#_x0000_s1032'>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <h1 align=center style='text-align:center'><span class=SpellE>GGG_Percept</span></h1>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><v:shape id="_x0000_s1034" type="#_x0000_t202" style='position:absolute;
+ margin-left:0;margin-top:91.55pt;width:90pt;height:27pt;z-index:2'>
+ <v:textbox style='mso-next-textbox:#_x0000_s1034'>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <h1><span class=SpellE>GGG_Target</span></h1>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><v:shape id="_x0000_s1026" type="#_x0000_t202" style='position:absolute;
+ margin-left:171pt;margin-top:2.6pt;width:99pt;height:27pt;z-index:3'
+ o:regroupid="1">
+ <v:textbox>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <h1 align=center style='text-align:center'>GGG_WB</h1>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><v:shape id="_x0000_s1027" type="#_x0000_t202" style='position:absolute;
+ margin-left:117pt;margin-top:95.3pt;width:117pt;height:27pt;z-index:4'
+ o:regroupid="1">
+ <v:textbox>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <h1 align=center style='text-align:center'><span class=SpellE>GGG_WB_Mobile</span></h1>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><v:shape id="_x0000_s1028" type="#_x0000_t202" style='position:absolute;
+ margin-left:252pt;margin-top:95.3pt;width:81pt;height:27pt;z-index:5'
+ o:regroupid="1">
+ <v:textbox>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <h1><span class=SpellE>GGG_Home</span></h1>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><v:shape id="_x0000_s1029" type="#_x0000_t202" style='position:absolute;
+ margin-left:234pt;margin-top:188.45pt;width:135pt;height:27pt;z-index:6'
+ o:regroupid="1">
+ <v:textbox style='mso-next-textbox:#_x0000_s1029'>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <h1><span class=SpellE>GGG_RoketLauncher</span></h1>
+    <p class=MsoNormal><o:p>&nbsp;</o:p></p>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><v:shape id="_x0000_s1030" type="#_x0000_t202" style='position:absolute;
+ margin-left:108pt;margin-top:188.45pt;width:117pt;height:27pt;z-index:7'
+ o:regroupid="1">
+ <v:textbox style='mso-next-textbox:#_x0000_s1030'>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <h1 align=center style='text-align:center'><span class=SpellE>GGG_Explorateur</span></h1>
+    <p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><v:line id="_x0000_s1036" style='position:absolute;flip:y;z-index:8'
+ from="189pt,30.5pt" to="198pt,93.5pt" o:regroupid="1">
+ <v:stroke endarrow="block"/>
+</v:line><v:line id="_x0000_s1037" style='position:absolute;flip:x y;z-index:9'
+ from="243pt,30.5pt" to="4in,93.5pt" o:regroupid="1">
+ <v:stroke endarrow="block"/>
+</v:line><v:line id="_x0000_s1038" style='position:absolute;flip:x y;z-index:10'
+ from="3in,123.2pt" to="261pt,186.2pt" o:regroupid="1">
+ <v:stroke endarrow="block"/>
+</v:line><v:line id="_x0000_s1039" style='position:absolute;flip:y;z-index:11'
+ from="153pt,123.2pt" to="171pt,186.2pt" o:regroupid="1">
+ <v:stroke endarrow="block"/>
+</v:line><v:shape id="_x0000_s1031" type="#_x0000_t202" style='position:absolute;
+ margin-left:5in;margin-top:2.6pt;width:81pt;height:27pt;z-index:12'
+ o:regroupid="2">
+ <v:textbox style='mso-next-textbox:#_x0000_s1031'>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <h1 align=center style='text-align:center'>GGG_BAL</h1>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><v:shape id="_x0000_s1033" type="#_x0000_t202" style='position:absolute;
+ margin-left:396pt;margin-top:58.4pt;width:1in;height:27pt;z-index:13'
+ o:regroupid="2">
+ <v:textbox style='mso-next-textbox:#_x0000_s1033'>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <h1><span class=SpellE>GGG_Msg</span></h1>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><v:line id="_x0000_s1040" style='position:absolute;flip:x y;
+ z-index:14' from="387pt,30.5pt" to="6in,57.5pt" o:regroupid="2">
+ <v:stroke endarrow="block"/>
+</v:line><v:line id="_x0000_s1043" style='position:absolute;z-index:15' from="117pt,17.25pt"
+ to="171pt,17.25pt">
+ <v:stroke endarrow="diamond" endarrowwidth="wide" endarrowlength="long"/>
+</v:line><v:line id="_x0000_s1044" style='position:absolute;flip:y;z-index:16'
+ from="89.85pt,110pt" to="116.85pt,110pt">
+ <v:stroke endarrow="diamond" endarrowwidth="wide" endarrowlength="long"/>
+</v:line><v:line id="_x0000_s1045" style='position:absolute;flip:x;z-index:17'
+ from="270pt,17.25pt" to="5in,17.25pt">
+ <v:stroke endarrow="diamond" endarrowwidth="wide" endarrowlength="long"/>
+</v:line><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+relative;z-index:1;left:-1px;top:2px;width:630px;height:292px'><img width=630
+height=290 src="GGG_fichiers/image007.gif" v:shapes="_x0000_s1032 _x0000_s1034 _x0000_s1026 _x0000_s1027 _x0000_s1028 _x0000_s1029 _x0000_s1030 _x0000_s1036 _x0000_s1037 _x0000_s1038 _x0000_s1039 _x0000_s1031 _x0000_s1033 _x0000_s1040 _x0000_s1043 _x0000_s1044 _x0000_s1045"></span><![endif]><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='line-height:18.0pt;mso-line-height-rule:exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='line-height:18.0pt;mso-line-height-rule:exactly'><o:p>&nbsp;</o:p></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<p class=MsoHeading7 style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><span style='mso-ansi-language:FR'>Fonctionnement global des agents<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'>A chaque tour un agent&nbsp;:</p>
+
+<p class=MsoNormal style='margin-left:71.4pt;text-align:justify;text-indent:
+-18.0pt;line-height:18.0pt;mso-line-height-rule:exactly;mso-list:l0 level1 lfo1;
+tab-stops:list 71.4pt'><![if !supportLists]><span style='mso-list:Ignore'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]>Reçoit
+les messages,</p>
+
+<p class=MsoNormal style='margin-left:71.4pt;text-align:justify;text-indent:
+-18.0pt;line-height:18.0pt;mso-line-height-rule:exactly;mso-list:l0 level1 lfo1;
+tab-stops:list 71.4pt'><![if !supportLists]><span style='mso-list:Ignore'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]>Traite
+les percepts,</p>
+
+<p class=MsoNormal style='margin-left:71.4pt;text-align:justify;text-indent:
+-18.0pt;line-height:18.0pt;mso-line-height-rule:exactly;mso-list:l0 level1 lfo1;
+tab-stops:list 71.4pt'><![if !supportLists]><span style='mso-list:Ignore'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]>Actualise
+son rôle,</p>
+
+<p class=MsoNormal style='margin-left:71.4pt;text-align:justify;text-indent:
+-18.0pt;line-height:18.0pt;mso-line-height-rule:exactly;mso-list:l0 level1 lfo1;
+tab-stops:list 71.4pt'><![if !supportLists]><span style='mso-list:Ignore'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]>Actualise
+sa tactique,</p>
+
+<p class=MsoNormal style='margin-left:71.4pt;text-align:justify;text-indent:
+-18.0pt;line-height:18.0pt;mso-line-height-rule:exactly;mso-list:l0 level1 lfo1;
+tab-stops:list 71.4pt'><![if !supportLists]><span style='mso-list:Ignore'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]>Actualise
+son but,</p>
+
+<p class=MsoNormal style='margin-left:71.4pt;text-align:justify;text-indent:
+-18.0pt;line-height:18.0pt;mso-line-height-rule:exactly;mso-list:l0 level1 lfo1;
+tab-stops:list 71.4pt'><![if !supportLists]><span style='mso-list:Ignore'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]>Agit.</p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly;tab-stops:list 71.4pt'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>Nous effectuons des
+pré-traitements sur la réception des messages (tri en fonction du type de
+message&nbsp;: Annonce, Requête, Ordre) ainsi que les celle des percepts (tri
+en fonction du type).</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>Un agent ne va
+changer de rôle que si il en reçoit l’ordre ou à la mort de son supérieur
+(sergent pour un RL, chef pour une base).</p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly;tab-stops:list 71.4pt'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoBodyTextIndent style='text-align:justify;line-height:18.0pt;
+mso-line-height-rule:exactly'>Nous avons divisé les buts d’un agent en
+plusieurs types certains d’entre eux n’étant valides que pour un type
+d’agent&nbsp;:</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>- inconnu,</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>- déplacement,</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>- rassembler
+(ordonner un regroupement à ses troupes pour un sergent),</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>- rassemblement
+(effectuer un regroupement),</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>- suivre un ami,</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>- attaquer une
+cible,</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>- organiser
+(création des groupes),</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>- appeler un groupe
+(sert au sergent pour connaître les soldats de son groupe),</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly;tab-stops:list 71.4pt'>- compter le nombre
+d’agents dans le groupe.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:35.4pt;line-height:
+18.0pt;mso-line-height-rule:exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoHeading7 style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><span style='mso-ansi-language:FR'>Stratégies globales<o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='text-align:justify;line-height:18.0pt;
+mso-line-height-rule:exactly;tab-stops:35.4pt'>Nous avons remarqué que dans <span
+class=SpellE>Warbot</span> l’union faisait la force et donc nous avons établi
+une stratégie de déplacement en groupe d’agents de taille paramétrable. Dans
+chacun de ces groupes les agents ont des rôles différents&nbsp;: un <span
+class=SpellE><span class=GramE>RocketLauncher</span></span><span class=GramE>(</span>RL)
+&quot;chef&quot;, plusieurs RL &quot;soldat&quot; et éventuellement un
+Explorateur &quot;éclaireur&quot; qui gravite autour du groupe.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly'>Lorsqu’un agent (Base, RL, Explorateur)
+détecte un ennemi il prévient tous les agents et les plus proches vont à
+l’attaque selon un ordre de priorité sur de la nature de l’ennemi.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly'>La création des groupes et les
+affectations des rôles sont centralisées par une base &quot;Chef&quot; à
+l’initialisation de la partie. Ces rôles peuvent changer au cours du match. </p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly'>Dans un premier temps les agents d’un même
+groupe vont se rassembler puis les groupes vont se disperser sur la carte. Une
+fois dispersés, ils adoptent une exploration en forme de spirale. Ainsi, nous
+couvrons une grande partie du terrain. Ces stratégies tendent à éliminer en
+premier lieu les ennemis mobiles, et dans le cas général être en surnombre par
+rapport à l’ennemi.</p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoHeading9 style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'>Gestion de l’évitement </p>
+
+<p class=MsoBodyTextIndent style='text-align:justify;line-height:18.0pt;
+mso-line-height-rule:exactly;tab-stops:35.4pt'>Un agent mobile pour éviter les
+obstacles calcule l’union des angles interdits induits par chacun des obstacles
+qu’il perçoit (murs, autres agents) et choisit l’angle optimal pour atteindre
+sa cible tout en évitant les collisions.</p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoHeading9 style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'>Gestion des tirs</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly'>Avant de tirer, un <span class=SpellE>RocketLauncher</span>
+regarde s’il n’y a pas d’obstacle gênant le tir. Dans cette éventualité le RL
+ne tire pas et se déplace de façon à obtenir un angle de tir sur sa cible.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly'>L’existence d’un angle de tir est calculée
+en fonction des arcs interdits par les obstacles. De plus, il n’est pas
+nécessaire au RL de voir sa cible pour lui tirer dessus. En effet, un agent
+peut indiquer la position de l’ennemi aux autres agents du groupe. Ceci permet
+de tuer les ennemis sans être vu.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly'>Cependant le défaut de cette technique est
+qu’un agent qui ne perçoit pas sa cible est incapable de s’assurer qu’il n’y a
+pas d’obstacles entre la limite de son percept et l’ennemi. Mais il serait très
+compliqué d’intégrer ces obstacles dans la gestion des perceptions indirectes.</p>
+
+<p class=MsoBodyTextIndent style='text-align:justify;line-height:18.0pt;
+mso-line-height-rule:exactly;tab-stops:35.4pt'>Il en résulte des dommages
+collatéraux possibles mais cela n’affecte pas l’efficacité globale de notre
+équipe.</p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoHeading7 style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><span style='mso-ansi-language:FR'>Conclusion<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify;line-height:18.0pt;mso-line-height-rule:
+exactly'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt;line-height:
+18.0pt;mso-line-height-rule:exactly'>Notre modélisation se veut hiérarchisée
+afin de pouvoir gérer séparément la tactique, la stratégie et les actions
+individuelles.</p>
+
+<p class=MsoBodyTextIndent style='text-align:justify;line-height:18.0pt;
+mso-line-height-rule:exactly;tab-stops:35.4pt'>Les comportements finaux de nos
+agents sont évolués et coopératifs. Cependant, il subsiste des dommages
+collatéraux.</p>
+
+<p class=MsoBodyTextIndent style='text-align:justify;line-height:18.0pt;
+mso-line-height-rule:exactly;tab-stops:35.4pt'>Nous avions envisagé diverses
+stratégies lors de la conception du modèle mais toutes n’ont pas été
+implémentées. Par exemple, la fuite d’un groupe en cas d’infériorité numérique
+au combat, tenter d’appâter des ennemis dans des pièges, <span class=SpellE>etc</span>…</p>
+
+<p class=MsoBodyTextIndent style='line-height:18.0pt;mso-line-height-rule:exactly;
+tab-stops:35.4pt'><o:p>&nbsp;</o:p></p>
+
+</div>
+
+</body>
+
+</html>

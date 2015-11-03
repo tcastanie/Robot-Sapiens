@@ -1,0 +1,406 @@
+(clear)
+(defrule init
+    "this rule is fired first by the inference engine."
+    ?initFact <- (initial-fact)
+  =>
+    (retract ?initFact)
+    (displayIntroScreen)
+    (assert (fruit))
+)
+; FUNCTIONS
+(deffunction displayIntroScreen ()
+    "display the introduction screen"
+    (printout t crlf)
+    (printout t "+--------------------------------------------------+" crlf)
+    (printout t "| Welcome to the fruit classification program      |" crlf)
+    (printout t "+--------------------------------------------------+" crlf)
+    (printout t crlf)
+)
+
+(deffunction displayMultifield ($?multifield)
+    "display elements of a multifield, separated by bars"
+
+    (if (> (length$ $?multifield) 0) then
+        (printout t (nth$ 1 $?multifield))
+    )
+
+    (bind ?i 2)
+    (while (<= ?i (length$ $?multifield)) do
+        (printout t " | " (nth$ ?i $?multifield))
+        (bind ?i (+ ?i 1))
+    )
+)
+
+(deffunction checkInput (?input ?inputTypes ?allowedValues)
+    "check if the input can be accepted"
+    (bind $?inputTypes (explode$ ?inputTypes))
+    (bind $?allowedValues (explode$ ?allowedValues))
+
+    (if (and (member$ integer $?inputTypes) (integerp ?input)) then
+        (return TRUE)
+    )
+    (if (and (member$ long $?inputTypes) (longp ?input)) then
+        (return TRUE)
+    )
+
+    (if (and
+            (member$ float $?inputTypes)
+            (floatp ?input)) then
+        (return TRUE)
+    )
+
+    (if (member$ atom $?inputTypes) then
+        (if (or
+                (= (length$ $?allowedValues) 0)
+                (member$ ?input $?allowedValues)) then
+            (return TRUE)
+        )
+    )
+
+    (printout t "Error: This input is not allowed." crlf)
+    (printout t "Allowed types: ")
+    (displayMultifield (explode$ (upcase (implode$ $?inputTypes))))
+    (printout t crlf)
+    (if (> (length$ $?allowedValues) 0) then
+        (printout t "Allowed values: ")
+        (displayMultifield $?allowedValues)
+        (printout t crlf)
+    )
+
+    (return FALSE)
+)
+
+
+
+(deffunction askQuestion (?question ?answerTypes ?allowedAnswers)
+    "repeatedly ask a question until valid user input is given."
+
+    (bind ?inputAccepted FALSE)
+    (while (eq ?inputAccepted FALSE) do
+        (printout t ?question " ")
+        (bind ?answer (read))
+        (bind ?inputAccepted (checkInput ?answer ?answerTypes ?allowedAnswers))
+    )
+
+    (return ?answer)
+)
+
+
+
+; *****************************************************************************
+; * Templates                                                                 *
+; *****************************************************************************
+
+(deftemplate fruit
+    "template for describing a piece of fruit"
+
+    (slot name
+        (type ATOM)
+        (default nil))
+    (slot shape
+        (type ATOM)
+        (default nil))
+    (slot color
+        (type ATOM)
+        (default nil))
+    (slot diameter
+        (type INTEGER)
+        (type ATOM)
+        (default nil))
+    (slot seedCount
+        (type INTEGER)
+        (type ATOM)
+        (default nil))
+    (slot surface
+        (type ATOM)
+        (default nil))
+)
+
+
+
+; *****************************************************************************
+; * Deffacts                                                                  *
+; *****************************************************************************
+
+(reset)
+
+
+
+; *****************************************************************************
+; * Rules                                                                     *
+; *****************************************************************************
+
+; *** Initialisation ***
+
+(defrule init
+    "this rule is fired first by the inference engine."
+
+    ?initFact <- (initial-fact)
+  =>
+    (retract ?initFact)
+    (displayIntroScreen)
+    (assert (fruit))
+)
+
+
+
+; *** Classification Knowledge ***
+
+; The priority (salience) of these rules is set to 10. This is higher than the
+; priorities of all other rules (which is 0), especially of the rules dealing
+; with asking questions. This has the effect that as few questions as possible
+; are asked and the classification is done with as little information as
+; possible.
+
+(defrule rule1
+    "if the shape is long AND the color is green or yellow, then it is a banana"
+
+    (declare (salience 10))
+
+    ?fruitFact <- (fruit (name nil) (shape long) (color green|yellow))
+  =>
+    (modify ?fruitFact (name banana))
+)
+
+
+
+(defrule rule2
+    "if the shape is round or oblong AND the diameter is greater than 4"
+
+    (declare (salience 10))
+
+    (fruit (name nil) (shape round|oblong) (diameter ?diameter))
+    (test (integerp ?diameter))
+    (test (> ?diameter 4))
+  =>
+    (assert (fruitClass vine))
+)
+
+
+
+(defrule rule3
+    "if the shape is round AND the diameter is less than 4"
+
+    (declare (salience 10))
+
+    (fruit (name nil) (shape round) (diameter ?diameter))
+    (test (integerp ?diameter))
+    (test (< ?diameter 4))
+  =>
+    (assert (fruitClass tree))
+)
+
+
+
+(defrule rule4
+    "if the seed count is equal to 1, then the seed class is stone fruit."
+
+    (declare (salience 10))
+
+    (fruit (name nil) (seedCount 1))
+  =>
+    (assert (seedClass stoneFruit))
+)
+
+
+
+(defrule rule5
+    "if the seed count is greater than 1, then the seed class is multiple."
+
+    (declare (salience 10))
+
+    (fruit (name nil) (seedCount ?seedCount))
+    (test (integerp ?seedCount))
+    (test (> ?seedCount 1))
+  =>
+    (assert (seedClass multiple))
+)
+
+
+
+(defrule rule6
+    "if the fruit class is vine AND the color is green, then it is a watermelon"
+
+    (declare (salience 10))
+
+    (fruitClass vine)
+    ?fruitFact <- (fruit (name nil) (color green))
+  =>
+    (modify ?fruitFact (name watermelon))
+)
+
+
+
+(defrule rule7
+    "if the fruit class is vine AND the surface is smooth AND the color is yellow"
+
+    (declare (salience 10))
+
+    (fruitClass vine)
+    ?fruitFact <- (fruit (name nil) (surface smooth) (color yellow))
+  =>
+    (modify ?fruitFact (name honeydew))
+)
+
+
+
+(defrule rule8
+    "if the fruit class is vine AND the surface is rough AND the color is tan, then it is a cantaloupe"
+
+    (declare (salience 10))
+
+    (fruitClass vine)
+    ?fruitFact <- (fruit (name nil) (surface rough) (color tan))
+  =>
+    (modify ?fruitFact (name cantaloupe))
+)
+
+
+
+(defrule rule9
+    "if the fruit class is tree AND the seed class is stone fruit AND the color.."
+
+    (declare (salience 10))
+
+    (fruitClass tree)
+    (seedClass stoneFruit)
+    ?fruitFact <- (fruit (name nil) (color orange) (diameter ?diameter))
+    (test (integerp ?diameter))
+    (test (< ?diameter 3))
+  =>
+    (modify ?fruitFact (name apricot))
+)
+
+
+
+(defrule rule10
+    "if the fruit class is tree AND the seed class is multiple AND the color is orange, then it is an orange"
+
+    (declare (salience 10))
+
+    (fruitClass tree)
+    (seedClass multiple)
+    ?fruitFact <- (fruit (name nil) (color orange))
+  =>
+    (modify ?fruitFact (name orange))
+)
+
+
+
+(defrule rule11
+    "if the fruit class is tree AND the seed class is stone fruit AND the color is red"
+
+    (declare (salience 10))
+
+    (fruitClass tree)
+    (seedClass stoneFruit)
+    ?fruitFact <- (fruit (name nil) (color red))
+  =>
+    (modify ?fruitFact (name cherry))
+)
+
+
+
+(defrule rule12
+    "if the fruit class is tree AND the seed class is stone fruit AND the color.."
+
+    (declare (salience 10))
+
+    (fruitClass tree)
+    (seedClass stoneFruit)
+    ?fruitFact <- (fruit (name nil) (color orange) (diameter ?diameter))
+    (test (integerp ?diameter))
+    (test (>= ?diameter 3))
+  =>
+    (modify ?fruitFact (name peach))
+)
+
+
+
+(defrule rule13
+    "if the fruit class is tree AND the seed class is multiple AND the color is.."
+
+    (declare (salience 10))
+
+    (fruitClass tree)
+    (seedClass multiple)
+    ?fruitFact <- (fruit (name nil) (color green|red|yellow))
+  =>
+    (modify ?fruitFact (name apple))
+)
+
+
+
+(defrule rule14
+    "if the fruit class is tree AND the seed class is stone fruit AND the color.."
+
+    (declare (salience 10))
+
+    (fruitClass tree)
+    (seedClass stoneFruit)
+    ?fruitFact <- (fruit (name nil) (color purple))
+  =>
+    (modify ?fruitFact (name plum))
+)
+
+
+
+(defrule displayResult
+    "display the result of the classification"
+
+    (declare (salience 10))
+
+    (fruit (name ?name&~nil))
+  =>
+    (printout t "The fruit is classified as a(n) " ?name "." crlf)
+)
+
+
+
+; *** Asking Questions ***
+
+; These rules deal with asking questions. Note that it is always among
+; possibilities to give the answer ``unknown''.
+
+(defrule askShape
+    ?fruitFact <- (fruit (name nil) (shape nil))
+  =>
+    (modify ?fruitFact (shape (askQuestion "Enter the shape:" "atom"
+      "long oblong round unknown")))
+)
+
+
+
+(defrule askColor
+    ?fruitFact <- (fruit (name nil) (color nil))
+  =>
+    (modify ?fruitFact (color (askQuestion "Enter the color:" "atom"
+      "green orange purple red tan yellow unknown")))
+)
+
+
+
+(defrule askDiameter
+    ?fruitFact <- (fruit (name nil) (diameter nil))
+  =>
+    (modify ?fruitFact (diameter (askQuestion "Enter the diameter:"
+      "integer atom" "unknown")))
+)
+
+
+
+(defrule askSeedCount
+    ?fruitFact <- (fruit (name nil) (seedCount nil))
+  =>
+    (modify ?fruitFact (seedCount (askQuestion "Enter the seed count:"
+      "integer atom" "unknown")))
+)
+
+
+
+(defrule askSurface
+    ?fruitFact <- (fruit (name nil) (surface nil))
+  =>
+    (modify ?fruitFact (surface (askQuestion "Enter the surface type:" "atom"
+      "rough smooth unknown")))
+)

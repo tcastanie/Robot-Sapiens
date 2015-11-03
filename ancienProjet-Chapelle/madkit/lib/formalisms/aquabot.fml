@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="aquabot" description="aquabot" 
+	class="aquabot.kernel.AquaStructure">
+	
+  <formalism-info>
+    <author>Yves DENNERY</author>
+    <date>06/06/2003</date>
+  </formalism-info>
+  <node-types>
+    <node-desc name="source" class="aquabot.kernel.AquaEntity">
+      <icon url="images/aquabot/source1.gif"/>
+      <property name="label">Source</property>
+      <property name="comment">Une source emet de l'eau</property>
+      <property name="brainClass">aquabot.kernel.SourceAgent</property>
+      <graphic-element class="aquabot.kernel.GBasicAquaEntity">
+		<property name="imageaddress">images/aquabot/source1.gif</property>
+		<property name="width">40</property>
+		<property name="height">40</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+      <action description="Switch ON/OFF">
+		<java-method name="triggerAgentAction1"/>
+      </action>
+
+    </node-desc>
+    <node-desc name="riviere" class="aquabot.kernel.AquaEntity">
+      <icon url="images/aquabot/riviere1.gif"/>
+      <property name="label">Riviere</property>
+      <property name="comment">Coule ...</property>
+      <property name="brainClass">aquabot.kernel.RiverAgent</property>
+      <graphic-element class="aquabot.kernel.GBasicAquaEntity">
+		<property name="imageaddress">images/aquabot/riviere1.gif</property>
+		<property name="width">40</property>
+		<property name="height">40</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="exutoire" class="aquabot.kernel.AquaEntity">
+      <icon url="images/aquabot/exutoire1.gif"/>
+      <property name="label">Exutoire</property>
+      <property name="comment">Evacue l'eau de la simulation</property>
+      <property name="brainClass">aquabot.kernel.DischargeAgent</property>
+      <graphic-element class="aquabot.kernel.GBasicAquaEntity">
+		<property name="imageaddress">images/aquabot/exutoire1.gif</property>
+		<property name="width">40</property>
+		<property name="height">40</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+
+    <node-desc name="pompe" class="aquabot.kernel.AquaEntity">
+      <icon url="images/aquabot/pompe1.gif"/>
+      <property name="label">Pompe</property>
+      <property name="comment">Preleve de l'eau sur commande et l'envoie vers les parcelles</property>
+      <property name="brainClass">aquabot.kernel.PumpAgent</property>
+      <graphic-element class="aquabot.kernel.GBasicAquaEntity">
+		<property name="imageaddress">images/aquabot/pompe1.gif</property>
+		<property name="width">40</property>
+		<property name="height">40</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+      <action description="Switch ON/OFF">
+		<java-method name="triggerAgentAction1"/>
+      </action>
+    </node-desc>
+
+    <node-desc name="agriculteur" class="aquabot.kernel.AquaEntity">
+      <icon url="images/aquabot/agriculteur1.gif"/>
+      <property name="label">agriculteur</property>
+      <property name="comment">Possede, surveille ses parcelles, declenche les pompes</property>
+      <property name="brainClass">aquabot.kernel.SourceAgent</property>
+      <graphic-element class="aquabot.kernel.GBasicAquaEntity">
+		<property name="imageaddress">images/aquabot/agriculteur1.gif</property>
+		<property name="width">40</property>
+		<property name="height">40</property>
+		<property name="labelLocation">4</property>
+                <property name="Tchounga">ouba</property>
+      </graphic-element>
+    </node-desc>
+
+    <node-desc name="parcelle" class="aquabot.kernel.AquaEntity">
+      <icon url="images/aquabot/parcelle1.gif"/>
+      <property name="label">parcelle</property>
+      <property name="comment">Croit,est surveillee par le proprietaire, rejette de l'eau</property>
+      <property name="brainClass">aquabot.kernel.FieldAgent</property>
+      <graphic-element class="aquabot.kernel.GBasicAquaEntity">
+		<property name="imageaddress">images/aquabot/parcelle1.gif</property>
+		<property name="width">40</property>
+		<property name="height">40</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+  </node-types>
+
+  <arrow-types>
+    <arrow-desc name="hydro" class="SEdit.SArrow" description="An hydrolic Link">
+      <icon url="images/aquabot/lienhydro.gif"/>
+      <graphic-element>
+                <property name="lineStyle">1</property>
+		<property name="displaylabel">false</property>
+		<property name="endingForm">1</property>
+      </graphic-element>
+    </arrow-desc>
+
+    <arrow-desc name="possession" class="SEdit.SArrow" description="Owning link">
+      <icon url="images/aquabot/lienproprio.gif"/>
+      <graphic-element>
+                <property name="lineStyle">1</property>
+		<property name="displaylabel">false</property>
+		<property name="endingForm">1</property>
+      </graphic-element>
+    </arrow-desc>
+
+    <arrow-desc name="commande" class="SEdit.SArrow" description="TriggerLink">
+      <icon url="images/aquabot/liencommande.gif"/>
+      <graphic-element>
+                <property name="lineStyle">1</property>
+		<property name="displaylabel">false</property>
+		<property name="endingForm">1</property>
+      </graphic-element>
+    </arrow-desc>
+  </arrow-types>
+
+
+  <action description="Start">
+    <icon url="images/run.gif"/>
+    <java-method name="start"/>
+  </action>
+
+  <action description="Stop">
+    <icon url="images/stop.gif"/>
+    <java-method name="stop"/>
+  </action>
+
+  <action description="Step">
+    <icon url="images/step.gif"/>
+    <java-method name="step"/>
+  </action>
+
+  <action description="userMessage">
+    <java-method name="showUserMessage"/>
+  </action>
+
+  <action description="showMessages">
+    <java-method name="showMessages"/>
+  </action>
+
+  <action description="map">
+    <java-method name="mapViewer"/>
+  </action>
+
+</formalism>
+

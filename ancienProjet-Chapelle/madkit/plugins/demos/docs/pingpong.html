@@ -1,0 +1,260 @@
+<HTML
+><HEAD
+><TITLE
+>PingPong and XMLPingPong</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="HOME"
+TITLE='The "Demo" Agent Pack
+    '
+HREF="index.html">
+<LINK
+REL="PREVIOUS"
+TITLE='The "Demo" Agent Pack
+    '
+HREF="index.html">
+<LINK
+REL="NEXT"
+TITLE="Minimal"
+HREF="minimal.html">
+</HEAD
+><BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The "Demo" Agent Pack</TH
+></TR
+><TR
+>
+      <TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="index.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+>
+      <TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="minimal.html"
+>Next</A
+></TD
+>
+    </TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN37"
+>2. PingPong and XMLPingPong</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN39"
+>2.1. Synopsis</A
+></H2
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 1. Two Ping-Pong agents</B
+></P
+>
+      <P
+><IMG
+SRC="images/PINGPONG.GIF"></P
+>
+    </DIV
+><P
+>This demonstration shows simple message passing
+	between two agents, as well as some basic group &#38; role manipulation</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN45"
+>2.2. Using the agent</A
+></H2
+><P
+>	Just launch two instances of this agent. The first agent
+	  checks if a <TT
+CLASS="LITERAL"
+>ping-pong</TT
+>
+	  exists or not, and creates it. Then, it requests a <TT
+CLASS="LITERAL"
+>player</TT
+> role in this group. 
+
+It will then wait
+	  for another agent with the same <TT
+CLASS="LITERAL"
+>player</TT
+> role in this group.
+
+	  The second one will check for the 
+<TT
+CLASS="LITERAL"
+>ping-pong</TT
+> group, joins it, and also
+	  requests the <TT
+CLASS="LITERAL"
+>player</TT
+> role.
+
+	  When both agents find their partner, they will enter in a 5
+	  messages exchange, then die.
+	</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN53"
+>2.3. Going further</A
+></H2
+><P
+>This demo can also be
+	launched in distributed mode, with the Communicator and
+	GroupSynchronizer agents: just launch one ping-pong agent on
+	each distant platform</P
+><P
+>You can also try it with
+	the monitoring agents (GroupLister, AgentLister,
+	MessageTracer, OrganizationTracer, ...)</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN57"
+>2.4. About the code</A
+></H2
+><P
+>	  The agent source is straightforward, so there isn't many
+	  things to say. Interesting points are the systematic usage
+	  of group, roles and <TT
+CLASS="CLASSNAME"
+>AgentAddress</TT
+>
+	  concepts to structure the application logics and identify
+	  the agents.	 
+	</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN61"
+>2.5. XMLPingPong</A
+></H2
+><P
+>There is also an other version
+      called <TT
+CLASS="CLASSNAME"
+>XMLPingPong</TT
+> which demonstrate the
+      <TT
+CLASS="CLASSNAME"
+>XMLMessage</TT
+> class (the rest is
+      similar). In this demo, the agents exchange a short XML document
+      and add comments at each turn.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="index.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="minimal.html"
+>Next</A
+></TD
+>
+    </TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The "Demo" Agent Pack</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Minimal</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

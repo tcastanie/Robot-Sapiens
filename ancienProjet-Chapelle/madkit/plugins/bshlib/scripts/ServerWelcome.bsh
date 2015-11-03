@@ -1,0 +1,60 @@
+/*
+* ServerWelcome.bsh - A small agent which Welcomes you when you connect to its site..
+* Copyright (C) 2002 Jacques Ferber
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+import madkit.lib.tools.*;
+import madkit.kernel.*;
+
+void activate(){
+    self.requestRole("system","welcomer",null);
+	println("The ServerWelcome is running");
+    mykernel = self.getAgentWithRole("system","kernel");
+	println("Kernel agent: "+mykernel);
+    //sendMessage(mykernel,
+	//	  new KernelMessage(KernelMessage.REQUEST_MONITOR_HOOK, Kernel.CONNECTED_TO));
+    self.sendMessage(mykernel,
+		  new KernelMessage(KernelMessage.REQUEST_MONITOR_HOOK, Kernel.ADD_MEMBER_ROLE));
+    self.sendMessage(mykernel,
+		  new KernelMessage(KernelMessage.REQUEST_MONITOR_HOOK, Kernel.REMOVE_MEMBER_ROLE));
+}
+	
+void live(){
+	
+	while (true){
+		m = self.waitNextMessage();
+		if (m instanceof KernelMessage)
+			handleMessage((KernelMessage)m);
+	}
+}
+
+void handleMessage(KernelMessage m){
+	// self.println(":: operation "+m.getOperation());
+	if (m.getOperation() == Kernel.ADD_MEMBER_ROLE){
+        AGRTrio agr = (AGRTrio) m.getArgument();
+		if ((agr.getCommunity().equals("communities")) && (agr.getGroup().equals("public")) && (agr.getRole().equals("site"))){
+			self.sendMessage(agr.getAgent(),new StringMessage("$message The host "+me.getKernel().getHost()+ " welcomes you!"));
+			println(":: Connection with site : "+agr.getAgent().getKernel().getHost());
+		}
+	}
+	if (m.getOperation() == Kernel.REMOVE_MEMBER_ROLE){
+        AGRTrio agr = (AGRTrio) m.getArgument();
+		if ((agr.getCommunity().equals("communities")) && (agr.getGroup().equals("public")) && (agr.getRole().equals("site"))){
+			println(":: Disconnection with site : "+agr.getAgent().getKernel().getHost());
+		}
+	}
+}
+

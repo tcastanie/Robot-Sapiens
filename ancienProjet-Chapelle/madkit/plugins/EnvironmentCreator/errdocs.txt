@@ -1,0 +1,31 @@
+Usage: java [-options] class [args...]
+           (to execute a class)
+   or  java -jar [-options] jarfile [args...]
+           (to execute a jar file)
+
+where options include:
+    -client	  to select the "client" VM
+    -server	  to select the "server" VM
+    -hotspot	  is a synonym for the "client" VM  [deprecated]
+                  The default VM is client.
+
+    -cp -classpath <directories and zip/jar files separated by ;>
+                  set search path for application classes and resources
+    -D<name>=<value>
+                  set a system property
+    -verbose[:class|gc|jni]
+                  enable verbose output
+    -version      print product version and exit
+    -showversion  print product version and continue
+    -? -help      print this help message
+    -X            print help on non-standard options
+    -ea[:<packagename>...|:<classname>]
+    -enableassertions[:<packagename>...|:<classname>]
+                  enable assertions
+    -da[:<packagename>...|:<classname>]
+    -disableassertions[:<packagename>...|:<classname>]
+                  disable assertions
+    -esa | -enablesystemassertions
+                  enable system assertions
+    -dsa | -disablesystemassertions
+                  disable system assertions

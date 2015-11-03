@@ -1,0 +1,145 @@
+<html>
+<head>
+<title>MadKit communicator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<div class="titlepage">
+  <div>
+    <h2 class="title" style="clear: both">The communicator agent</h2>
+    <p>The communicator agent is used to give MadKit its distributed capabilities 
+      and allows MadKit platforms to form a network of kernels from which agents 
+      may communicate transparently.</p>
+  </div>
+</div>
+<div class="sect2">
+  <div class="titlepage">
+    <div>
+      <h3 class="title"><a name="IDANEKYG"></a>6.1. Synopsis</h3>
+    </div>
+  </div>
+  <p>MadKit in distributed mode use an important agent called the <tt>Communicator</tt>. 
+    This agent provides distributed message passing through socket connections. 
+    It runs a small socket server (on the port 4444 by default). To link with 
+    another platform, you have to give the host name and optionnally the port 
+    on which the distant <tt>Communicator</tt> is listening. For instance: <tt>khazar.lirmm.fr</tt> 
+    and <tt>4444</tt></p>
+  <p>It also handles organizational information synchronization on multiple distant 
+    agent kernel. Communities, groups and roles created on a platform in distributed 
+    mode are seen from the other connected platforms. </p>
+  <p> Once the connection is made between two kernels, all organization tables 
+    are synchronized. Thus groups (and their respective roles and agents) which 
+    have been created in distributed mode are automatically seen by both kernels, 
+    assuming that the two kernels are connected to the communities where these 
+    groups belongs. </p>
+  <p><span class="bold"><b>Note: </b></span>When you want to connect to an already 
+    formed network, i.e. several kernels connected together, just connect to one 
+    of them. All subsequent connections between your kernel and the other ones 
+    will be done automatically. The following figure shows such a connection. 
+    When a kernel, called <tt>yourKernel</tt> wants to connect to an already formed 
+    network (a), it just has to connect to one of them, for instance the kernel 
+    located on the <tt>toto</tt> host (b). Then this kernel is connected to all 
+    the other kernel (c). 
+  <p><img src="images/connection_network.gif" width="460" height="624"></p>
+  <p></p>
+</div>
+
+      <h3 class="title"><a name="IDAGFKYG"></a>Using the agents</h3>
+
+  <div class="procedure">
+    <p><b>Procedure 1. </b></p>
+    <ol type="1">
+      <li>
+        <p> From the MadKit Desktop, you may Launch the "Communicator" either 
+          by selecting the <b>Agents</b><b>&gt;Communicator</b> menuitem, or, 
+          from the directory explorer, by double clicking on the <tt>DynamicTwoChannelsCommunicator</tt> 
+          agent situated in the <tt>Communicator.jar</tt> Jar. </p>
+        <p><img src="images/communicator1.gif" width="404" height="412"></p>
+        <p> Its property box lists the current communication port (4444 by default). 
+          If the server starts up correctly, the small LED on the agent turns 
+          green. You may notice the <tt>SiteAgent</tt> window which displays the 
+          set of available communities. Here, the local kernel is connected to 
+          two communities: the <tt>public</tt> community which is the general 
+          community to which all kernels are automatically connected (you cannot 
+          disconnect your kernel from the <tt>public</tt> community), and the 
+          <tt>travel</tt> community which is created by the <tt>travelagents</tt> 
+          demo application. </p>
+      </li>
+      <li>
+        <p> To connect with a remote kernel, just type its hostname (and port 
+          if necessary). Let us suppose that we want to connect with a host called 
+          <tt>lucrece</tt> (type your desired host name, lucrece is a fake name). 
+          The host name maybe any correct Internet name, such as <tt>kant.lirmm.fr</tt> 
+          for instance). 
+        <p><img src="images/communicator2.gif" width="391" height="424"></p>
+        <p></p>
+      </li>
+    </ol>
+  <p>Once the "Add" button clicked, if the distributed mode bootstrap succeeded, 
+    a MadKit kernel name (actually a host name) appears in the Communicator. 
+  <p><img src="images/communicator3_bis.gif" width="692" height="422"></p>
+  <p></p>
+  <p> Communities appear in the <tt>SiteAgent</tt> window. If you want to use 
+    the applications associated to specific communities, check the related items 
+    in this window. This will &#8220;connect&#8221; the kernel to those communities, 
+    making the groups, roles and agents of this communities accessible from it. 
+    (<span class="bold"><b>Note: </b></span> you may have to click the <tt>refresh</tt> 
+    button of the browser, to see the new communities in the browser). 
+  <p><img src="images/communicator4.gif" width="713" height="519"></p>
+  <p></p>
+  <p>To test the distributed mode, you can use any classic demo, see for instance 
+    the {{link }}travel demo or the {{link}} Chat application. </p>
+  <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+    <h3 class="title">Note</h3>
+    <p>For strange reasons, it is not possible to disconnect a kernel from a network 
+      of kernels. For the moment, the best thing to do is to simply quit MadKit. 
+      This will be solved in the future. </p>
+  </div>
+  <h3>Programming the communicator</h3>
+  <p>The communicator is an agent and, as such, it may interact with other agents. 
+    Its communications are very simple. The communicator may be asked to attempt 
+    connexion to another kernel and get the port on which the communicator is 
+    listening. All messages are messages of the class <code>StringMessage</code>.</p>
+  <p>You can pilot the <tt>Communicator</tt> from another agent by sending it 
+    a simple <tt>StringMessage</tt> with "<b><tt>add-host <i><tt>machine</tt></i><i><tt>port</tt></i></tt></b>" 
+    as the content. It will attempt connexion upon message reception. </p>
+  <p>It is also possible to know the port on which the <tt>Communicator</tt> is 
+    runing by sending a <tt>StringMessage</tt> with <b><tt>get-port</tt></b> in 
+    content string.</p>
+</div>
+      <h3 class="title"><a name="communicator_options"></a>Options</h3>
+  <p>It is possible to automatically run a communicator at launch time, using 
+    among the two following possibilities: 
+  <div class="orderedlist">
+    <ol type="1">
+      <li>
+        <p>Start a MadKit kernel with <tt>--communicator-on</tt>. For instance, 
+          type the following command: 
+        <table border="1" bgcolor="#E0E0E0">
+          <tr>
+            <td>
+              <pre class="screen"><b><tt><tt>$</tt>java madkit.platform.console.Booter --communicator-on</tt></b></pre>
+            </td>
+          </tr>
+        </table>
+        to start a MadKit kernel in console mode, with an active communicator. 
+        <p></p>
+      </li>
+      <li>
+        <p>You may also use a <a href="../../userguide/userguide.html#configfile" target="_top">configuration 
+          file</a> which contains a Communicator agent. Insert the following line 
+          into a configuration file: 
+        <table border="1" bgcolor="#E0E0E0">
+          <tr>
+            <td>
+              <pre class="programlisting">
+&lt;launch-agent name="communicator" type="Java"	code="agents.network.communicator.DynamicTwoChannelsCommunicator"/&gt;</pre>
+            </td>
+          </tr>
+        </table>
+      </li>
+    </ol>
+</div>
+</body>
+</html>

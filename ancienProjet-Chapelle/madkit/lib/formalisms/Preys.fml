@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="Preys" description="Preys and Predators"
+		class="SEdit.Formalisms.World.WorldStructure">
+  <formalism-info>
+    <author>Jacques Ferber</author>
+  </formalism-info>
+  <node-types>
+    <node-desc name="Prey" class="SEdit.Formalisms.World.Preys.PreyBody">
+      <icon url="images/world/robot1.gif"/>
+      <property name="detectingrange">20</property>
+	  <property name="brainClass">SEdit.Formalisms.World.Preys.Prey</property>
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/world/robot1.gif</property>
+		<property name="width">24</property>
+		<property name="height">24</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+ 	<node-desc name="DumbPredator" class="SEdit.Formalisms.World.Preys.PredatorBody">
+      <icon url="images/world/boyStupid.gif"/>
+      <property name="detectingrange">120</property>
+	  <property name="brainClass">SEdit.Formalisms.World.Preys.DumbPredator</property>
+      <graphic-element class="SEdit.Formalisms.World.GMobileEntity">
+		<property name="imageaddress">images/world/boyStupid.gif</property>
+		<property name="width">24</property>
+		<property name="height">24</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+ 	<node-desc name="CommunicatingPredator" class="SEdit.Formalisms.World.Preys.PredatorBody">
+      <icon url="images/world/girlStupid.gif"/>
+      <property name="detectingrange">120</property>
+	  <property name="brainClass">SEdit.Formalisms.World.Preys.CommunicatingPredator</property>
+      <graphic-element class="SEdit.Formalisms.World.GMobileEntity">
+		<property name="imageaddress">images/world/girlStupid.gif</property>
+		<property name="width">24</property>
+		<property name="height">24</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+  </node-types>
+  <action description="Start">
+    <icon url="images/run.gif"/>
+    <java-method name="start"/>
+  </action>
+  <action description="Stop">
+    <icon url="images/stop.gif"/>
+    <java-method name="stop"/>
+  </action>
+  <action description="Step">
+    <icon url="images/step.gif"/>
+    <java-method name="step"/>
+  </action>
+  <action description="Set delay">
+    <icon url="images/clock.gif"/>
+    <java-method name="modifyDelay"/>
+  </action>
+    <property name="displaygrid">false</property>
+    <property name="delay">100</property>
+</formalism>

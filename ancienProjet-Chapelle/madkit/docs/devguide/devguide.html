@@ -1,0 +1,1539 @@
+<html><head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>MadKit Development Guide</title><meta name="generator" content="DocBook XSL Stylesheets V1.49"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="book"> 
+  <div class="titlepage"> 
+    <div> 
+      <h1 class="title"><a name="IDA5LFKG"></a>MadKit Development Guide</h1>
+    </div>
+    <div> 
+      <h3 class="author"><a href="../../plugins/documentation/docs/devguide/ferber@madkit.org">Jacques Ferber</a>, <a href="../../plugins/documentation/docs/devguide/olg@madkit.org">Olivier 
+        Gutkecht</a>, <a href="../../plugins/documentation/docs/devguide/fmichel@lirmm.fr">Fabien Michel</a></h3>
+      <div class="affiliation"> 
+        <div class="address"></div>
+      </div>
+      <div class="affiliation"> 
+        <div class="address"></div>
+      </div>
+    </div>
+    <div> 
+      <p class="releaseinfo"><font size="+1"><b>Version 4.0</b></font></p>
+    </div>
+    <div> 
+      <div class="abstract"> 
+        <p><b>Abstract</b></p>
+        <p>This document describes how to develop agents with the MadKit agent 
+          platform. </p>
+        <p><span class="bold"><b>Note: </b></span>This document is not finished. 
+          Comments and unfinished parts are surrounded by double brackets. For 
+          instance {{link}} means that there is a missing link here.</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="toc"> 
+    <p><b>Table of Contents</b></p>
+    <ul>
+      <li><a href="#IDABNFKG">Introduction</a></li>
+      <li><a href="#Principles">General principles</a> 
+        <ul>
+          <li><a href="#IDA5NFKG">Conceptual model</a></li>
+          <li><a href="#plugin">Plugin development architecture of MadKit</a></li>
+        </ul>
+      </li>
+      <li><a href="#IDAQ1FKG">Programming MadKit agents in Java</a> 
+        <ul>
+          <li><a href="#IDAP2FKG">Structure</a></li>
+          <li><a href="#IDAS3FKG">Life Cycle</a></li>
+          <li><a href="#IDAC5FKG">Communications</a></li>
+          <li><a href="#IDAWBGKG">Group and role management</a></li>
+          <li><a href="#IDADPGKG">Graphical interface</a></li>
+          <li><a href="#Threaded">The threaded agent class</a></li>
+        </ul>
+      </li>
+      <li><a href="#Hello">The Hello progam</a></li>
+      <li><a href="#IDADSHKG">Tips and tricks of MadKit programming</a> 
+        <ul>
+          <li><a href="#IDAGSHKG">Concurrent techniques</a></li>
+          <li><a href="#IDAQSHKG">Distribution techniques</a></li>
+          <li><a href="#IDAYSHKG">Working with agent controllers</a></li>
+          <li><a href="#IDA1SHKG">Adding a new scripting language</a></li>
+        </ul>
+      </li>
+      <li><a href="#Links">Other related documentation</a> 
+        <ul>
+          <li><a href="synchronous.html">The synchronous engine: how to build 
+            simulation examples</a></li>
+          <li><a href="../../plugins/turtlekit/docs/turtlekit.html">The TurtleKit platform 
+            to build simple multiagent simulations</a></li>
+          <li>System agents: a library of useful tool agents</li>
+          <li>Warbot: a game-like platform for understanding cooperation</li>
+          <li><a href="../../plugins/demos/docs/index.html">Some examples and demos</a></li>
+          <li><a href="../../plugins/schemelib/docs/schemeprog.html">Programming agents 
+            in Scheme/Kawa</a></li>
+          <li><a href="../../plugins/pythonlib/docs/pythonprog.html">Programming agents 
+            in Python</a></li>
+          <li><a href="../../plugins/jesslib/docs/jessprog.html">Programming agents 
+            in Jess, a rule based language</a></li>
+          <li><a href="../../plugins/bshlib/docs/bshprog.html">Programming agents in 
+            BeanShell, a Java interpreter</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="chapter"> 
+    <div class="titlepage"> 
+      <div> 
+        <h2 class="title"><a name="IDABNFKG"></a>Introduction</h2>
+      </div>
+    </div>
+    <div class="toc"></div>
+    <div class="sect1"> 
+      <div class="titlepage"> 
+        <div></div>
+      </div>
+      <p> MadKit (<span class="emphasis"><i>Multi-Agent Development Kit</i></span>) 
+        is a versatile agent platform. Among its features: 
+      <ul>
+        <li> Cross-platform. MadKit works on Win xx, Linux, Mac Os, Other Unix 
+          based OS, etc..</li>
+        <li> There is no prerequisite on agent model. Users may choose or develop 
+          the agent architecture of their choice.</li>
+        <li> Can support many simultaneous communication models : communication 
+          using message passing, broadcast, etc...</li>
+        <li> Transparent distributed mode, using the Communicator or the new NetCom 
+          agent </li>
+        <li> Can host multiple, heterogeneous agent applications (from BDI-like 
+          agents to artificial life applications). </li>
+        <li> Componential and flexible graphical agent interfaces </li>
+        <li>May be used for designing any multiagent applications, from distributed 
+          applications to multiagent simulation.</li>
+      </ul>
+    </div>
+    <p></p>
+    <div class="sect1"> 
+      <div class="titlepage"> 
+        <div> 
+          <h3 class="title" style="clear: both">Motivation</h3>
+        </div>
+      </div>
+      <p> A major characteristic in agent research and applications is the high 
+        heterogeneity of the field: both agent model heterogeneity, characterizing 
+        agents described and built with different models and formalisms; language 
+        heterogeneity, with agents using different communication and interaction 
+        schemes, and finally applicative heterogeneity, as multi-agent systems 
+        are used with various goals and in many applicative domains. </p>
+      <p> We believe that being able to take advantage of this diversity of approaches 
+        simultaneously is important to build complex systems, while keeping heterogeneity 
+        manageable with appropriate conceptual models <span class="emphasis"><i>and</i></span> 
+        software toolkits. </p>
+      <p>The MadKit toolkit was motivated by the need to provide a generic, highly 
+        customizable and scalable multiagent platform. The goal was to built a 
+        foundation layer for various agent models, and to make the basic services 
+        fully extensible and replaceable. </p>
+    </div>
+  </div>
+  <div class="chapter"> 
+    <div class="titlepage"> 
+      <div> 
+        <h2 class="title"><a name="Principles"></a>General principles</h2>
+      </div>
+    </div>
+    <div class="toc"></div>
+    <p>In order to be able to program in MadKit, it is important to understand 
+      the general conceptual model which underlies it. This section is dedicated 
+      to a quick presentation of the AGR model and of the main features of MadKit 
+      from a programmer's point of view.</p>
+    <div class="sect1"> 
+      <div class="titlepage"> 
+        <div> 
+          <h2 class="title" style="clear: both"><a name="IDA5NFKG"></a>Conceptual 
+            model</h2>
+        </div>
+      </div>
+      <p> We will just summarize here the Aalaadin Agent/Group/Role model. However, 
+        we will not address issues like its formal operational semantics, nor 
+        make a general overview of the Aalaadin project. See our <a href="http://www.madkit.org/papers" target="_top">online 
+        papers</a> for more information. </p>
+      <div class="figure"> 
+        <p><b>Figure 2.1. Agent/Group/Role Model</b></p>
+        <p><img src="dev_AGR_OMT.jpg"></p>
+      </div>
+      <p> The Aalaadin model is based on three core concepts: <span class="emphasis"><i>agent</i></span>, 
+        <span class="emphasis"><i>group</i></span> and <span class="emphasis"><i>role</i></span>. 
+      </p>
+      <p> In this definition, an organization is viewed as a framework for activity 
+        and interaction through the definition of groups, roles and their relationships. 
+        But, by avoiding an agent-oriented viewpoint, an organization is regarded 
+        as a structural relationship between a collection of agents. Thus, an 
+        organization can be described solely on the basis of its structure, i.e. 
+        by the way groups and roles are arranged to form a whole, without being 
+        concerned with the way agents actually behave, and multi-agent systems 
+        will be analyzed from the "outside", as a set of interaction modes. The 
+        specific architecture of agents is purposely not addressed. </p>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAVOFKG"></a>Agent</h3>
+          </div>
+        </div>
+        <p> The model places no constraints on the internal architecture of agents. 
+          An <span class="emphasis"><i>agent</i></span> is only specified as an 
+          active communicating entity which plays <span class="emphasis"><i>roles</i></span> 
+          within <span class="emphasis"><i>groups</i></span>. This agent definition 
+          is intentionally generic to allow agent designers to adopt the most 
+          accurate definition of agent-hood relative to their application. The 
+          agent designer is responsible for choosing the most appropriate agent 
+          model as internal architecture. </p>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDA4OFKG"></a>Group</h3>
+          </div>
+        </div>
+        <p><span class="emphasis"><i>Groups</i></span> are defined as atomic sets 
+          of agent aggregation. Each agent is part of one or more groups. In its 
+          most basic form, the group is only a way to tag a set of agents. In 
+          a more developed form, in conjunction with the role definition, it may 
+          represent any usual multi-agent system. </p>
+        <p> Groups have the following characteristics: 
+        <div class="itemizedlist"> 
+          <ul type="disc">
+            <li> 
+              <p> An agent can be a member of <span class="emphasis"><i>n</i></span> 
+                groups at the same time.</p>
+            </li>
+            <li> 
+              <p> Groups can freely overlap. </p>
+            </li>
+            <li> 
+              <p> A group may be founded by any agent, and an agent may request 
+                the admission to any group (whether it will be accepted or not 
+                is another story). </p>
+            </li>
+            <li> 
+              <p> With additional system agents, a group can be either local or 
+                distributed on many machines. </p>
+            </li>
+          </ul>
+        </div>
+        <p></p>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAPPFKG"></a>Role</h3>
+          </div>
+        </div>
+        <p> The role is an abstract representation of an agent function, service 
+          or identification within a group. Each agent can handle multiple roles, 
+          and each role handled by an agent is local to a group. Handling a role 
+          in a group must be requested by the candidate agent, and is not necessarily 
+          awarded. Thus, modeling of abstract communication schemes can defined 
+          from roles, guiding the design process. </p>
+      </div>
+    </div>
+    <div class="sect1"> 
+      <div class="titlepage"> 
+        <div> 
+          <h2 class="title" style="clear: both"><a name="IDASPFKG"></a>Kernel 
+            architecture</h2>
+        </div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAUPFKG"></a>Principles</h3>
+          </div>
+        </div>
+        <p> The MadKit platform is built around this agent/group/role model. In 
+          addition to the three core concepts, the platform adds three design 
+          principles: 
+        <div class="itemizedlist"> 
+          <ul type="disc">
+            <li> Micro-kernel architecture </li>
+            <li> Agentification of services </li>
+            <li> Component model for graphical interface </li>
+          </ul>
+        </div>
+        <p>MadKit itself is a set of packages of Java classes that implements 
+          the agent kernel, the various libraries of messages, probes and agents. 
+          It also includes a graphical development environment and many system 
+          and demonstration agents. </p>
+        <p> The basic philosophy of the MadKit architecture is to use wherever 
+          possible the platform for its own management: any service beside those 
+          assured by the micro-kernel are handled by agents. Thus the platform 
+          is not an agent platform according to the classical sense. The reduced 
+          size of the agent kernel, combined with the principle of modular services 
+          managed by agents enable a range of multiple, scalable platforms with 
+          simultaneous specialized agent models libraries. </p>
+        <div class="figure"> 
+          <p><b>Figure 2.2. MadKit architecture</b></p>
+          <p><img src="dev_core_architecture.gif"></p>
+        </div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAOYFKG"></a>The agent micro-kernel</h3>
+          </div>
+        </div>
+        <p> The MadKit micro-kernel is a small (less than 50 Kb) and optimized 
+          agent kernel. The term "micro-kernel" is intentionally used as a reference 
+          to the role of micro-kernels in the domain of OS engineering. We could 
+          directly translate their motto into: 
+        <blockquote class="blockquote"> 
+          <p><span class="emphasis"><i>...incorporating a number of key facilities 
+            that allow the efficient deployment of services.</i></span></p>
+        </blockquote>
+        <p></p>
+        <p> The MadKit kernel handles only the following tasks: 
+        <div class="itemizedlist"> 
+          <ul type="disc">
+            <li> 
+              <p> Control of local groups and roles: As most of the interoperability 
+                and extensibility possibilities in MadKit relies on the organizational 
+                layer, it is mandatory that group and role are handled at the 
+                lowest level in the platform, to provide this functionality to 
+                any agent The micro-kernel is responsible for maintaining correct 
+                information about group members and roles handled within the groups. 
+                It also checks if requests made on groups and roles structures 
+                are correct. </p>
+            </li>
+            <li> 
+              <p> Agent life-cycle management: The kernel also launches (and eventually 
+                kills) agents, and maintains tables and references of agent instances. 
+                It is the only module in MadKit that owns direct references to 
+                the actual agents. It also handles the agent personal information 
+                and assigns to it, upon creation, a globally unique identifier 
+                : the <tt>AgentAddress</tt> (composed of the kernel address, plus 
+                the agent identification on the local kernel). This identifier 
+                can be redefined to accept standardized agent naming schemes. 
+              </p>
+            </li>
+            <li> 
+              <p> Local message passing. The kernel manages routing and distribution 
+                of messages between <span class="emphasis"><i>agents</i></span>. 
+                The basic mechanism relies on a copy-on-write implementation to 
+                avoid unnecessary operations. The kernel itself is wrapped in 
+                an special agent, the <tt>KernelAgent</tt>, which is created at 
+                bootstrap. Control and monitoring of the kernel occurs within 
+                the agent model. </p>
+            </li>
+          </ul>
+        </div>
+        <p></p>
+        <div class="sect3"> 
+          <div class="titlepage"> 
+            <div> 
+              <h4 class="title"><a name="IDAKZFKG"></a>System hooks and kernel 
+                communication</h4>
+            </div>
+          </div>
+          <p> The kernel itself is fully extensible through <span class="emphasis"><i>kernel 
+            hooks</i></span> or <span class="emphasis"><i>kernel operations</i></span>. 
+            Any entitled agent (i.e. an agent that has been allowed to be member 
+            of the <tt>system</tt> group) can request to the <tt>KernelAgent</tt> 
+            to subscribe to a kernel hook or invoke operations on the kernel. 
+          </p>
+          <div class="sect4"> 
+            <div class="titlepage"> 
+              <div> 
+                <h5 class="title"><a name="IDAVZFKG"></a>Hooks</h5>
+              </div>
+            </div>
+            <p> These hooks are the generic subscribe-and-publish scheme allowing 
+              extension of the core behavior of the platform. Every core function 
+              in the kernel (adding an agent to a group, launching an agent, sending 
+              a message) implements this mechanisms. </p>
+            <p> 
+            <div class="variablelist"> 
+              <dl> 
+                <dt><span class="term">Monitor hooks</span></dt>
+                <dd> 
+                  <p> Any number of agents can subscribe to a monitoring hook. 
+                    In such a hook, invocation of a kernel operation make the 
+                    <tt>KernelAgent</tt> send an information message to the agents 
+                    that requested a monitor hook on this operation, with the 
+                    arguments of this operation as the content of the message. 
+                    For instance, this is how the agents that monitor the population 
+                    or organization in the platform are written. </p>
+                </dd>
+                <dt><span class="term">Interceptor hooks</span></dt>
+                <dd> 
+                  <p> These hooks are similar to the previous type, but only one 
+                    agent can hold an interceptor hook on a given kernel operation. 
+                    Furthermore, an interceptor hook prevents the execution of 
+                    the implemented kernel operation. It is particularly useful 
+                    to write distributed messaging agents, group synchronizers, 
+                    security control in groups, etc. by changing the behavior 
+                    of a basic operation. The reduced number of kernel calls and 
+                    the simple underlying model helps the modification of these 
+                    calls while preserving their semantics. </p>
+                </dd>
+              </dl>
+            </div>
+            <p></p>
+            <p> When a kernel call with active hooks is invoked, the information 
+              is routed to the <tt>KernelAgent</tt> which does the message transmission 
+              to the agent which subscribed. </p>
+          </div>
+          <div class="sect4"> 
+            <div class="titlepage"> 
+              <div> 
+                <h5 class="title"><a name="IDAH0FKG"></a>Kernel operations</h5>
+              </div>
+            </div>
+            <p> We first described how hooks offer a way to monitor or intercept 
+              kernel calls, but actions can also be directly invoked in the kernel, 
+              also through an interaction with the <tt>KernelAgent</tt>. </p>
+            <p> For instance, a system <tt>SocketCommunicator</tt> agent enable 
+              distribution of MadKit applications over the network. It injects 
+              in the local kernel a message received through a socket connection 
+              with a distant MadKit platform to implements distributed messaging. 
+            </p>
+          </div>
+        </div>
+        <div class="sect3"> 
+          <div class="titlepage"> 
+            <div> 
+              <h4 class="title"><a name="IDAR0FKG"></a>Agents, groups and roles 
+                in the platform</h4>
+            </div>
+          </div>
+          <p> The generic agent is a class defining basic life-cycle (what to 
+            do upon activation, execution, and termination). Agents are developed 
+            by inheriting from the <tt>AbstractAgent</tt> class. This class defines 
+            methods that identify the agents, handle message passing, and provide 
+            group and role management (creation, join, requests, delegation, ...) 
+          </p>
+        </div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAW0FKG"></a>Agentification of service 
+              and distribution</h3>
+          </div>
+        </div>
+        <p>MadKit uses the AGR model for its own usage. All services, apart from 
+          those provided by the kernel are performed by agents using groupes and 
+          roles to perform their own tasks. For instance, remote communication, 
+          i.e. communications that are performed between agents situated in different 
+          kernels, are handled by a specific <tt>Communicator</tt> agent. </p>
+        <p> An important aspect of MadKit is the possibility to define distributed 
+          applications without being concerned by low level constructs such as 
+          sockets, threads, URL, etc. No modification of code is needed to distribute 
+          a MadKit application. Once the basic principles of MadKit, i.e. using 
+          AGR, sending messages, referencing agents through their agent address, 
+          are applied, it is straightforward to make it work on several kernels. 
+          See section {{section}} to learn how to setup a distributed network 
+          of MadKit kernels, and see section {{section}} to learn the fundamental 
+          tips and tricks of distributed programming, and the main errors a programmer 
+          should avoid to make his or her application transparently work in a 
+          distributed environment. </p>
+        <div class="sect3"> 
+          <div class="titlepage"> 
+            <div> 
+              <h4 class="title"><a name="IDAC1FKG"></a>Communities</h4>
+            </div>
+          </div>
+          <p>The concept of community comes from the concept of groups applied 
+            to madkit kernels. A community is a group of kernels. Each kernel 
+            is represented by its<i> SiteAgent</i>, and a kernel may or may not 
+            enter this community. A community may be viewed as a distributed application 
+            spread over a computer network. A community contains a set of groups 
+            but a group may only be part of a single community.</p>
+        </div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAF1FKG"></a>Graphical model</h3>
+          </div>
+        </div>
+        <p>The MadKit graphical interface is based on the Java Bean specification. 
+          Each agent is solely responsible for its own graphical interface in 
+          every aspect (rendering, event processing, actions...). An agent interface 
+          can be a simple label, a complex construction based on multiple widgets, 
+          or a legacy bean software module. </p>
+        <p>A "graphic shell", called the <span class="emphasis"><i>MadKit desktop</i></span> 
+          or <span class="emphasis"><i>desktop</i></span> for short, launches 
+          the kernel and setup the interfaces for the various agents and manages 
+          them in a global GUI (for instance: each agent has its own window, or 
+          is mapped in a global worksheet, or is combined with another agent interface, 
+          etc.). </p>
+        <p>As the agent graphic interfaces are decoupled from the agent kernel, 
+          the platform can run in various modes (desktop, applet, console only, 
+          etc.) and the agent code does not need any modification. </p>
+        <h3>Plugin based structure</h3>
+        <p>MadKit comes as a set of plugins. This structure allows various agents 
+          and features to be added as simple module one may add, remove and update 
+          at its own needs. Each plugin is controlled by an ant file from which 
+          it is possible to recompile, install and desinstall a module.</p>
+        <h3><a name="plugin"></a>Plugin development architecture of MadKit</h3>
+        <p>In this section we describe the plugin architecture of MadKit 4. MadKit 
+          is based on a plugin structure which allows new features and agents 
+          to be added as kind of modules called plugins. A plugin is made of files 
+          and resources which may be compiled, installed, updated, etc. using 
+          <a href="http://jakarta.apache.org/ant/">ant</a>, a fantastic development 
+          tool written in Java. </p>
+        <pre>
+  madkit
+   +--- bin  // contains launcher scripts
+   |
+   +--- lib  // contains Ant jars plus necessary dependencies
+   |
+   +--- docs // contains documentation
+   |
+   +--- plugins // contains all the plugins description
+          +---- plugin1 // the different plugins
+          +---- plugin2 //
+          +---- plugin3 //</pre>
+        <p>Each plugin is related to a specific jar in the lib directory and its 
+          description is associated to a specific directory of the same name, 
+          which is located in the <i>plugins</i> directory of MadKit. For instance, 
+          the <i>demos</i> plugin is related to the <code>demos.jar</code> file 
+          situated in the lib directory, and its description can be found in the 
+          directory <code>demos</code> located in the <i>plugins</i> directory.</p>
+        <pre>
+  plugin's name
+   +--- src  // containts the sources of the java files and the ressources to be included in the jar.
+   |     +--- <i>package name of java files</i>
+   |     +--- images  // the images to be included as resources in the jar.
+   |
+   +--- scripts  // contains the text files used by agents, and the sources of the scripted files.
+   |
+   +--- docs // contains the documentation of the plugin
+   |
+   +--- build.xml // the ant file used to compile, install, etc.. the plugin
+   +--- optional: <i>&lt;plugin&gt;</i>.cfg // a configuration file (in XML format) which may be used to initiate a set of agents
+   +--- optional: <i>&lt;plugin&gt;</i>.bat // a .bat file which starts MadKit with no desktop 
+   |                           // with only the agents defined in the <i>&lt;plugin&gt;</i>.cfg file
+   +--- optional: <i>&lt;plugin&gt;</i>.sh  // a .sh file which starts MadKit with no desktop 
+   |                           // with only the agents defined in the <i>&lt;plugin&gt;</i>.cfg file
+   +--- optional: <i>&lt;plugin&gt;</i>_desktop.bat // a .bat file which starts MadKit with the desktop 
+   |                                   // and load the agents defined in the <i>&lt;plugin&gt;</i>.cfg file
+   +--- optional: <i>&lt;plugin&gt;_desktop</i>.sh  // a .sh file which starts MadKit with the desktop 
+                                       // and load the agents defined in the <i>&lt;plugin&gt;</i>.cfg file
+</pre>
+        <p>The <code>build.xml</code> file is very important because it contains 
+          all the information needed to compile the plugin and make the jar, create 
+          the API documentation, and clean the plugin. Here are all the targets 
+          offered by this <code>build.xml</code> file: </p>
+        <table width="77%" border="1">
+          <tr> 
+            <td width="27%"><b>Name</b></td>
+            <td width="73%"><b>Description</b></td>
+          </tr>
+          <tr> 
+            <td width="27%">jar (default)</td>
+            <td width="73%">Compile the plugin and create the jar.</td>
+          </tr>
+          <tr> 
+            <td width="27%">docs</td>
+            <td width="73%">Create the API documentation using javadoc</td>
+          </tr>
+          <tr> 
+            <td width="27%">clean</td>
+            <td width="73%">Remove the build directory created during the java 
+              compilation process</td>
+          </tr>
+          <tr> 
+            <td width="27%">real-clean</td>
+            <td width="73%">Delete all the files that are automatically created 
+              from the sources (api doc, jar, .class, etc)</td>
+          </tr>
+          <tr> 
+            <td width="27%">src-dist</td>
+            <td width="73%">Create a distribution of the plugin with only the 
+              sources. Must be compiled to be used</td>
+          </tr>
+          <tr> 
+            <td width="27%">bin-dist</td>
+            <td width="73%">Create a distribution with only the executables and 
+              no sources</td>
+          </tr>
+          <tr> 
+            <td width="27%">doc-dist</td>
+            <td width="73%">Create a distribution with the executables and the 
+              documentation</td>
+          </tr>
+          <tr> 
+            <td width="27%">standalone-dist</td>
+            <td width="73%">Create a distribution which may be run as a standalone 
+              application. </td>
+          </tr>
+          <tr> 
+            <td width="27%">all</td>
+            <td width="73%">Create all the previous distribution (except the following 
+              one) </td>
+          </tr>
+          <tr> 
+            <td width="27%">plugin-dist</td>
+            <td width="73%">Create a .zip file of the plugin and put it in the 
+              distrib directory. This is used to create a plugin distribution 
+              which may be used by an automatic installation process (installer 
+              {{link}}or MadKit update {{link}}).</td>
+          </tr>
+        </table>
+        <p>The targets you will use most often are the 'jar' target (default one), 
+          the 'docs', and the 'real-clean' one. To execute such a target, go to 
+          the directory of the plugin, and type: </p>
+        <pre>	&gt; ant &lt;target&gt;
+</pre>
+        <p>where &lt;target&gt; is the name of one the targets (or only <code>ant</code> 
+          alone if you want to use the default target).</p>
+        <p>It is also possible to execute such a target directly from the explorer 
+          {{link}} of MadKit</p>
+        <p>To define a new plugin, copy the <i>template</i> plugin which has been 
+          defined for this purpose and give it the name of the plugin. Then modify 
+          the .xml file as follows.<br>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter"> 
+    <div class="titlepage"> 
+      <div> 
+        <h2 class="title"><a name="IDAQ1FKG"></a>Programming MadKit agents in 
+          Java</h2>
+      </div>
+    </div>
+    <div class="toc"></div>
+    <p>It is possible to program MadKit agents in several languages: Java, Python, 
+      Scheme (Kawa), BeanShell and Jess. More languages will be added in the future. 
+      It is actually quite straightforward to add a new scripting language in 
+      MadKit.</p>
+    <p>Java is the main language of MadKit because MadKit has been programmed 
+      in Java. However, because Java is a compiled language, it is somehow more 
+      difficult to develop agents in Java because you need to compile your agent 
+      and the associated classes, make a Jar, place your jar in a specific location, 
+      and restart MadKit to get your agents working. Conversely, if you use one 
+      of the available scripting languages (i.e. Python, Scheme (Kawa), BeanShell 
+      and Jess, for the moment), it is easier to get your agent working quickly. 
+      On the contrary, Java agents are more efficient. So it is up to you to start 
+      with one of the available languages.</p>
+    <p>First, the basic structure of an agent will be introduced. Then we will 
+      show how to program a new agent from scratch in the different available 
+      languages. Then the section {{section}} will be dedicated to some of the 
+      techniques, tips and tricks one has to use to make his or her agents work 
+      efficiently in a concurrent and/or distributed environment.</p>
+    <p>An agent, in MadKit, is made of four optional sections:</p>
+    <div class="itemizedlist"> 
+      <ul type="bullet">
+        <li style="list-style-type: disc"> 
+          <p>The <span class="emphasis"><i>activate</i></span> section, which 
+            contains some code to be executed when an agent is created.</p>
+        </li>
+        <li style="list-style-type: disc"> 
+          <p>The <span class="emphasis"><i>live</i></span> section, which contains 
+            the main code of the agent. Generally, this section is made of a (quasi) 
+            infinite loop describing the behavior of the agent.</p>
+        </li>
+        <li style="list-style-type: disc"> 
+          <p>The <span class="emphasis"><i>end</i></span> section, which contains 
+            some code which is executed when an agent is terminating (either because 
+            it finishes its behavior or because it is killed).</p>
+        </li>
+        <li style="list-style-type: disc"> 
+          <p>The <span class="emphasis"><i>initGUI</i></span> section, which contains 
+            the description of a Java bean component which is to be used as the 
+            graphic interface of the agent, and aimed at replacing the default 
+            graphic interface.</p>
+        </li>
+      </ul>
+    </div>
+    <p></p>
+    <div class="sect1"> 
+      <div class="titlepage"> 
+        <div></div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAP2FKG"></a>Structure</h3>
+          </div>
+        </div>
+        <p>In MadKit, an agent is an object class that inherits from <tt>AbstractAgent</tt> 
+          class or one of its subclasses, and has the following capacities: 
+        <div class="variablelist"> 
+          <dl> 
+            <dt><span class="term">Control and life-cycle</span></dt>
+            <dd> 
+              <p> The main agent class (<tt>AbstractAgent</tt>) does not implement 
+                a specific execution policy. The <tt>Agent</tt> subclass adds 
+                support for concurrent, thread-based execution, which is the natural 
+                model for coarse-grained collaborative or cognitive agent. An 
+                interface (<tt>Referenceable</tt>), with the help of additional 
+                classes, implements synchronous execution through external schedulers, 
+                allowing reactive or hybrid architectures with many fine-grained 
+                agents. </p>
+            </dd>
+            <dt><span class="term">Messaging</span></dt>
+            <dd> 
+              <p>Communication is achieved through asynchronous message passing, 
+                with primitive calls to send a message to another agent designated 
+                by its address, or with the higher-level version that broadcasts 
+                messages to agents playing a given role in a specific group. </p>
+            </dd>
+            <dt><span class="term">Organizational view</span></dt>
+            <dd> 
+              <p> Every agent, regardless of its specific behavior model, has 
+                access to the organizations (groups and roles). The main agent 
+                class (<tt>AbstractAgent</tt>) provides actions and requests on 
+                this information. The agent developer is completely free to define 
+                the agent behavior, but the organizational view will be always 
+                present, and can gather highly heterogeneous agents. </p>
+            </dd>
+          </dl>
+        </div>
+        <p></p>
+        <p> To compile your own agent, you'll probably have to import classes 
+          from the <tt>madkit.kernel</tt> package, so you must have the <tt>madkit.jar</tt> 
+          class archive somewhere in your <tt>CLASSPATH</tt> environment variable. 
+        </p>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAS3FKG"></a>Life cycle</h3>
+          </div>
+        </div>
+        <p> In the agent life-cycle, some functions are defined at <tt>AbstractAgent</tt> 
+          level, and other in the various subclasses that define more precisely 
+          its execution. This point is important as an agent can be executed within 
+          its own thread (by using the <tt>Agent</tt> class), or through the synchronous 
+          engine (see the <a href="synchronous.html">Synchronous Engine guide</a>). 
+          Thus, what is found in the <tt>AbstractAgent</tt> class is only a part 
+          of the description of the whole agent life-cycle </p>
+        <p>All abstract agents contain two specific sections, the <span class="emphasis"><i>activate</i></span> 
+          and <span class="emphasis"><i>end</i></span> section:</p>
+        <p>Activate section</p>
+        <p>When an agent is created, the kernel calls its <tt><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#activate()" target="_top">activate()</a></tt> 
+          method. This method can be seen as a kind of "constructor" in the agent 
+          world. When an agent is instantiated and the constructor called, the 
+          kernel has not already setup the internal structures and registered 
+          it, thus you <span class="emphasis"><i>cannot use any of the methods 
+          of the </i></span>AbstractAgent<span class="emphasis"><i> class</i></span> 
+          (for example, to set up initial groups and roles)! All initialization 
+          of an agent must be done in the <tt>activate()</tt> method. </p>
+        <p>End section</p>
+        <p>When an agent terminates, due either to a normal termination of its 
+          behavior or a request to be killed (from the graphical host, from a 
+          system agent, ...), the kernel calls its <tt><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#end()" target="_top">end()</a></tt> 
+          method. However, this functionality is not as important as the activate(), 
+          and is rarely used. </p>
+        <p>An important point of agent life-cycle management is being able to 
+          launch new agents from an agent. To instantiate a subclass of AbstractAgent 
+          is not enough. It is necessary to register the agent instance to the 
+          social context (i.e. tables of groups and roles) managed by the kernel 
+          using the <tt><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#launchAgent(madkit.kernel.AbstractAgent,%20java.lang.String,%20boolean)" target="_top">launchAgent(...)</a></tt> 
+          method. </p>
+        <p>An agent may also be killed using the <tt><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#killAgent(madkit.kernel.AbstractAgent)" target="_top">killAgent(...)</a></tt>method. 
+        </p>
+        <p><b>Important</b>: only the original launcher of an agent (i.e. the 
+          agent that has launched it), or the agent itself, may kill this agent 
+        </p>
+        <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"></div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAC5FKG"></a>Communications</h3>
+          </div>
+        </div>
+        <p> The standard class for information exchange in MadKit is <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Message.html" target="_top"><tt>Message</tt></a>. 
+          This class only defines things like sender, receiver or date of emission, 
+          so it's mostly used through specialized subclasses. Messages receivers 
+          and senders are identified thanks to their <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AgentAddress.html" target="_top"><tt>AgentAddress</tt></a>. 
+          MadKit does not enforce a standard interaction mechanism. Such a mechanism 
+          can be defined on an ad-hoc basis, or built in a specific agent model 
+          library. </p>
+        <p><b>Note</b>: MadKit provides several kinds of predefined messages such 
+          as StringMessage, XMLMesssage and ActMessage. The latter is the starting 
+          point for defining ACLMessages and KQMLMessages. You may define your 
+          own class of message, by letting your class inherit from the class Message.</p>
+        <div class="sect3"> 
+          <div class="titlepage"> 
+            <div> 
+              <h4 class="title"><a name="IDAS5FKG"></a>Sending messages</h4>
+            </div>
+          </div>
+          <p> The <tt><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#sendMessage(madkit.kernel.AgentAddress,%20madkit.kernel.Message)" target="_top">sendMessage(<i><tt>AgentAddress</tt></i>, 
+            <i><tt>message</tt></i>)</a></tt> call is the basic, low-level message 
+            sending operation, and transmit a message to an <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AgentAddress.html" target="_top"><tt>AgentAddress</tt></a>. 
+            The <i><tt>sender</tt></i> field of the message is set up automatically 
+            by the kernel. These <tt>AgentAddress</tt> can be obtained through 
+            another agent, or more frequently by requesting the group and role 
+            system. </p>
+          <p>For instance: </p>
+          <table border="0" bgcolor="#E0E0E0">
+            <tr> 
+              <td> 
+                <pre class="synopsis">
+				
+	    AgentAddress otherAgent = getAgentWithRole("travel", "contract-net", "bidder");
+	    sendMessage(otherAgent, new ContractMessage("your-offer?"));
+	  </pre>
+              </td>
+            </tr>
+          </table>
+          <p>sends a message of type <code>ContractMessage</code> to the agent 
+            obtained from the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAgentWithRole(java.lang.String,%20java.lang.String)" target="_top"><tt>getAgentWithRole(...)</tt></a> 
+            primitive.</p>
+          <p> A higher-level version exists, which broadcasts a message to all 
+            agents playing a specific role in a group within a specific community. 
+            There are two forms of the broadcast procedure:<a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#broadcastMessage(java.lang.String,%20java.lang.String,%20madkit.kernel.Message)" target="_top"><tt> 
+            </tt></a><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#broadcastMessage(java.lang.String,%20java.lang.String,%20java.lang.String,%20madkit.kernel.Message)" target="_top"><tt>broadcastMessage(<i><tt>community</tt></i>, 
+            <i><tt>group</tt></i>, <i><tt>role</tt></i>, <i><tt>message</tt></i>)</tt></a> 
+            and <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#broadcastMessage(java.lang.String,%20java.lang.String,%20madkit.kernel.Message)" target="_top"><tt>broadcastMessage(<i><tt>group</tt></i>, 
+            <i><tt>role</tt></i>, <i><tt>message</tt></i>)</tt></a> which uses 
+            the community &quot;public&quot; as a default.</p>
+          <p> For instance: 
+          <table border="0" bgcolor="#E0E0E0">
+            <tr> 
+              <td> 
+                <pre class="synopsis">
+				
+	    broadcastMessage("travel", "marketgroup", "provider", new ACTMessage("ask-for-bid","travel-proposal"));
+	  </pre>
+              </td>
+            </tr>
+          </table>
+          <p>broadcast a message to all agents with the role &quot;provider&quot;, 
+            in the group &quot;marketgroup&quot; of the community &quot;travel'&quot;.</p>
+          <p></p>
+        </div>
+        <div class="sect3"> 
+          <div class="titlepage"> 
+            <div> 
+              <h4 class="title"><a name="IDA5AGKG"></a>Receiving messages</h4>
+            </div>
+          </div>
+          <p> Upon reception, the messages are put by the kernel in a message 
+            box owned by the agent. It is a thread-safe unprioritized FIFO. </p>
+          <p> At the basic level, there are two low-level calls for message handling 
+            in agents. The <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#isMessageBoxEmpty()" target="_top"><tt>isMessageBoxEmpty()</tt></a> 
+            check returns false if an unread message still is in the queue. The 
+            <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#nextMessage()" target="_top"><tt>nextMessage()</tt></a> 
+            method returns the first unread message and removes it from the message 
+            box. </p>
+          <p> For instance: 
+          <table border="0" bgcolor="#E0E0E0">
+            <tr> 
+              <td> 
+                <pre class="synopsis">
+	    if (!isMessageBoxEmpty())
+        {  
+            Message m = nextMessage();
+            println("The sender was: "+ m.getSender());
+        }
+	  </pre>
+              </td>
+            </tr>
+          </table>
+          <p><b>Note</b>: Threaded agents, i.e. agents that inherits from the 
+            class <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html">Agent</a>, 
+            may use the blocking version of the nextMessage method, called <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Agent.html#waitNextMessage()">waitNextMessage</a>. 
+            Very often, this method is called in a loop:</p>
+          <table border="0" bgcolor="#E0E0E0">
+            <tr> 
+              <td> 
+                <pre class="synopsis">
+	    while (true)
+        {  
+             Message m = waitNextMessage();
+             println("The sender was: "+ m.getSender());
+        }
+	  </pre>
+              </td>
+            </tr>
+          </table>
+          <p></p>
+          <p>It is a good habit not to put <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Agent.html#waitNextMessage()">waitNextMessage</a> 
+            anywhere in your code. See the <a href="#threaded">section</a> on 
+            threaded agents.</p>
+        </div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAWBGKG"></a>Group and role management</h3>
+          </div>
+        </div>
+        <p> The group and role system is always available to an agent and provides 
+          both action and information calls. </p>
+        <p> 
+        <div class="table"> 
+          <p><b>Table 3.1. Group/Role API</b></p>
+          <table summary="Group/Role API" border="1">
+            <colgroup><col><col><col></colgroup><tbody> 
+            <tr> 
+              <td> </td>
+              <td>Actions</td>
+              <td>Requests</td>
+            </tr>
+            <tr> 
+              <td>Groups</td>
+              <td><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#createGroup(java.lang.String,%20java.lang.String,%20java.lang.String,%20java.lang.String,%20madkit.kernel.GroupIdentifier)" target="_top"><tt>createGroup(..)</tt></a>, 
+                <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#leaveGroup(java.lang.String)" target="_top"><tt>leaveGroup(..)</tt></a></td>
+              <td><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getMyGroups(java.lang.String)" target="_top"><tt>getMyGroups(...)</tt></a>, 
+                <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getExistingGroups(java.lang.String)" target="_top"><tt>getExistingGroups(...)</tt></a>, 
+                <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAvailableCommunities()" target="_top"><tt>getAvailableCommunities()</tt></a>, 
+                <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#isCommunity()" target="_top"><tt>isCommunity(...)</tt></a>, 
+                <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#isGroup(java.lang.String)" target="_top"><tt>isGroup(...)</tt></a></td>
+            </tr>
+            <tr> 
+              <td>Roles</td>
+              <td><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#requestRole(java.lang.String,%20java.lang.String)" target="_top"><tt>requestRole(...)</tt></a><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#leaveRole(java.lang.String,%20java.lang.String)" target="_top"><tt>leaveRole(...)</tt></a></td>
+              <td><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getMyRoles(java.lang.String,java.lang.String)" target="_top"><tt>getMyRoles(...)</tt></a>, 
+                <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getExistingRoles(java.lang.String,java.lang.String)" target="_top"><tt>getExistingRoles(...)</tt></a>, 
+                <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAgentsWithRole(java.lang.String,%20java.lang.String)" target="_top"><tt>getAgentsWithRole(...)</tt></a>, 
+                <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAgentWithRole(java.lang.String,%20java.lang.String)" target="_top"><tt>getAgentWithRole(...)</tt></a>, 
+                <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#isRole(java.lang.String,java.lang.String)" target="_top"><tt>isRole(...)</tt></a></td>
+            </tr>
+            </tbody> 
+          </table>
+        </div>
+        <p></p>
+        <p>The group API just takes the group name as parameter (a simple string) 
+          and the role-related calls always take the group name and the role name 
+          (also a string). </p>
+        <p> Here are their definition: </p>
+        <div class="variablelist"> 
+          <dl> 
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef">int <b class="fsfunc"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#createGroup(boolean,%20java.lang.String,%20java.lang.String,%20java.lang.String,%20madkit.kernel.GroupIdentifier)">createGroup</a></b><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#createGroup(java.lang.String">(String 
+                  d, String c, String g, String s, GroupIdentifier a)</a></code></code></p>
+                <p><code><code class="funcdef">int <b class="fsfunc"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#createGroup(boolean,%20java.lang.String,%20java.lang.String,%20madkit.kernel.GroupIdentifier)">createGroup</a></b><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#createGroup(java.lang.String,java.lang.String,java.lang.String,madkit.kernel.GroupIdentifier)">(String 
+                  d, String g, String s, GroupIdentifier a)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Creates the group <tt>g</tt> in the community <tt>c</tt> if 
+                this parameter is present and in <tt>"public"</tt> if not. The 
+                group is distributed if the boolean parameter <tt>d</tt> is <tt>true</tt> 
+                and local (i.e. agents are not visible from distant kernels) otherwise. 
+                The <tt>s</tt> parameter is used to describe the overall structure 
+                of the group, but this feature is not used yet. The <tt>a</tt> 
+                parameter must be a <tt>GroupIdentifier</tt> i.e. an object which 
+                implements a security manager/authorization mechanism that consult 
+                agents before letting them enter into the group. See section {{section}} 
+                for more information on creating groups with authorization elements. 
+              </p>
+              <p>Example:</p>
+              <table border="0" bgcolor="#E0E0E0">
+                <tr> 
+                  <td> 
+                    <pre class="programlisting">createGroup(true,"foo","myGroup",null,null)</pre>
+                  </td>
+                </tr>
+              </table>
+              <p>creates a distributed group <tt>"myGroup"</tt> in the community 
+                <tt>"foo"</tt> with no description and no authorization element. 
+              </p>
+              <table border="0" bgcolor="#E0E0E0">
+                <tr> 
+                  <td> 
+                    <pre class="programlisting">createGroup(false,"myGroup",null,null)</pre>
+                  </td>
+                </tr>
+              </table>
+              <p>creates a local group <tt>"myGroup"</tt> in the community <tt>"public"</tt> 
+                with no description and no authorization element. </p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#requestRole(java.lang.String,%20java.lang.String,%20java.lang.String,%20java.lang.Object)">int 
+                  <b class="fsfunc">requestRole</b>(String c, String g, String 
+                  r, Object m)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#requestRole(java.lang.String,%20java.lang.String,%20java.lang.Object)">int 
+                  <b class="fsfunc">requestRole</b>(String g, String r, Object 
+                  m)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> The current agent requests to play the role <tt>r</tt> within 
+                the group <tt>g</tt> in the community <tt>c</tt> if this parameter 
+                is present and in <tt>"public"</tt> if not. The <tt>m</tt> parameter 
+                is a "member card" that the current agent may use to enter the 
+                group and obtain this role, which may be <tt>null</tt> if the 
+                group <tt>g</tt> has no security manager. </p>
+              <p> Returns the following values: 1 : operation success; -1 : access 
+                denied; -2 : the role is already handled by this agent; -3 : the 
+                group does not exist; -4 : the community does not exist. </p>
+              <p>Example:</p>
+              <table border="0" bgcolor="#E0E0E0">
+                <tr> 
+                  <td> 
+                    <pre class="programlisting">requestRole("foo","myGroup","player",null)</pre>
+                  </td>
+                </tr>
+              </table>
+              <p>Requests to play the role <tt>"player"</tt> in the group <tt>"myGroup"</tt> 
+                with regards to the community <tt>"foo"</tt> with no member card. 
+              </p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#leaveRole(java.lang.String,%20java.lang.String,%20java.lang.String)">void 
+                  <b class="fsfunc">leaveRole</b>(String c, String g, String r)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#leaveRole(java.lang.String,%20java.lang.String)">void 
+                  <b class="fsfunc">leaveRole</b>(String g, String r)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Leaves the role <tt>r</tt> which exists in the group <tt>g</tt> 
+                of community <tt>c</tt> if the parameter is present, or of community 
+                <tt>"public"</tt> if not. If the current agent plays only the 
+                role <tt>r</tt> in <tt>g</tt>, then it leaves the group. </p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#leaveGroup(java.lang.String,%20java.lang.String)">void 
+                  <b class="fsfunc">leaveGroup</b>(String c, String g)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#leaveGroup(java.lang.String)">void 
+                  <b class="fsfunc">leaveGroup</b>(String g)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Leaves the group <tt>g</tt> of community <tt>c</tt> if the parameter 
+                is present, or of community <tt>"public"</tt> if not. </p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#isCommunity(java.lang.String)">boolean 
+                  <b class="fsfunc">isCommunity</b>(String c)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Returns <tt>true</tt> if the community <tt>c</tt> exists, i.e. 
+                if the kernel (represented by the <tt>SiteAgent</tt>) is present 
+                in this community. </p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#isGroup(java.lang.String,%20java.lang.String)">boolean 
+                  <b class="fsfunc">isGroup</b>(String c, String g)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#isGroup(java.lang.String)">boolean 
+                  <b class="fsfunc">isGroup</b>(String g)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Returns <tt>true</tt> if the group <tt>g</tt> exists in the 
+                community <tt>c</tt> if the parameter is present, or exists in 
+                the community <tt>"public"</tt> if not. Returns <tt>false</tt> 
+                otherwise.</p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#isRole(java.lang.String,%20java.lang.String,%20java.lang.String)">boolean 
+                  <b class="fsfunc">isRole</b>(String c, String g, String r)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#isRole(java.lang.String,%20java.lang.String)">boolean 
+                  <b class="fsfunc">isRole</b>(String g, String r)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p>Returns <tt>true</tt> if the role <tt>r</tt> of the group <tt></tt> 
+                exists in the community <tt>c</tt> if the parameter is present, 
+                or exists in the community <tt>"public"</tt> if not. Returns <tt>false</tt> 
+                otherwise.</p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getMyGroups(java.lang.String)">String[] 
+                  <b class="fsfunc">getMyGroups</b>(String c)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getMyGroups()">String[] 
+                  <b class="fsfunc">getMyGroups</b>()</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Returns an array of String containing the names of the groups 
+                of which the current agent is a member. Groups are taken from 
+                the community <tt>c</tt> if the parameter is present or of the 
+                community <tt>"public"</tt> if not. </p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getExistingGroups(java.lang.String)">String[] 
+                  <b class="fsfunc">getExistingGroups</b>(String c)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getExistingGroups()">String[] 
+                  <b class="fsfunc">getExistingGroups</b>()</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Returns an array of String containing the names of the groups 
+                which belongs to the community <tt>c</tt> if the parameter is 
+                present, or which belongs to the community <tt>"public"</tt> if 
+                not. </p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getMyRoles(java.lang.String,%20java.lang.String)">String[] 
+                  <b class="fsfunc">getMyRoles</b>(String c, String g)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getMyRoles(java.lang.String)">String[] 
+                  <b class="fsfunc">getMyRoles</b>(String g)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Returns an array of String containing the names of all roles 
+                played by the current agent in the group <tt>g</tt>. The group 
+                is taken from the community <tt>c</tt> if the parameter is present 
+                or of the community <tt>"public"</tt> if not. </p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getExistingRoles(java.lang.String,%20java.lang.String)">String[] 
+                  <b class="fsfunc">getExistingRoles</b>(String c, String g)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getExistingRoles(java.lang.String)">String[] 
+                  <b class="fsfunc">getExistingRoles</b>(String g)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Returns an array of String containing the names of all roles 
+                existing in the group <tt>g</tt>. The group is taken from the 
+                community <tt>c</tt> if the parameter is present or of the community 
+                <tt>"public"</tt> if not. <span class="bold"><b>Note:</b></span> 
+                The current agent MUST be a member of the group <tt>g</tt> to 
+                get this information</p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAvailableCommunities()">String[] 
+                  <b class="fsfunc">getAvailableCommunities</b>()</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Returns an array of String containing the names of all communities 
+                in which the current kernel (through its <tt>SiteAgent</tt>) is 
+                present. By default, contains at least one element, the <tt>"public"</tt> 
+                community.</p>
+            </dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAgentsWithRole(java.lang.String,%20java.lang.String,%20java.lang.String)">AgentAddress[] 
+                  <b class="fsfunc">getAgentsWithRole</b>(String c, String g, 
+                  String r)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAgentsWithRole(java.lang.String,%20java.lang.String)">AgentAddress[] 
+                  <b class="fsfunc">getAgentsWithRole</b>(String g, String r)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd> 
+              <p> Returns an array of AgentAddress representing all the agents 
+                playing the role <tt>r</tt> in the group <tt>g</tt>. The group 
+                is taken from the community <tt>c</tt> if the parameter is present 
+                or of the community <tt>"public"</tt> if not. <span class="bold"><b>Note:</b></span> 
+                The current agent MUST be a member of the group <tt>g</tt> to 
+                get this information</p>
+              <p>Example:</p>
+              <table border="0" bgcolor="#E0E0E0">
+                <tr> 
+                  <td> 
+                    <pre class="programlisting">
+	AgentAddress[] agList = getAgentsWithRole("foo","myGroup","aRole");
+	for (int i=0;i&lt;agList.length;i++)
+		sendMessage(agList[i],new StringMessage("salut coco!"));
+</pre>
+                  </td>
+                </tr>
+              </table>
+            </dd>
+            <dt>&nbsp;</dt>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAgentWithRole(java.lang.String,%20java.lang.String,%20java.lang.String)">AgentAddress[] 
+                  <b class="fsfunc">getAgentWithRole</b>(String c, String g, String 
+                  r)</a></code></code></p>
+                <p><code><code class="funcdef"><a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAgentWithRole(java.lang.String,%20java.lang.String)">AgentAddress[] 
+                  <b class="fsfunc">getAgentWithRole</b>(String g, String r)</a></code></code></p>
+              </div>
+              </span></dt>
+            <dd><span class="term"></span></dd>
+            <dd><span class="term"></span></dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"> 
+                <p>Returns one agent taken at random from the list returned by 
+                  <tt>getAgentsWithRole</tt>.</p>
+              </div>
+              </span></dt>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"></div>
+              </span></dt>
+            <dd><span class="term"></span></dd>
+            <dt><span class="term"> 
+              <div class="funcsynopsis"></div>
+              </span></dt>
+          </dl>
+        </div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDADPGKG"></a>Graphical interfaces</h3>
+          </div>
+        </div>
+        <p> The MadKit graphic model is based on independent graphic components, 
+          using the Java Beans specification for building graphical components.. 
+        </p>
+        <p> Each agent is solely responsible for its own graphical interface, 
+          in every aspect (rendering, event processing, actions...) An agent interface 
+          can be a simple label, a complex construction based on multiple widgets, 
+          or a legacy bean software module. A "graphic shell"(which is usually 
+          the <span class="emphasis"><i>MadKit desktop</i></span>) launches the 
+          kernel and setup the interfaces for the various agents and manages them 
+          in a global GUI (for instance: each agent has its own window, or is 
+          mapped in a global worksheet, or is combined with another agent interface, 
+          ...). </p>
+        <p> As the graphic shell is a classic software module, it can be wrapped 
+          in an agent for maximum flexibility, allowing control of other agent 
+          interfaces by a regular agent that can be part of any interaction scenario. 
+        </p>
+        <div class="sect3"> 
+          <div class="titlepage"> 
+            <div></div>
+          </div>
+          <p> Associating a bean to an agent is quite straightforward: 
+          <div class="orderedlist"> 
+            <ol type="1">
+              <li> 
+                <p> Define a <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#initGUI()" target="_top"><tt>initGUI()</tt></a> 
+                  method. This function is automatically called at agent creation 
+                  by the kernel if a graphical shell (such as the G-Box) has been 
+                  registered. </p>
+              </li>
+              <li> 
+                <p> Call the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#setGUIObject(java.lang.Object)" target="_top"><tt>setGUIObject(...)</tt></a> 
+                  method, with the bean you want to associate as parameter. The 
+                  best place to do this is in the <tt>initGUI()</tt> implementation. 
+                </p>
+              </li>
+            </ol>
+          </div>
+          <p></p>
+          <p> There are also two additional calls: <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getGUIObject()" target="_top"><tt>getGUIObject()</tt></a> 
+            returns the bean currently associated to the agent; and with the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#hasGUI()" target="_top"><tt>hasGUI()</tt></a> 
+            method it is possible to check if the agent runs in GUI mode (i.e. 
+            the platform offers a graphic shell or not). </p>
+          <p> For instance, one could find in some agent code: 
+          <table border="0" bgcolor="#E0E0E0">
+            <tr> 
+              <td> 
+                <pre class="programlisting">
+protected void initGUI()
+{
+     JLabel myLabel = new JLabel("Ulysses");
+     setGUIObject(myLabel);
+}
+	  </pre>
+              </td>
+            </tr>
+          </table>
+          <p></p>
+          <p> This would simply create a simple word "<span class="emphasis"><i>Ulysses</i></span>" 
+            with the Java <tt>JLabel</tt> class, and set it as the agent graphic 
+            interface. </p>
+          <h4 class="title">Note:</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote> 
+  <div class="book"> 
+    <div class="chapter"> 
+      <div class="sect1"> 
+        <div class="sect2"> 
+          <div class="sect3"> The easiest way to build an agent with an associated 
+            graphic interface is to have two classes (or two set of classes), 
+            one being the implementation of the agent, and the other coding the 
+            graphical interface. You'll find in the examples provided with the 
+            MadKit distribution, many application of this principle. </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="book"> 
+    <div class="chapter"> 
+      <div class="sect1"> 
+        <div class="sect2"> 
+          <div class="sect3"> This clear distinction also has the advantage of 
+            keeping the agent GUI code completely standard. You can use your favorite 
+            RAD tool to code your interface, or use a standard off-the-shelf Java 
+            Bean as your agent interface. </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div class="book">
+  <div class="chapter">
+    <div class="sect1">
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAVQGKG"></a>Various calls</h3>
+          </div>
+        </div>
+        <p> There is also some miscellaneous calls that do not fall in the above 
+          categories. The <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAddress()" target="_top"><tt>getAddress()</tt></a> 
+          makes the agent return its own <tt>AgentAddress</tt>. </p>
+        <p> The couple <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#setName(java.lang.String)" target="_top"><tt>setName(...)</tt></a> 
+          and <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getName()" target="_top"><tt>getName()</tt></a> 
+          manipulate the agent <span class="emphasis"><i>name</i></span>. The 
+          agent name can be altered during the agent life. The only thing that 
+          is unique and is used for messaging and group/role management is the 
+          <tt>AgentAddress</tt>. The <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#getAgentInformation()" target="_top"><tt>getAgentInformation()</tt></a> 
+          returns an agent "identity card" (creator, age, ...). </p>
+        <p>Agents also have a minimal text output mechanism. The <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#println(java.lang.String)" target="_top"><tt>println(...)</tt></a> 
+          method outputs a line of text. The actual output can be redirected on 
+          a file, on the console or in an automatically launched GUI, depending 
+          on the platform configuration. Hackers can redirect this output stream 
+          with the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#setOutputWriter(java.io.Writer)" target="_top"><tt>setOutputWriter(...)</tt></a> 
+          method. A related utility is the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#debug(java.lang.String)" target="_top"><tt>debug(...)</tt></a> 
+          method, which outputs the parameter string only if a debug flag is set. 
+          This flag can be manipulated at run-time with the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#setDebug(boolean)" target="_top"><tt>setDebug(...)</tt></a> 
+          call. The debug stream can also be redirected with the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/AbstractAgent.html#setDebugWriter(java.io.Writer)" target="_top"><tt>setDebugWriter(...)</tt></a> 
+          method. </p>
+      </div>
+    </div>
+    <div class="sect1"> 
+      <div class="titlepage"> 
+        <div> 
+          <h2 class="title" style="clear: both"><a name="Threaded"></a>The threaded 
+            <tt>Agent</tt> class</h2>
+        </div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> </div>
+        </div>
+        <p> A very important subclass of the <tt>AbstractAgent</tt> is the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Agent.html" target="_top"><tt>Agent</tt></a> 
+          class. This class defines an agent running in a concurrent thread. It 
+          is the most direct and easy way to define an agent. </p>
+        <p>With this class, the behavior of an agent must be coded in the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Agent.html#live()" target="_top"><tt>live()</tt></a> 
+          method, which will be called automatically upon agent creation. Agents 
+          being defined with the <tt>Agent</tt> or one of its subclasses are recognized 
+          by the kernel, which handles the job of creating and starting the thread 
+          which will execute the <tt>live()</tt>.</p>
+        <p>The class also provides a blocking version of the message reception 
+          call: <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Agent.html#waitNextMessage()" target="_top"><tt>waitNextMessage()</tt></a>. 
+          If this method is invoked and there is something in the message box, 
+          it returns immediately. Otherwise, the thread is suspended until something 
+          arrive.</p>
+        <p>An utility method, <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Agent.html#pause(int)" target="_top"><tt>pause(...)</tt></a> 
+          is also provided, and can suspend the thread for the number of milliseconds 
+          given in parameter. </p>
+        <p>A classic agent implementation is an endless loop waiting for messages 
+          and dispatching them according to the message type: 
+        <table border="0" bgcolor="#E0E0E0">
+          <tr> 
+            <td> 
+              <pre class="programlisting">
+protected void live()
+{
+   while(true)
+	{
+	  Message e = waitNextMessage();
+	  if (e instanceof StringMessage)
+	      handleMessage((StringMessage)e); 
+	  else if (e instanceof KQMLMessage)
+	      handleMessage((KQMLMessage)e);
+	  else if (e instanceof Message)
+	      handleMessage(e);
+	}
+}</pre>
+            </td>
+          </tr>
+        </table>
+        <dl> 
+          <dt> 
+            <div class="funcsynopsis"> 
+              <h2><span class="term"><a name="Hello"></a>The Hello program</span></h2>
+            </div>
+          </dt>
+          <dd> 
+            <p><b>Example</b>: here is the Hello agent which is defined in the 
+              template plugin. This agent first prints the message &quot;Hello 
+              I'm an agent&quot;, then creates a group and attempt to play a role 
+              into it. If this work, it goes into an infinite loop, waiting for 
+              a message to handle it. This is obviously a very basic behavior. 
+              You should be able to do better :-)</p>
+            <table border="0" bgcolor="#E0E0E0">
+              <tr> 
+                <td> 
+                  <pre class="synopsis">&nbsp;
+public class Hello extends Agent {
+	String myCommunity="myCommunity";
+	String myGroup="myGroup";
+	String myRole="myRole";
+	
+	boolean alive = true;
+	
+	public void activate(){
+		println("Hello I'm an agent !");
+		// create a distributed group
+		int r = createGroup(true, myCommunity, myGroup, null, null);
+		if (r != 1)
+			alive =false;
+		else 
+			requestRole(myCommunity, myGroup, myRole);
+	}
+	
+	public void live()
+	{
+		println("Hello world...");
+		while(alive){
+			Message m = waitNextMessage();
+			handleMessage(m);
+		}
+	}
+	
+	void handleMessage(Message m){
+		// You should describe here the agent's behavior
+		// upon reception of a message
+	}
+	
+	public void end()
+	{
+		println("\t That's it !!! Bye ");
+		pause(2000); // just to be abloe to see the last message..
+	}
+}
+			  </pre>
+                </td>
+              </tr>
+            </table>
+            <span class="term"></span></dd>
+          <dt> 
+            <div class="funcsynopsis"> </div>
+          </dt>
+        </dl>
+        <p>&nbsp;</p>
+        <p></p>
+      </div>
+    </div>
+    <div class="sect1"> 
+      <div class="titlepage"> 
+        <div></div>
+      </div>
+    </div>
+    <div class="footnotes"> 
+      <div class="footnote"></div>
+    </div>
+  </div>
+  <div class="chapter"> 
+    <div class="titlepage"> 
+      <div></div>
+    </div>
+    <div class="sect1">
+      <div class="sect2"></div>
+    </div>
+  </div>
+  <div class="chapter"> 
+    <div class="titlepage"> 
+      <div> 
+        <h2 class="title"><a name="IDADSHKG"></a>Chapter 5. Tips and tricks of 
+          MadKit programming</h2>
+      </div>
+    </div>
+    <div class="toc"> 
+      <p><b>Table of Contents</b></p>
+      <ul>
+        <li><a href="#IDAGSHKG">Concurrent techniques</a></li>
+        <li><a href="#IDAQSHKG">Distribution techniques</a></li>
+        <li><a href="#IDAYSHKG">Working with agent controllers</a></li>
+        <li><a href="#IDA1SHKG">Adding a new scripting language</a></li>
+      </ul>
+    </div>
+    <p>This chapter tries to help the developer by guiding him or her in the intricaties 
+      of agent and distributed programming. We will see also how to avoid some 
+      of the most classical pitfalls a programmer should avoid. Here are some 
+      of the most well known: </p>
+    <div class="section"> 
+      <div class="titlepage"> 
+        <div> 
+          <h2 class="title" style="clear: both"><a name="IDAGSHKG"></a>Concurrent 
+            techniques</h2>
+        </div>
+      </div>
+      <table class="simplelist" border="0" summary="Simple list">
+        <tr> 
+          <td>Getting a value in return of a message</td>
+        </tr>
+      </table>
+      <table class="simplelist" border="0" summary="Simple list">
+        <tr> 
+          <td>Working with many agents at once</td>
+        </tr>
+      </table>
+      <table class="simplelist" border="0" summary="Simple list">
+        <tr> 
+          <td>Getting the right answer</td>
+        </tr>
+      </table>
+      <table class="simplelist" border="0" summary="Simple list">
+        <tr> 
+          <td>Troobleshooting</td>
+        </tr>
+      </table>
+    </div>
+    <div class="section"> 
+      <div class="titlepage"> 
+        <div> 
+          <h2 class="title" style="clear: both"><a name="IDAQSHKG"></a>Distribution 
+            techniques</h2>
+        </div>
+      </div>
+      <table class="simplelist" border="0" summary="Simple list">
+        <tr> 
+          <td>Passing arguments</td>
+        </tr>
+      </table>
+      <table class="simplelist" border="0" summary="Simple list">
+        <tr> 
+          <td>Accessing remote agents</td>
+        </tr>
+      </table>
+      <table class="simplelist" border="0" summary="Simple list">
+        <tr> 
+          <td>Displaying information about a remote agent</td>
+        </tr>
+      </table>
+    </div>
+    <div class="section"> 
+      <div class="titlepage"> 
+        <div> 
+          <h2 class="title" style="clear: both"><a name="IDAYSHKG"></a>Working 
+            with agent controllers</h2>
+        </div>
+      </div>
+      <p></p>
+    </div>
+  </div>
+  <div class="chapter">
+    <div class="sect1">
+      <div class="sect2">
+        <div class="sect1">
+          <div class="sect2">
+            <div class="sect3">
+<p></p>
+            </div>
+          </div>
+        </div>
+        <div class="sect1"> 
+          <div class="titlepage"> 
+            <div> 
+              <h2 class="title" style="clear: both">&nbsp;</h2>
+            </div>
+          </div>
+          <div class="sect2"></div>
+        </div>
+        <p>&nbsp;</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

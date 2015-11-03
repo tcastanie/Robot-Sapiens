@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+
+<!-- 
+ This is build.xml file for building the MadKit core jars: boot.jar, madkit.jar using JAKARTA-ANT http://ant.apache.org/index.html 
+ Author: Fabien Michel
+ Version: 2.0
+ -->
+
+<project name="madkitkernel" default="jar" basedir=".">
+
+	<property file="../madkit.properties"/> 
+
+	<fileset id="project.class.path" dir="${jars.dir}">
+		<include name="boot.jar"/>
+	</fileset>
+	
+	<property name="src.dir" value="src"/>
+	<property name="version"  value="4.0.8"/>
+	<property name="author"  value="Olivier Gutknecht, Fabien Michel, Jacques Ferber"/>
+	<property name="depend"  value=""/>
+	<property name="description"  value="The MadKit core plugins, allways required"/>
+
+	<property name="images.dir" value="images"/>
+	<property name="project.label"  value="The MadKit Kernel"/>
+	<property name="project.category" value="main"/>
+	<property name="system.plugin" value="true"/>
+
+	<target name="init">
+		<available file="${ant.project.name}.cfg" type="file" property="cfgfile.present"/>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${build.dir}"/>
+		<javac
+			srcdir="${src.dir}"
+			destdir="${build.dir}"
+			deprecation="on">
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile" description="Jars the plugin ">
+
+		<!-- Create property file -->
+		<propertyfile file="build/${ant.project.name}.properties" comment="madkit plugin's properties file" >
+		  	<entry  key="${string.name.var}" value="${ant.project.name}"/>
+		  	<entry  key="${string.author.var}" value="${author}"/>
+		  	<entry  key="${string.version.var}" value="${version}"/>
+		  	<entry  key="${string.depend.var}" value="${depend}"/>
+		  	<entry  key="${string.description.var}" value="${description}"/>
+		</propertyfile>
+		<copy file="build/${ant.project.name}.properties" todir="."/>
+	
+		<mkdir dir="${jars.dir}"/>
+
+		<copy todir="${build.dir}/${images.dir}">
+			<fileset dir="${src.dir}/${images.dir}"/>
+		</copy>
+		<jar destfile="${jars.dir}/${jar.name}"
+			basedir="${build.dir}"
+			excludes="madkit/boot/**"
+		/>
+		<jar destfile="${jars.dir}/boot.jar"
+			basedir="${build.dir}"
+			excludes="madkit/kernel/**,images/**"
+		/>
+
+		<delete failonerror="false" file="build/${project.name}.properties"/>
+	</target>
+
+	<target name="docs">
+		<ant antfile="${generic.file}" dir="." target="docs" inheritrefs="true"/>
+	</target>
+
+	<target name="real-clean">
+		<delete dir="${build.dir}"/>
+		<delete failonerror="false" file="${jars.dir}/${jar.name}"/>
+		<delete failonerror="false" file="${jars.dir}/boot.jar"/>
+		<delete failonerror="false" file="${ant.project.name}.bat"/>
+		<delete failonerror="false" file="${ant.project.name}.sh"/>
+		<delete dir="docs/api"/>
+		<delete failonerror="false" includeEmptyDirs="true">
+			<fileset dir="docs" excludes="*"/>
+		</delete>
+	</target>
+
+	<target name="clean">
+		<ant antfile="${generic.file}" dir="." target="clean" inheritrefs="true"/>
+	</target>
+
+	<target name="all">
+		<antcall target="clean"/>
+		<antcall target="bin-dist"/>
+		<antcall target="src-dist"/>
+		<antcall target="doc-dist"/>
+		<antcall target="standalone-dist"/>
+	</target>
+
+	<target name="src-dist">
+		<concat destfile="readme.txt" >This is ${ant.project.name} plugin sources version ${version} ! expand this archive in your madkit root directory</concat>
+		<zip destfile="../${ant.project.name}-${version}-src.zip">
+			<zipfileset dir="." includes="build.xml,${ant.project.name}.cfg,readme.txt" prefix="plugins/${ant.project.name}"/>
+			<zipfileset dir="src" includes="**/*" prefix="plugins/${ant.project.name}/src"/>
+		</zip>
+		<delete failonerror="false" file="readme.txt"/>
+	</target>
+
+	<target name="bin-dist" depends="jar">
+		<concat destfile="readme.txt" >This is ${ant.project.name} plugin version ${version} ! expand this archive in your madkit root directory</concat>
+		<zip destfile="../${ant.project.name}-${version}-bin.zip">
+			<zipfileset dir="." includes="${ant.project.name}.bat,${ant.project.name}.cfg,readme.txt" prefix="plugins/${ant.project.name}"/>
+			<zipfileset dir="${jars.dir}" includes="${jar.name},boot.jar" prefix="jars"/>
+		</zip>
+		<delete failonerror="false" file="readme.txt"/>
+	</target>
+
+	<target name="doc-dist" depends="docs">
+		<concat destfile="readme.txt" >This is ${ant.project.name} plugin documentation ! expand this archive in your madkit root directory</concat>
+		<zip destfile="../${ant.project.name}-${version}-doc.zip">
+			<zipfileset dir="." includes="readme.txt" prefix="plugins/${ant.project.name}"/>
+			<zipfileset dir="docs" includes="**/*" prefix="plugins/${ant.project.name}/docs"/>
+		</zip>
+		<delete failonerror="false" file="readme.txt"/>
+	</target>	
+	
+	<target name="plugin-dist-prepare">
+		<ant antfile="${generic.file}" dir="." target="plugin-dist-prepare" inheritrefs="true"/>
+	</target>
+	
+	<target name="plugin-dist" depends="plugin-dist-prepare">
+		<zip destfile="${installer.dir}/${project.name}-${version}.zip">
+			<zipfileset dir="." includes="build.xml,${project.name}.bat,${project.name}.sh,${project.name}.cfg" prefix="${plugins.root.path}/${project.name}"/>
+			<zipfileset dir="${jars.dir}" includes="${jar.name}" prefix="${lib.dir.name}"/>
+			<zipfileset dir="${src.dir}" includes="**/*" prefix="${plugins.root.path}/${project.name}/${src.dir}"/>
+			<zipfileset refid="project.class.path" prefix="${lib.dir.name}"/>
+			<zipfileset dir="."  includes="${scripts.dir}/**" prefix="${plugins.root.path}/${project.name}" />
+			<zipfileset dir="../.." includes="index.html" />
+			<zipfileset dir=".." includes="generic.xml, build.xml, madkit.properties" prefix="${plugins.root.path}" />
+			<!-- <zipfileset dir="docs" includes="**/*" prefix="${project.name}/docs"/> -->
+		</zip>
+	</target>
+	
+	<target name="web-dist" depends="jar">
+		<property name="zip.extra.inc.bin" value="boot.jar"/>
+		<property name="zip.extra.inc.bin.prefix" value="lib"/>
+		<ant antfile="${generic.file}" dir="." target="web-dist" inheritrefs="true"/>
+		
+	</target>
+	<target name="make-plugin-xml">
+		<ant antfile="${generic.file}" dir="." target="make-plugin-xml" inheritrefs="true"/>
+	</target>
+</project>

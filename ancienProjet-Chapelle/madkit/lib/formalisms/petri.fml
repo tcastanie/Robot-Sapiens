@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="Petri" description="Petri (basic + colored)"
+		class="SEdit.Formalisms.Petri.PetriStructure">
+  <formalism-info>
+    <author>Jacques Ferber</author>
+  </formalism-info>
+  <node-types>
+    <node-desc name="Place" class="SEdit.Formalisms.Petri.PetriPlace">
+      <icon url="images/place1.gif"/>
+      <graphic-element class="SEdit.Formalisms.Petri.GPetriPlace">
+		<property name="width">40</property>
+		<property name="height">40</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+      <action description="add simple token">
+			<java-method name="addToken"/>
+      </action>
+      <action description="add colored token">
+			<java-method name="addColoredToken"/>
+      </action>
+      <action description="remove all tokens">
+			<java-method name="removeAllTokens"/>
+      </action>
+    </node-desc>
+    <node-desc name="Transition"  class="SEdit.Formalisms.Petri.PetriTransition">
+      <icon url="images/transition1.gif"/>
+      <graphic-element class="SEdit.Formalisms.Petri.GPetriTransition">
+		<property name="width">80</property>
+		<property name="height">32</property>	
+		<property name="labelLocation">5</property>
+      </graphic-element>
+      <action description="validate">
+			<java-method name="validate"/>
+      </action>
+      <action description="modify predicate">
+			<java-method name="modifyPredicate"/>
+      </action>
+      <action description="modify action">
+			<java-method name="modifyAction"/>
+      </action>
+    </node-desc>
+  </node-types>
+  <arrow-types>
+    <arrow-desc name="Consumer" from="Place" to="Transition"  
+		class="SEdit.Formalisms.Petri.ConsumerLink"
+		description="Consumer arc" >
+      <icon url="images/consumer.gif"/>
+      <graphic-element>
+			<property name="displaylabel">false</property>
+      </graphic-element>
+	  <action description="modify weight">
+			<java-method name="modifyWeight"/>
+      </action>
+	  <action description="modify filter">
+			<java-method name="modifyFilter"/>
+      </action>
+    </arrow-desc>
+    <arrow-desc name="Inhibitor" from="Place" to="Transition" 
+		class="SEdit.Formalisms.Petri.InhibitorLink" description="Inhibitor arc" >
+      <icon url="images/inhibitor.gif"/>
+      <graphic-element>
+			<property name="displaylabel">false</property>
+			<property name="endingForm">3</property>
+      </graphic-element>
+	  <action description="modify weight">
+			<java-method name="modifyWeight"/>
+      </action>
+	  <action description="modify filter">
+			<java-method name="modifyFilter"/>
+      </action>
+    </arrow-desc>
+    <arrow-desc name="Informer" from="Place" to="Transition" 
+		class="SEdit.Formalisms.Petri.InformerLink" description="Inform arc" >
+      <icon url="images/informer.gif"/>
+      <graphic-element>
+			<property name="displaylabel">false</property>
+			<property name="endingForm">2</property>
+      </graphic-element>
+	  <action description="modify weight">
+			<java-method name="modifyWeight"/>
+      </action>
+	  <action description="modify filter">
+			<java-method name="modifyFilter"/>
+      </action>
+    </arrow-desc>
+    <arrow-desc name="Producer" from="Transition" to="Place" 
+		class="SEdit.Formalisms.Petri.ProducerLink" description="Producer arc" >
+      <icon url="images/producer.gif"/>
+      <graphic-element>
+			<property name="displaylabel">false</property>
+      </graphic-element>
+	  <action description="modify weight">
+			<java-method name="modifyWeight"/>
+      </action>
+	  <action description="modify filter">
+			<java-method name="modifyFilter"/>
+      </action>
+    </arrow-desc>
+  </arrow-types>
+  <action description="Run">
+    <icon url="images/run.gif"/>
+    <java-method name="step"/>
+  </action>
+</formalism>

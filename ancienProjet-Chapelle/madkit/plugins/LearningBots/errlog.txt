@@ -1,0 +1,32 @@
+Buildfile: D:\FAC\socVirt\madkit\plugins\LearningBots\build.xml
+
+jar:
+
+compile:
+    [javac] D:\FAC\socVirt\madkit\plugins\generic.xml:48: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+
+copy-images:
+
+copy-resources:
+
+jar:
+     [echo] ****** Creating jar : LearningBots **********
+[propertyfile] Updating property file: D:\FAC\socVirt\madkit\plugins\LearningBots\build\LearningBots.properties
+     [copy] Copying 1 file to D:\FAC\socVirt\madkit\plugins\LearningBots
+      [jar] Building jar: D:\FAC\socVirt\madkit\lib\LearningBots.jar
+
+runners:
+
+runners-files:
+
+applet:
+   [delete] Deleting: D:\FAC\socVirt\madkit\plugins\LearningBots\LearningBots.html
+    [unzip] Expanding: D:\FAC\socVirt\madkit\lib\madkitapplet.jar into D:\FAC\socVirt\madkit\plugins\LearningBots\build
+     [move] Moving 1 file to D:\FAC\socVirt\madkit\plugins\LearningBots
+
+desktop-runners:
+
+runners-files:
+
+BUILD SUCCESSFUL
+Total time: 0 seconds

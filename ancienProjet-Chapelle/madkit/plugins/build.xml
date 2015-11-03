@@ -1,0 +1,341 @@
+<?xml version="1.0"?>
+
+<!--
+     This is build.xml file for building MadKit distributions, cleaning, etc.
+     Author: Fabien Michel
+     Version: 2.0
+-->
+
+<project name="MadKit" default="make-jar" basedir=".">
+
+	<property name="plugins.dir" value="."/>
+	<property name="lib.dir" value="../lib"/>
+	<property name="madkit.version" value="4.0.8"/>
+
+	<!-- <property name="build.compiler" value="modern" /> -->
+	<property name="author" value="Madkit Team (O. Gutknecht, J. Ferber, F. Michel et al.)"/>
+	<property name="dist.dir.name" value="../distrib"/>
+	<property name="console.bootargs" value="boot.jar -Xms16m -Xmx128m madkit.boot.Madkit madkit.kernel.Booter --graphics"/>
+	<property name="desktop.bootargs" value="boot.jar -Xms16m -Xmx128m madkit.boot.Madkit madkit.desktop2.DesktopBooter --graphics" />
+	<property name="whatToDo" value="jar"/>
+	<property name="system.plugin" value="true"/>
+
+	<target name="delete-api">
+		<delete dir="../docs/api"/>
+		<delete failonerror="false" includeEmptyDirs="true">
+			<fileset dir="../docs" excludes="**/*"/>
+		</delete>
+	</target>
+
+	<target name="delete-zip">
+		<delete>
+			<fileset dir=".." includes="*.zip"/>
+		</delete>
+		<delete>
+			<fileset dir="${plugins.dir}" includes="*.zip"/>
+		</delete>
+  		<delete dir="../${ant.project.name}-${madkit.version}"/>
+	</target>
+
+	<target name="doIt">
+		<ant antfile="build.xml" dir="${plugins.dir}/madkitkernel" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/madkitapplet" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/messages" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/madkitutils" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/pluginmanager" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/system" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/SEdit" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/jsynedit" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/desktop2" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/template" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/simulation" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/demos" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/communicator" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/netcomm" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/marketorg" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/pythonlib" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/analysistools" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/turtlekit" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/turtlesimulation" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/jesslib" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/schemelib" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/bshlib" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/treetools" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/share" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/jsynedit" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/explorer" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/chat" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/warbot" target="${whatToDo}"/>
+		<!-- <ant antfile="build.xml" dir="${plugins.dir}/fipa" target="${whatToDo}"/> -->
+		<ant antfile="build.xml" dir="${plugins.dir}/distributedbees" target="${whatToDo}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/documentation" target="${whatToDo}"/>
+		<!-- <ant antfile="build.xml" dir="${plugins.dir}/docbrowser" target="${whatToDo}"/> -->
+		<ant antfile="build.xml" dir="${plugins.dir}/warbot04" target="${whatToDo}"/>
+		<!-- <ant antfile="build.xml" dir="${plugins.dir}/simKernel" target="${whatToDo}"/> -->
+		<!-- <ant antfile="build.xml" dir="${plugins.dir}/mimosa" target="${whatToDo}"/> -->
+		<ant antfile="build.xml" dir="${plugins.dir}/MOP" target="${whatToDo}"/>
+	</target>
+
+	<target name="clean">
+		<antcall target="doIt">
+			<param name="whatToDo" value="clean"/>
+		</antcall>
+		<delete failonerror="false" dir="${lib.dir}/cachedir"/>
+		<delete dir="${dist.dir.name}"/>
+	</target>
+
+	<target name="make-jar">
+		<!-- <splash imageurl="http://www.madkit.org/Logos/Head.gif"/> -->
+		<antcall target="doIt">
+			<param name="whatToDo" value="jar"/>
+		</antcall>
+		<antcall target="desktop-runners"/>
+		<antcall target="console-runners"/>
+	</target>
+
+	<target name="desktop-runners">
+		<property name="bootline" value="java -cp ${lib.dir}/${desktop.bootargs}"/>
+		<property name="bin.name" value="../bin/desktop"/>
+		<ant antfile="generic.xml" dir="." target="runners-files" inheritrefs="true"/>
+	</target>
+
+	<target name="console-runners">
+		<property name="bootline" value="java -cp ${lib.dir}/${console.bootargs} --config configs/testconfig.cfg"/>
+		<property name="bin.name" value="../bin/console"/>
+		<ant antfile="generic.xml" dir="." target="runners-files" inheritrefs="true"/>
+	</target>
+
+	<target name="real-clean" depends="delete-api,delete-zip">
+		<antcall target="doIt">
+			<param name="whatToDo" value="real-clean"/>
+		</antcall>
+		<delete failonerror="false" dir="${lib.dir}/cachedir"/>
+		<delete failonerror="false" file="../bin/desktop.bat"/>
+		<delete failonerror="false" file="../bin/desktop.sh"/>
+		<delete failonerror="false" file="../bin/MadkitApplet.html"/>
+		<delete dir="${dist.dir.name}"/>
+		<ant antfile="build.xml" dir="${plugins.dir}/installer" target="real-clean"/>
+	</target>
+
+	<target name="plugin-src-dist">
+		<antcall target="doIt">
+			<param name="whatToDo" value="src-dist"/>
+		</antcall>
+	</target>
+	
+
+	<target name="plugin-docs">
+		<antcall target="doIt">
+			<param name="whatToDo" value="docs"/>
+		</antcall>
+	</target>
+
+	<target name="src-dist" depends="real-clean,make-jar">
+		<antcall target="real-clean" />
+		<concat destfile="../readme.txt" >This is ${ant.project.name} version ${madkit.version} src release (you have to compile it : using ANT is the best way : http://ant.apache.org/)! some don't work :)</concat>
+		<zip destfile="../${ant.project.name}-${madkit.version}-src.zip">
+			<zipfileset dir=".." excludes="**/CVS,**/*.zip,**/*.jbx,**/*.jbf,**/*.bak" includes="**/*" prefix="${ant.project.name}-${madkit.version}"/>
+		</zip>
+		<delete failonerror="false" file="../readme.txt"/>
+	</target>
+
+	<target name="bin-dist" depends="real-clean,make-jar,clean">
+  		<concat destfile="../readme.txt" >This is ${ant.project.name} version ${madkit.version} bin release (without any sources or build files)! some don't work :)</concat>
+		<zip destfile="../${ant.project.name}-${madkit.version}-bin.zip">
+			<zipfileset dir=".." excludes="**/CVS,**/docs,**/netcomm,**/analysistools,**/communicator,**/explorer,**/madkitkernel,**/madkitutils,**/messages,**/simulation,**/system,**/treetools,**/*.java,**/*.zip,**/*.jbx,**/*.jbf,**/*.bak,**/src/**,**/build.xml,**/generic.xml,**/madkit.properties" includes="**/*" prefix="${ant.project.name}-${madkit.version}"/>
+		</zip>
+		<delete failonerror="false" file="../readme.txt"/>
+	</target>
+
+	<!-- <target name="light-dist" depends="real-clean,make-jar,clean">
+
+  		<concat destfile="../readme.txt" >This is ${ant.project.name} version ${madkit.version} light/core release. </concat>
+		<zip destfile="../${ant.project.name}-${madkit.version}-light.zip">
+			<zipfileset dir=".." excludes="**/CVS,**/docs,**/netcomm,**/analysistools,**/communicator,**/explorer,**/madkitkernel,**/madkitutils,**/messages,**/simulation,**/system,**/treetools,**/*.java,**/*.zip,**/*.jbx,**/*.jbf,**/*.bak,**/src/**,**/build.xml,**/generic.xml,**/madkit.properties" includes="**/*" prefix="${ant.project.name}-${madkit.version}"/>
+		</zip>
+		<delete failonerror="false" file="../readme.txt"/> 
+	</target> -->
+
+	<target name="dev-dist" depends="real-clean,make-jar,clean">
+		<concat destfile="../readme.txt" >This is ${ant.project.name} version ${madkit.version} developer release (source + bin)! some don't work :)</concat>
+		<zip destfile="../${ant.project.name}-${madkit.version}-dev.zip">
+			<zipfileset dir=".." includes="**/*" excludes="**/CVS,**/*.zip,**/*.jbx,**/*.jbf,**/*.bak" prefix="${ant.project.name}-${madkit.version}"/>
+		</zip>
+		<delete failonerror="false" file="../readme.txt"/>
+	</target>
+
+	<target name="docs-dist" depends="delete-zip,docs">
+		<concat destfile="../readme.txt" >This is ${ant.project.name} api docs version ${madkit.version} expand it in your madkit root directory</concat>
+		<zip destfile="../${ant.project.name}-${madkit.version}-docs.zip">
+			<zipfileset dir=".." includes="docs/**"/>
+			<zipfileset dir=".." includes="readme.txt"/>
+		</zip>
+		<delete failonerror="false" file="../readme.txt"/>
+	</target>
+	
+	<target name="complete-dist" depends="real-clean,make-jar,docs,clean">
+		<concat destfile="../readme.txt" >This is ${ant.project.name} complete version ${madkit.version} </concat>
+		<zip destfile="../${ant.project.name}-${madkit.version}-complete.zip">
+			<zipfileset dir=".." includes="**/*" excludes="**/CVS,**/*.zip,**/*.jbx,**/*.jbf,**/*.bak" prefix="${ant.project.name}-${madkit.version}"/>
+		</zip>
+		<delete failonerror="false" file="../readme.txt"/>
+	</target>
+	
+	<target name="all-dist" depends="real-clean">
+		<delete failonerror="false" file="${jars.dir}/${jar.name}"/>
+		<antcall target="bin-dist"/>
+		<antcall target="src-dist"/>
+		<antcall target="dev-dist"/>
+		<antcall target="doc-dist"/>
+		<antcall target="complete-dist"/>
+	</target>
+
+	<target name="docs" depends="delete-api">
+		  <javadoc 
+		           destdir="../docs/api"
+		           author="true"
+		           version="true"
+		           use="true"
+		           classpath="../${lib.dir}/*.jar"
+		           windowtitle="${ant.project.name}-${madkit.version} API">
+
+			<packageset dir="madkitkernel/src" defaultexcludes="yes"/>
+			<packageset dir="madkitapplet/src" defaultexcludes="yes"/>
+			<packageset dir="messages/src" defaultexcludes="yes"/>
+			<packageset dir="madkitutils/src" defaultexcludes="yes"/>
+			<packageset dir="SEdit/src" defaultexcludes="yes"/>
+			<packageset dir="system/src" defaultexcludes="yes"/>
+			<packageset dir="desktop2/src" defaultexcludes="yes"/>
+			<packageset dir="template/src" defaultexcludes="yes"/>
+			<packageset dir="simulation/src" defaultexcludes="yes"/>
+			<packageset dir="demos/src" defaultexcludes="yes"/>
+			<packageset dir="analysistools/src" defaultexcludes="yes"/>
+			<packageset dir="communicator/src" defaultexcludes="yes"/>
+			<packageset dir="netcomm/src" defaultexcludes="yes"/>
+			<!--	<packageset dir="dynamicbees/src" defaultexcludes="yes"/> -->
+			<packageset dir="marketorg/src" defaultexcludes="yes"/>
+			<packageset dir="pythonlib/src" defaultexcludes="yes"/>
+			<packageset dir="bshlib/src" defaultexcludes="yes"/>
+			<packageset dir="jesslib/src" defaultexcludes="yes"/>
+			<packageset dir="schemelib/src" defaultexcludes="yes"/>
+			<packageset dir="turtlekit/src" defaultexcludes="yes"/>
+			<packageset dir="turtlesimulation/src" defaultexcludes="yes"/>
+			<packageset dir="treetools/src" defaultexcludes="yes"/>
+			<packageset dir="share/src" defaultexcludes="yes"/>
+			<packageset dir="explorer/src" defaultexcludes="yes"/>
+			<packageset dir="jsynedit/src" defaultexcludes="yes"/>
+			<packageset dir="chat/src" defaultexcludes="yes"/>
+			<packageset dir="warbot/src" defaultexcludes="yes"/>
+			<!-- <packageset dir="fipa/src" defaultexcludes="yes"/> -->
+			<packageset dir="pluginmanager/src" defaultexcludes="yes"/>
+			<!-- <packageset dir="docbrowser/src" defaultexcludes="yes"/> -->
+			<packageset dir="warbot04/src" defaultexcludes="yes"/>
+			<!-- <packageset dir="mimosa/src" defaultexcludes="yes"/> -->
+			<packageset dir="mop/src" defaultexcludes="yes"/>
+
+		    <doctitle><![CDATA[<h1>${ant.project.name}-${madkit.version} API</h1>]]></doctitle>
+		    <bottom><![CDATA[<i>Copyright &#169; ${author} All Rights Reserved.</i>]]></bottom>
+		    <link href="http://www.jython.org/docs/javadoc/" />
+		    <link href="http://java.sun.com/j2se/1.4.2/docs/api/" />
+		    <link href="http://xml.apache.org/xerces-j/apiDocs/" />
+		    <link href="http://herzberg.ca.sandia.gov/jess/docs/52/api/index.html" />
+	</javadoc>
+	</target>
+	
+	<target name="install-dist">
+		<delete dir="${dist.dir.name}"/>
+		<mkdir dir="${dist.dir.name}"/>
+		<mkdir dir="${dist.dir.name}/installer"/>
+		<propertyfile file="${dist.dir.name}/installer/component.properties" >
+			<entry key="component.number" type="int" value="0"/>
+		</propertyfile>
+		<propertyfile file="${dist.dir.name}/installer/plugins.properties" >
+			<entry key="app.name" value="Madkit" />
+			<entry key="app.version" value="${madkit.version}" />
+			<entry key="app.readme" value="readme.html" />
+			<entry key="app.license.title" value="GNU General Public License" />
+			<entry key="app.license" value="gpl.html" />
+		</propertyfile>
+		
+		<antcall target="doIt">
+			<param name="whatToDo" value="plugin-dist"/>
+		</antcall>
+		
+		<!-- <ant antfile="build.xml" dir="${plugins.dir}/documentation" target="plugin-dist"/> -->
+		
+		<copy todir="${dist.dir.name}/installer/" includeEmptyDirs="false">
+			<fileset dir="${plugins.dir}/installer/build/installer" />
+		</copy>
+		<jar destfile="../madkitinstall.jar" 
+			basedir="${dist.dir.name}"
+			manifest="${dist.dir.name}/installer/MANIFEST.MF"
+		/>
+		
+	</target>
+
+	<target name="new-project">
+		<mkdir dir="newProject"/>
+		<mkdir dir="newProject/src"/>
+		<copy file="template/build.xml" todir="newProject"/>
+		<copy file="template/template.cfg" tofile="newProject/newProject.cfg"/>
+	</target>
+	
+	<target name="web-dist" depends="make-jar">
+		<echo >Starting Web Distribution build </echo>
+		<echo >******************************* </echo>
+		<echo/>
+		<echo/>
+		<property name="xmls" value="${dist.dir.name}/installer/web/xmls"/>
+		<mkdir dir="${xmls}" />
+		<delete file="${xmls}/plugins.xml"/>
+		<echo file="${xmls}/plugins.xml" append="true">&lt;?xml version="1.0"?>
+&lt;plugins>
+		</echo>
+
+		<antcall target="support-packages"/>
+		
+		<antcall target="doIt">
+			<param name="whatToDo" value="web-dist"/>
+		</antcall>
+
+		<antcall target="meta-packages"/>
+
+		<echo file="${xmls}/plugins.xml" append="true">
+&lt;/plugins>
+		</echo>
+
+		
+		<zip destfile="${dist.dir.name}/installer/web/plugins.zip">
+			<zipfileset dir="${xmls}" includes="*.xml"/>
+		</zip>
+	
+		<!--Finally create a pluginInstaller -->
+		<ant antfile="build.xml" dir="${plugins.dir}/pluginmanager" target="plugininstaller"/>
+		<antcall target="std-dist"></antcall>
+	</target>
+
+	<target name="support-packages">
+		<echo >Starting Support packages build </echo>
+		<echo >******************************* </echo>
+		<ant antfile="support-packages.xml" dir="${plugins.dir}/pluginmanager/meta" target="web-dist"/>
+	</target>
+
+	<target name="meta-packages" >
+		<echo >Starting Bundle package build </echo>
+		<echo >*************************** </echo>
+		<ant antfile="meta-packages.xml" dir="${plugins.dir}/pluginmanager/meta" target="web-dist"/>
+	</target>
+
+	<target name="std-dist" >
+		<echo >Starting Full Madkit package build </echo>
+		<echo >*************************** </echo>
+		<zip destfile="${dist.dir.name}/installer/madkit-${madkit.version}.zip">
+			<zipfileset dir="${dist.dir.name}/installer/web">
+				<include name="*.zip"/>
+				<exclude name="plugins.properties,component.properties,xmls/**"/>
+			</zipfileset>
+		</zip>
+
+	</target>
+
+</project>

@@ -1,0 +1,31 @@
+Buildfile: build.xml
+
+jar:
+
+compile:
+
+copy-images:
+
+copy-resources:
+
+jar:
+     [echo] ****** Creating jar : EnvironmentCreator **********
+[propertyfile] Updating property file: C:\madkit\plugins\EnvironmentCreator\build\EnvironmentCreator.properties
+     [copy] Copying 1 file to C:\madkit\plugins\EnvironmentCreator
+      [jar] Building jar: C:\madkit\lib\EnvironmentCreator.jar
+
+runners:
+
+runners-files:
+
+applet:
+   [delete] Deleting: C:\madkit\plugins\EnvironmentCreator\EnvironmentCreator.html
+    [unzip] Expanding: C:\madkit\lib\madkitapplet.jar into C:\madkit\plugins\EnvironmentCreator\build
+     [move] Moving 1 files to C:\madkit\plugins\EnvironmentCreator
+
+desktop-runners:
+
+runners-files:
+
+BUILD SUCCESSFUL
+Total time: 2 seconds

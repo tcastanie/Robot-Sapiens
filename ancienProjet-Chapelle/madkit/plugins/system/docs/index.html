@@ -1,0 +1,615 @@
+<html><head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>The system agents</title><meta name="generator" content="DocBook XSL Stylesheets V1.49"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="article">
+  <div class="titlepage">
+    <div>
+      <h1 class="title"><a name="IDA2D1RG"></a>The system agents</h1>
+    </div>
+    <div> 
+      <p class="author"><font size="+2"><b>MadKit team</b></font><tt> &lt;<a href="mailto:ferber@madkit.org">team@madkit.org</a>&gt;</tt></p>
+      <div class="affiliation"> 
+        <div class="address"></div>
+      </div>
+    </div>
+    <div></div>
+    <div>
+      <div class="abstract">
+        <p><b>Abstract</b></p>
+        <p>This file documents the <tt>system plugin which contains the whole 
+          set of the so-called 'system agents' of MadKit.</tt></p>
+        <p><tt>System agents</tt> are mainly used to explore, launch, visualize, trace 
+          agents</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="toc">
+    <p><b>Table of Contents</b></p>
+    <dl> 
+      <dt>1. <a href="#IDAZE1RG">Summary</a></dt>
+      <dt>2. <a href="#groupobserver">GroupObserver</a></dt>
+      <dt>3. <a href="#IDALAKYG">MessageTracer</a></dt>
+      <dt>4. <a href="#IDA2BKYG">OrganizationTracer</a></dt>
+      <dt>5. <a href="#IDAMDKYG">WebBrowser</a></dt>
+      <dt></dt>
+      <dt>6. <a href="#sequence">Sequence diagram agent</a></dt>
+      <dt>7. <a href="#notepad">Editor Agent</a></dt>
+    </dl>
+  </div>
+</div>
+<div class="article">
+  <div class="toc"></div>
+  <div class="sect1">
+    <div class="titlepage">
+      <div>
+        <h2 class="title" style="clear: both"><a name="IDAZE1RG"></a>1. Summary</h2>
+      </div>
+    </div>
+    <p> These two agent packs contains several agents providing monitoring services 
+      for the MadKit kernels and for the distributed mode. </p>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDA2E1RG"></a>1.1. The system monitoring 
+            agents</h3>
+        </div>
+      </div>
+      <p>The <b>system</b> plugin includes the following agents: 
+      <div class="itemizedlist"> 
+        <ul type="disc">
+          <li> 
+            <p><b>GroupLister. </b> A simple agent which just continuously lists 
+              known group on the platform. </p>
+          </li>
+          <li> 
+            <p><b>AgentLister. </b> This agents lists active, registered agents 
+              on the local kernel. </p>
+          </li>
+          <li> 
+            <p><b>MessageTracer. </b>This agent intercepts and displays any message 
+              transiting through the local kernel.</p>
+          </li>
+          <li> 
+            <p><b>OrganizationTracer. </b>This agent intercepts and displays any 
+              action made on the group and role tables in the local kernel.</p>
+          </li>
+          <li> 
+            <p><b>GroupObserver. </b> An agent which shows the complete organization 
+              (groups, roles and communities) of MadKit plus the messages transiting 
+              through the local kernel and the social actions that a local kernel 
+              is aware of). </p>
+          </li>
+          <li> 
+            <p><b>SequenceDiagramAgent. </b> An agent which graphically displays 
+              the messages within a group or a community.</p>
+          </li>
+          <li> 
+            <p><b>EditorAgent. </b>An agent that can be used as a note pad, and 
+              which sends <code>StringMessages</code> to other agents, with a 
+              powerful user interface </p>
+          </li>
+          <li> 
+            <p><b>WebBrowserAgent. </b>An agent that displays .html pages and 
+              which may be controlled by messages. </p>
+          </li>
+          <li> 
+            <p><b>MonitorAgent. </b>An agent which gives some information about 
+              the Java virtual machine. You may also asks directly for a garbage 
+              collection. </p>
+          </li>
+        </ul>
+      </div>
+      <p></p>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDAFG1RG"></a>1.2. The network agents</h3>
+        </div>
+      </div>
+      <p>The <tt>communicator.jar</tt> pack includes the <tt>communicator</tt> 
+        agent which extends the kernel by intercepting non-local messages and 
+        rerouting them to a distant kernel. It also helps the kernel to synchronize 
+        with remote organizations (groups, roles, communities). </p>
+    </div>
+  </div>
+  <div class="sect1">
+    <div class="titlepage">
+      <div>
+        <h2 class="title" style="clear: both"><a name="groupobserver"></a>2. GroupObserver</h2>
+      </div>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDASG1RG"></a>2.1. Synopsis</h3>
+        </div>
+      </div>
+      <p> The <tt>GroupObserver</tt> agent is the main tool to get information 
+        about the MadKit organization, about the transmitted messages and about 
+        social actions. Modifications of the display are automatically taken into 
+        account when an agent either creates a group/community, joins/leaves a 
+        group/community, requests/leaves a role in a group, or sends/broadcasts 
+        a message. </p>
+      <p>The GroupObserver agent is made of two panes: the top pane displays the 
+        organization in a tree-like structure, while the bottom pane shows the 
+        messages and actions that the current agent is aware of. The following 
+        figure shows a GroupObserver: 
+      <p><img src="images/groupobserver3.gif"></p>
+      <p></p>
+      <p> An organization is represented as a tree: communities are at the top 
+        level, then groups, then roles. Agents are at the bottom level. Right 
+        clicking on elements of the trees will bring a popup menu: for the moment, 
+        only groups have a popup menu, which allows for the tracing of messages 
+        of just one group, or of all the groups. By default, the message panel 
+        shows the messages of all groups. </p>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDA1G1RG"></a>2.2. Using the agent</h3>
+        </div>
+      </div>
+      <p> Click on the <tt>Messages</tt> tab to get a view of all messages that 
+        are sent by agents. If the "trace messages of only one group" option is 
+        set, then only the messages of the group are displayed. The following 
+        messages field are displayed: sender, receiver, message class, content, 
+        date. </p>
+      <p><span class="bold"><b>Note: </b></span> only messages of which this kernel 
+        is aware are displayed. A kernel is aware of all messages that are done 
+        locally and all messages of which either the sender or the receiver is 
+        located in this kernel. Thus a message concerning two agents located in 
+        remote kernels are not displayed with this tool. </p>
+      <p> Click on the <tt>Actions</tt> tab to get a view of all organizational 
+        actions that your local kernel is aware. The following actions attributes 
+        are displayed: agent (the source of the action), action (the type of the 
+        action), community (the community in which the action is performed), group 
+        (the group concerned by this action), role (the role concerned by this 
+        action if any), date (the time at which this action happened). </p>
+      <p><span class="bold"><b>Note: </b></span>organizational actions are automatically 
+        forwarded to all kernels that are connected. A local kernel is then aware 
+        of all organizational actions that happens in all communities to which 
+        this kernel through its <tt>SiteAgent</tt> is connected. If a kernel is 
+        not connected to a community, then the corresponding actions that takes 
+        place inside this community are not displayed. </p>
+      <div class="itemizedlist"> 
+        <ul type="disc">
+          <li> 
+            <p><b><b><img src="images/clear_messages24.gif"> Clear messages</b>. </b>Clear 
+              all messages from the message tab. </p>
+          </li>
+          <li> 
+            <p><b><b><img src="images/clear_actions24.gif"> Clear actions</b>. </b>Clear 
+              all actions from the actions tab. </p>
+          </li>
+          <li><img src="images/run.png" width="32" height="31"> <b>Show messages</b>: 
+            activate or deactivate the display of messages. By default, this option 
+            is deactivated in order to reduce the time and space taken.</li>
+          <li> 
+            <p><b><b><img src="images/refresh.gif"> Refresh</b>. </b>Actualize 
+              the organization tree, and get a "fresh" organization representation. 
+              Click on it if you suspect that the GroupObserver has not updated 
+              a modification of the organization. This should not be necessary, 
+              due to the wonderful quality of the code ;-) </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sect1">
+    <div class="titlepage">
+      <div>
+        <h2 class="title" style="clear: both"><a name="IDALAKYG"></a>3. MessageTracer</h2>
+      </div>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDANAKYG"></a>3.1. Synopsis</h3>
+        </div>
+      </div>
+      <p>
+      <p><img src="images/messagetracer.gif"></p>
+      This agent intercepts the <tt>sendMessage()</tt> calls in the kernel and 
+      displays them in a table. 
+      <p></p>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDAXAKYG"></a>3.2. Using the agent</h3>
+        </div>
+      </div>
+      <p> Displayed information is: 
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The sender identification. If it is a local agent, the "agent name" 
+              will be used, and the <tt>AgentAddress</tt> otherwise</p>
+          </li>
+          <li>
+            <p>The receiver identification. If the message was sent through a 
+              <tt>sendMessage</tt> call, the tracer will use the agent name or 
+              address as above. If the message was sent through a <tt>broadcastMessage()</tt>call, 
+              it will display the parameters as <tt>&lt;group,role&gt;</tt></p>
+          </li>
+          <li>
+            <p>The message class name</p>
+          </li>
+          <li>
+            <p>The message content. This information is only available if the 
+              developer defined a <tt>toString()</tt> method in its message class</p>
+          </li>
+          <li>
+            <p>The time, represented as the number of milliseconds since January 
+              1, 1970, 00:00:00 GMT. </p>
+          </li>
+        </ul>
+      </div>
+      <p></p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <h3 class="title">Note</h3>
+        <p>The MessageTracer agent has been replaced by the <a href="#groupobserver" title="2. GroupObserver">GroupObserver</a>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sect1">
+    <div class="titlepage">
+      <div>
+        <h2 class="title" style="clear: both"><a name="IDA2BKYG"></a>4. OrganizationTracer</h2>
+      </div>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDA4BKYG"></a>4.1. Synopsis</h3>
+        </div>
+      </div>
+      <p><img src="images/orgtracer.gif"></p>
+      <p> This agent requests hooks on every organization-related calls. This 
+        covers: <tt>joinGroup()</tt>, <tt>foundGroup()</tt>, <tt>requestRole()</tt>, 
+        <tt>leaveRole()</tt>, <tt>leaveGroup()</tt></p>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDAWCKYG"></a>4.2. Using the agent</h3>
+        </div>
+      </div>
+      <p> Displayed information is: 
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The sender identification. If it is a local agent, the "agent name" 
+              will be used, and the <tt>AgentAddress</tt> otherwise</p>
+          </li>
+          <li>
+            <p>The triggered hook</p>
+          </li>
+          <li>
+            <p>The group parameter</p>
+          </li>
+          <li>
+            <p>The role parameter, if applicable</p>
+          </li>
+          <li>
+            <p>The time, represented as the number of milliseconds since January 
+              1, 1970, 00:00:00 GMT. </p>
+          </li>
+        </ul>
+      </div>
+      <p></p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <h3 class="title">Note</h3>
+        <p>The OrganizationTracer agent has been replaced by the <a href="#groupobserver" title="2. GroupObserver">GroupObserver</a>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sect1">
+    <div class="titlepage">
+      <div>
+        <h2 class="title" style="clear: both"><a name="IDAMDKYG"></a>5. WebBrowser</h2>
+      </div>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDAODKYG"></a>5.1. Synopsis</h3>
+        </div>
+      </div>
+      <p> The <tt>WebBrowser</tt> agent is a simple agent which displays .html 
+        pages. Apart from being a simple browser, this agent may be controlled 
+        by messages to display the page of a specific URL. The main purpose of 
+        this agent is to display the documentation of MadKit. 
+      <p><img src="images/webbrowser.gif"></p>
+      <p></p>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDAXDKYG"></a>5.2. Using the agent</h3>
+        </div>
+      </div>
+      <p> Use this agent as you would do with any we browser. </p>
+      <p><span class="bold"><b>Note:</b></span> this browser is VERY simple. You 
+        have to type the whole URL. Some pages may not be correctly displayed. 
+        because, this agent use the JTextEditor of Sun's class libraries which 
+        does not implement the whole .html standard. </p>
+      <p>You may ask this agent to display a specific .html page by sending it 
+        a well formatted URL with a <tt>StringMessage</tt>. </p>
+      <p>For instance if there is a browser agent with role <tt>browser</tt> in 
+        group <tt>myGroup</tt>, then the following code: 
+      <table border="1" bgcolor="#E0E0E0">
+        <tr>
+          <td>
+            <pre class="programlisting">
+AgentAddress ag = getAgentWithRole("myGroup", "browser");
+sendMessage(ag, new StringMessage("http://www.madkit.org"));
+</pre>
+          </td>
+        </tr>
+      </table>
+      <p>will display the page of URL <tt>www.madkit.org</tt> in the browser agent. 
+      </p>
+      <div class="titlepage">
+        <div>
+          <h2 class="title" style="clear: both"><a name="sequence"></a>6. Sequence 
+            diagram agent</h2>
+        </div>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDANAKYG"></a>6.1. Synopsis</h3>
+            <p class="title">The sequence diagram agent displays graphically the 
+              messages sent by agents within a group or a community.</p>
+          </div>
+        </div>
+        <p> 
+        <p><img src="images/sequence1.png" width="424" height="406"></p>
+        This agent intercepts the <tt>sendMessage()</tt> calls in the kernel and 
+        displays them in a table. 
+        <p></p>
+      </div>
+      <div class="sect2"> 
+        <div class="titlepage"> 
+          <div> 
+            <h3 class="title"><a name="IDAXAKYG"></a>6.2. Using the agent</h3>
+          </div>
+        </div>
+        <p>This agent is fired through the <b>GroupObserver</b> agent. In a GroupObserver 
+          agent, right click on a community or on a group icon, and select the 
+          '<b>sequence diagram</b>' menu item. 
+        <p><img src="images/sequence2.png" width="356" height="381"> 
+        <p><b>Note</b>: we have noticed a little bug of the displayed information 
+          when agents are not on the same kernel and are connected through NetCom 
+          or the Communicator. This will be fixed soon... 
+      </div>
+      <p></p>
+    </div>
+  </div>
+  <div class="sect1">
+    <div class="titlepage">
+      <div></div>
+    </div>
+    <div class="sect2"></div>
+  </div>
+  <div class="sect1">
+    <div class="titlepage">
+      <div>
+        <h2 class="title" style="clear: both"><a name="notepad"></a>7. Editor 
+          Agent</h2>
+      </div>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDAMIKYG"></a>7.1. Synopsis</h3>
+        </div>
+      </div>
+      <p>The <tt>Editor </tt>agent, also called the <tt>NotePad Agent </tt> is a 
+        simple editor application which can send the content of its buffer to 
+        other agents using <code>StringMessage</code> messages.</p>
+      <p>NotePad can be used for a variety of purposes: as a companion editor 
+        for language agents, as a simple "chat" agent to communicate with others, 
+        etc...</p>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDAUIKYG"></a>7.2. Description</h3>
+        </div>
+      </div>
+      <p><img src="images/editor.gif"></p>
+      <p>The NotepadAgent GUI contains two editing areas. The top one is used 
+        to edit text. The second one is used to display the texts sent or received 
+        via messages. An editor can join a group and plays a role interactively. 
+        It can also select a role within a group as the target, to broadcast messages 
+        to all agents that play that role. When the user push the button or select 
+        the menu item 'send selection' (or send buffer) the content of the selected 
+        text of the top editing area (or the whole text) is sent to all the connected 
+        agents.</p>
+      <p><span class="bold"><b>Note: </b></span>A NotePad agent does not receive 
+        its own messages even if it is a member of a targetted group/role. </p>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDA4IKYG"></a>7.3. Using the agents</h3>
+        </div>
+      </div>
+      <div class="sect3">
+        <div class="titlepage">
+          <div>
+            <h4 class="title"><a name="IDAAJKYG"></a>7.3.1. Commands</h4>
+          </div>
+        </div>
+        <p>Most commands can be activated through the menu or the toolbar interface<b>File 
+          MMenu</b></p>
+        <div class="sect4">
+          <div class="titlepage">
+            <div>
+              <h5 class="title"><a name="IDAGJKYG"></a>7.3.1.1. File Menu</h5>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul type="disc">
+              <li>
+                <p><b>Load. </b>Open a file in the top editing area. </p>
+              </li>
+              <li>
+                <p><b>Save. </b>Save the content of the top editing area into 
+                  a text file. If there is no file selected, this command opens 
+                  a dialog box. </p>
+              </li>
+              <li>
+                <p><b>Save as. </b>Opens a dialog box to save the content of the 
+                  top editing area into a text file.<b>Save</b></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect4">
+          <div class="titlepage">
+            <div>
+              <h5 class="title"><a name="IDAWJKYG"></a>7.3.1.2. File Menu</h5>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul type="disc">
+              <li>
+                <p><b> </b>Cut the selected text and copy it to the clipboard. 
+                </p>
+              </li>
+              <li>
+                <p><b>Copy. </b>Copy the selected text to the clipboard. </p>
+              </li>
+              <li>
+                <p><b>Paste. </b>Paste the content of the clipboard. </p>
+              </li>
+              <li>
+                <p><b>Delete. </b>Delete the selected text. </p>
+              </li>
+              <li>
+                <p><b>Clear output. </b>Delete the content of the bottom editing 
+                  area. </p>
+              </li>
+            </ul>
+          </div>
+          <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>All cut, copy, and paste operations, when activated from the menu 
+              or the toolbar, are performed on the top editing area. But the keyboard 
+              shortcuts (ctrl-x, ctrl-c and ctrl-v) works on both editing areas. 
+            </p>
+          </div>
+        </div>
+        <div class="sect4">
+          <div class="titlepage">
+            <div>
+              <h5 class="title"><a name="IDAPKKYG"></a>7.3.1.3. Action menu</h5>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul type="disc">
+              <li>
+                <p><b><b><img src="images/joingroup.gif"> Join Group</b>. </b> 
+                  Opens a dialog box where the user can enter a name of a group 
+                  and a role. You may either select an already created group or 
+                  role, or type a new group name to create a group. 
+                <p><img src="images/joingroup_dialog.gif"></p>
+                If accepted (for the moment, we assume that it is always accepted) 
+                the agent join the group and plays the role. If the group or the 
+                role within the group does not exist, the group and role are created. 
+                This can be used to interactively create a group. 
+                <p></p>
+              </li>
+              <li>
+                <p><b><b><img src="images/leaverole.gif"> Leave Role</b>. </b> 
+                  Opens a dialog box where the user can leave a role the editor 
+                  agent previously handled. </p>
+              </li>
+              <li>
+                <p><b><b><img src="images/settarget.gif"> Set Target</b>. </b>Opens 
+                  a dialog box where the user selects the group and roles that 
+                  will receive its messages. Only the groups already joined by 
+                  the AgentEditor appear in the groups list. 
+                <p><img src="images/targetdialog.gif"></p>
+                <p></p>
+              </li>
+              <li>
+                <p><b><b><img src="images/sendsel.gif">Send selection</b>. </b>Sends 
+                  the selected text to the connected agents.</p>
+              </li>
+              <li>
+                <p><b><b><img src="images/sendbuf.gif">Send buffer</b>. </b>Sends 
+                  the whole text of the top editing area to the target agents</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect3">
+        <div class="titlepage">
+          <div>
+            <h4 class="title"><a name="IDA5LKYG"></a>7.3.2. Bottom of window</h4>
+          </div>
+        </div>
+        <p><b>Target group and Target role. </b>Displays the group and roles whose 
+          members will receive the messages. Mention 'none' means that there is 
+          no target. </p>
+      </div>
+    </div>
+    <div class="sect2">
+      <div class="titlepage">
+        <div>
+          <h3 class="title"><a name="IDAEMKYG"></a>7.4. Some example uses</h3>
+        </div>
+      </div>
+      <div class="sect3">
+        <div class="titlepage">
+          <div>
+            <h4 class="title"><a name="IDAGMKYG"></a>7.4.1. SimpleChat</h4>
+          </div>
+        </div>
+        <p> To make a chat between several distributed users is quite easy with 
+          EditorAgent. Each user launches its own EditorAgent and joins a predefined 
+          group (e.g. "ChatGroup") with a role corresponding to a discussion topic. 
+          Then select as target the joined group and role. Then, all users listening 
+          to the same topic (i.e. playing the same role) will receive the messages 
+          of all the others. </p>
+        <p> The following picture shows two agents engaged into a chat. They are 
+          members of the group 'chat' and plays the role 'boring_topic'. This 
+          group and this role are set as targets for the messages. 
+        <p><img src="images/chat.gif"></p>
+        <p></p>
+      </div>
+      <div class="sect3">
+        <div class="titlepage">
+          <div>
+            <h4 class="title"><a name="IDAMMKYG"></a>7.4.2. Evaluating expressions 
+              using language agents</h4>
+          </div>
+        </div>
+        <p> It is possible to use EditorAgent as a front end editor for language 
+          oriented agents, i.e. agents that evaluate expressions and return results. 
+        </p>
+        <p> For instance, the following picture shows a connection between and 
+          EditorAgent and a MiniSchemeEval agent (which can be found in the <tt>scheme</tt> 
+          directory). The latter is a simple scheme evaluator which receives StringMessage 
+          and evaluates its content. 
+        <p><img src="images/editor_schemeeval.gif"></p>
+        <p></p>
+        <p> EditorAgent has just to join the group "scheme" with the role "eval", 
+          where the MiniSchemeEval agent is already present. Then, the expressions 
+          in the top editing panel are evaluated by the miniEval agent. Of course, 
+          the two agents can physically resides in two different sites. </p>
+        <div class="titlepage">
+          <div></div>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+</body></html>

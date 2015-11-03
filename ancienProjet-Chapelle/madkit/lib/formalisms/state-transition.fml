@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="state-transition">
+  <formalism-info>
+    <author>Jacques Ferber</author>
+    <author>Ol. Gutknecht</author>
+  </formalism-info>
+  <node-types>
+    <node-desc name="state" class="SEdit.Formalisms.StateTransition.SimpleState">
+    </node-desc>
+    <node-desc name="transition" class="SEdit.Formalisms.StateTransition.SimpleTransition">
+      <graphic-element class="SEdit.Graphics.GRectangle">
+	<property name="width">10</property>
+	<property name="height">40</property>
+      </graphic-element>
+    </node-desc>
+  </node-types>
+  <arrow-types>
+    <arrow-desc name="link" class="SEdit.Formalisms.StateTransition.SimpleStateTransitionLink">
+    </arrow-desc>
+  </arrow-types>
+</formalism>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formalism class="SEdit.Formalisms.Mobile.MobileStructure" name="mobile">
+  <formalism-info>
+    <author>J.Ferber</author>
+  </formalism-info>
+  <node-types>
+    <node-desc class="SEdit.Formalisms.Mobile.MobileNode" name="mobilenode">
+	<icon url="images/agent3.gif"/>
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/agent1.gif</property>
+		<property name="width">40</property>
+		<property name="height">44</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc class="SEdit.Formalisms.Mobile.FixedMobileNode" name="Fixed">
+	<icon url="images/world/wall.gif"/>
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/world/wall.gif</property>
+		<property name="width">32</property>
+		<property name="height">32</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+  </node-types>
+  <arrow-types>
+    <arrow-desc name="Link" class="SEdit.Formalisms.Mobile.MobileLink">
+      <icon url="images/arrowwithsharpedge.gif"/>
+      <graphic-element>
+		<property name="lineStyle">1</property>
+		<property name="endingForm">0</property>
+      </graphic-element>
+    </arrow-desc>
+  </arrow-types>
+  <action description="Start">
+    <java-method name="start"/>
+    <icon url="images/run.gif"/>
+  </action>
+  <action description="Stop">
+    <java-method name="stop"/>
+    <icon url="images/stop.gif"/>
+  </action>
+  <action description="Shake">
+    <java-method name="shake"/>
+  </action>
+  <action description="Scramble">
+    <java-method name="scramble"/>
+    <icon url="images/world/dynamite.gif"/>
+  </action>
+</formalism>

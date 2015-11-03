@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="Warbot2" description="Warbot2"
+		class="warbot.kernel.WarbotStructure">
+  <formalism-info>
+    <author>Fabien Michel</author>
+	<author>Jacques Ferber </author>
+	<date>16/01/2002</date>
+  </formalism-info>
+  <node-types>
+	<node-desc name="greenMissileLauncher" class="warbot.kernel.RocketLauncher">
+      <icon url="images/world/greenRobot1.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">green</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+	  <property name="brainClass">warbot.demo.RastaRocket</property> -->
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/greenRobot1.gif</property>
+		<property name="labelLocation">4</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+	<node-desc name="greenDetector" class="warbot.kernel.Explorer">
+      <icon url="images/world/greenRobotAntenna.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">green</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.demo.Ant</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/greenRobotAntenna.gif</property>
+		<property name="labelLocation">4</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+	<node-desc name="redMissileLauncher" class="warbot.kernel.RocketLauncher">
+      <icon url="images/world/redRobot1.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">red</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+	  <property name="brainClass">warbot.demo.HomeKiller</property> -->
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/redRobot1.gif</property>
+		<property name="labelLocation">4</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+	<node-desc name="redDetector" class="warbot.kernel.Explorer">
+      <icon url="images/world/redRobotAntenna.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">red</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.kernel.PythonBrain</property>
+	  <property name="behaviorFileName">plugins/warbot/scripts/explore1.py</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/redRobotAntenna.gif</property>
+		<property name="labelLocation">4</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+
+	<!-- <node-desc name="redJess" class="warbot.kernel.Explorer">
+      <icon url="images/world/girlStupid.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">red</property>
+      <property name="detectingrange">150</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.kernel.JessBrain</property>
+	  <property name="behaviorFileName">scripts/warbot/testjesswar.clp</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/girlStupid.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc> -->
+
+	<node-desc name="greenBase" class="warbot.kernel.Home">
+      <icon url="images/world/greenHome.gif"/>
+	  <property name="team">green</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/greenHome.gif</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+
+    <node-desc name="redBase" class="warbot.kernel.Home">
+      <icon url="images/world/redHome.gif"/>
+	  <property name="team">red</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+	  <property name="brainClass">warbot.kernel.PythonBrain</property>
+	  <property name="behaviorFileName">scripts/warbot/home_defender1.py</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/redHome.gif</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+
+	<node-desc name="Food" class="warbot.kernel.Hamburger">
+      <icon url="images/world/hamburger.gif"/>
+      <property name="radius">10</property>
+	  <property name="energy">200</property>
+      <graphic-element class="warbot.kernel.GEntity">
+		<property name="imageaddress">images/world/hamburger.gif</property>
+      </graphic-element>
+    </node-desc>	
+	<node-desc name="Wall" class="warbot.kernel.Wall">
+      <icon url="images/world/wall.gif"/>
+      <property name="radius">20</property>
+      <graphic-element class="warbot.kernel.GEntity">
+		<property name="imageaddress">images/world/wall.gif</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+	
+	<node-desc name="Rocket" class="warbot.kernel.Rocket">
+      <icon url="images/world/dynamite.gif"/>
+      <property name="radius">1</property>
+	  <property name="energy">100</property>
+      <graphic-element class="SEdit.Graphics.GOval">
+		<property name="width">2</property>
+		<property name="height">2</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+
+  </node-types>
+
+  <property name="worldWidth">1200</property>
+  <property name="worldHeight">800</property>
+  <action description="Start">
+    <icon url="images/run.gif"/>
+    <java-method name="start"/>
+  </action>
+  <action description="Stop">
+    <icon url="images/stop.gif"/>
+    <java-method name="stop"/>
+  </action>
+  <action description="Step">
+    <icon url="images/step.gif"/>
+    <java-method name="step"/>
+  </action>
+  <action description="detect">
+    <java-method name="showDetect"/>
+  </action>
+  <action description="userMessage">
+    <java-method name="showUserMessage"/>
+  </action>
+  <action description="showMessages">
+    <java-method name="showMessages"/>
+  </action>
+  <action description="map">
+    <java-method name="mapViewer"/>
+  </action>
+  <!--<action description="Set delay">
+    <icon url="images/clock.gif"/>
+    <java-method name="modifyDelay"/>
+  </action> -->
+
+</formalism>

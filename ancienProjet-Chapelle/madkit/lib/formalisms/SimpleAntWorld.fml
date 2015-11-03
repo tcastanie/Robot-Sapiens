@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="SimpleAntWorld" description="SimpleAntWorld"
+		class="SEdit.Formalisms.World.WorldStructure">
+  <formalism-info>
+    <author>Jacques Ferber</author>
+  </formalism-info>
+  <node-types>
+    <node-desc name="SimpleAnt" class="SEdit.Formalisms.World.Ants.SimpleAnt">
+      <icon url="images/world/boyStupid.gif"/>
+	  <property name="team">green</property>
+      <graphic-element class="SEdit.Formalisms.World.Ants.GAnt">
+		<property name="imageaddress">images/world/boyStupid.gif</property>
+		<property name="width">16</property>
+		<property name="height">16</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="MarkingAnt" class="SEdit.Formalisms.World.Ants.MarkingAnt">
+      <icon url="images/world/robot1.gif"/>
+	  <property name="team">green</property>
+      <graphic-element class="SEdit.Formalisms.World.Ants.GAnt">
+		<property name="imageaddress">images/world/robot1.gif</property>
+		<property name="width">16</property>
+		<property name="height">16</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+	<node-desc name="Home" class="SEdit.Formalisms.World.Ants.Home">
+      <icon url="images/world/home.gif"/>
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/world/home.gif</property>
+		<property name="width">32</property>
+		<property name="height">32</property>
+		<property name="displaylabel">true</property>
+		<property name="labelLocation">3</property>
+      </graphic-element>
+    </node-desc>
+	<node-desc name="Food" class="SEdit.Formalisms.World.Food">
+      <icon url="images/world/hamburger.gif"/>
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/world/hamburger.gif</property>
+		<property name="width">16</property>
+		<property name="height">16</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+	<node-desc name="Mark" class="SEdit.Formalisms.World.Ants.Mark">
+      <icon url="images/world/wall.gif"/>
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/world/wall.gif</property>
+		<property name="width">8</property>
+		<property name="height">8</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+  </node-types>
+  <action description="Start">
+    <icon url="images/run.gif"/>
+    <java-method name="start"/>
+  </action>
+  <action description="Stop">
+    <icon url="images/stop.gif"/>
+    <java-method name="stop"/>
+  </action>
+  <action description="Step">
+    <icon url="images/step.gif"/>
+    <java-method name="step"/>
+  </action>
+  <action description="Set delay">
+    <icon url="images/clock.gif"/>
+    <java-method name="modifyDelay"/>
+  </action>
+</formalism>

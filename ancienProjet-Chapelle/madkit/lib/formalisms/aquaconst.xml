@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE note SYSTEM "aquaconst.dtd">
+<ListeContraintes>
+	<Contrainte>
+		<type>hydro</type>
+		<from>source</from>
+		<to>riviere</to>
+	</Contrainte>
+        <Contrainte>
+		<type>hydro</type>
+		<from>riviere</from>
+		<to>riviere</to>
+		<to>exutoire</to>
+                <to>pompe</to>
+	</Contrainte>
+        <Contrainte>
+                <type>hydro</type>
+                <from>pompe</from>
+                <to>riviere</to>
+                <to>parcelle</to>
+        </Contrainte>
+        <Contrainte>
+                <type>hydro</type>
+                <from>parcelle</from>
+                <to>riviere</to>
+                <to>parcelle</to>
+        </Contrainte>
+	<Contrainte>
+		<type>commande</type>
+		<from>agriculteur</from>
+		<to>pompe</to>
+	</Contrainte>
+	<Contrainte>
+	<type>possession</type>
+	<from>parcelle</from>
+	<to>agriculteur</to>
+	</Contrainte>
+</ListeContraintes>

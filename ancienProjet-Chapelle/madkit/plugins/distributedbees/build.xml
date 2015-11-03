@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!-- 
+ MadKit template build.xml
+ Author: F. Michel
+ Version: 2.0
+
+This is generic build.xml file for building MadKit plugins using JAKARTA-ANT http://ant.apache.org/index.html 
+ 
+available targets are :
+	- jar (default): make a clean compilation, and creates the jar file into the jars directory. Also create runner file if cfg file available
+	- compile : only compile sources.
+	- clean : remove built directories and files. Also remove docs/api directory.
+	- src-dist : create the source distribution of the plugin.
+	- bin-dist : create the bin distribution of the plugin.
+	- doc-dist : create the doc distribution of the plugin.
+	- standalone-dist : create a zip file that can be expand run anywhere as an autonomous application. (a cfg file is required)
+	- all : do it all at once.
+ -->
+
+<!-- 
+     EDIT THIS PART ACCORDING TO YOUR OWN PROJECT
+-->
+
+<project name="distributedbees" default="jar" basedir="."> <!-- default is "jar" but can be changed to "compile" to only compile for instance -->
+
+	<property file="../madkit.properties"/> <!-- using madkit project's default properties. -->
+
+	<!--
+	     Specify the plugin jar files and third party resources that are required for compiling (madkitkernel.jar at least) (must be located in the lib directory) 
+	-->
+	<fileset id="project.class.path" dir="${jars.dir}">
+		<include name="madkitkernel.jar"/>
+		<include name="simulation.jar"/>
+		<include name="communicator.jar"/>
+		<include name="messages.jar"/>
+		<!-- <include name="other1.jar"/> -->
+		<!-- <include name="other2.jar"/> -->
+	</fileset>
+
+ 	<!--
+	     Specify the plugin basic informations:
+	     . source directory
+	     . version of the plugin
+	     . author
+	     . other plugins dependencies: the required jars separated by "," whithout space
+	     . description: a short description of what the plugin does
+	-->
+	<property name="src.dir" value="src"/>
+	<property name="version"  value="1.0"/>
+	<property name="author"  value="Pierre Bommel, Fabien Michel, Olivier Gutknecht"/> <!-- the author's name -->
+	<property name="depend"  value="madkitkernel, simulation"/> <!-- value="madkitkernel, messages, other1, other2" for instance (you will need madkitkernel at least) -->
+	<property name="requires" value="" /> <!-- value="boo.jar", "images.jar", all the external jars that you would need -->
+	<property name="description"  value="The template plugin is designed to help developpers to build madkit plugin easily and quickly by providing a minimal example of how to build a madkit plugin."/>
+	<property name="agents"  value="madkit.distributedbees.BeeLauncher"/>
+	<property name="project.category" value="demos"/>
+	<!--
+	     Options:
+	     . Specify the directory where your images (jpg and gifs) are located inside the src directory (they will be added in the jar file)
+	     . Specify the name of the java packages to build api docs properly.
+	     . Give a title to the generated html pages.
+	-->
+	<property name="images.dir" value="images"/> <!-- means that images are located in "${src}/images" or its subdirectories-->
+	<property name="project.label"  value="An example of distributed simulation"/>
+
+<!-- 
+-->
+
+
+<!-- 
+     GENERIC PART (edit to achieve more functionalities or delete unused targets)
+-->
+
+	<target name="jar" description="Jars the plugin into the jars.dir directory and create launch file if a cfg file available">
+		<ant antfile="${generic.file}" dir="." target="jar" inheritrefs="true"/>
+	</target>
+
+	<target name="docs">
+		<ant antfile="${generic.file}" dir="." target="docs" inheritrefs="true"/>
+	</target>
+
+	<target name="clean">
+		<ant antfile="${generic.file}" dir="." target="clean" inheritrefs="true"/>
+	</target>
+
+	<target name="real-clean">
+		<ant antfile="${generic.file}" dir="." target="real-clean" inheritrefs="true"/>
+	</target>
+
+	<target name="all">
+		<ant antfile="${generic.file}" dir="." target="all" inheritrefs="true"/>
+	</target>
+
+	<target name="src-dist">
+		<ant antfile="${generic.file}" dir="." target="src-dist" inheritrefs="true"/>
+	</target>
+
+	<target name="bin-dist">
+		<ant antfile="${generic.file}" dir="." target="bin-dist" inheritrefs="true"/>
+	</target>
+
+	<target name="doc-dist">
+		<ant antfile="${generic.file}" dir="." target="doc-dist" inheritrefs="true"/>
+	</target>
+
+	<target name="standalone-dist">
+		<ant antfile="${generic.file}" dir="." target="standalone-dist" inheritrefs="true"/>
+	</target>
+	
+	<target name="plugin-dist">
+		<ant antfile="${generic.file}" dir="." target="plugin-dist" inheritrefs="true"/>
+	</target>
+	<target name="web-dist">
+		<ant antfile="${generic.file}" dir="." target="web-dist" inheritrefs="true"/>
+	</target>
+
+</project>

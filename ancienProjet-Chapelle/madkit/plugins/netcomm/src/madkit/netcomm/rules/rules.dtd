@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!ELEMENT type (defaultrule,rules+)>
+<!ATTLIST rules
+			version ID #REQUIRED
+>
+
+<!ELEMENT defaultrule EMPTY>
+<!ATTLIST defaultrule
+			action  (accept|refuse|reject) #REQUIRED
+			arg CDATA #REQUIRED
+>
+
+
+<!ELEMENT rule EMPTY>
+<!ATTLIST rule
+			match CDATA #REQUIRED
+			action  (accept|refuse|reject) #REQUIRED
+			arg CDATA #REQUIRED
+>
+

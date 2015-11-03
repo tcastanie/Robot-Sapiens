@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>Installing Madkit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="madkit.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<div class="titlepage">
+  <div>
+    <h1 class="title" style="clear: both">Installing MadKit</h1>
+  </div>
+</div>
+<div class="titlepage">
+    <div>
+      <h2>Required software</h2>
+    </div>
+  </div>
+  <p>MadKit itself is written in 100% pure Java, so you will need a properly installed 
+    Java Virtual Machine. We have tested MadKit with the java virtual machine 
+    provided by <a href="http://java.sun.com">Sun</a></p>
+  <p>MadKit 4 requires a Java 2 1.4 JVM (or above) to work properly. Some parts 
+    may work with 1.3, but we now use JDK 1.4 to test MadKit.</p>
+  <p>MadKit has been tested on the following platforms: Windows (98/2000/XP/NT), 
+    Linux (x86/PC) and MacOS X. (beware: the integration is not complete on the 
+    Mac. For instance cut/copy/paste still uses the ctrl-x/c/V keys and not the 
+    cmd-x/c/v keys as other softwares on the Mac, this will be done in future 
+    releases).</p>
+  <p>We will suppose that you have installed a Java 2 development environment. 
+    You can verify your Java version in a shell with the <tt>-version</tt> command-line 
+    option: </p>
+  <table border="1" bgcolor="#E0E0E0">
+    <tr>
+      <td>
+        <pre class="screen"><b><tt>java -version</tt></b>
+java version "1.4.0"
+Java(TM) 2 Runtime Environment, Standard Edition (build 1.4.0-b92)
+Java HotSpot(TM) Client VM (build 1.4.0-b92, mixed mode)
+</pre>
+      </td>
+    </tr>
+  </table>
+
+    
+<p>If you plan to develop agents, for the moment you will certainly need to install 
+  the Apache Ant Java-based build tool. You will need the version 1.6.0 of Ant 
+  (or above) to develop java agents with MadKit.</p>
+<p>Download a MadKit archive and start the install process by typing the following 
+  command at a terminal (or shell) prompt:</p>
+<table border="1" bgcolor="#E0E0E0" width="542">
+  <tr>
+    <td>
+      <pre class="synopsis"><tt>$</tt> java -jar madkitinstall.jar</pre>
+    </td>
+  </tr>
+</table>
+<p>and follow the on screen instructions.</p>
+<p>At the last screen, you may choose the plugins that you want to have installed 
+  in MadKit:</p>
+<p><img src="images/install_plugins.png"></p>
+<p> You do not need to install all the plugins of MadKit. You may install any 
+  number of plugins that you may need for your application. If you click on only 
+  one plugin, all the files needed to make this plugin work will be automatically 
+  installed, so you don't need to know the dependencies between plugins.</p>
+
+<div class="sect2">
+  <div class="titlepage">
+    <div>
+      <h2 class="title"> Installing the Jess archive</h2>
+    </div>
+  </div>
+  <p> To work properly, agents of the <tt>JessAgent</tt> class need a specific 
+    library, called <tt>jess.jar</tt>. Due to the special License of Jess, it 
+    is not possible for MadKit to distribute this library. You must get the jar 
+    archive directly from <a href="http://herzberg.ca.sandia.gov/jess" target="_top">Sandia</a> 
+    the owner of Jess.</p>
+  <p>First, go to the <a href="http://herzberg.ca.sandia.gov/jess/download.htm" target="_top">Sandia 
+    download area</a>, download the jar corresponding to Jess 6.0 or above, rename 
+    it to <code>jess.jar</code> and put it in the <tt>libs/support</tt> directory, 
+    overwriting the old <tt>jess.jar</tt>. Then start again MadKit. The new Jess 
+    archive will be taken into account directly.</p>
+  <p>You may still use MadKit without Jess. Everything, but instances of <tt>JessAgent</tt> 
+    and the <tt>JessEditAgent</tt> work fine wihout having the Jess archive installed. 
+  </p>
+  <p>We are very sorry for this inconvenience, Jess is a good product, but its 
+    license is terrible. We are looking for a good free replacement of Jess. Any 
+    information about such a product would be appreciated.</p>
+  <p><span class="bold"><b>Note:</b></span> if you have any trouble installing 
+    Jess on MadKit, contact <tt>&lt;<a href="mailto:ferber@madkit.org">ferber@madkit.org</a>&gt;</tt></p>
+</div>
+<div class="sect2">
+  <div class="titlepage">
+    <div>
+      <h3 class="title">Starting MadKit</h3>
+    </div>
+  </div>
+  <p> Due to its modular and micro-kernel based architecture, it is possible to 
+    start MadKit in several ways: 
+  <div class="itemizedlist">
+    <ul type="disc">
+      <li> 
+        <p>with the standard agent launching and development environment, <a href="#desktop" title="3. The MadKit desktop  environment">the 
+          Madkit desktop</a>,</p>
+      </li>
+      <li> 
+        <p>as an applet embedded into HTML pages using the <a href="#applet" title="5.2. Applet kernel        ">MadKit 
+          applet kernel</a></p>
+      </li>
+      <li> 
+        <p>without any environment using the <a href="#console" title="5.1. The console booter">console 
+          booter</a>.</p>
+      </li>
+      <li> 
+        <p>starting a specific plugin at the console. {{link}}</p>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

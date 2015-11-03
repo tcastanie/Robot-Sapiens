@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="logicalgates_seg" description="Logical Gates (segmented)">
+  <formalism-info>
+    <author>Jaco</author>
+  </formalism-info>
+  <connector-types>
+    <connector-desc name="inlet" mode="in" class="SEdit.Formalisms.Logical.LogicalInConnect">
+      <graphic-element class="SEdit.Graphics.GOval">
+	<property name="width">6</property>
+	<property name="height">6</property>
+	<property name="displayLabel">false</property>	
+      </graphic-element>
+    </connector-desc>
+    <connector-desc name="outlet" mode="out" class="SEdit.Formalisms.Logical.LogicalOutConnect"> 
+      <graphic-element class="SEdit.Graphics.GOval">
+	<property name="width">6</property>
+	<property name="height">6</property>
+	<property name="displayLabel">false</property>	
+      </graphic-element>
+    </connector-desc>
+  </connector-types>
+  <node-types>
+    <node-desc name="andgate" description="AND Gate" class="SEdit.Formalisms.Logical.AndGate">
+      <icon url="images/logical/logical_comp_and.gif"/>
+      <graphic-element class="SEdit.Graphics.GIcon">
+	<property name="imageaddress">images/logical/logical_comp_and.gif</property>
+	<property name="labellocation">4</property>
+	<property name="width">46</property>
+	<property name="height">38</property>
+      </graphic-element>
+      <module type="fixed" layout="justified">
+	<connector type="inlet" side="left"/>
+	<connector type="inlet" side="left"/>
+	<connector type="outlet" side="right"/>
+      </module>
+    </node-desc>
+    <node-desc name="orgate" description="OR Gate" class="SEdit.Formalisms.Logical.OrGate">
+      <icon url="images/logical/logical_comp_or.gif"/>
+      <graphic-element class="SEdit.Graphics.GIcon">
+	<property name="imageaddress">images/logical/logical_comp_or.gif</property>
+	<property name="labelLocation">4</property>
+      </graphic-element>
+      <module type="fixed" layout="justified">
+	<connector type="inlet" side="left"/>
+	<connector type="inlet" side="left"/>
+	<connector type="outlet" side="right"/>
+      </module>
+    </node-desc>
+    <node-desc name="notgate" description="NOT Gate" class="SEdit.Formalisms.Logical.NotGate">
+      <icon url="images/logical/logical_comp_not.gif"/>
+      <graphic-element class="SEdit.Graphics.GIcon">
+	<property name="imageaddress">images/logical/logical_comp_not.gif</property>
+	<property name="labelLocation">4</property>
+      </graphic-element>
+      <module type="fixed" layout="justified">
+	<connector type="inlet" side="left"/>
+	<connector type="outlet" side="right"/>
+      </module>
+    </node-desc>
+    <node-desc name="display" description="A Display" class="SEdit.Formalisms.Logical.LogicalDisplay">
+      <icon url="images/logical/logical_button_display.gif"/>
+      <graphic-element class="SEdit.Formalisms.Logical.GLogicalDisplay">
+	<property name="labelLocation">4</property>
+	<property name="width">40</property>
+	<property name="height">40</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="switch" description="A Switch" class="SEdit.Formalisms.Logical.LogicalSwitch">
+      <icon url="images/logical/logical_button_switch.gif"/>
+       <graphic-element class="SEdit.Graphics.GIcon">
+	<property name="labelLocation">4</property>
+	<property name="imageaddress">images/logical/logical_button_switch.gif</property>
+      </graphic-element>
+      <action description="Put 0">
+	<java-method name="putZero"/>
+      </action>
+      <action description="Put 1">
+	<java-method name="putOne"/>
+      </action>
+    </node-desc>
+  </node-types>
+  <arrow-types>
+   <!-- <arrow-desc name="link" description="A wire" class="SEdit.Formalisms.Logical.LogicalLink">
+      <icon url="images/logical/arrowwithsharpedge.gif"/>
+      <graphic-element>
+	    <property name="displayLabel">false</property>
+      </graphic-element>
+    </arrow-desc> -->
+    <arrow-desc name="link2" description="A segmented wire" class="SEdit.Formalisms.Logical.LogicalLink">
+        <icon url="images/logical/arrowwithsharpedge.gif"/>
+        <graphic-element class="SEdit.Graphics.GSegmentedArrow">
+	        <property name="displayLabel">false</property>
+        </graphic-element>
+    </arrow-desc>
+  </arrow-types>
+</formalism>
+
+
+
+
+
+
+
+
+
+

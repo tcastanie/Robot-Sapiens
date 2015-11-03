@@ -1,0 +1,998 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="generator" content="Adobe GoLive 4">
+		<title>MadKit - Release notes</title>
+	</head>
+
+	<body bgcolor="white">
+		<h1>MadKit - Version History</h1>
+		
+<h4>Olivier Gutknecht, Jacques Ferber, Fabien Michel, and all the MadKit Team<a href="mailto:ferber@madkit.org"><br>
+  &lt;olg@madkit.org&gt;, &lt;ferber@madkit.org&gt;, </a><a href="mailto:fmichel@lirmm.fr">&lt;fmichel@lirmm.fr&gt;</a></h4>
+<h2>V4.0 a7&quot;True Color&quot;</h2>
+<h4>New features</h4>
+<ul>
+  <li>A new Editor agent, the JSynEditor has been developped specially for MadKit 
+    by a group of students of the University of Montpellier. This editor is component 
+    based and has all the features of the previous EditorAgent with added capabilities: 
+    syntax coloring, full search, replace, undo/redo, java browsing facilities, 
+    templates, etc... </li>
+  <li>The DocBrowser gots its information from the PluginAgent which are loaded 
+    at run time.</li>
+  </ul>
+<h2>V4.0 a6 &quot;True Color&quot;</h2>
+<p>All agents of version 3.1.xx should work without any problem: you may just 
+  have to change the 'import' statements<br>
+  in the header of your java files. See the file 'index.html' and follow the links.</p>
+<h4>New features</h4>
+<ul>
+  <li>The PluginManager is an installer specifically built for MadKit which uses 
+    agents to install and upgrade the MadKit platform.</li>
+  <li>It is possible to build agents and recompile a Java project without quitting 
+    MadKit, due to the integration of ant to MadKit. A very important and often 
+    asked feature. Double click on an 'build.xml' file in the plugin directory, 
+    and all agents are automatically recompiled and reloaded.</li>
+  <li>Integration of all the Warbot projects of the LIRMM 2004 Warbot tournament, 
+    with their sources and documentation (in french).</li>
+  <li>The MadKit applet does work now, and is much better than before...</li>
+  <li>There is a DocBrowser agent, inside MadKit which is used to browse through 
+    all the manuals of MadKit. You may develop your own manual and add it to the 
+    DocBrowser.</li>
+</ul>
+<h2>V4.0 pre1 &quot;Shade&quot; (25/11/2003)</h2>
+<p>MadKit is back in a refunded software architecture and a new desktop look. 
+  The MadKit distribution is now more modular and it is very easy to add new modules 
+  (called plugins) at will.</p>
+<p>This is still a pre-release, which means that the documentation needs a major 
+  update, and that some features which worked in the previous version still don't 
+  work (see below).</p>
+<p>All agents of version 3.1.xx should work without any problem: you may just 
+  have to change the 'import' statements<br>
+  in the header of your java files. See the file 'index.html' and follow the links.</p>
+<h4>New feature</h4>
+<ul>
+  <li>MadKit 4.0 comes with a new software architecture which allows for different 
+    usages. <br>
+    You may use the part of MadKit that you really need.</li>
+  <li>The Desktop has been totally rewritten. It is now totally modifiable to 
+    suit <br>
+    your needs. You may even change the background color or image...</li>
+  <li>There is a new Explorer agent which allows for the launching of agents and 
+    execution<br>
+    of non agent files.</li>
+  <li>The communicator is now programmable. It is possible to ask it to connect 
+    <br>
+    to another kernel by sending it a message.</li>
+  <li>There is also a new NetComm agent which allows for new features </li>
+  <li>The Share plugin allows different user to share document over a MadKit network.<br>
+    You may use it to share documents (agents scripts, etc..)</li>
+</ul>
+<h4>Features not reimplemented yet</h4>
+<ul>
+  <li>jEdit does not work with this release, but it should work quite soon.</li>
+  <li>the MadKit Applet does not work.</li>
+  <li>the AgentJSP has not been updated to work with this version.<br>
+  </li>
+</ul>
+<h2>V3.1b5 - &quot;Deadend&quot; (10/03/2003)</h2>
+<p>This is to be the last 3.xx version of MadKit. Next version will be the new 
+  4.x version which comes with a complete remodelling of the software architecture.</p>
+<h4>Bug correction</h4>
+<ul>
+  <li>Corrected the very annoying bug which appeared on the Desktop with screen 
+    resolution equals or below 1024x768. I hope this won't happen anymore.</li>
+  <li>The MemoryMonitor, which was the most important cause of this bug is not 
+    placed in the dock of the software at launch time. It is now available from 
+    a toolbar in the desktop.ini file.</li>
+</ul>
+<h4>New features</h4>
+<ul>
+  <li>It is now possible to change the look and feel of MadKit. MadKit comes now 
+    with <strong>SkinLF</strong>, a skin manager with which you may change the 
+    look of MadKit. See <a href="http://www.L2FProd.com/software/skinlf/index.html">www.L2FProd.com/software/skinlf/index.html</a>, 
+    the home of 'Skinlf' for more details about its use and how to get available 
+    themepacks. It comes with several themepacks. You may add you own by placing 
+    your theme pack in the libs/skins directory and changing the tag <code>&lt;skin 
+    name=&quot;themepack.zip&quot; /&gt; </code>to your preferred themepack in 
+    the <code>desktop.ini</code> file. If you don't want to use skins, just comment 
+    out this line.</li>
+  <li>It is possible to launch a configuration of several agent by only clicking 
+    on a .cfg file in the desktop. To get the structure of a configuration file, 
+    see the content of the file <code>testconfig.cfg</code> file which create 
+    and launch several different agents.</li>
+</ul>
+<h2>V3.1b4 - &quot;Banshee&quot; (15/01/2003)</h2>
+<h4>New features</h4>
+<ul>
+  <li>There is now a flag which may be used to make sure that messages between 
+    agents take place only between two agents of the same group. The flag is: 
+    <code>--no-interGroup-Messages</code>, and should be set at MadKit startup 
+    (in a desktop.bat of .sh for example). For the moment this is just an attempt, 
+    and by default, this flag is not set. But, in the future, this flag will be 
+    set by default, and then be compliant with AGR... We have to check first that 
+    all our software work with this flag set! We know that this could be annoying 
+    for some of the users, but this is an important security issue...</li>
+  <li>It is now possible to load Script files directly, using the &quot;Open&quot; 
+    button, and the File&gt;Open Script File menu item.</li>
+  <li>System properties are shown in the &quot;About&quot; dialog. Very handy 
+    to know which JVM is actually running...</li>
+</ul>
+<h2>V3.1b3 - &quot;Red Cloud 2&quot; (8/12/2002)</h2>
+<p><b>Note</b>: Surprisingly, this version has not been publicly released...</p>
+<h4>New features</h4>
+<p>Many Desktop new features...</p>
+<ul>
+  <li>The Desktop has a new &quot;Dockpane&quot; which displays agents in a very 
+    pretty way... (tell Jacques (<a href="mailto:ferber@madkit.org">ferber@madkit.org</a>) 
+    what you think of it). You may install agents when the Desktop is launched 
+    using the <code>&lt;dockpane&gt; ... &lt;/dockpane&gt;</code> in the <code>desktop.ini</code> 
+    file. See this file to understand how to add your own agents. It is also possible 
+    to add agents in the dockpane directly from the menu, using the &quot;launch 
+    in dockpane&quot; feature from the <code>display</code> menu. This feature 
+    may evolve very soon: the explorer and the output will be considered as agents 
+    themselves. <br>
+  </li>
+  <li>It is possible to set the size of the Desktop in the <code>desktop.ini</code> 
+    file with the <code>displaysize</code> tag. (for the moment this feature is 
+    commented out. But you may change it at will.</li>
+  <li>The property box is now an agent. When it receives an ActMessage with a 
+    direct reference to an agent, it displays the properties of this agent.</li>
+  <li>The agents' toolbar is now a tabbed pane. Then you may add your own agents... 
+    New agents have been installed in the Desktop using this feature.</li>
+  <li>SEdit formalisms and SEdit files may be launched directly from toolbars 
+    of the Desktop.</li>
+</ul>
+<p>Other new features are:</p>
+<ul>
+  <li>Two new examples of agents have been included: a <code>GPongAgent</code> 
+    agent which plays ping pong with another agent of the same kind (test it on 
+    two different machines, it's fun..), and a distributed games to play <em>TicTacToe 
+    </em> or <em>FourInARow</em> (<em>Puissance4</em> in French) with another 
+    partner (test it on two different machines, too. &quot;it's more fun to compete&quot; 
+    ;-) ).</li>
+  <li>Some demos of Warbot done by french DEA (like MSc) students. have been added 
+    to this release... For the moment, the sources have not been added, but keep 
+    in touch, there will be more about this in future releases...</li>
+</ul>
+<h4>Corrected bugs and simple modifications</h4>
+<ul>
+  <li>Corrected little bugs in the Kernel.</li>
+  <li>Corrected a bug in the use of ClassLoader. It is now possible to use the 
+    &quot;extens&quot; directory as a real extension directory and to create new 
+    Java Warbot agents (unfortunately this was impossible in the 3.1b2 release). 
+    It is also possible to launch ALL java agents (and even the newly designed 
+    and compiled agents) from BeanShell and Python.. There was a bug in the previous 
+    releases that prevented it.</li>
+  <li>Corrected a bug in the GroupObserver (it is possible to select a group to 
+    observe as in previous 3.1 versions.</li>
+  <li>Slightly modified the MemoryMonitorAgent to have a stop and a start button.</li>
+</ul>
+<h2>V3.1b2 - &quot;Ana&iuml;s&quot; (13/07/2002)</h2>
+<h4>New features</h4>
+<ul>
+  <li>The SiteAgent may receive messages to display information... Upon reception 
+    of a StringMessage with the header <tt>$url</tt>, it launches a WebBrowser 
+    and sends it the URL; when receiving a StringMessage with the header <tt>$message</tt>, 
+    the remaining part is shown in a pager (see below).</li>
+  <li>The <tt>RemoteEval.bsh</tt> script now requires a password to enter the 
+    group. By default the passwd is '<tt>madkit</tt>'. You may change it for your 
+    own purpose. A better password mechanism, using encryption protocols, will 
+    be proposed soon. When an agent needs to enter the group (called '<tt>bsheval-hostname</tt>' 
+    where hostname is the name of the host site, it has to give a password. See 
+    the code in the script). </li>
+  <li>A little agent, called a <tt>Pager</tt>, is used to display messages sent 
+    to a user. When receiving a message with header <tt>$display</tt>, the pager 
+    displays the remaining part of the string directly in its window.</li>
+  <li>The <tt>WebBrowserAgent</tt> now accepts StringMessages with the commande 
+    : <tt>$goto</tt> followed by an URL address. It will accept other commands 
+    in the near future (receive a whole .html page, go backward or forward, home, 
+    etc..).</li>
+  <li>A new scripted agent, <tt>ServerWelcome</tt>, (filename: <tt>ServerWelcome.bsh</tt>) 
+    sends a &quot;welcome message&quot; to a remote SiteAgent which is connecting. 
+    As a result, this opens a Pager in the connecting kernel. Very, very nice.... 
+    The <tt>remoteconfig.cfg</tt> configuration file has been updated to take 
+    this agent into account.</li>
+  <li>A new scripted agent, <tt>LogListener.bsh</tt>, is used to log out all information 
+    that is distributed within a group. It has been designed to work as a companion 
+    of the OutputRouter agent.</li>
+</ul>
+<h4>Corrected bugs and simple modifications</h4>
+<ul>
+  <li>Corrected small bugs in the <tt>getExistingGroups</tt> and <tt>getExistingRoles</tt> 
+    methods of AbstractAgent..</li>
+  <li>Changed the EditorAgent (which actually should be called NotePadAgent, this 
+    has to be done..): it shows communities, groups, and roles. There is also 
+    a new '<tt>passwd</tt>' field which may be used for groups which require a 
+    passwd to accept agents.</li>
+</ul>
+<h4>Remarks (from JF)</h4>
+<ul>
+  <li>It is clear that more and more agents will be done in scripting language. 
+    My preference goes to BeanShell, because it has a real Java syntax. But I 
+    assume that others would prefer Python, Scheme or Jess. This is so easy to 
+    develop and to test without leaving MadKit. I hope we will be able to do the 
+    same in Java one day...</li>
+  <li>StringMessage tends to get the syntax <tt>$&lt;command&gt; &lt;argument&gt;</tt> 
+    where <tt>$&lt;command&gt;</tt> is simply a word, like <tt>$request</tt>, 
+    <tt>$display</tt>, <tt>$goto</tt>, etc.. and <tt>&lt;argument&gt;</tt> is 
+    the rest of the String... Is it a a way to close the gap between MadKit and 
+    FIPA, by using some kind of structured message?</li>
+</ul>
+<h2>V3.1b1 - &quot;Suntan&quot; (07/072002)</h2>
+<h4>New features</h4>
+<ul>
+  <li>The first 3.xx version of MadKit to be public... At last, MadKit is public 
+    again!!</li>
+  <li>A simple server.bat (or server.sh) launches a &quot;server&quot; like version 
+    of MadKit. You may control this server from outside by sending beanshell commands 
+    to the agent playing the '<tt>eval</tt>' role of the group '<tt>bsheval-&lt;kernel&gt;</tt>'. 
+    Have fun.. This is just the beginning of a set of system agents making remote 
+    access to MadKit very easy. We also have to secure it ;-)</li>
+  <li>The <tt>OutputRouter</tt> agent, which is part of the &quot;server&quot; 
+    bundle, captures the standard output and transforms the strings into StringMessages 
+    sent to the <tt>listener</tt> role.</li>
+</ul>
+<h4>Corrected bugs and simple modifications</h4>
+<ul>
+  <li>Corrected small bugs in the Turtle, in the SiteAgent, etc...</li>
+</ul>
+<h2>V3.1a8 - &quot;Swimming pool&quot; (06/2002)</h2>
+<h4>New features</h4>
+<ul>
+  <li>Nothing really new, except one thing: all files are now GPL or LGPL. Thus, 
+    MadKit is (at last) really <i>open source!!</i> I hope this will bring a lot 
+    of users and a lot of developpers. There are so many things one can develop 
+    with MadKit... 
+    <ul>
+      <li>In MadKit everything is GPL except <tt>madkit.jar</tt> and <tt>communicator.jar</tt> 
+        which are LGPL. This means that MadKit may be used in commercial applications 
+        (but you have too build your own interfaces).</li>
+    </ul>
+  </li>
+  <li>A new icon on the desktop to launch the communicator. Its &quot;lovely&quot;...</li>
+  <li>New agents: OutputRerouter, to send all standards output to &quot;listener&quot; 
+    agents, and a new script agent in BeanShell (called RemoteEval) to administrate 
+    a remote kernel (BeanShell is really great!!). Thus, it is now possible to 
+    administrate remote kernels in MadKit!! It will be necessary to introduce 
+    some security protections, but this will be done in next releases. I (JF) 
+    also started a RemoteEval in Python. It is clear that it is possible to make 
+    one in any scripting language.</li>
+  <li>I bet this is the last &quot;private&quot; alpha version. Next release will 
+    be on sourceforge!! Yeah man...</li>
+</ul>
+<h4>Corrected bugs and simple modifications</h4>
+<ul>
+  <li>Modified the location of files relative to the &quot;communicator&quot;. 
+    The communicator is not in <tt>agents</tt> any more. It has its own starting 
+    point.</li>
+  <li>All images (except SEdit images) are now located in only one jar: images.jar. 
+    All sources have been modified (and debugged) accordingly.</li>
+  <li>Script agents may now be launched in the .cfg files</li>
+  <li>Corrected a simple bug in SiteAgent which supposed that MadKit was always 
+    in graphic mode.</li>
+</ul>
+<h2>V3.1a7 - &quot;Shower&quot; (05/2002)</h2>
+<h4>New features</h4>
+<ul>
+  <li>Re-integration of SEdit into MadKit. </li>
+  <ol>
+    <li> The desktop now works as a SEdit launcher. When clicking on SEdit files 
+      (extension .sed), a SEdit agent is launched in the Desktop with all its 
+      information.</li>
+    <li>Formalism have a new extension (.fml). When clicking on such file, a SEdit 
+      agent is launched.</li>
+  </ol>
+  <li> OrgGrapher is back and has been updated to take into account the concept 
+    of <i>communities</i>. Well the display is still rather messy, but it is cute 
+    and useful when one wants to see what happens in Organization. OrgGrapher 
+    could be improved a lot, but still, it is interesting.</li>
+  <li><b>WarBot</b> is back with its old display. There is still much work to 
+    do to arrange the whole thing and make it a useful and enjoyable test framework, 
+    but you may develop your own &quot;brains&quot; from now on...</li>
+  <li>The &quot;<b>Chat</b>&quot; application provided by J.-G. Bertrand and O. 
+    Mohsine, has been included with the release... Use it and test it. </li>
+  <li>Documentation update. The documentation is near finished.. SEdit should 
+    be updated.</li>
+</ul>
+<h4>Corrected bugs and simple modifications</h4>
+<ul>
+  <li> Hooks sent bad community information on remote synchronizations. This has 
+    been fixed.</li>
+  <li>In the Marketorg example, Clients now have the <tt>client</tt> role (and 
+    not the member role) due to some &quot;filters&quot; of the OrgGrapher.</li>
+</ul>
+<h2>v3.1a5 &quot;Tiger&quot; (05/2002)</h2>
+<h4>New features</h4>
+<ul>
+  <li>The &quot;Chat&quot; application provided by J.-G. Bertrand and O. Mohsine, 
+    has been included with the release... Use it and test it. </li>
+  <li>Documentation update. The documentation is near finished..</li>
+</ul>
+<h4>Bug fixes</h4>
+<ul>
+  <li>Correction of little bugs in the kernel and in the Turtle kit which is much 
+    easier to use</li>
+  <li>I Hope (JF) this one will be the last alpha release!! I would like to see 
+    MadKit online again (at last!!)</li>
+</ul>
+<h4>In Preparation</h4>
+<ul>
+  <li>A share application will be available soon...</li>
+  <li>A better communicator is in preparation</li>
+  <li>We are working to make MadKit FIPA compliant. This would mean that some 
+    MadKit agents could work hand in hand with FIPA agents located in FIPA OS 
+    or Jade. Keep in touch,...</li>
+</ul>
+<h2>v3.1a4 &quot;Nightingale&quot; - (04/2002)</h2>
+<h4>New features</h4>
+<ul>
+  <li>A very small version which is only provided to solve the pb with the JDK 
+    1.4.</li>
+  <li>The Install Anywhere may use the jdk 1.4, thus, if you are under a Win OS, 
+    you do not need to get the package with the JVM inside and you may use your 
+    own JVM. Much, much better.</li>
+  <li>Update of some part of the development guide, with the beginning of a tutorial 
+    of how to program with MadKit..</li>
+  <li>Still a lot to do with the documentation... (the user doc is still old... 
+    unfortunately..)</li>
+  <li>SEdit has been suppressed from the release. The gbox is only accessible 
+    from the command line. Please, use the new &quot;Madkit desktop&quot; instead.</li>
+</ul>
+<h4>Bug fixes</h4>
+<p>One of the last 'alpha' version before the beta version... Some little bugs 
+  have been corrected.<br>
+</p>
+<h2>v 3.1a3 &quot;Monster&quot; - 16/04/2002</h2>
+<h4>New features</h4>
+<ul>
+  <li> A new scripting language has been introduced, BeanShell, which a small 
+    Java interpreter. It uses the Java syntax but variables are weakly typed (types 
+    are recognized at run time). It is possible to instantiate Java objects, but 
+    not to create classes. If you know Java, then BeanShell is quite handy to 
+    use for describing small agent behavior. See <a href="http://www.beanshell.org">www.beanshell.org</a> 
+    to get information about BeanShell. BeanShell agents are built on exactly 
+    the same basis as Python agent. The embedded BeanShell interpreter is the 
+    one which is distributed with jEdit (I don't know the exact version though). 
+    Because it was in already in the CLASSPATH, it was a good opportunity to add 
+    a new scripting language to MadKit. To get an overview of the syntax, see 
+  </li>
+  <li>jEdit is a powerful editor written in Java (see <a href="http://www.jedit.org">www.jedit.org</a>) 
+    which has been integrated to MadKit. jEdit features syntax highlighting, macros 
+    facilities (using BeanShell), and easy extension through plugins. It is possible 
+    to launch jEdit from MadKit, use it as an editor for scripting languages, 
+    create agents on the fly which executes script codes, evaluate Scheme expressions, 
+    etc... </li>
+  <li>Script files (i.e. files written in BeanShell, Python, Scheme or Jess) may 
+    be edited by jEdit directly from the desktop (right click on script files).</li>
+</ul>
+<h4>Bug fixes</h4>
+<ul>
+  <li>Small editors (notepad) now have a &quot;new&quot; function which clears 
+    the current buffer and reinitiates the editor.</li>
+</ul>
+<h2>v 3.1a2 &quot;Fools day&quot; - 3/04/2002</h2>
+<h4>New features</h4>
+<ul>
+  <li>Scheme agents have been updated to the last Kawa release (i.e.: 1.66.98). 
+    Scheme primitives takes the new features of MadKit into account. Caution: 
+    join-group and request-role send warning messages when used with the deprecated 
+    API. </li>
+  <li>Jess agents have been updated to the last Jess stable release (i.e.: 6.0). 
+    The license of Jess has slightly been changed... Jess primitives takes the 
+    new features of MadKit into account. Simple limitations: Jess agents may only 
+    create and join &quot;free&quot; groups (groupes libres), in which no authorization 
+    is needed.</li>
+  <li>Jess agents now have control buttons to control their behavior. It is thus 
+    possible to stop, reset, restart, etc. Jess agents and edit their code. </li>
+  <li>WebBrowserAgent agents are able to browse Web pages. The help system from 
+    the Desktop uses these agents.</li>
+  <li>The jess init file is now called madkitlib.clp</li>
+  <li>Desktop: 
+    <ul>
+      <li>The toolbar may be parametrized in the desktop.ini file (XML file). 
+        This toolbar contains button to launch agents on the Desktop.</li>
+      <li>Directories may be &quot;mounted&quot; in the &quot;Explorer-like&quot; 
+        tree of the desktop (this is very handy when you want to add agents designed 
+        outside the Madkit directory). This mounting operation may be described 
+        in the desktop.ini file.</li>
+      <li>Property box uses a separate frame.</li>
+      <li>Script files may be edited directly from the tree view with a right 
+        click </li>
+    </ul>
+  </li>
+</ul>
+<h2>v 3.1d8 &quot;Rebirth&quot; - 03/2002</h2>
+<h4>New features</h4>
+<ul>
+  <li> Integration of the <i>Community</i> concept into MadKit. Communities are 
+    groups of kernels. A community contains many groups. A community is shared 
+    among all kernels which have asked to enter the community and have been accepted 
+    (for the moment kernels that ask to enter a community are always accepted, 
+    but this will be modified in the future). Communities add a new perspective 
+    to Madkit by allowing several kernels to share only some specific groups and 
+    roles. A community is often used as a kind of application. </li>
+  <li>It is straightforward to use communities. Just use the classic Madkit primitives 
+    (createGroup, requestRole, leaveGroup, leaveRole) with a new argument which 
+    contains the name of the community. When this argument is not present, the 
+    community &quot;public&quot; is used in place. In the community &quot;public&quot;, 
+    all groups are shared among all connected kernels. There are also some primitives 
+    which deal with predicates about communities (isCommunity, getCommunities, 
+    etc..).</li>
+  <li>Connection and deconnection of communities is done dynamically. </li>
+  <li>All configuration files use XML structures.</li>
+  <li>A new &quot;GBox like&quot; GUI for launching agents. It is called &quot;desktop&quot;. 
+    It is mainly a complete rewriting of the GBox. New features are: it is now 
+    possible to launch an agent from its script (Python, Scheme, Jess, etc..), 
+    and most class loading are done internally (they do not expect a complete 
+    CLASSPATH at launch time). There is also the possibility to launch an agent 
+    (either Java or scripted) from the toolbar... Very soon, it will be possible 
+    to modify this toolbar... This desktop contains the following features: 
+    <ul>
+      <li>As in the G-Box, the desktop displays the GUI of agents</li>
+      <li>Script agents (i.e. Python, Scheme, Jess,..) may be launched from the 
+        tree view with a simple click</li>
+      <li>Configuration files may be opened directly from the Open menu/button.</li>
+    </ul>
+  </li>
+</ul>
+<h4>Changes and bug fixes</h4>
+<ul>
+  <li>Configuration files have a .cfg suffix and possess a XML structure</li>
+  <li>It is now possible to make agents impossible to delete by clicking on the 
+    window. In the agent, just add the following method: 
+    <blockquote> 
+      <p> <code> public void windowClosing(AWTEvent we){<br>
+        }</code></p>
+    </blockquote>
+    <p>You may now do what you want on the window (as an argument of the <tt>we</tt> 
+      variable), hide it, ask the user if he/she really want to close it, etc. 
+      Notice: the <tt>AWTEvent</tt> may either be a <tt>windowEvent</tt> or an 
+      <tt>InternalFrameEvent</tt>!!</p>
+  </li>
+  <li>All scripts files are now situated in the autoload folder... (which should 
+    be reorganized somehow..)</li>
+  <li>So many bug fixes...</li>
+</ul>
+<h2>v 3.0 &quot;Guava&quot; - 01/2002</h2>
+<p>One year and a half between this version and the previous one.... But the new 
+  MadKit is even better, with a new Kernel and some features which will help it 
+  to reach new grounds...</p>
+<h4>New features</h4>
+<ul>
+  <li>New kernel. The kernel has been simplified, adapted to Java 2 collections 
+    and, above all, contains a new mechanism for synchronizing groups. A great 
+    change which has required a new main number... 
+  <li>The synchronisation mechanism makes possible &quot;hot&quot; synchronizations, 
+    i.e. synchronization of already created groups. 
+  <li>New authorization mechanism for entering a group. See the api documentation 
+    for more information about it. Necessitated new primitives: joinGroup, foundGroup 
+    ar now deprecated. There is a new primitive, createGroup. requestRole takes 
+    a new argument and returns a value. 
+  <li>Integration of Python as a scripting language for developing agents in Madkit. 
+    The jython version of Python is totally integrated with Java and is perfectly 
+    adapted to the design of Madkit agents. 
+  <li>GroupObserver, a new agent for observing groups (works like a mini explorator) 
+  <li>OrgGrapher gives a graphical representation using graphs, of the overall 
+    organization of Madkit groups and roles. 
+  <li>Warbot II is now totally integrated to Madkit (for the moment it uses a 
+    specialized version of SEdit). 
+</ul>
+<h2>v 2.0.1 <i>&quot;Zimbra&quot;</i>- 06/2000</h2>
+
+    		<h4>Changes and bug fixes</h4>
+		<ul>
+			<li>The G-Box scripts now use
+			<tt>--single-window</tt> by default
+
+			<li>The G-Box has window titles again, and
+			now keep at least one agent layer.
+
+			<li>Accelerators for G-Box menus. 
+
+			<li>The <b>SocketCommunicator</b> was
+			erroneously built with debug mode on. The
+			<b>SocketCommunicator</b> will also try up
+			to five ports if the default port is already
+			bound.
+
+			<li>The <b>GroupSynchronizer</b> now
+			automatically synchronizes. This can be change
+			through the <i>autosynchro</i> property.
+
+			<li>May work with hosts as IP numbers instead
+			of names, through an additional flag at kernel
+			construction. G-Box and console launcher can
+			be configured to start in this mode with the
+			<tt>--ip-numeric</tt> flag.
+
+			<li>A bug with broadcast messaging in distributed mode
+			has been fixed
+	
+	<li> The MessageTracer and OrganizationTracer can now write time information in parsed form.
+
+	<li>The EditorAgent can leave a role. 
+
+	<li>Xerces XML Parser upgraded to version 1.1.1
+		</ul>
+
+
+    <h2>v 2.0 <i>&quot;Nemo&quot;</i>- 04/2000</h2>
+    <h4>New features</H4>
+    <ul>    <li>G-Box</li>
+      <ul>
+      <li>You can now choose the GUI launch mode: classic (internal frame), as an external
+	window, or as a full layer. The G-Box still launches
+	agents with heavyweight GUI (i.e. pure AWT) in
+	external windows, regardless of the launch mode setting.
+	<li>Preliminary print support
+	  <li>There is a "single window" mode which setup the toolbox, desktop, and property window within a single window. It is not default, but you can activate it with the <tt>--single-window</tt> flag.
+<li> The G-Box can now dispose automatically agent interfaces at deactivation.
+	  <li>Changes in the launch scripts: the
+	    <tt>CLASSPATH</tt> is not hardcoded anymore in the
+	    run-gbox script. Instead, the classpath is built at
+	    launch time by adding every file in the
+	    <tt>libs/madkit</tt> and <tt>libs/support</tt>
+	    directories. 
+                        <li>The G-Box now appends a number to the agent <I>name</I> to avoid
+                        confusions (the <tt>AgentAddress</tt> remains unique, as usual)
+
+</li></ul>
+<li>Environment
+<ul>
+		<li> The new website is online at: <A
+		HREF="http://www.madkit.org">http://www.madkit.org</A>. This
+		change is revelant to MadKit itself as we're going to
+		modularize the platform in future versions, so some
+		agent packs might no longer be included in the base
+		distribution, but be available as add-ons on the
+		site. To ease sharing of information and/or code, a web-based database is
+		online at <A
+		HREF="http://community.madkit.org">http://community.madkit.org</A>. You
+		can use it to search for and download an agent pack,
+	  look for or register your own project, etc... Feel free to use it.
+<li>Please report madkit bugs with: <a href="http://bugs.madkit.org">http://bugs.madkit.org</A>
+<li>File organization changes so that extensions or new agent
+	    models can be added to MadKit without having to edit
+	    the launch scripts. Downside is that the
+	    <tt>madkit.jar</tt> and <tt>gbox.jar</tt> files are no
+		longer in the main directory, but moved in
+	    <tt>libs/madkit</tt>. If you
+	    created custom launch scripts or CLASSPATH, you may
+	    have to update. <br>The policy for the <tt>libs</tt>
+		directory is now: 
+<ul><li><tt>libs/madkit</tt>: ZIP files or JAR files that are
+		MadKit-related, such as the kernel, the G-Box archive,
+		or various agent models libraries.
+<li><tt>libs/support</tt>: ZIP files or JAR files for
+		third-parties libraries, that some MadKit code might
+		need (Swing, Kawa, ...)</ul>
+
+
+<li> We added documentation for the included demo or system agents.
+The user's guide and tutorial have been reorganized.
+</li>
+<li>Scheme agents are now in the <tt>src/scheme</tt> directory
+</ul>
+<li>Agents and libraries</li><ul>		
+<li>A new <b>XMLMessage</b> class in <tt>madkit.lib.messages</tt>
+(which uses the <a href="http://xml.apache.org">Xerces</A> XML parser from the Apache Group) and an <b>XMLPingPong</b> example
+<li> The previously known <I>"logolib"</I> has been greatly improved. It is
+now called the <b>TurtleKit</b> library and provides new features, increased
+efficiency, a new interface, a new documentation and new demonstration
+applications
+
+			<li>A new set of system agents that hooks on the kernel to ease the understanding
+and debugging of applications.  <B>MessageTracer</B> traces every message transiting
+between agent. <B>OrganizationTracer</B> traces every group action requested by an
+agent. <B>OrgLister</B> displays the whole organisation (groups, roles and agents) of
+the system. These agents can be found in the System Agents pack.
+
+
+<li>A new agent <b>EditorAgent</b> in which StringMessages can be edited and sent in
+various ways. Much better and really more powerful than the old <b>StringMessage</b> 
+<li>The console booter now takes <tt>--with-native-lf</tt> and <tt>--with-java-lf</tt> options like the G-Box does (only effective with <tt>--graphics</tt> enabled)
+</ul>
+</ul>
+                <h4>Changes</H4>
+		<ul>
+<li>The <tt>GraphicShell</tt> interface has been slightly modified so
+that the host application can specify the "default" agent GUI with
+method <tt>getDefaultGUIObject</tt>. A side effect of this
+modification is that the <tt>madkit.kernel</tt> package is now
+<i>completely</i> free of GUI-specific code. We're trying to be as
+toolkit-independant as possible (think Java 2 MicroEdition, Cocoa,
+MS-Cool ... :-> )
+<li>The <i>"travel agency"</i> small example has been cleaned up, and
+is now in its own <tt>travel.jar</tt> agent pack.
+<li>Another consequences of the GUI-independance: the
+<tt>getBean()/setBean(...)</tt> methods are now <i>deprecated</I> and
+replaced with a more generic
+<tt>getGUIObject/setGUIObject(...)</tt>. The
+<tt>java.awt.Component</tt> is now replaced with a simple
+<tt>java.lang.Object</tt>. We no longer assume that agent interfaces
+are bean component. It is up to the host application to check types
+and setup the GUI accordingly. However, the change should be
+completely transparent for agent developers. Host application
+developers should check the example code in console/Booter,
+cocoa/Booter or in the G-Box.
+
+			<table border="2" cellpadding="0" cellspacing="2" frame="" width="100%">
+				<tr>
+					<th bgcolor="#ffffcc">MadKit
+					1.4.1 - AbstractAgent Class</th>
+					<th width="60%" bgcolor="#ffffcc">MadKit 2.0 - AbstractAgent Class</th>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td width="60%">void <tt>setBean</tt>(<i><b>Component</b> bean</i>)<br>
+<b><i>Component</i></b> <tt>getBean</tt>()</td>
+<td>void <tt>setGUIObject</tt>(<i><b>Object</b> o</i>)<br>
+<b><i>Object</i></b> <tt>getGUIObject</tt>()</td>
+					
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td width="60%">
+void <tt>setOutput</tt>(<i>Writer o</i>)<br>
+&nbsp;
+</td>
+					<td>void
+					<tt>setOutputWriter</tt>(<i>Writer
+					o</i>)<br>
+void <tt>setDebugWriter</tt>(<i>Writer o</i>)<br>
+    </td>
+
+				</tr>
+			</table>
+Note that getBean()/setBean(..) are still here and functional, but might be removed in a future version. Please upgrade your code.
+<li> The LogoLib has been renamed to "TurtleKit". There has been some
+code changes to reflect this: the package for this library is now
+<tt>madkit.models.turtlekit</tt> (from
+<tt>madkit.models.logolib</tt>). The examples also moved in the
+<tt>src/demo/agents/turtles</tt> directory.
+<li>The Scheme agent model has been updated to Kawa 1.6.66
+<li>The <b>GenericMessage</b> has been renamed to <b>ActMessage</b>. A
+<tt>getAction()</tt> call has been added.
+<li>G-Box interface change: the "add layer" and "remove layer" commands are now in the
+<b>View</b> menu and no longer in a toolbar.
+</ul>
+<h4>Bug fixes</h4>
+<ul><li>The <b>GroupLister</b> and <b>AgentLister</b> GUI were not
+reliable (intermittent display). This bug was present since the MadKit
+1.1 days.
+<li>An old, hard to track, bugin the Scheme agents has been fixed. In previous versions, some applications with several Scheme agents could fail as the library confused references to the underlying Java object, which had the effect of causing messages sent to the wrong agent, error in group/role actions, etc...
+<li>The "remove layer" action is now reliable and is always disabled
+when ony one layer remains.
+</ul>
+		<h2>v 1.4.1 <i>&quot;Honk&quot;</i>- 01/2000</h2>
+		<h4>Changes and bug fixes</h4>
+		<ul>
+			<li>A new <b>GenericMessage</b> (in
+			<tt>madkit.lib.messages</tt>), which describe
+			a classic act of language message with an
+			action, various key/value pairs and some
+			content.
+			<li>Both <b>ACLMessage</b> and
+			<b>KQMLMessage</b> now inherits from the new GenericMessage.
+			<li>A (really stupid) bug introduced with the
+			new hook mechanism made <tt>leaveRole</tt> calls fail. Fixed.
+			<li>The G-Box didn't kill synchronous agents
+			with a pure AWT GUI. Fixed. 
+		</ul>
+
+		<h2>v 1.4 <i>&quot;Werewolf&quot;</i>- 11/99</h2>
+		<p>This release brings some very important changes: unification of threaded/synchronous agents, new hook manager, many optimizations. We tried to keep compatibility as much as possible, but we'd really like to know if your code break with this version or if you notice any weird behavior.</p>
+		<h4>New features:</h4>
+		<ul>
+			<li><b>Yoohoo, the new synchronous execution engine !</b> (aka &quot;ReactiveLib II&quot;). Now you can build reactive MAS, hybrid system while keeping the AGR model, and have a very, very flexible scheduling and probe mechanism. We added a section to the development guide, and a page to the visual MadKit tour. There is some demos for the new simulation engine, see the <tt>demo/agents/bees</tt> and <tt>demo/agents/logo</tt>. You'll also find a simulation library with some generic tools in <tt>madkit.lib.simulation</tt>. Finally an example of a specific simulation model which is a clone of some functions of the StarLogo system is in <tt>madkit.models.logolib</tt>. Note that old ReactiveLib-based agents should still work, but won't benefit from the new architecture. The <tt>madkit.lib.reactive</tt> package is now deprecated. Some of its features will be eventually merged in the new simulation library.
+			<li>The new hook and system communication mechanism. See the architecture section in the DevGuide and the sources of the system agents. See <tt>AgentLister</tt> or <tt>SocketCommunicator</tt> for an idea. Port of your old code should be straightforward. <i>There is no backward compatibility for the old hook system</i>: the integration in the kernel of the two modules would have way too much difficult and potentially instable.
+			<li>In the G-Box, you can now register at startup agent names in the toolbox window. The G-Box reads <tt>xxx.scm</tt> files in the <tt>autoload</tt> directory, and recognize <tt>(add-agent 'my.full.agent.class.name)</tt> lines; agents classes must be accessible in the CLASSPATH. This feature can avoid systematic JAR pack builds or repetitive &quot;Add agent...&quot; commands
+		</ul>
+		<h4>Changes</h4>
+		<ul>
+			<li>The documentation has been reorganized, expanded, and is now 100% in english. As it's the first release of this new documentation, I'm quite sure that some parts are quite crude, comments are welcome.
+			<li><b>Important change:</b> The <tt>Agent</tt> is no longer the root class of the agent hierarchy. It is now the <tt>AbstractAgent</tt> which holds this place. This should not have consequences on your code, just recompile it<br>
+			.
+			<table border="2" cellpadding="0" cellspacing="2" frame="">
+				<tr>
+					<th bgcolor="#ffffcc">MadKit 1.3.2<br>Agent Class</th>
+					<th bgcolor="#ffffcc">MadKit 1.4<br>AbstractAgent Class</th>
+					<th bgcolor="#ffffcc">MadKit
+					1.4<br>Agent Class (extends AbstractAgent)</th>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td>Message-related methods (expect for <tt>waitNextMessage</tt>() )
+
+					<p>
+Group-related methods<br>
+						Role-related methods
+						<p>GUI / Bean methods<br>
+						Print / debug / name / AgentAddress methods </p>
+						<p><tt>void activate()<br>
+						void
+						end()</tt>
+</td>
+					<td><i>No change</i>
+</td>
+					<td><i>Inherited</i></td>
+				
+				</tr>
+				<tr bgcolor="#e0ffff">
+						<td>
+<tt>getCurrentGroups()</tt>
+						(was obsoleted in 1.2)
+</td>
+					<td><tt>getGroups()</tt>
+</td>
+					<td><i>Inherited</i></td>
+				</tr>
+				<tr bgcolor="#e0ffff">
+						<td>
+					<tt>killAgent(..)<br>
+						launchAgent(..)
+</tt></td>
+					<td>
+Now with <tt>AbstractAgent</tt><i> as parameter type (instead of
+</i><tt>Agent</tt><i>).
+</i></td>
+					<td><i>Inherited</i></td>
+				</tr>
+				<tr bgcolor="#e0ffff">
+						<td>
+<tt>launchReactiveAgent(..)
+</tt></td>
+					<td>
+<i>
+ Was experimental and has been removed.
+</i></td>
+					<td><i>Not available</i></td>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td><tt>void live()<br>
+						void pause(...)<br>
+						waitNextMessage()<br>
+						</tt></td>
+					<td><i>not available</i></td>
+					<td><tt>live()<br>
+						pause(...)<br>
+						waitNextMessage()<br>
+						</tt></td>
+				</tr>
+			</table>
+			<br>
+			<li>The <tt>SocketCommunicator</tt> and <tt>GroupSynchronizer</tt> have been rewritten for more genericity and to reduce the hack level. It should also be easier to write your own synchronizers and communicators.
+			<li>What seems to be a nasty race condition has been fixed in the messaging code. That <i>could</i> explain some difficult, unreproducible message losses under very heavy load in MadKit.
+
+			<li>Deprecated methods have been removed in
+			the <tt>Agent / AbstractAgent</tt> classes:
+			<tt>launchAgent(..,..)</tt> (two parameters
+			variant), <tt>addRole(..,..)</tt>,
+			<tt>removeRole(..,..)</tt>,
+			<tt>getRoleAgents(..,..)</tt>,
+			<tt>getRoleHandler(..,..)</tt>, <tt>getGroupRoles(...)</tt>
+
+		</ul>
+		<h4>Bug fixes</h4>
+		<ul>
+			<li>The kernel tables have been optimized for synchronous agents, this involved some changes in kernel structure like <tt>AGRTrio</tt> but developers should not perceive a difference.
+			<li>Kernel fix: you can't launch twice the same agent instance
+			<li>Fix (let me know if this one breaks some of your system agents code): <tt>setSender(...)</tt> and <tt>setReceiver(...)</tt> no longer public in the <tt>Message</tt> class.
+		</ul>
+		<h2>v 1.3.2 <i>&quot;Glassworks&quot;</i>- 10/99</h2>
+		<h4>Changes and bug fixes</h4>
+		<ul>
+			<li>The hook on <tt>sendBroadcastMessage</tt> should now work. The args is a vector with the group, the role, the message, and a vector containing the <tt>AgentAddress</tt> concerned (local or not). The broadcast call is completely intercepted, it is up to the agent that requested the hook to execute it correctly.
+			<li><tt>HookMessage</tt> now has its fields protected, please use the accessors now.
+			<li>The hook system is being generalized. Some initial code is included, full support should come in the next version.
+			<li>API documentation is now generated through Java 2 tool.
+		</ul>
+		<h2>v 1.3.1 <i>&quot;Deeper Green&quot;</i>- 9/99</h2>
+		<h4>Changes and bug fixes</h4>
+		<ul>
+			<li>A new KernelMessage: &quot;DUMP_ORGANIZATION&quot; returns a complete dump of the local organization, with a <tt>Vector</tt> containing a <tt>Vector</tt> with the group name and a <tt>Vector</tt> having the role name and a <tt>Vector</tt> of <tt>AgentAddress</tt>
+			<li>The Kernel had forgotten debug messages occasionaly printed. Fixed.
+			<li>KernelMessages: &quot;FREEZE_AGENT&quot; and &quot;UNFREEZE_AGENT&quot; are deprecated and will be removed from KernelAgent in a future version.
+			<li><tt>getRoles(..)</tt> could throw an exception when a wrong group name was in argument. Fixed
+			<li>Removed erroneous public access to the <tt>Role</tt> kernel class in <tt>AGRTrio</tt>, the <tt>getRole()</tt> method now returns a <tt>String</tt>.
+			<li>Rewrote parts of local group implementation. Quicker and safer.
+		</ul>
+		<h2>v 1.3 <i>&quot;Archeo Sunrise&quot;</i>- 5/99</h2>
+		<h4>New features:</h4>
+		<ul>
+			<li><b>Preliminary <a href="scheme_example.gif">Scheme support</a> !</b> Please refer to the MadKit development guide for more information. The Scheme implementation we're using is the excellent <a href="http://www.gnu.org/software/kawa/">Kawa</a> software by Per Bothner, Cygnus Solutions. Feedback welcomed&nbsp;! This is the very first release of these Scheme bindings, so we're quite sure that a few bugs are still lurking around.
+			<li>A frequently requested feature: launching a new agent from another one can setup the agent graphical interface. In previous versions, a developer had to manually instantiate the GUI with <tt>initGUI()</tt> and <tt>getBean()</tt>. Now, the <tt>launchAgent(..)</tt> API has a flag to determine if the new agent should run without instanciated GUI or if it should appear in the graphic environment (i.e. the G-Box).
+			<table border="2" cellpadding="0" cellspacing="2" frame="" width="100%">
+				<tr>
+					<th bgcolor="#ffffcc">MadKit 1.2.1 - Agent Class</th>
+					<th width="60%" bgcolor="#ffffcc">MadKit 1.3 - Agent Class</th>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td>void <tt>launchAgent</tt>(<i>agent, name</i>)</td>
+					<td width="60%">void <tt>launchAgent</tt>(<i>agent, name, gui</i>)</td>
+				</tr>
+			</table>
+			<br>
+			<li>Applications that define their own graphical interface (i.e. not the G-Box nor console mode) can implement the <tt>madkit.kernel.GraphicShell</tt> interface and define the <tt>setupGUI</tt>(<i>Agent</i>) method, and call the <tt>registerGUI</tt>(<i>GraphicShell</i>) method on the kernel at application startup. This will ensure the new launchAgent call will be routed to your own application. See the <tt>madkit.console.Booter</tt> source for an example.
+			<li>An agent that launches another agent can kill it if it still owns a reference to it.<br>
+			<table border="2" cellpadding="0" cellspacing="2" frame="" width="100%">
+				<tr>
+					<th bgcolor="#ffffcc">MadKit 1.2.1 - Agent Class</th>
+					<th width="60%" bgcolor="#ffffcc">MadKit 1.3 - Agent Class</th>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td>n/a</td>
+					<td width="60%">void <tt>killAgent</tt>(<i>agent</i>)</td>
+				</tr>
+			</table>
+		</ul>
+		<h4>Changes and bug fixes</h4>
+		<ul>
+			<li><i>Warning</i>: the default directory for jar files searched at G-Box startup is no longer &quot;<tt>jars</tt>&quot; but &quot;<tt><b>autoload</b></tt>&quot;
+			<li>A bug has been discovered in the new <tt>AgentAddress</tt> notation. A common symptom was a blank AgentAddressEditor in the G-Box property window if the agent name was manually changed.
+			<li>Minor fixes in documentation. Release notes and history translated to english.
+			<li>The SocketCommunicator graphical interface now preset the port to the default value (4444)
+			<li>Minor changes under the hood to clean the way for the upcoming SEdit/MadKit integration.
+		</ul>
+		<h2>v 1.2.1 <i>&quot;Sartori&quot; </i>- 15/12/98</h2>
+		<h4>Changes and bug fixes</h4>
+		<ul>
+			<li>The G-Box should be a bit quicker. The agent property editor has a better interface and displays the agent patronymic name instead of plain <tt>AgentAddress</tt> (which is still readable in a tooltip)
+			<li><b>Important:</b> We upgraded to Swing 1.1 (from 1.0.3) for all user interface elements. The consequence for your own developments is that you must now import the <tt>javax.swing</tt> packages (and no longer <tt>com.sun.java.swing</tt>). Please check JavaSoft web site for additional <a href="http://www.javasoft.com/products/jfc">details</a>.
+			<li>The G-Box starts up with platform native look-and-feel. Remove the <tt>--with-native-lf</tt> option in the <tt>run-gbox</tt> script if you want to switch back to the multi-platform &quot;Metal&quot; look-and-feel.
+			<li>Documentation has been slightly modified (some imprecision in the DevGuide, an incorrect API in the present document).
+			<li>Text files (sources and docs) should have correct end-of-line characters on Windows.
+			<li>A kernel bug which might cause a <tt>NullPointerException</tt> in <tt>sendMessage(group,role,message)</tt> has been fixed.
+			<li>The <b>SocketCommunicator</b> did not close its server socket upon agent death. Fixed.
+		</ul>
+		<h2>v 1.2 <i>&quot;THRaK&quot;</i> - 01/12/98</h2>
+		<h4>New features:</h4>
+		<ul>
+			<li>The whole new G-Box! Agent packs are now displayed as a hierarchy in the Toolbox window, the agents are launched as internal windows in an &quot;agent desktop&quot;. Overall agent GUI manipulation is simpler and user-friendly. Agents can be organized as &quot;layers&quot; is the MDI interface.
+			<li>The G-Box and every demo agents have been rewritten with the Swing classes (aka Java Foundation Classes) from Sun JavaSoft.
+			<li>The G-Box starts up with the Swing &quot;Metal&quot; look and feel. If you prefer the platform native look&amp;feel, add the <tt>--with-native-lf</tt> command line option in the <tt>run-gbox</tt> script.
+			<li>The agent launch configuration scripts have been re-designed with a Lisp-like syntax. Eventually, MadKit will embed a small Scheme interpreter (which will also be useful to SEdit)
+			<li>A <tt>madkit.lib.messages</tt> package has landed. The <tt>StringMessage</tt> class is now defined in this package (from <tt>demo.agents</tt>). <tt>KQMLMessage</tt> and <tt>ACLMessage</tt> classes are also defined (simple wrappers for these agent communication languages message structures). An <tt>ObjectMessage</tt> is also defined to store an arbitrary <tt>Object</tt>. But you can still inherit from <tt>Message</tt> for your specific needs
+			<li>Many small fixes, optimization and changes. We also made some intensive message-passing tests and the kernel seems to be quite stable, handling 500000 messages without losses nor memory leaks.
+			<li>An <i>experimental</i> scheduler for synchronous (aka: reactive, or situated) agents within the kernel. This module is not really documented yet, but curious can give a look to the <tt>NewRManager</tt> agent. The main advantage is that you can launch a huge population synchronous agents without freezing as this is not an &quot;one thread/ one agent&quot; model. These agent have the same capacities than classic MadKit agents, and can access the message-passing or group/role primitives.
+		</ul>
+		<h4>Changes</h4>
+		<ul>
+			<li>Documention is being rewritten, translated to english and reorganized. The plan is to have four documents: an &quot;install guide&quot;, a &quot;visual tutorial&quot;, a &quot;reference guide&quot; and the javadoc-generated API documentation. We're also switching to SGML, so generating multiples output formats should be quite simple.
+			<li>The role acceptation and security has not come back yet, but we now have a good design plan, so it should appear in a later version.
+			<li>The <tt>AgentAddress</tt> has been reworked to be more coherent with the <tt>AgentInformation</tt> class (which has been modified as well). The <tt>name</tt> field is now common between these and is not used for <tt>AgentAddress </tt>discrimination.
+			<li><i><b>Warning</b></i>, The <tt>Agent</tt> class API changes. Some methods are renamed, others disappear. The main objective is to have a global coherent naming. Old methods returning multiple values with a <tt>Vector</tt> ou <tt>Enumeration</tt> now return an <tt>AgentAddress</tt> array. Previous methods are still there, but are tagged as <i>deprecated</i>. Please migrate as soon as possible to the new API, MadKit 2.0 will remove any <i>deprecated</i> method.
+			<table border="2" cellpadding="0" cellspacing="2" frame="" width="100%">
+				<tr>
+					<th bgcolor="#ffffcc">MadKit 1.0.4</th>
+					<th width="60%" bgcolor="#ffffcc">MadKit 1.2</th>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td>
+						<dl>
+							<dt>void <tt>addRole</tt>(group, role)
+						</dl>
+					</td>
+					<td width="60%">void <tt>requestRole</tt>(group, role)</td>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td>void <tt>removeRole</tt>(group, role)</td>
+					<td width="60%">void <tt>leaveRole</tt>(group, role)</td>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td>Vector <tt>getRoleAgents</tt>(group, role)</td>
+					<td width="60%">AgentAddress[] <tt>getAgentsWithRole</tt>(group, role)</td>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td>AgentAddress <tt>getRoleHandler</tt>(grp, role)</td>
+					<td width="60%">AgentAddress <tt>getAgentWithRole</tt>(group, role)</td>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td>Vector <tt>getGroupRoles</tt>(group)</td>
+					<td width="60%">String[] <tt>getRoles</tt>(group)</td>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td>Vector <tt>getCurrentGroups()</tt></td>
+					<td width="60%"><i>n/a</i></td>
+				</tr>
+				<tr bgcolor="#e0ffff">
+					<td><i>n/a</i></td>
+					<td width="60%"><tt>launchReactiveAgent</tt>(reactiveAgent, name) <i><b>Exp&eacute;rimental</b></i></td>
+				</tr>
+			</table>
+		</ul>
+		<h4>Bug fixes</h4>
+		<ul>
+			<li>Many. A few fixes in the kernel, particulary agents had a way to get a direct reference on group and role internal tables
+			<li>Distributed communication agents should be more robust now.
+			<li>The HOOK_MESSAGES code is also more reliable and more generic.
+		</ul>
+		<h2>
+		<hr>
+		v 1.1 - 2/08/98</h2>
+		<ul>
+			<li>LIRMM internal version.
+		</ul>
+		<h2>
+		<hr>
+		v 1.0.4 - 23/01/98</h2>
+		<h4>Changes</h4>
+		<ul>
+			<li>Distributed Applications ! Please check the devguide and tutorial for more info.
+			<li>Compiled classes for MadKit are no distributed as JAR files (<tt>madkit.jar</tt> and <tt>gbox.jar</tt>, like the usual agent packs in the <tt>jars</tt> directory) and not as a directory hierarchy and class files. The reasons for the switch are:
+			<ul>
+				<li>Easing transfer between various host platforms (Mac, Unix, Windows)
+				<li>Simplifying applet mode in web browser.
+			</ul>
+			<li>On the MacOS, the G-Box has been validated against MRJ 2.0 and CodeWarrior Java.
+			<li>Version numbering: MadKit is not &quot;alpha&quot; anymore. <i>Yo ho ho, and a bottle of Rum^H^H^H Orange Juice.</i>
+		</ul>
+		<h4>Bug fixes</h4>
+		<ul>
+			<li>Fixes in the kernel to make it compatible with web browser (SecurityManagers are paranoid with System Properties).
+		</ul>
+		<h4>Micro-kernel</h4>
+		<ul>
+			<li>The command-line option <tt>-port</tt> <i>xxxx</i> is now obsolete.
+			<li>The command-line option <tt>-ipnumeric</tt> is now (hopefully) useless and obsolete.
+			<li><b>Warning</b> The internal representation for agent addresses changed. It should not be a problem for usual agents which do not try to access directly the <tt>AgentAddress</tt> internal structures. The <tt>KernelAddress</tt> field was specific to applet mode in previous versions, and as of MadKit 1.0.4 is used as a generic representation of Kernel location and communication mechanisms (sockets, CORBA, SMTP, ...) which might be implemented in the future.
+			<li>Hooks on <tt>SendMessage</tt> are only active in non-local messages
+			<li>The micro-kernel is now compatible with&quot;en applet-mode&quot; and has been tested against AppletViewer, HotJava, Internet Explorer 3.0-4.0/MRJ 2.0 0 with MacOS. Execution with Netscape 4.04j2 Linux is a bit rought (thread poroblems). Not tested (yet) against Communicator or Explorer under Windows. To try this, just type the java fully qualified class name of an agent (for instance <tt>demo.agents.PingPong</tt>), and an optional name.
+		</ul>
+		<h4>Distribution</h4>
+		<ul>
+			<li><b>The Communication Agent changed ! </b>It's now the &quot;SocketCommunicator&quot;. To use it, just give a port nubmer in its PropertyBox and launch the socket server with the popup-menu.
+			<li>The SocketCommunicator does not relay message between kernels
+			<li>Distributed mode is not compatible with applet kernels
+			<li>Agent migration is not supported yet. Two test agent exists anyway &quot;Migrator&quot; and &quot;netTest&quot;. A clean implementation is underway.
+			<li>MadKit <b>does not work with </b>JDK 1.2beta2
+		</ul>
+		<h4>Group &amp; role management</h4>
+		<ul>
+			<li>The group and role manager does not support access control yet. This will be corrected eventually.
+		</ul>
+		<p>
+		<hr size="2">
+		<p></p>
+		<h2>v 1.0a3 - 09/12/97</h2>
+		<h4>New features</h4>
+		<ul>
+			<li>When an agent death occurs (because it has reached its end() or because of a bug intercepted by the kernel), MadKit changes the bean color in G-Box or applet modes.
+			<li>A new Splash Screen with a progression bar. Groovy !
+			<li>To avoid some problems with exotic network settings, the kernel may be launch with the <tt>-ipnumeric</tt> flag. In that case, the various AgentAdress are built with the four-digits IP number.
+		</ul>
+		<h4>Changes</h4>
+		<ul>
+			<li>The G-Box source has been synchronized again with the JavaSoft BeanBox nov97 source.
+			<li>The <tt>madkit.graphics</tt> package has been renamed to <tt>madkit.lib.graphics</tt>
+			<li>Less agents launched in a default configuration. Non-essential or experimental demonstration code is now in a <tt>demo-exp.jar</tt> file in the <tt>otherjars</tt> director, but is still usable with the <i>File-&gt;Add Jar..</i> command
+		</ul>
+		<h4>Bug fixes</h4>
+		<ul>
+			<li>Requests concerning non-existant groups caused the kernel to crash in a case involving getRoleHandlers(...). Fixed
+			<li>The G-Box now runs correcly even if a &quot;jars&quot; directory is not present in the startup directory.
+			<li>A (stupid, although benign) bug in AppletMadKit fixed
+			<li>The G-Box does not use the &quot;tmp&quot; directory anymore.
+		</ul>
+		<h2>v 1.0a2 - 01/12/97</h2>
+		<h4>New features</h4>
+		<ul>
+			<li>The archive now includes sources for the MadKit Applet demonstrator, the text booter, and the G-Box.
+			<li>The market demo is more interesting.
+		</ul>
+		<h4>Bug fixes</h4>
+		<ul>
+			<li>Some groups were incorrectly kept in kernel tables after the termination of all of their members.
+			<li>The start-up scripts didn't keep the previous CLASSPATH
+			<li>The agent micro-kernel now runs under Apple Rhapsody.
+		</ul>
+		<h4>Known bugs</h4>
+		<ul>
+			<li>The red rectangle during dragging feedback might be incorrectly placed with some graphic configurations.
+			<li>Layout for AgentAddress properties in the PropertyBox is incorrect.
+		</ul>
+		<h2>v 1.0a1 - 01/10/97</h2>
+		<p>First non-development version.
+		<hr size="2">
+	</body>
+
+</html>

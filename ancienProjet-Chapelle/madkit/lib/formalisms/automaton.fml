@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="automaton" description="Automaton (with simulation)"
+	   class="SEdit.Formalisms.Automaton.AutomatonStructure">
+  <formalism-info>
+    <author>Jacques Ferber</author>
+    <author>Ol. Gutknecht</author>
+  </formalism-info>
+  <node-types>
+    <node-desc name="state" class="SEdit.Formalisms.Automaton.AutomatonState">
+      <icon url="images/place1.gif"/>
+    </node-desc>
+    <node-desc name="transition" class="SEdit.Formalisms.Automaton.AutomatonTransition">
+      <icon url="images/transition2.gif"/>
+      <graphic-element class="SEdit.Graphics.GRectangle">
+	<property name="width">10</property>
+	<property name="height">40</property>
+      </graphic-element>
+      <action description="validate">
+	<java-method name="validate"/>
+      </action>
+    </node-desc>
+  </node-types>
+  <arrow-types>
+    <arrow-desc name="link" class="SEdit.Formalisms.Automaton.AutomatonLink">
+      <icon url="images/stdarrow.gif"/>
+      <graphic-element >
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </arrow-desc>
+  </arrow-types>
+  <action description="Run">
+    <icon url="images/run.gif"/>
+    <java-method name="step"/>
+  </action>
+</formalism>

@@ -1,0 +1,48 @@
+/*
+* MemoryObserver.bsh - An agent which displays the remaining size
+*				       of the JVM
+* Copyright (C) 2002 Jacques Ferber
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+void activate(){
+    self.requestRole("system","memoryObserver",null);
+}
+    
+        
+void live(){
+    while (true){ //never stops
+    	self.println("--------------------------------------kernel status");
+    	ThreadGroup tg = Thread.currentThread().getThreadGroup();
+		Thread[] temp=new Thread[tg.activeCount()];
+		tg.enumerate(temp);
+		for(int i = 0; i< temp.length; i++)
+		{
+			if (temp[i] != null)
+				self.println(""+i+":  "+temp[i]+", daemon: "+temp[i].isDaemon());
+		}
+		r = Runtime.getRuntime();
+		free = r.freeMemory()/1024;
+		total = r.totalMemory()/1024;
+		self.println("free="+ free+ "Ko, total="+ total+"Ko, used="+(total-free)+"Ko");
+		self.pause(2000);
+	}
+}
+
+void end(){
+    self.println("MemoryObserver ended : " + self.getName());
+}
+

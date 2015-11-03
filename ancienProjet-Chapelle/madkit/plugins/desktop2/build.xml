@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+
+<!-- 
+ MadKit template build.xml
+ Author: F. Michel
+ Version: 2.0
+
+ This is generic build.xml file for building MadKit plugins using JAKARTA-ANT http://ant.apache.org/index.html 
+ 
+available targets are :
+
+	- jar (default): make a clean compilation, and creates the jar file into the jars directory. Also create runner file if cfg file available
+	- compile : only compile sources.
+	- clean : remove built directories and files. Also remove docs/api directory.
+	- src-dist : create the source distribution of the plugin.
+	- bin-dist : create the bin distribution of the plugin.
+	- doc-dist : create the doc distribution of the plugin.
+	- standalone-dist : create a zip file that can be expand run anywhere as an autonomous application. (a cfg file is required)
+	- all : do it all at once.
+ -->
+
+
+<!-- 
+     EDIT THIS PART ACCORDING TO YOUR OWN PROJECT
+-->
+
+<project name="desktop2" default="jar" basedir="."> <!-- default is "jar" but can be changed to "compile" to only compile for instance -->
+
+	<property file="../madkit.properties"/> <!-- using madkit project's default properties -->
+
+	<!--
+	     Add the required plugins to the classpath for compiling sources (madkitkernel.jar at least)
+	-->
+	<fileset id="project.class.path" dir="${jars.dir}">
+		<include name="madkitkernel.jar"/>
+		<include name="boot.jar"/>
+		<include name="madkitutils.jar"/>
+		<include name="messages.jar"/>
+		<include name="SEdit.jar"/>
+		<include name="system.jar"/>
+		<include name="skinlf.jar"/>
+		<include name="skins/**"/>
+		<include name="images.jar"/>
+		<include name="jlfgr-1_0.jar"/>
+		<!--<include name="treedirectory.jar"/>
+		<include name="system.jar"/>
+		-->
+		<!-- <include name="other1.jar"/> -->
+		<!-- <include name="other2.jar"/> -->
+	</fileset>
+	
+	<fileset id="bin.path" dir="${bin.dir}">
+		<include name="configs/**"/>
+		<include name="*.bat"/>
+		<include name="*.sh"/>
+		<include name="desktop.ini" />
+	</fileset>
+
+ 	<!--
+	     Specify the plugin basic informations:
+	     . source directory
+	     . version of the plugin
+	     . author
+	     . other plugins dependencies: the required jars separated by "," whithout space
+	     . description: a short description of what the plugin does
+	-->
+	<property name="src.dir" value="src"/>
+	<property name="version"  value="1.1.3"/>
+	<property name="author"  value="David Pujol, J.Ferber"/>
+	<property name="depend"  value="madkitkernel, system, madkitutils, messages, SEdit, jlfgr, skinlf, xerces"/> <!--, system"/>--> <!-- value="madkitkernel, messages, other1, other2" for instance (you will need madkitkernel at least) -->
+	<!--<property name="requires" value="treedirectory.jar, skinlf.jar" /> --><!-- value="boo.jar", "images.jar", all the external jars that you would need -->
+	<property name="description"  value="The MadKit Desktop is a GUI oriented desktop-like sofware to launch agents and view their execution"/>
+	<property name="agents"  value="none"/>
+	<property name="project.category" value="tools"/>
+	<!--
+	     Options:
+	     . Specify the directory where your images (jpg and gifs) are located inside the src directory (they will be added in the jar file)
+	     . Specify the name of the java packages to build api docs properly.
+	     . Give a title to the html pages generated.
+	-->
+	<property name="images.dir" value="images"/> <!-- means that images are located in "${src}/images" or its subdirectories-->
+	<property name="project.label"  value="The MadKit desktop"/>
+	<property name="system.plugin" value="true"/>
+
+<!-- 
+-->
+
+
+<!-- 
+     GENERIC PART (edit to achieve more functionalities or delete unused targets)
+-->
+
+	<target name="jar" description="Jars the plugin into the jars.dir directory and create launch file if a cfg file available">
+		<ant antfile="${generic.file}" dir="." target="jar" inheritrefs="true"/>
+		<property name="bootline" value="java -cp ${jars.dir}/${desktop.bootargs}"/>
+		<property name="bin.name" value="${project.name}"/>
+		<ant antfile="${generic.file}" dir="." target="runners-files" inheritrefs="true"/>
+	</target>
+
+	<target name="docs">
+		<ant antfile="${generic.file}" dir="." target="docs" inheritrefs="true"/>
+	</target>
+
+	<target name="clean">
+		<ant antfile="${generic.file}" dir="." target="clean" inheritrefs="true"/>
+	</target>
+
+	<target name="real-clean">
+		<ant antfile="${generic.file}" dir="." target="real-clean" inheritrefs="true"/>
+	</target>
+
+	<target name="all">
+		<ant antfile="${generic.file}" dir="." target="all" inheritrefs="true"/>
+	</target>
+
+	<target name="src-dist">
+		<ant antfile="${generic.file}" dir="." target="src-dist" inheritrefs="true"/>
+	</target>
+
+	<target name="bin-dist">
+		<ant antfile="${generic.file}" dir="." target="bin-dist" inheritrefs="true"/>
+	</target>
+
+	<target name="doc-dist">
+		<ant antfile="${generic.file}" dir="." target="doc-dist" inheritrefs="true"/>
+	</target>
+
+	<target name="standalone-dist">
+		<ant antfile="${generic.file}" dir="." target="standalone-dist" inheritrefs="true"/>
+	</target>
+	
+	<target name="plugin-dist-prepare">
+		<ant antfile="${generic.file}" dir="." target="plugin-dist-prepare" inheritrefs="true"/>
+	</target>
+	<target name="plugin-dist" depends="plugin-dist-prepare">
+		<zip destfile="${installer.dir}/${ant.project.name}-${version}.zip">
+			<zipfileset dir="." includes="build.xml,${ant.project.name}.bat,${ant.project.name}.sh,${ant.project.name}.cfg" prefix="${plugins.root.path}/${ant.project.name}"/>
+			<zipfileset dir="${jars.dir}" includes="${jar.name}" prefix="${lib.dir.name}"/>
+			<zipfileset dir="${src.dir}" includes="**/*" prefix="${plugins.root.path}/${ant.project.name}/${src.dir}"/>
+			<zipfileset refid="project.class.path" prefix="${lib.dir.name}"/>
+			<zipfileset dir="."  includes="${scripts.dir}/**" prefix="${plugins.root.path}/${ant.project.name}" />
+			<zipfileset refid="bin.path" prefix="${bin.dir.name}"/>
+			<!-- <zipfileset dir="docs" includes="**/*" prefix="${ant.project.name}/docs"/> -->
+		</zip>
+	</target>
+	<target name="web-dist">
+		<property name="zip.extra.inc.bin" value="images.jar"/>
+		<property name="zip.extra.inc.bin.prefix" value="lib"/>
+		<ant antfile="${generic.file}" dir="." target="web-dist" inheritrefs="true"/>
+	</target>
+
+</project>

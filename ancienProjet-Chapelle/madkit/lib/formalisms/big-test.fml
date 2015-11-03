@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formalism name="TestFormalism" description="Big test">
+ <formalism-info>
+  <author>Ol. Gutknecht</author>
+  <doc url="doc/testformalism.html"/>
+ </formalism-info>      
+ <graphic-element >
+		<property name="automaticDimension">true</property>
+		<property name="pageWidth">300</property>
+		<property name="pageHeight">200</property>
+		<property name="color">10</property>
+ </graphic-element>
+ <connector-types>
+    <connector-desc name="PlugIn" mode="In" category="modtools"/>
+    <connector-desc name="PlugOut" mode="Out" category="modtools"/>
+  </connector-types>
+  <node-types>
+    <node-desc name="Gauge" class="SEdit.Formalisms.DataFlow.SimpleProcess" description="A process">
+      <graphic-element class="SEdit.Graphics.Gauge">
+	<property name="width">200</property>
+	<property name="height">200</property>
+	<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="DefJavaComponent" class="SEdit.Formalisms.DataFlow.SimpleProcess" description="Another process">
+      <graphic-element class="SEdit.Graphics.GJavaComponent">
+	<property name="javaComponentClass">javax.swing.JButton</property>
+	<property name="resizable">true</property>
+	<property name="width">200</property>
+	<property name="height">100</property>
+	<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="DefJInternalFrame" class="SEdit.Formalisms.DataFlow.SimpleProcess">
+      <graphic-element class="SEdit.Graphics.GInternalFrame">
+		<property name="resizable">true</property>
+		<property name="width">300</property>
+		<property name="height">200</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="DefAgent" class="SEdit.JavaAgentNode">
+      <property name="agentClass">demo.agents.system.EditorAgent</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+	<property name="width">200</property>
+	<property name="height">80</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="Circle">
+      <icon url="images/place1.gif"/>
+    </node-desc>
+    <node-desc name="Module1" description="Module with fixed/Layout auto" category="modtools">
+      <module type="Fixed" layout="Auto">
+	<connector type="PlugIn" name="a1"/>
+	<connector type="PlugIn" name="b2"/>
+	<connector type="PlugIn" name="c3"/>
+	<connector type="PlugIn" name="d3"/>
+	<connector type="PlugOut" name="e4"/>
+	<connector type="PlugOut" name="f5"/>
+	<connector type="PlugOut" name="g4"/>
+	<connector type="PlugOut" name="h2"/>
+      </module>
+    </node-desc>
+    <node-desc name="ModuleFree" description="Module with free/Layout Auto" category="modtools">
+      <module type="Free" layout="Auto">
+	<connector type="PlugIn" name="in"/>
+	<connector type="PlugOut" name="gout"/>
+      </module>
+    </node-desc>
+    <node-desc name="ModuleFixedJustified" description="Module with Fixed/Layout Justified" category="modtools">
+      <module type="Fixed" layout="Justified">
+	<connector type="PlugIn" name="c" side="Top"/>
+	<connector type="PlugIn" name="d" side="Bottom"/>
+	<connector type="PlugOut" name="e" side="Left"/>
+	<connector type="PlugOut" name="f" side="Right"/>
+	<connector type="PlugOut" name="g" side="Top"/>
+	<connector type="PlugOut" name="h" side="Bottom"/>
+      </module>
+    </node-desc>
+    <node-desc name="moduleFixedManual" description="A module with Fixed/Layout Manual" category="modtools">
+      <module type="Fixed" layout="Manual">
+	<connector type="PlugIn" name="z" side="Top" ratio="0.1"/>
+	<connector type="PlugOut" name="x" side="Left" ratio="0.5"/>
+	<connector type="PlugOut" name="y" side="Bottom" ratio="1"/>
+	<connector type="PlugIn" name="d" side="Bottom" ratio="0.0"/>
+	<connector type="PlugOut" name="f" side="Right" ratio="0.2"/>
+	<connector type="PlugOut" name="h" side="Bottom" ratio="1"/>
+      </module>
+    </node-desc>
+
+ </node-types>
+ <arrow-types>
+  <arrow-desc to="Process"
+  class="SEdit.Formalisms.DataFlow.SimpleProcessLink" from="Process"
+  description="A link from process to process" name="Link"/>
+  <arrow-desc 
+  class="SEdit.Formalisms.DataFlow.SimpleProcessLink" 
+  description="A link from circle to anything" name="Link2"/>
+
+  <arrow-desc to="PlugIn"
+  class="SEdit.Formalisms.DataFlow.SimpleProcessLink" description="A
+  link to module" name="LinkModule"/>
+  <arrow-desc to="PlugIn" from="PlugOut" description="A link from
+  module to module" name="Intermodule" category="modtools"/>
+ </arrow-types>
+</formalism>
+
+
+
+

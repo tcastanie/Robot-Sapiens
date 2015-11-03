@@ -1,0 +1,72 @@
+/*
+* PingPong.bsh - PingPong agent in BeanShell
+*				adapted from PingPong.java of O. Gutknecht
+* Copyright (C) 2002 Jacques Ferber
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+
+boolean creator=false;
+
+void activate(){
+    self.println("BeanShellAgent ping pong activated");
+    self.println("looking for a ping pong group");
+    if (self.isGroup("ping-pong")){
+        self.println("Yeah I am coming");
+    } else {
+        self.println("I create a new group");
+        self.createGroup(true,"ping-pong",null,null);
+    }
+    self.requestRole("ping-pong","player",null);
+}
+
+void live(){
+    other = null;
+    self.println("looking for a ping pong partner");
+    while (other == null){
+        v = self.getAgentsWithRole("ping-pong","player");
+	for (int i=0; i < v.length; i++){
+			agent = v[i];
+			if (! agent.equals(self.getAddress()))
+				other = agent;
+		}
+	self.pause(1000);
+    }
+   
+// If I'm not the founder agent, I send the first ball
+	if (! creator)
+		self.sendMessage(other, new StringMessage("Ball"));
+	
+	for (int i = 5; i > 0; i--)
+	{
+		m = self.waitNextMessage();
+		if(! m.getSender().equals(other))
+		{
+			other = m.getSender();
+			i=5;
+		}
+		// StringMessage ans = (StringMessage) m;
+		self.println("GEE ! My turn..."+ m.getCreationDate());
+		self.pause(1000);
+		self.sendMessage(other, new StringMessage(m.getString()));
+	}
+}
+
+void end(){
+    self.println("PythonAgent ping pong ended : " + self.getName());
+}
+
+

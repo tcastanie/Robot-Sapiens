@@ -1,0 +1,350 @@
+<HTML
+><HEAD
+><TITLE
+>Demo simulations</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="HOME"
+TITLE='The "Turtles" simulation Pack
+    '
+HREF="index.html">
+<LINK
+REL="PREVIOUS"
+TITLE='The "Turtles" simulation Pack
+    '
+HREF="index.html">
+<LINK
+REL="NEXT"
+TITLE="Virus"
+HREF="virus.html">
+</HEAD
+><BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The "Turtles" simulation Pack</TH
+></TR
+><TR
+>
+      <TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="index.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+>
+      <TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="virus.html"
+>Next</A
+></TD
+>
+    </TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN45"
+>2. Demo simulations</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN47"
+>2.1. Walkers</A
+></H2
+><DIV
+CLASS="SECT3"
+><H3
+CLASS="SECT3"
+><A
+NAME="AEN49"
+>2.1.1. Synopsis</A
+></H3
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 1. walkers are just walking</B
+></P
+>
+        <P
+><IMG
+SRC="images/tp_walkers.gif"></P
+>
+      </DIV
+><P
+>Walkers is a little simulation where the turtle have two behaviors:
+walk forward or change its color according to a new random
+heading. This simulation was made to test the good working of the
+heading primitives</P
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN55"
+>2.2. Mosquitoes</A
+></H2
+><DIV
+CLASS="SECT3"
+><H3
+CLASS="SECT3"
+><A
+NAME="AEN57"
+>2.2.1. Synopsis</A
+></H3
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 2. Mosquitoes fly around but always return to the light source</B
+></P
+>
+        <P
+><IMG
+SRC="images/tp_mosquito.gif"></P
+>
+      </DIV
+><P
+>In Mosquitoes the turtles just "fly" in a random way during a countdown and then fall down to a light source represented by a yellow patch. Turtles known the localization (x,y) of this patch (as a parameter in the constructor). So they use the <TT
+CLASS="FUNCTION"
+>towards</TT
+> command to set their heading. 
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>setHeading(towards(x,y));</PRE
+></TD
+></TR
+></TABLE
+><p></P
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN65"
+>2.3. Creation</A
+></H2
+><DIV
+CLASS="SECT3"
+><H3
+CLASS="SECT3"
+><A
+NAME="AEN67"
+>2.3.1. Synopsis</A
+></H3
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 3. A turtle can create other turtles</B
+></P
+>
+        <P
+><IMG
+SRC="images/tp_creation.gif"></P
+>
+      </DIV
+><P
+>In this simulation a turtle, a creator, tests the good working                                                       of the <TT
+CLASS="FUNCTION"
+>createTurtle</TT
+> command. When moving, a creator draws the patches in white. Then, when it crosses a patch that is already white, it creates a new turtle of a random kind using the <TT
+CLASS="FUNCTION"
+>createTurtle</TT
+> command.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>createTurtle(new Walker());</PRE
+></TD
+></TR
+></TABLE
+>
+At the beginning of the simulation, you can set the wanted number of creator in the launcher's properties box. Moreover an Observer, CreationObserver, displays the total number of turtles alive. <p></P
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN76"
+>2.4. OVNI</A
+></H2
+><DIV
+CLASS="SECT3"
+><H3
+CLASS="SECT3"
+><A
+NAME="AEN78"
+>2.4.1. Synopsis</A
+></H3
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 4. Multiple world interpretations</B
+></P
+>
+        <P
+><IMG
+SRC="images/TP_OVNI.GIF"></P
+>
+      </DIV
+><P
+>The Ovni (french for UFO) simulation was made only to test the display
+of multiple representations at the same time. To do this we have
+written a SpecialViewer (extends Viewer) and overridden its
+<TT
+CLASS="FUNCTION"
+>paintTurtle</TT
+> method in order to obtain that the
+turtles was shown like disks. So it is possible to create your own
+representation of a patch or a turtle (you can use a gif for a
+turtle).
+ <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>public class SpecialViewer extends Viewer 
+{
+    public void paintTurtle(Graphics g,Turtle t,int x,int y,int cellSize)
+    {
+		g.setColor(t.getColor());
+		g.fillOval(x,y,cellSize*3,cellSize*3);
+	}
+
+    public void paintPatch(Graphics g,Patch p,int x,int y,int cellSize)
+    {
+		g.setColor(p.getColor());
+		g.fillRect(x,y,cellSize*3,cellSize*3);
+	}
+
+}</PRE
+></TD
+></TR
+></TABLE
+>
+We have also overridden the <TT
+CLASS="FUNCTION"
+>paintPatch</TT
+> method in
+	  order to avoid that the only draw of the turtles drops some
+	  residue on the floor. This dues to the optimizations made in
+	  the default display engine (using the redrawAll function
+	  (slower) is a solution too).<p></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="index.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="virus.html"
+>Next</A
+></TD
+>
+    </TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The "Turtles" simulation Pack</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Virus</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

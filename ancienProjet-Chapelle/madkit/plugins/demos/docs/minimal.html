@@ -1,0 +1,206 @@
+<HTML
+><HEAD
+><TITLE
+>Minimal</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="HOME"
+TITLE='The "Demo" Agent Pack
+    '
+HREF="index.html">
+<LINK
+REL="PREVIOUS"
+TITLE="PingPong and XMLPingPong"
+HREF="pingpong.html">
+<LINK
+REL="NEXT"
+TITLE="LiveScheme"
+HREF="livescheme.html">
+</HEAD
+><BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The "Demo" Agent Pack</TH
+></TR
+><TR
+>
+      <TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="pingpong.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+>
+      <TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="livescheme.html"
+>Next</A
+></TD
+>
+    </TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN66"
+>3. Minimal</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN68"
+>3.1. Synopsis</A
+></H2
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 2. The minimal agent and its breed</B
+></P
+>
+      <P
+><IMG
+SRC="images/MINIMAL.GIF"></P
+>
+    </DIV
+><P
+>	  This examples exhibits the basic MadKit agent lifecycle, and
+	  shows how to launch or kill other agents.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN74"
+>3.2. Using the agent</A
+></H2
+><P
+>	  Just launch it ! It will print messages upon activation and
+	  run, and launch another agent (a Ping-Pong instance) after
+	  10 seconds delay, and then terminates it.
+	</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN77"
+>3.3. About the code</A
+></H2
+><P
+>	  Two notable security restrictions: you can kill an agent
+	  from another only if you are the agent which created it.
+
+	  Another fact about the MadKit agent lifecycle: you can use
+	  agent-related calls in an agent only after this agent has
+	  been launched (and thus registered in the kernel). This means
+	  that for instance, you cannot use message passing, or
+	  group &#38; role manipulation in the agent class constructor. You
+	  must use the calls only in the <TT
+CLASS="FUNCTION"
+>activate()</TT
+>, <TT
+CLASS="FUNCTION"
+>run()</TT
+> or <TT
+CLASS="FUNCTION"
+>end()</TT
+>.
+	 
+	</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="pingpong.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="livescheme.html"
+>Next</A
+></TD
+>
+    </TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>PingPong and XMLPingPong</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>LiveScheme</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

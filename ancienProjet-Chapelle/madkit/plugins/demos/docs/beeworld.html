@@ -1,0 +1,218 @@
+<HTML
+><HEAD
+><TITLE
+>BeeWorldViewer / BeeScheduler</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="HOME"
+TITLE='The "Demo" Agent Pack
+    '
+HREF="index.html">
+<LINK
+REL="PREVIOUS"
+TITLE="SimplePlotAgent"
+HREF="plot.html">
+</HEAD
+><BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The "Demo" Agent Pack</TH
+></TR
+><TR
+>
+      <TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="plot.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+>&nbsp;</TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN124"
+>6. BeeWorldViewer / BeeScheduler</A
+></H1
+><P
+>The main recent improvement in MadKit is the addition of a generic
+synchronous execution engine to the kernel. You can now build reactive
+systems, simulation models or hybrid agent architecture with the same
+agent/group/role model or messaging capacities. This new architecture
+allows for easy definition of scheduling mechanism and probes to
+observe a system.</P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN127"
+>6.1. Synopsis</A
+></H2
+><P
+>      These agents illustrate the use of the synchronous engine. The <TT
+CLASS="CLASSNAME"
+>BeeScheduler</TT
+> 
+      launches many synchronous agents and schedules them, and the <TT
+CLASS="CLASSNAME"
+>BeeWorldViewer</TT
+> sets up some probes to watch the simulated system.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN132"
+>6.2. Using the agents</A
+></H2
+><DIV
+CLASS="PROCEDURE"
+><OL
+TYPE="1"
+><LI
+><P
+>	    Launch the "BeeWorldViewer", and then a "BeeScheduler". Set
+	    the "active" property of the BeeScheduler to "true" (what we have here
+	    is a scheduler that launched 100 MadKit "bee" agents and an
+	    independent observer).  
+          <P
+><IMG
+SRC="images/TUT_REA1.JPG"></P
+>
+	  <p></P
+></LI
+><LI
+><P
+>	    Now launch another "BeeScheduler" and activate it. Then
+	    select the BeeWorldViewer frame and set the
+	    "instantupdate" property to true. What we have here is a
+	    common observer for two independent reactive systems.
+	      <P
+><IMG
+SRC="images/TUT_REA2.JPG"></P
+>
+	  <p></P
+></LI
+><LI
+><P
+> Now kill one BeeScheduler. The agents are not
+	    executed anymore, but still exist, and the observer should
+	    show one still swarm and another still roaming. You could
+	    also add another viewer, etc...  
+          <P
+><IMG
+SRC="images/TUT_REA3.JPG"></P
+>
+          <p></P
+></LI
+></OL
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN144"
+>6.3. About the code</A
+></H2
+><P
+>To fully understand this code, you should read the chapter <I
+CLASS="CITETITLE"
+>the synchronous engine</I
+> in the MadKit Development Guide. The "bees" example is then quite straightforward. Notable implementations points here are the use of two different activators: the standard ReflectiveActivator which just plugs itself on an existing class through the reflection Java API, and a hand-made <TT
+CLASS="CLASSNAME"
+>BeeActivator</TT
+> which shows that it is always possible to develop some specific classes to maximize speed or expressiveness.&#13;</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="plot.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>SimplePlotAgent</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>&nbsp;</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

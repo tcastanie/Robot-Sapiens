@@ -1,0 +1,515 @@
+<html>
+<head>
+<title>MadKit Desktop</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="madkit.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<h1>The MadKit Desktop environment</h1>
+<p>The Madkit Destkop environment or desktop for short, is the standard platform 
+  GUI for execution and development of agents within MadKit and a good way to 
+  start with MadKit. We will see in the <a href="#host" title="5. MadKit host containers"> 
+  section about host containers</a> that this is not the only execution environment 
+  for MadKit (actually, you can design your owns as needed)</p>
+<p><b>Note</b>: the Desktop has been completely modified from version 3.1 to version 
+  4.0.</p>
+<h4>Convention</h4>
+<p>When a menu item selection is being described, the menu is listed first, followed 
+  by the menu item itself. The menu is separated from the menu item by greater-than 
+  symbols (&#8220;&gt;&#8221;). For example, <b>Windows</b>&gt;<b>add layer</b> 
+  refers to the <b>add layer </b> command contained in the <b>Windows</b> menu. 
+</p>
+<h2>Starting the desktop</h2>
+<p>To start the desktop, double click on the file called desktop.bat or desktop.sh, 
+  depending on your system, in the bin directory. If the installer set up an icon 
+  on your Windows of KDE environment, double click on this icon.</p>
+<h3>Quick overview</h3>
+<div class="sect2">
+  <p>Here is a snapshot of the main components of the desktop interface: 
+  <p>&nbsp;
+  <div class="figure"> 
+    <p><img src="images/desktop1.png" align="center" width="838" height="857"></p>
+    <p><b>Figure 1. A desktop overview</b></p>
+  </div>
+  The main components of the desktop interfaces are: 
+  <div class="itemizedlist"> 
+    <ul type="disc">
+      <li> 
+        <p><b>The MadKit menus. </b>This menu works as in many window based environment, 
+          except that, in our case, standard applications are replaced by agents 
+          which may be launched by clicking on the menu items. This menu contains 
+          a set of pre-defined agents which may be launched with a single click. 
+          It is possible to modify these toolbars at startup. See the section 
+          configuring the MadKit menu to learn how to configure this menu. The 
+          MadKit menu also contains a set of commands which are used to exit from 
+          MadKit, execute script files and select the type of Desktop you like.</p>
+      </li>
+      <li> 
+        <p><b> The destkop area. </b>This is the "working sheet" where agents 
+          are automatically placed when launched. This area contains the agents 
+          window and icons which may be configure to </p>
+      </li>
+      <li> <b> The output pane. </b>This is the place where messages are displayed. 
+        This is a redirection of the main output stream (i.e. the output produced 
+        by <tt>System.out.println(..)</tt> instructions are displayed in this 
+        pane). </li>
+    </ul>
+  </div>
+</div>
+<div class="sect2"> 
+  <div class="itemizedlist"> 
+    <p>Some agents are very often used in conjunction with the desktop for launching 
+      agents, exploring directories, observing organizations, tracing messages, 
+      etc... Here is a brief description of these agents. Please refer to the 
+      standard documentation of the system agents.</p>
+  </div>
+</div>
+<ul>
+  <li> 
+    <div class="sect2"> 
+      <div class="itemizedlist">The <b>OutputAgent</b>: displays the text that 
+        is printed globally with commands such as <code>System.out.println(..)</code>.</div>
+    </div>
+  </li>
+  <li>
+    <div class="sect2">
+      <div class="itemizedlist">The<b> MadKit explorer agent. </b>Works as a standard 
+        file explorer, but somes files (scripted files, SEdit files and Java agents) 
+        which represent MadKit agents may be launched directly from this explorer. 
+        The explorer displays the structure and content of directories. Double-clicking 
+        on one of the icons will start the corresponding application. For instance, 
+        clicking on .txt file will open the notepad or the corresponding editor, 
+        if you have changed the association. Double clicking on agent icons will 
+        launch the corresponding agent, whether it is written in Java or in any 
+        scripting language. Java jar files containing agents are represented as 
+        directories where leaves are the corresponding agents. See <a href="../../plugins/explorer/docs/index.html" title="3.4.2. Using the directory explorer">Using 
+        the MadKit explorer</a> for a description of all possibilities of the 
+        directory explorer. </div>
+    </div>
+  </li>
+  <li> 
+    <div class="sect2"> 
+      <div class="itemizedlist">The<b> GroupObserver agent</b> is used to observe 
+        the structure of communities, groups and roles in MadKit. It is also possible 
+        to trace diagrams within a group, and/or to observe all the organizational 
+        events (creation of groups, agents that enter or leave groups, ..) that 
+        take place in Madkit.</div>
+    </div>
+  </li>
+  <li> 
+    <div class="sect2"> 
+      <div class="itemizedlist">The<b> NetAgent </b>which is part of the MadKit 
+        plugin, is used to connect a MadKit platform to other MadKit platforms 
+        and constitute a MadKit network. See using MadKit as a distributed platform 
+        for a description of the possibilities of the netcom plugin.</div>
+    </div>
+  </li>
+  <li>The<b> SpyAgent </b>is used to observe the communications between agents 
+    of the same community or of the same group.</li>
+  <li>The <b>EditorAgent</b> may be used to edit a text or the script of an agent. 
+  </li>
+</ul>
+<div class="sect2">
+  <div class="itemizedlist">
+    <h2>Launching and observing agents</h2>
+  </div>
+</div>
+<div class="sect2">
+  <div class="titlepage">
+    <div></div>
+  </div>
+  <p> To launch an agent you have several possibilities: 
+  <div class="itemizedlist"> 
+    <ul type="disc">
+      <li> 
+        <p>Click on one of the menu items of the MadKit main menu</p>
+      </li>
+      <li> 
+        <p>Double click on one of the agents of the MadKit explorer. If the icons 
+          represents a Java agent, then this classe is instantiated and the Java 
+          agent launched. If this agent is represented as a script file, i.e. 
+          as a .scm (Scheme agents), .py (Python agents), .clp (Jess agents), 
+          .bsh (BeanShell agents), then a corresponding agent is launched (e.g. 
+          if the file is a .scm file, then a SchemeAgent is launched) with this 
+          script as argument. </p>
+      </li>
+      <li> 
+        <p>Open one of the language editor used for scripted agents (i.e. PythonEditor 
+          for Python scripts) and from this editor open a script and evaluate 
+          it. See {{link}} to learn how to use the languages editors. </p>
+      </li>
+    </ul>
+  </div>
+  <p>There are several tools to observe agents. One of the main tools is the <b>GroupObserver</b>{{link}}, 
+    an agent which shows the structure of groups, displays messages between agents, 
+    and lists organizational events (playing a role, entering or leaving a group, 
+    creating a group, etc.).</p>
+  <div class="sect3"> 
+    <div class="titlepage"> 
+      <div>
+        <h4 class="title">Tutorial: launching a simple agent from the editor</h4>
+      </div>
+    </div>
+    <div class="simplesect"> 
+      <div class="titlepage"> 
+        <div>
+          <h4 class="title">A first Java agent</h4>
+        </div>
+      </div>
+      <p> Start by clicking on the PingPong demo agent written in Java. The simplest 
+        way is to click the menu item <b>madkit&gt;general demos&gt;PingPong</b>, 
+        with icon </p>
+      <p><img src="images/agentpingpongJava32.gif">.</p>
+      <p><img src="images/pingpong1.png" align="center" width="443" height="344"></p>
+        
+      <p><b>Figure 2. Launching a PingPongJava agent</b></p>
+      <p> The PingPong agent creates a <tt>ping-pong</tt> group, requests and 
+        obtains a <tt>player</tt> role, and then waits for another agent with 
+        the same <tt>player</tt> role in the group to exchange a few messages 
+        (seen as "balls") with it. You will get the following picture: </p>
+      <p><img src="images/pingpong2.png" width="339" height="187"></p>
+      <p><b>Figure 3. a PingPongJava agent launched</b></p>
+      <p>To kill an agent, just close its window, the desktop will request its 
+        termination to the agent micro-kernel. </p>
+      <p></p>
+    </div>
+    <div class="simplesect"> 
+      <div class="titlepage"> 
+        <div>
+          <h4 class="title">Observing agents</h4>
+        </div>
+      </div>
+      <p>It is possible to view the general organization (i.e. groups, roles and 
+        communities), messages and organizational events (i.e. creation of groups, 
+        adhesion of an agent to a group, etc.) with a <b>GroupObserver</b>. This 
+        tool is actually an agent which is able to display what happens in Madkit 
+        from an organizational point of view. To launch the <tt>GroupObserver</tt> 
+        click on the icon: <img src="images/groupObserver.gif"></p>
+      <p><img src="images/pingpong3.png" align="center" width="449" height="597"></p>
+        
+      <p><b>Figure 4. A GroupObserver with a PingPong agent</b></p>
+		
+      <p>It is possible to see that the PingPong agent plays the role <tt>player</tt> 
+        in the group <tt>ping-pong</tt>. One can notice also that there are already 
+        several groups which are not part of the application. For instance, the 
+        groups <tt>communications</tt> and <tt>system</tt> are parts of MadKit 
+        and are used to manage the platform.</p>
+      <p>To actually see a trace of the messages sent by agents, click on the 
+        <b>show messages</b> button of the <b>Observer</b> agent.</p>
+      <p></p>
+      <p>Launch another PingPong java by double clicking on the <code>PingPong 
+        agent</code> menu item again. You will see that the two agents (here called 
+        <code>PingPong-7</code> and <code>PingPong-8</code>) starts communicating. 
+        The <tt>GroupObserver</tt> {{link}} lists all messages that are transmitted 
+        between these two agents. 
+      <p><img src="images/pingpong4.png" align="center"></p>
+        
+      <p><b>Figure 5. Communication between agents seen by the observer</b></p>
+
+      <p></p>
+      <p>Scripted agents (i.e. agents whose behavior is written in a script language 
+        such as Scheme, Jess, Python or BeanShell) may be launched in exactly 
+        the same way as Java based agents. For instance, the following figure 
+        shows two PingPong agents. The first one is a Java based agent (as before), 
+        and the second one has been written in Python. {{to be finished}} </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <h3 class="title">Note</h3>
+        <p>When using Python for the first time, a Python initialization mechanism 
+          checks the classpath and build a <tt>cachedir</tt> directory. This may 
+          takes some time (from a few seconds to half a minute depending on your 
+          system). Don't panic, your system is not frozen!!</p>
+      </div>
+    </div>
+  </div>
+  <div class="sect3"> 
+    <div class="titlepage"> 
+      <div></div>
+    </div>
+  </div>
+  <div class="sect3"></div>
+</div>
+<div class="sect2"> 
+  <div class="titlepage"> 
+    <div> 
+      <h3 class="title"><a name="desktopconfig"></a>Configuring the desktop</h3>
+    </div>
+  </div>
+  <p>The configuration of the desktop is described in a file called <tt>desktop.ini</tt>, 
+    which is a XML file which containing information about toolbars and directories 
+    to mount at boot time. </p>
+  <p>The desktop may be configured in several ways to change its appearance and 
+    to add new menu items and icons.</p>
+  <p>There are three ways to add new classes of agents in a desktop: add a button 
+    in the desktop, add a menu item in the madkit menu, open a configuration file 
+    or double click on an agent icon in the Explorer.</p>
+  <div class="sect3"> 
+    <div class="titlepage"> 
+      <div></div>
+    </div>
+    <p>The <tt>desktop.ini</tt> file is used to configure the desktop at launch 
+      time. This is a XML file which contains (for the moment) only two type of 
+      entries: toolbar description and directories to mount </p>
+    <div class="sect4"> 
+      <div class="titlepage"> 
+        <div> 
+          <h4 class="title">Menu description</h4>
+          <p class="title">{{<b>Note</b>: This section does not correspond to 
+            the new Desktop configuration. Look at the desktop.ini file...}}</p>
+        </div>
+      </div>
+      <p>A toolbar is a set of buttons which are used to launch agents. Each button 
+        is described with the following entries: 
+      <table border="1" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="programlisting">&lt;button name="name of button"
+	description="a string which describes the button"
+	icon="address of image"
+	type="type of agent" 
+	code="class of Java agent or address of script code" 
+/&gt;</pre>
+          </td>
+        </tr>
+      </table>
+      The <tt>type</tt> attribute refers to the type of agent. 
+      <p></p>
+      <div class="orderedlist"> 
+        <ol type="1">
+          <li> 
+            <p>If the value of the <tt>type</tt> attribute is <tt>Java</tt> then 
+              the <tt>code</tt> attribute refers to the Java class name which 
+              will be instantiated when the button is clicked. </p>
+          </li>
+          <li> 
+            <p>If the value is different, then this is a script based agent, i.e. 
+              an agent whose behavior has been written in a script language. For 
+              the moment only the following values are recognized: <tt>Scheme</tt>, 
+              <tt>Jess</tt>, <tt>Pyton</tt>, <tt>BeanShell</tt>. More will be 
+              added in the future. In this case, the <tt>code</tt> attribute, 
+              refers to the address of the file. </p>
+          </li>
+        </ol>
+      </div>
+      <p>Here is the definition of the "Pingpong" toolbar from <tt>desktop.ini.</tt></p>
+      <table border="1" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="programlisting">
+&lt;toolbar name="Pingpong"&gt;
+	&lt;button name="PingPongJava" 
+			description="the PingPong demo agent in Java"
+			icon="images/agents/agentpingpongJava32.gif"
+			type="Java"
+			code="agents.PingPong" /&gt;
+			
+	&lt;button name="PingPongScheme" 
+			description="the PingPong demo agent in Scheme"
+			icon="images/agents/agentpingpongScheme32.gif"
+			type="Scheme"
+			code="autoload/scripts/schemefiles/PingPong.scm" /&gt;
+			
+	&lt;button name="PingPongJess" 
+			description="the PingPong demo agent in Jess"
+			icon="images/agents/agentpingpongJess32.gif"
+			type="Jess"
+			code="autoload/scripts/jessfiles/madkit standard/PingPong.clp" /&gt;
+			
+	&lt;button name="PingPongPython" 
+			description="the PingPong demo agent in Python"
+			icon="images/agents/agentpingpongPython32.gif"
+			type="Python"
+			code="autoload/scripts/pythonfiles/PingPong.py" /&gt;
+
+	&lt;button name="PingPongBeanShell" 
+			description="the PingPong demo agent in BeanShell"
+			icon="images/agents/agentpingpongBeanShell32.gif"
+			type="BeanShell"
+			code="autoload/scripts/beanshellfiles/PingPong.bsh" /&gt;
+&lt;/toolbar&gt;</pre>
+          </td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+    </div>
+    <div class="sect3"> 
+      <h4>Configuration files </h4>
+      <p>A configuration file has the extension <tt>.cfg</tt> and contains a set 
+        of actions that have to be done when the configuration file is loaded. 
+        For the moment, the only recognized action is the <tt>launch-agent</tt> 
+        action wich has the following form: 
+      <table border="1" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="programlisting">
+&lt;launch-agent name="agent name" 
+   type="type of agent" 
+   code="Java class name or script file address depending on the type"
+   gui="true"
+/&gt;</pre>
+          </td>
+        </tr>
+      </table>
+      <p></p>
+      <p> The <tt>type</tt> attribute refers to the type of agent. </p>
+      <div class="orderedlist"> 
+        <ol type="1">
+          <li> 
+            <p>If the value of the <tt>type</tt> attribute is <tt>Java</tt> then 
+              the <tt>code</tt> attribute refers to the Java class name which 
+              will be instantiated to make the agent. </p>
+          </li>
+          <li> 
+            <p>If the value is different, then this is a script based agent, i.e. 
+              an agent whose behavior has been written in a script language. For 
+              the moment only the following values are recognized: <tt>Scheme</tt>, 
+              <tt>Jess</tt>, <tt>Pyton</tt>, <tt>BeanShell</tt>. More will be 
+              added in the future. In this case, the <tt>code</tt> attribute, 
+              refers to the address of the script file. </p>
+          </li>
+        </ol>
+      </div>
+      <p> The <tt>gui</tt> attribute is a flag which says if the agent must be 
+        launched with its GUI interface or not. By default the flag is <tt>true</tt>. 
+      </p>
+      <p>Here is the definition of the <tt>testconfig.cfg</tt> configuration file. 
+        You may notice that some agents are launched with their GUI interface 
+        and some are not. </p>
+      <table border="1" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="programlisting">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;config&gt;
+	&lt;launch-agent name="pong-java" type="Java" code="agents.PingPong"/&gt;
+	&lt;launch-agent name="provider-1" type="Java" code="agents.marketorg.Provider"/&gt;
+	&lt;launch-agent name="provider-2" type="Java" code="agents.marketorg.Provider"/&gt;
+	&lt;launch-agent name="provider-3" type="Java" code="agents.marketorg.Provider"/&gt;
+	&lt;launch-agent name="provider-4" type="Java" code="agents.marketorg.Provider"/&gt;
+	&lt;launch-agent name="provider-5" type="Java" code="agents.marketorg.Provider"/&gt;
+	&lt;launch-agent name="provider-6" type="Java" code="agents.marketorg.Provider" gui="false"/&gt;
+	&lt;launch-agent name="provider-7" type="Java" code="agents.marketorg.Provider" gui="false"/&gt;
+	&lt;launch-agent name="provider-8" type="Java" code="agents.marketorg.Provider" gui="false"/&gt;
+	&lt;launch-agent name="provider-9" type="Java" code="agents.marketorg.Provider" gui="false"/&gt;
+&lt;/config&gt;</pre>
+          </td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+    </div>
+  </div>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h3 class="title">Desktop properties</h3>
+      </div>
+    </div>
+    <h4 class="title">Creating new Icons</h4>
+    <p class="title">To create a desktop icon, right click on the background and 
+      select the popup menu item <b>add icon</b>. Then the following dialog appears:</p>
+    <p class="title"><img src="images/icon_maker.png" width="506" height="426"></p>
+    <p class="title"><b>Figure xx: the Icon maker dialog to create new Icons on 
+      the desktop </b></p>
+    <p class="title">Choose an image among all the resources (this dialog shows 
+      all the images that are available in all the jars of madkit). Then fill 
+      the fields and validate. Here is the meaning of the fields:</p>
+  </div>
+</div>
+<ul>
+  <li> Icon label corresponds to the name displayed under the icon</li>
+  <li>Icon description is the tooltip text which will be displayed when the mouse 
+    goes over the icon.</li>
+  <li>Icon type must be filled by one of the following items: Java, BeanShell, 
+    Scheme, Jess, Python. The default value is Java. This corresponds to the language 
+    category of the agent.</li>
+  <li>Icon code is the name of the full Java class (when the agent is a Java agent) 
+    or of the file (if the agent is a scripted agent).</li>
+</ul>
+<p>To modify an icon, right click on the icon and choose the menu item <b>Icon 
+  property</b>, modify the fields and validate the modifications with the OK button.</p>
+<p>To delete an icon, right click on the icon and choose the menu item <b>Delete 
+  icon</b>.</p>
+
+<div class="sect2">
+  <div class="sect2">
+<h4 class="title">Launch mode</h4>
+    <p>{{this has been changed with the new Desktop...}}</p>
+    <p>When an agent is activated, the desktop will launch a new internal frame 
+      in the agent desktop to enclose its graphical interface (whether it is a 
+      custom GUI or a simple text panel automatically created). </p>
+    <p>You can easily change this behavior with the <b>Launch mode</b> menu. You 
+      can choose between 2 options: 
+    <div class="itemizedlist"> 
+      <ul type="disc">
+        <li> 
+          <p><b>Launch as internal frame. </b>The default behavior, the agent 
+            is launched in an internal frame on the current agent desktop. You 
+            can add or remove new agent desktops with the <b>Windows</b>&gt;<b>add 
+            Layer</b> command.</p>
+        </li>
+        <li> 
+          <p><b>Launch as external window. </b>The agent is launched in an external 
+            native window.</p>
+        </li>
+      </ul>
+    </div>
+    <p></p>
+    <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"> 
+      <h3 class="title">Note</h3>
+      <p>When an agent use a heavyweight AWT component (i.e. native platform components), 
+        the desktop will launch the agent as an external window, because heavyweight 
+        components do not mix well with Swing lightweight components. Please see 
+        the Java documentation for more information. </p>
+    </div>
+  </div>
+  <div class="sect3"> 
+    <div class="titlepage"> 
+      <div> 
+        <h4 class="title"><a name="IDAY2IQF"></a>3.6.2. Agent disposal</h4>
+      </div>
+    </div>
+    <p>By default, the desktop will remove the graphical interface of agent when 
+      an agent is killed. You can modify this behavior, and leave the graphical 
+      interface of agents after the death of agents by unchecking th <b>Dispose 
+      GUI at deactivation</b> item in the <b>View</b> menu. </p>
+    <p>Note that closing manually an agent interface (by hitting the close box) 
+      will dispose the agent GUI <span class="emphasis"><i>and</i></span> kill 
+      the agent, thus removing it from the MadKit kernel.</p>
+  </div>
+</div>
+<div class="sect2"> 
+  <div class="titlepage"> 
+    <div> 
+      <h3 class="title"><a name="jEdit"></a>3.7. Using jEdit with MadKit</h3>
+    </div>
+  </div>
+  <p> jEdit is powerful text editor which is provided free with a GPL Licence. 
+    One of the key feature of jEdit is the facility to add plugins and supplement 
+    jEdit with new features. </p>
+  <p> jEdit has been integrated into MadKit in order to bring the power of a complete 
+    editor. With jEdit, it is possible to edit a script of an agent, launch a 
+    scripted agent, evaluate Scheme expressions. In the future, more facilities 
+    will be added, like developping Java agents without requiring to stop and 
+    rerun MadKit. </p>
+  <div class="sect3"> 
+    <div class="titlepage"> 
+      <div> 
+        <h4 class="title"><a name="IDAH3IQF"></a>3.7.1. Basic commands with jEdit</h4>
+      </div>
+    </div>
+    <p> To launch jEdit, click on the jEdit button: 
+    <p><img src="images/jedit-icon.gif"></p>
+    <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"> 
+      <h3 class="title">Caution</h3>
+      <p>For the moment, you cannot quit jEdit without leaving MadKit too. Thus 
+        once jEdit is launched, you cannot 'delete' jEdit. This is due to some 
+        initialization problems. This problem will be solved in a future version 
+        of MadKit. </p>
+    </div>
+    <p></p>
+    <p>{{to be finished}}</p>
+  </div>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

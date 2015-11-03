@@ -1,0 +1,29 @@
+h1 {  font-family: Verdana, Arial, Helvetica, sans-serif; color: #3333FF}
+h2 {
+	color: #0099FF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+p {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: x-small}
+h3 {
+	color: #3399FF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+li {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+}
+.annonce {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: xx-small;
+}
+.bandeau {
+	color: #00FFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+}
+h4 {
+	color: #3399FF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+tt {  font-family: "Courier New", Courier, mono; font-size: x-small}
+code {  font-family: "Courier New", Courier, mono; font-size: x-small}

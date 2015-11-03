@@ -1,0 +1,5 @@
+<!ELEMENT ListeContraintes (Contrainte*)>
+ <!ELEMENT Contrainte (type,from*,to*)>
+  <!ELEMENT type (#PCDATA)>
+  <!ELEMENT from (#PCDATA)>
+  <!ELEMENT to (#PCDATA)>

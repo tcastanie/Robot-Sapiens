@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="tutorial1" description="a simple tutorial example">
+  <formalism-info>
+    <author>Jacques Ferber</author>
+    <author>Ol. Gutknecht</author>
+  </formalism-info>
+
+  <node-types>
+    <node-desc name="round node" class="SEdit.SimpleNode">
+      <icon url="images/place1.gif"/>
+    </node-desc>
+    <node-desc name="rectangular node" class="SEdit.SimpleNode">
+      <icon url="images/transition1.gif"/>
+      <graphic-element class="SEdit.Graphics.GRectangle">
+		<property name="width">80</property>
+		<property name="height">40</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="iconic node" class="SEdit.SimpleNode">
+      <icon url="images/monalisa.gif"/>
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/monalisa.gif</property>
+		<property name="width">40</property>
+		<property name="height">40</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+  </node-types>
+  <arrow-types>
+    <arrow-desc name="link1" class="SEdit.SArrow" description="A link from anything to anything">
+      <icon url="images/stdarrow.gif"/>
+      <graphic-element >
+		<property name="displaylabel">false</property>
+		<property name="endingForm">2</property>
+      </graphic-element>
+    </arrow-desc>
+	<arrow-desc name="link2"
+  		class="SEdit.SArrow" from="round node" to="round node"
+  		description="A link from node1 to node1"/>
+  </arrow-types>
+</formalism>

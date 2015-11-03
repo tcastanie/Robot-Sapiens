@@ -1,0 +1,88 @@
+/*
+* Migrator.bsh - Communicator: the connection module of MadKit
+* Copyright (C) 1998-2002 Fabien Michel, Jacques Ferber
+*
+* This library is free software; you can redistribute it and/or
+* modify it under the terms of the GNU Lesser General Public
+* License as published by the Free Software Foundation; either
+* version 2.1 of the License, or (at your option) any later version.
+
+* This library is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* Lesser General Public License for more details.
+
+* You should have received a copy of the GNU Lesser General Public
+* License along with this library; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+*/
+
+import network.demo.*;
+import madkit.kernel.*;
+
+  int status=0;
+
+  void activate() 
+    {
+    	self.createGroup(false,"migration",null,null);
+    	self.requestRole("migration","traveler");
+
+    }
+    
+  void live()
+  {
+ 	while(true)
+  	{
+  		switch(status)
+  		{
+  			case 0:
+  				println("ok i'm starting living !! "+me);
+  				global.status = 1;
+  				self.pause(2000);
+  				println("ok i'm trying to move");
+  				break;
+  			case 1:
+  				self.sendMessage(self.getAgentWithRole("communications","site"),new NetworkRequest(NetworkRequest.GET_AVAILABLE_DESTINATIONS));
+  				Message m = self.waitNextMessage();
+  				KernelAddress[] destinations = (KernelAddress[])((NetworkRequest) m).getArgument();
+  				if(destinations.length > 0)
+  				{
+  					global.status = 2;
+  					println("ok let's go to "+destinations[0].toString()+"!!!!!!!\n");
+					for(int i=5;i>=0;i--)
+					{
+						println(" "+i+" !!!");
+						self.pause(1000);
+					}
+					println("\nGO !!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					self.pause(100);
+  					self.sendMessage(self.getAgentWithRole("communications","site"),new NetworkRequest(NetworkRequest.REQUEST_MIGRATION,destinations[0]));
+  					self.disposeMyGUI();
+  				}
+  				else
+					println("no destination, waiting...");
+				self.pause(1500);
+  				break;
+ 		}
+  		if(status == 2)
+  		{
+  			//redisplayMyGUI();
+			println("\nyeeeeeaaaaaaaaahhhhhhhhhhhh !!!!!!!");
+			self.pause(100);
+			println("\nok I have moved :] address is now "+getAddress());
+			self.pause(1000);
+  			global.status=3;
+			self.pause(100);
+			println("\nmission completed!! bye !");
+			self.pause(5000);
+  			break;
+  		}
+  	}
+  	
+  }
+  
+  void end()
+    {
+      println ("Migrator agent Ended");
+    }
+

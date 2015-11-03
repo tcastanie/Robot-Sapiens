@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formalism name="AgentTestFormalism" description="Agents">
+ <formalism-info>
+  <author>J. Ferber</author>
+  <doc url="doc/testformalism.html"/>
+ </formalism-info>
+  <graphic-element >
+		<property name="color">2</property>
+  </graphic-element>
+  <node-types>
+    <node-desc name="Editor" class="SEdit.JavaAgentNode" description="A simple text editor agent" category="System agents">
+      <icon url="images/agents/agenteditor32.gif"/>
+      <property name="agentClass">agents.system.EditorAgent</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+		<property name="width">200</property>
+		<property name="height">80</property>
+      </graphic-element>
+    </node-desc>
+ <!--   <node-desc name="OrgLister" class="SEdit.JavaAgentNode" description="An organization lister agent" category="System agents">
+      <icon url="images/agents/agenttree32.gif"/>
+      <property name="agentClass">agents.system.OrgLister</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+		<property name="displayLabel">false</property>
+      </graphic-element>
+    </node-desc> -->
+    <node-desc name="GroupObserver" class="SEdit.JavaAgentNode" description="A message tracer agent" category="System agents">
+      <icon url="images/agents/groupObserver.gif"/> -->
+      <property name="agentClass">agents.system.GroupObserver</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+		<property name="displayLabel">false</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="Broker" class="SEdit.JavaAgentNode" description="A broker" category="Travel">
+	  <icon url="images/agents/broker1.gif"/>
+      <property name="agentClass">agents.marketorg.Broker</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+	<property name="displayLabel">false</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="Provider" class="SEdit.JavaAgentNode" category="Travel"
+			    description="a travel provider">
+	  <icon url="images/agents/plane-provider.gif"/>
+      <property name="agentClass">agents.marketorg.Provider</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+	<property name="displayLabel">false</property>
+      </graphic-element>
+    </node-desc>    
+	<node-desc name="JessProvider" class="SEdit.JessAgentNode" category="Travel"
+			    description="a travel provider written in Jess">
+	  <icon url="images/agents/plane-providerJess.gif"/>
+      <property name="agentClass">scripts/jessfiles/marketorg/marketorg_provider.clp</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+	<property name="displayLabel">false</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="Client" class="SEdit.JavaAgentNode" category="Travel"
+			    description="a client">
+	  <icon url="images/agents/client.gif"/>
+      <property name="agentClass">agents.marketorg.Client</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="OrgGrapher" class="SEdit.JavaAgentNode" category="System agents"
+			    description="an organization grapher agent">
+	  <icon url="images/agents/orgGrapher.gif"/>
+      <property name="agentClass">SEdit.Formalisms.OrgGrapher.OrgGrapher</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>    
+    <node-desc name="JessEditor" class="SEdit.JavaAgentNode" category="Language"
+			    description="a Jess editor agent">
+	  <icon url="images/agents/agenteditorJess32.gif"/>
+      <property name="agentClass">agents.jess.EditJessAgent</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>    
+	<node-desc name="JessMonitor" class="SEdit.JavaAgentNode" category="Language"
+			    description="a Jess monitor agent">
+	  <icon url="images/agents/jessMonitor.gif"/>
+      <property name="agentClass">agents.jess.JessMonitor</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc> 
+	<node-desc name="JessAgent" class="SEdit.JavaAgentNode" category="Language"
+			    description="a simple Jess agent">
+	  <icon url="images/agents/jessAgent.gif"/>
+      <property name="agentClass">madkit.models.jess.JessAgent</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc> 
+	<node-desc name="LiveScheme" class="SEdit.JavaAgentNode" category="Language"
+			    description="a Scheme simple toplevel">
+	  <icon url="images/agents/schemeAgent.gif"/>
+      <property name="agentClass">agents.scheme.LiveScheme</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="EditSchemeAgent" class="SEdit.JavaAgentNode" category="Language"
+			    description="a scheme editor agent">
+	  <icon url="images/agents/agenteditorScheme32.gif"/>
+      <property name="agentClass">agents.scheme.EditSchemeAgent</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+      </graphic-element> 
+    </node-desc> 
+	<node-desc name="EditPythonAgent" class="SEdit.JavaAgentNode" category="Language"
+			    description="a Python editor agent">
+	  <icon url="images/agents/agenteditorScheme32.gif"/>
+      <property name="agentClass">agents.python.EditPythonAgent</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+      </graphic-element> 
+    </node-desc> 
+	<node-desc name="Scheme PingPong" class="SEdit.SchemeAgentNode" category="Language"
+			    description="a mini Scheme interpreter which may be used to create agents remotely">
+	  <icon url="images/agents/evalSchemeAgent.gif"/>
+      <property name="agentClass">scripts/schemefiles/PingPong.scm</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>     
+    <node-desc name="DBAgent" class="SEdit.JavaAgentNode" 
+				description="A Data base agent which agentify access to JDBC databases" category="tools">
+      <icon url="images/agents/agent3.gif"/>
+      <property name="agentClass">agents.toolagents.DBAgent</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+	<property name="displayLabel">false</property>
+	<!-- <property name="width">200</property> -->
+	<!-- <property name="height">80</property> -->
+      </graphic-element>
+    </node-desc>    
+    <node-desc name="MinimalChat" class="SEdit.JavaAgentNode" 
+	description="A minimal chat agent" category="tools">
+      <icon url="images/agents/agent3.gif"/>
+      <property name="agentClass">agents.system.MinimalChat</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+	<property name="displayLabel">false</property>
+	<!-- <property name="width">200</property> -->
+	<!-- <property name="height">80</property> -->
+      </graphic-element>
+    </node-desc>
+    <node-desc name="PingPong" class="SEdit.JavaAgentNode" 
+				description="A PingPong agent programmed in Java" category="demo">
+      <icon url="images/agents/agentpingpongJava32.gif"/>
+      <property name="agentClass">agents.PingPong</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	<property name="resizable">true</property>
+	<property name="displayLabel">false</property>
+	<!-- <property name="width">200</property> -->
+	<!-- <property name="height">80</property> -->
+      </graphic-element>
+    </node-desc>
+    <node-desc name="Scheme PingPong" class="SEdit.SchemeAgentNode" category="demo"
+			    description="a ping-pong agent programmed in Scheme">
+	  <icon url="images/agents/agentpingpongScheme32.gif"/>
+      <property name="agentClass">scripts/schemefiles/PingPong.scm</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="Jess PingPong" class="SEdit.JessAgentNode" category="demo"
+			    description="a ping-pong agent programmed in Jess rule based language">
+	  <icon url="images/agents/agentpingpongJess32.gif"/>
+      <property name="agentClass">scripts/jessfiles/madkit standard/PingPong.clp</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="Python PingPong" class="SEdit.PythonAgentNode" category="demo"
+			    description="a ping-pong agent programmed in Python">
+	  <icon url="images/agents/agentpingpongScheme32.gif"/>
+      <property name="agentClass">scripts/pythonfiles/PingPong.py</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+		<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>
+	<node-desc name="Bee Scheduler" class="SEdit.JavaAgentNode" category="demo" 
+				description="a Bee Launcher use the property box to activate it">
+	  <icon url="images/agents/beescheduler.gif"/>
+      <property name="agentClass">agents.dynamicbees.BeeLauncher</property>
+      <graphic-element class="SEdit.Graphics.GAgent">
+	 	<property name="resizable">true</property>
+      </graphic-element>
+    </node-desc>
+  </node-types>
+</formalism>

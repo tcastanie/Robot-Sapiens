@@ -1,0 +1,492 @@
+<html>
+<head>
+<title>Programming MadKit in Scheme</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<div class="titlepage">
+  <div>
+    <h2 class="title"><a name="IDAFXGKG"></a>Programming agents using scripting 
+      languages</h2>
+  </div>
+</div>
+<div class="toc"> 
+  <h2><b>Table of Contents</b></h2>
+  <ul>
+    <li><a href="#IDAKXGKG">General principles</a></li>
+    <li><a href="#Intro">Introduction to programming MadKit in Scheme (Kawa)</a></li>
+    <li><a href="#API">API for programming MadKit from Scheme </a> 
+      <ul>
+        <li><a href="#organization">Organization related primitives</a></li>
+        <li><a href="#Communication">Communication related primitives</a></li>
+        <li><a href="#Agent">Agent creation and destruction primitives</a> </li>
+        <li><a href="#misc">Miscelleaneous primitives</a></li>
+        <li><a href="#Additional">Additional functions</a></li>
+      </ul>
+    </li>
+    <li><a href="#Examples">Examples</a> </li>
+  </ul>
+</div>
+<p>Java is not the only language one can use to develop applications in MadKit. 
+  There are already several scripting languages which may be used to describe 
+  agents behavior and GUI components. For the moment four scripting languages 
+  are already available: <b>Scheme</b> (using the Kawa engine), <b>Python</b> 
+  (using the Jython interpreter), <b>Jess</b> (a rule based language), and <b>BeanShell</b> 
+  (a Java interpreter). In the future, more scripting languages will be added 
+  to MadKit. Moreover, it is quite straightforward to add a new scripting language 
+  to MadKit (see {{adding your own scripting language}}).</p>
+<div class="sect1"> 
+  <div class="titlepage"> 
+    <div> 
+      <h2 class="title" style="clear: both"><a name="IDAKXGKG"></a>General principles 
+        when programming with scripting languages</h2>
+    </div>
+  </div>
+  <p>There are some general principles that work with all scripting languages. 
+  </p>
+  <p>The behavior description of a scripted agent is located in a script file 
+    which is loaded and evaluated at launch time. Thus, if you modify the behavior 
+    file, when you instantiate and launch a new agent from the same file, then 
+    you will get a new behavior. This means that you may develop scripted agents 
+    behavior without leaving MadKit. To edit a scripted agent, you have several 
+    possibilies (see also the <a href="../userguide/userguide.html#scriptedit" target="_top">userguide</a> 
+    to get more details): 
+  <div class="itemizedlist"> 
+    <ul type="disc">
+      <li> 
+        <p>Use an external editor.</p>
+      </li>
+      <li> 
+        <p>Use an "<a href="file:///F|/madkit/madkit4/sourceforgecvs/madkit/plugins/schemelib/agents/systempack/systempack.html#notepad" target="_top">Editor</a> 
+          agent" to edit the code of the agent. </p>
+        <p><span class="bold"><b>Note: </b></span> On the MadKit desktop, you 
+          may invoke this action by selecting the <b>NotePad</b> menuitem on the 
+          popup menu associated to a script file in the <a href="../userguide/userguide.html#explorer" target="_top">directory 
+          explorer</a>. </p>
+      </li>
+      <li> 
+        <p>Use jEdit to edit the code of the script file and create agents directly 
+          from jEdit. <span class="bold"><b>Note: </b></span> On the MadKit desktop, 
+          you may invoke this action by selecting the <b>jEdit</b> menuitem on 
+          the popup menu associated to a script file in the <a href="../userguide/userguide.html#explorer" target="_top">directory 
+          explorer</a>. </p>
+      </li>
+      <li> 
+        <p>Use specialized editor agents that may evaluate their content: <tt>JessEditorAgent</tt> 
+          {{link}} for the JessLanguage, <tt>SchemeEditorAgent</tt> {{link}} for 
+          Scheme, <tt>BeanshellEditorAgent</tt> {{link}} for Beanshell, and <tt>PythonEditorAgent</tt> 
+          {{link}} for the Python language. All of these editor has a generic 
+          structure of a NotePad agent with the ability to evaluate the content 
+          of whole or part of the buffer. On top of it, each editor presents a 
+          set of specific features. See the corresponding sections. </p>
+      </li>
+    </ul>
+  </div>
+  <p></p>
+  <p>For each scripting language there is a special agent called <tt>&lt;language&gt;Agent</tt> 
+    where &lt;<tt>language</tt>&gt; is one of the scripting languages. This type 
+    of agent inherits from <tt>Agent</tt> and is threaded. When you launch a scripted 
+    agent, for instance by double clicking on a script file in the directories 
+    explorer of the MadKit desktop, one of these agent is instantiated and the 
+    script file is passed as argument. </p>
+</div>
+<div class="sect1"> 
+  <div class="titlepage"> 
+    <div></div>
+  </div>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h2 class="title"><a name="Intro"></a>Introduction to programming MadKit 
+          in Scheme (Kawa)</h2>
+      </div>
+    </div>
+    <p> Scheme agents are instances of the class <a href="../api/madkit/lib/agents/SchemeAgent.html" target="_top"><tt>SchemeAgent</tt></a>. 
+      Scheme functions have been added to provide bindings with the <tt>Agent</tt> 
+      class. </p>
+    <p>The Kawa Scheme system is the underlying implementation and the bindings 
+      are developed with the Scheme/Java interface. The related Kawa documentation 
+      (<a href="http://www.gnu.org/software/kawa/" target="_top">http://www.gnu.org/software/kawa/</a>) 
+      is a recommended reading for MadKit/Scheme agent developers. </p>
+    <p> As with the Java API, an agent developed with the MadKit/Scheme bindings 
+      has to define the <tt>activate</tt>, <tt>live</tt> or <tt>end</tt> functions. 
+      See <a href="#Examples">examples</a> below.</p>
+  </div>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h2 class="title"><a name="API"></a> API for programming MadKit from Scheme</h2>
+      </div>
+    </div>
+    <p> These functions map to the agent life-cycle and information methods. Arguments 
+      are standard scheme type or Java objects.</p>
+    <p>The variable <tt>self</tt> represents the current agent.</p>
+    <div class="sect3"> 
+      <div class="titlepage"> 
+        <div> 
+          <h3 class="title"><a name="organization"></a>Organization related primitives</h3>
+        </div>
+      </div>
+      <p> These functions maps the group, role and community management for an 
+        agent. Scheme strings are automatically translated to Java strings, so 
+        usage is similar.</p>
+      <div class="variablelist"> 
+        <dl> 
+          <dt><span class="term"><tt>(create-group d c g s a), (create-group d 
+            g s a)</tt></span></dt>
+          <dd> 
+            <p> Creates the group <tt>g</tt> in the community <tt>c</tt> if this 
+              parameter is present and in <tt>"public"</tt> if not. The group 
+              is distributed if the boolean parameter <tt>d</tt> is <tt>#t</tt> 
+              and local (i.e. agents are not visible from distant kernels) otherwise. 
+              The <tt>s</tt> parameter is used to describe the overall structure 
+              of the group, but this feature is not used yet. The <tt>a</tt> parameter 
+              is an object which implements an authorization mechanism for agents 
+              to get into the group. see section {{section}} for more information 
+              on creating groups with authorization elements. </p>
+            <p>Example:</p>
+            <table border="0" bgcolor="#E0E0E0">
+              <tr> 
+                <td> 
+                  <pre class="programlisting">(create-group #t "foo" "myGroup" #!null #!null)</pre>
+                </td>
+              </tr>
+            </table>
+            <p>creates a distributed group <tt>"myGroup"</tt> in the community 
+              <tt>"foo"</tt> with no description and no authorization element. 
+            </p>
+            <table border="0" bgcolor="#E0E0E0">
+              <tr> 
+                <td> 
+                  <pre class="programlisting">(create-group #f "myGroup" #!null #!null)</pre>
+                </td>
+              </tr>
+            </table>
+            <p>creates a local group <tt>"myGroup"</tt> in the community <tt>"public"</tt> 
+              with no description and no authorization element. </p>
+          </dd>
+          <dt><span class="term"><tt>(request-role c g r m), (request-role g r 
+            m)</tt></span></dt>
+          <dd> 
+            <p> The current agent requests to play the role <tt>r</tt> within 
+              the group <tt>g</tt> in the community <tt>c</tt> if this parameter 
+              is present and in <tt>"public"</tt> if not. The <tt>m</tt> parameter 
+              is a "member card" that the current agent may use to enter the group 
+              and obtain this role, which may be null (i.e. #!null in Scheme/Kawa) 
+              if the group <tt>g</tt> has no security manager. </p>
+            <p> Returns the following values: 1 : operation success; -1 : access 
+              denied; -2 : the role is already handled by this agent; -3 : the 
+              group does not exist; -4 : the community does not exist. </p>
+            <p>Example:</p>
+            <table border="0" bgcolor="#E0E0E0">
+              <tr> 
+                <td> 
+                  <pre class="programlisting">(request-role "foo" "myGroup" "player" #!null)</pre>
+                </td>
+              </tr>
+            </table>
+            <p>Requests to play the role <tt>"player"</tt> in the group <tt>"myGroup"</tt> 
+              with regards to the community <tt>"foo"</tt> with no member card. 
+            </p>
+          </dd>
+          <dt><span class="term"><tt>(leave-role c g r), (leave-role g r)</tt></span></dt>
+          <dd> 
+            <p> Leaves the role <tt>r</tt> which exists in the group <tt>g</tt> 
+              of community <tt>c</tt> if the parameter is present, or of community 
+              <tt>"public"</tt> if not. If the current agent plays only the role 
+              <tt>r</tt> in <tt>g</tt>, then it leaves the group. </p>
+          </dd>
+          <dt><span class="term"><tt>(leave-group c g), (leave-group g)</tt></span></dt>
+          <dd> 
+            <p> Leaves the group <tt>g</tt> of community <tt>c</tt> if the parameter 
+              is present, or of community <tt>"public"</tt> if not. </p>
+          </dd>
+          <dt><span class="term"><tt>(community? c)</tt></span></dt>
+          <dd> 
+            <p> Returns <tt>#t</tt> if the community <tt>c</tt> exists, i.e. if 
+              the kernel (represented by the <tt>SiteAgent</tt>) is present in 
+              this community. </p>
+          </dd>
+          <dt><span class="term"><tt>(group? c g), (group? g)</tt></span></dt>
+          <dd> 
+            <p> Returns <tt>#t</tt> if the group <tt>g</tt> exists in the community 
+              <tt>c</tt> if the parameter is present, or exists in the community 
+              <tt>"public"</tt> if not. Returns <tt>#f</tt> otherwise.</p>
+          </dd>
+          <dt><span class="term"><tt>(role? c g r), (role? g r)</tt></span></dt>
+          <dd> 
+            <p>Returns <tt>#t</tt> if the role <tt>r</tt> of the group <tt></tt> 
+              exists in the community <tt>c</tt> if the parameter is present, 
+              or exists in the community <tt>"public"</tt> if not. Returns <tt>#f</tt> 
+              otherwise.</p>
+          </dd>
+          <dt><span class="term"><tt>(get-my-groups c), (get-my-groups)</tt></span></dt>
+          <dd> 
+            <p> Returns the list of all groups of which the current agent is a 
+              member. Groups are taken from the community <tt>c</tt> if the parameter 
+              is present or of the community <tt>"public"</tt> if not. </p>
+          </dd>
+          <dt><span class="term"><tt>(get-existing-groups c), (get-existing-groups)</tt></span></dt>
+          <dd> 
+            <p> Returns the list of all groups existing in the community <tt>c</tt> 
+              if the parameter is present, or existing in the community <tt>"public"</tt> 
+              if not. </p>
+          </dd>
+          <dt><span class="term"><tt>(get-my-roles c g), (get-my-roles g)</tt></span></dt>
+          <dd> 
+            <p> Returns the list of all roles played by the current agent in the 
+              group <tt>g</tt>. The group is taken from the community <tt>c</tt> 
+              if the parameter is present or of the community <tt>"public"</tt> 
+              if not. </p>
+          </dd>
+          <dt><span class="term"><tt>(get-existing-roles c g), (get-existing-roles 
+            g)</tt></span></dt>
+          <dd> 
+            <p> Returns the list of all roles existing in the group <tt>g</tt>. 
+              The group is taken from the community <tt>c</tt> if the parameter 
+              is present or of the community <tt>"public"</tt> if not. <span class="bold"><b>Note:</b></span> 
+              The current agent MUST be a member of the group <tt>g</tt> to get 
+              this information</p>
+          </dd>
+          <dt><span class="term"><tt>(get-available-communities)</tt></span></dt>
+          <dd> 
+            <p> Returns the list of all communities in which the current kernel 
+              (through its <tt>SiteAgent</tt>) is present. By default, contains 
+              at least one element, the <tt>"public"</tt> community.</p>
+          </dd>
+          <dt><span class="term"><tt>(get-agents-with-role c g r), (get-agents-with-role 
+            g r)</tt></span></dt>
+          <dd> 
+            <p> Returns the list of all agents playing the role <tt>r</tt> in 
+              the group <tt>g</tt>. The group is taken from the community <tt>c</tt> 
+              if the parameter is present or of the community <tt>"public"</tt> 
+              if not. <span class="bold"><b>Note:</b></span> The current agent 
+              MUST be a member of the group <tt>g</tt> to get this information</p>
+          </dd>
+          <dt><span class="term"><tt>(get-agent-with-role c g r), (get-agent-with-role 
+            g r)</tt></span></dt>
+          <dd> 
+            <p> Returns one agent taken at random from the list returned by <tt>get-agents-with-role</tt>.</p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="sect3"> 
+      <div class="titlepage"> 
+        <div> 
+          <h3 class="title"><a name="Communication"></a>Communication related 
+            primitives</h3>
+        </div>
+      </div>
+      <p> These functions map to the message-related methods of the Agent class. 
+        Arguments and return values are Java object references. The developer 
+        has to stick with the provided <tt>StringMessage</tt> or <tt>ActMessage</tt> 
+        (see below) mappings or develop new bindings for its specific Message 
+        class (see Kawa Java/Scheme low-level interface document). </p>
+      <div class="variablelist"> 
+        <dl> 
+          <dt><span class="term"><tt>(messagebox-empty?)</tt></span></dt>
+          <dd> 
+            <p> Returns <tt>#t</tt> if the message box of the current SchemeAgent 
+              is empty and <tt>#f</tt> otherwise.</p>
+          </dd>
+          <dt><span class="term"><tt>(next-message)</tt></span></dt>
+          <dd> 
+            <p> Returns the next-message in the messagebox or <tt>#!null</tt> 
+              if it is empty.</p>
+          </dd>
+          <dt><span class="term"><tt>(wait-next-message)</tt></span></dt>
+          <dd> 
+            <p> Returns the next-message in the messagebox if there is one or 
+              block the thread of the agent until it receives a new message.</p>
+          </dd>
+          <dt><span class="term"><tt>(send-message a m)</tt></span></dt>
+          <dd> 
+            <p> Sends the message <tt>m</tt> to the agent represented by its agent 
+              address <tt>a</tt>.</p>
+          </dd>
+          <dt><span class="term"><tt>(broadcast-message c g r m), (broadcast-message 
+            g r m)</tt></span></dt>
+          <dd> 
+            <p> Sends the message <tt>m</tt> to all agents playing role <tt>r</tt> 
+              within group <tt>g</tt> in community <tt>c</tt> (or in community 
+              <tt>"public"</tt> if this parameter is not present).</p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="sect3"> 
+      <div class="titlepage"> 
+        <div> 
+          <h3 class="title"><a name="Agent"></a>Agent creation and destruction 
+            primitives</h3>
+        </div>
+      </div>
+      <div class="variablelist"> 
+        <dl> 
+          <dt><span class="term"><tt>(launch-agent ag name gui)</tt></span></dt>
+          <dd> 
+            <p> Launches the agent <tt>ag</tt>of name <tt>name</tt>. If the flag 
+              <tt>gui</tt> is <tt>#t</tt> then its graphic interface is displayed, 
+              otherwise, the agent works without any GUI. </p>
+          </dd>
+          <dt><span class="term"><tt>(make-launch-agent classname name)</tt></span></dt>
+          <dd> 
+            <p> Creates an agent of class <tt>classname</tt> and of name <tt>name</tt> 
+              and launches it. </p>
+          </dd>
+          <dt><span class="term"><tt>(kill-agent ag)</tt></span></dt>
+          <dd> 
+            <p> Kills the agent referenced by <tt>ag</tt>. This agent must either 
+              be the current agent or an agent created by the current agent. </p>
+            <p><span class="bold"><b>Note:</b></span> The <tt>ag</tt> parameter 
+              is a reference to an agent and not an <tt>AgentAdress</tt>.</p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="sect3"> 
+      <div class="titlepage"> 
+        <div> 
+          <h3 class="title"><a name="misc"></a>Miscelleaneous primitives</h3>
+        </div>
+      </div>
+      <div class="variablelist"> 
+        <dl> 
+          <dt><span class="term"><tt>(get-address)</tt></span></dt>
+          <dd> 
+            <p> Returns the AgentAddres of the current agent.</p>
+          </dd>
+          <dt><span class="term"><tt>(get-name)</tt></span></dt>
+          <dd> 
+            <p> Returns the name of the current agent.</p>
+          </dd>
+          <dt><span class="term"><tt>(set-name name)</tt></span></dt>
+          <dd> 
+            <p> Sets the name of the current agent to name.</p>
+          </dd>
+          <dt><span class="term"><tt>(pause milli)</tt></span></dt>
+          <dd> 
+            <p> Stops the thread of the current agent for <tt>milli</tt> milliseconds.</p>
+          </dd>
+          <dt><span class="term"><tt>(println s)</tt></span></dt>
+          <dd> 
+            <p> Displays the string s in the standard output of the agent.</p>
+          </dd>
+          <dt><span class="term"><tt>(debug s)</tt></span></dt>
+          <dd> 
+            <p> Displays the string s in the standard output of the agent, if 
+              the <tt>debug </tt> flag is on.</p>
+          </dd>
+          <dt><span class="term"><tt>(set-debug b)</tt></span></dt>
+          <dd> 
+            <p> Sets the <tt>debug</tt> flag to b.</p>
+          </dd>
+          <dt><span class="term"><tt>(get-debug b)</tt></span></dt>
+          <dd> 
+            <p> Returns the value of the <tt>debug</tt> flag.</p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="sect3"> 
+      <div class="titlepage"> 
+        <div> 
+          <h3 class="title"><a name="Additional"></a>Additional functions</h3>
+        </div>
+      </div>
+      <p> These functions give access to the useful message class <a href="../api/madkit/libs/messages/StringMessage.html" target="_top"><tt>StringClass</tt></a>.</p>
+      <table border="0" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="programlisting">
+(new-string-message m)
+(get-string-message-content m)</pre>
+          </td>
+        </tr>
+      </table>
+      <p> The following functions give access to the useful message class <a href="../api/madkit/libs/messages/ActMessage.html" target="_top"><tt>ActMessage</tt></a>. 
+      <table border="0" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="programlisting">
+(new-act-message a)
+(get-act-message-action m)
+(get-act-message-content m)
+(set-act-message-content m s) 
+(get-act-message-object m)
+(set-act-message-object m o)
+(get-act-message-field m f)
+(set-act-message-field m f o)</pre>
+          </td>
+        </tr>
+      </table>
+      <p></p>
+      <p>The following functions wrap methods of the <a href="../../../madkitkernel/docs/api/madkit/kernel/Message.html" target="_top"><tt>Message</tt></a>class: 
+      <table border="0" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="programlisting">
+(get-message-sender m)
+(get-message-receiver m)
+	    </pre>
+          </td>
+        </tr>
+      </table>
+      <p></p>
+    </div>
+  </div>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h2 class="title"><a name="Examples"></a>Examples</h2>
+      </div>
+    </div>
+    <p>In order to show how to program agents in Scheme, Here is a Hello agent, 
+      which has the same behavior as the <a href="../../../docs/devguide/devguide.html#Hello">Hello 
+      agent provided in Java</a>. The example is given in the <a href="../../template/scripts/Hello.scm">Hello.scm</a> 
+      file from the template plugin.</p>
+    <table border="0" bgcolor="#E0E0E0">
+      <tr> 
+        <td> 
+          <pre class="programlisting">&nbsp;
+(define myCommunity "myCommunity")
+(define myGroup "myGroup")
+(define myRole "myRole")
+
+(define alive #t)
+
+(define (activate)
+  (println "Hello I'm an agent !")
+  (let ((r (create-group #t myCommunity myGroup #!null #!null)))
+	  (display "r = ")
+	  (display r)
+	  (if (not (equal? r 1))
+		  (set! alive #f)
+		  (request-role myCommunity myGroup myRole #!null)
+)))
+
+;; 
+(define (live)
+	(handle-message (wait-next-message))
+)
+
+(define (handle-message msg)
+	(println (string-append "handling the message " msg))
+	(handle-message (wait-next-message))
+)
+
+(define (end)
+  (println "That's it !!! Bye ")
+  (pause 2000)
+)
+		  </pre>
+        </td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    </div>
+</div>
+</body>
+</html>

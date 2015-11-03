@@ -1,0 +1,449 @@
+<HTML
+>
+<HEAD
+>
+<TITLE
+>The "Demo" Agent Pack </TITLE
+>
+<META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="NEXT"
+TITLE="PingPong and XMLPingPong"
+HREF="pingpong.html">
+</HEAD
+>
+<BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+>
+<DIV
+CLASS="ARTICLE"
+>
+  <DIV
+CLASS="TITLEPAGE"
+>
+    <H1
+CLASS="TITLE"
+><A
+NAME="AEN2"
+>The "Demo" Agent Pack</A
+></H1
+>
+    <H3
+CLASS="AUTHOR"
+>Ol. Gutknecht, F. Michel</H3
+>
+    <DIV
+>
+      <DIV
+CLASS="ABSTRACT"
+>
+        <P
+></P
+>
+        <P
+>This file documents the <TT
+CLASS="FILENAME"
+>demo</TT> plugin</P
+>
+        <P
+></P
+>
+      </DIV
+>
+    </DIV
+>
+    <HR>
+  </DIV
+>
+  <DIV
+CLASS="TOC"
+> 
+    <DL
+> 
+      <DT
+><B
+>Table of Contents</B
+></DT
+>
+      <DT
+>1. <A
+HREF="index.html#AEN12"
+>Summary</A
+></DT
+>
+      <DT
+>2. <A
+HREF="pingpong.html"
+>PingPong and XMLPingPong</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>2.1. <A
+HREF="pingpong.html#AEN39"
+>Synopsis</A
+></DT
+>
+          <DT
+>2.2. <A
+HREF="pingpong.html#AEN45"
+>Using the agent</A
+></DT
+>
+          <DT
+>2.3. <A
+HREF="pingpong.html#AEN53"
+>Going further</A
+></DT
+>
+          <DT
+>2.4. <A
+HREF="pingpong.html#AEN57"
+>About the code</A
+></DT
+>
+          <DT
+>2.5. <A
+HREF="pingpong.html#AEN61"
+>XMLPingPong</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+>3. <A
+HREF="minimal.html"
+>Minimal</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>3.1. <A
+HREF="minimal.html#AEN68"
+>Synopsis</A
+></DT
+>
+          <DT
+>3.2. <A
+HREF="minimal.html#AEN74"
+>Using the agent</A
+></DT
+>
+          <DT
+>3.3. <A
+HREF="minimal.html#AEN77"
+>About the code</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+>4. <A
+HREF="livescheme.html"
+>LiveScheme</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>4.1. <A
+HREF="livescheme.html#AEN85"
+>Synopsis</A
+></DT
+>
+          <DT
+>4.2. <A
+HREF="livescheme.html#AEN91"
+>Using the agent</A
+></DT
+>
+          <DT
+>4.3. <A
+HREF="livescheme.html#AEN96"
+>About the code</A
+></DT
+>
+          <DT
+>4.4. <A
+HREF="livescheme.html#AEN99"
+>Going further</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+>5. <A
+HREF="plot.html"
+>SimplePlotAgent</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>5.1. <A
+HREF="plot.html#AEN108"
+>Synopsis</A
+></DT
+>
+          <DT
+>5.2. <A
+HREF="plot.html#AEN114"
+>Using the agent</A
+></DT
+>
+          <DT
+>5.3. <A
+HREF="plot.html#AEN118"
+>About the code</A
+></DT
+>
+        </DL
+>
+      </DD
+>
+      <DT
+>6. <A
+HREF="beeworld.html"
+>BeeWorldViewer / BeeScheduler</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>6.1. <A
+HREF="beeworld.html#AEN127"
+>Synopsis</A
+></DT
+>
+          <DT
+>6.2. <A
+HREF="beeworld.html#AEN132"
+>Using the agents</A
+></DT
+>
+          <DT
+>6.3. <A
+HREF="beeworld.html#AEN144"
+>About the code</A></DT>
+        </DL>
+      </DD>
+      <DT
+>7. <A
+HREF="beeworld.html"
+>Distributed bees</A
+></DT
+>
+      <DD
+> 
+        <DL
+> 
+          <DT
+>7.1. <A
+HREF="beeworld.html#AEN127"
+>Synopsis<br>
+            <br>
+            </A
+>7.2. <A
+HREF="beeworld.html#AEN132"
+>Using the agents</A
+></DT
+>
+          <DT
+>7.3. <A
+HREF="beeworld.html#AEN144"
+>About the code</A></DT>
+        </DL>
+      </DD>
+    </DL>
+    <p>&nbsp;</p>
+  </DIV
+>
+  <DIV
+CLASS="SECT1"
+>
+    <H1
+CLASS="SECT1"
+><A
+NAME="AEN12"
+>1. Summary</A
+></H1
+>
+    <P
+> This agent pack gathers some classic agent demonstration and shows some functionalities 
+      of the MadKit kernel and its associated libraries. </P
+>
+    <P
+>This pack includes the following agents: 
+    <P
+></P
+>
+    <UL
+>
+      <LI
+>
+        <DIV
+CLASS="FORMALPARA"
+>
+          <P
+><B
+>PingPong. </B
+> A simple message, and group &#38; role example </P
+>
+        </DIV
+>
+      </LI
+>
+      <LI
+>
+        <DIV
+CLASS="FORMALPARA"
+>
+          <P
+><B
+>LiveScheme. </B
+> An agent embedding the Kawa Scheme implementation, enabling dynamic agent programming.	
+          </P
+>
+        </DIV
+>
+      </LI
+>
+      <LI
+>
+        <DIV
+CLASS="FORMALPARA"
+>
+          <P
+><B
+>Minimal. </B
+> Basic agent lifecycle example </P
+>
+        </DIV
+>
+      </LI
+>
+      <LI
+>
+        <DIV
+CLASS="FORMALPARA"
+>
+          <P
+><B
+>SimplePlotAgent. </B
+> An example of an agent which defines its own GUI </P
+>
+        </DIV
+>
+      </LI
+>
+      <LI
+>
+        <DIV
+CLASS="FORMALPARA"
+>
+          <P
+><B
+>BeeScheduler / BeeWorldViewer. </B
+> Two simple agents demonstrating the synchronous engine and the probes / activators 
+            mechanism. </P
+>
+        </DIV
+>
+      </LI
+>
+    </UL
+>
+    <p></P
+>
+  </DIV
+>
+</DIV
+>
+<DIV
+CLASS="NAVFOOTER"
+>
+  <HR
+ALIGN="LEFT"
+WIDTH="100%">
+  <TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+>
+    <TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="pingpong.html"
+>Next</A
+></TD
+>
+    </TR
+>
+    <TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>PingPong and XMLPingPong</TD
+>
+    </TR
+>
+  </TABLE
+>
+</DIV
+>
+</BODY
+>
+</HTML
+>

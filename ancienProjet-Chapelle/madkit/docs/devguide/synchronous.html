@@ -1,0 +1,518 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<div class="titlepage">
+  <div>
+    <h1 class="title">The Synchronous Engine</h1>
+  </div>
+</div>
+<div class="toc"> 
+  <h3><b>Table of Contents</b></h3>
+  <ul>
+    <li><a href="#IDANTHKG">Architecture</a></li>
+    <li><a href="#IDACWHKG">An example</a> 
+      <ul>
+        <li><a href="#IDAFWHKG">Defining the agent</a></li>
+        <li><a href="#IDAVWHKG">The scheduler and activator</a> 
+          <ul>
+            <li><a href="#IDA1WHKG">The activator</a></li>
+          </ul>
+        </li>
+        <li><a href="#IDA0XHKG">The scheduler</a></li>
+        <li><a href="#IDAVYHKG">Observing the system</a> 
+          <ul>
+            <li><a href="#IDA2YHKG">Building an observer</a></li>
+            <li><a href="#IDA3ZHKG">Executing the observer</a></li>
+          </ul>
+        </li>
+        <li><a href="#IDAK0HKG">Launching the simulation</a></li>
+        <li><a href="#IDA20HKG">Final remarks</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<p> When building a multi-agent systems, it might be necessary to launch hundred 
+  of agents. Until now, that implied in MadKit launching hundred of threads, which 
+  is extremely resource-consuming. Thus it was not possible to define artificial-like 
+  simulations, hybrid systems, etc with the standard <tt>Agent</tt> class. </p>
+<p> In the previous versions we offered a small simulation toolkit, the so-called 
+  ReactiveLib, which was a set of classes in the <tt>madkit.lib.reactive</tt> 
+  package. In this library, a standard MadKit agent was encapsulating a small 
+  simulation engine. There was numerous design flaws with this library: simulated 
+  entities were not MadKit agents (thus having no access to the messaging or agent/group/role 
+  API), the visualization mechanisms were hard-coded, the agents homogeneous, 
+  etc.. </p>
+<p> Thus, we wrote from scratch a new engine to permit development of agents that 
+  are not associated with a thread, and can be scheduled by an external entity 
+  and easily monitored from the outside. </p>
+<div class="sect1"> 
+  <div class="titlepage"> 
+    <div> 
+      <h2 class="title" style="clear: both"><a name="IDANTHKG"></a>Architecture</h2>
+    </div>
+  </div>
+  <p> The synchronous engine provides 5 essential building blocks. The following 
+    figure shows an illustration of this architecture: 
+  <div class="figure"> 
+    <p><b>Figure 6.1. Synchronous Engine Example</b></p>
+    <p><img src="dev_synchronous_engine.gif"></p>
+  </div>
+  <div class="variablelist"> 
+    <dl> 
+      <dt><span class="term">The Referenceable Agent</span></dt>
+      <dd> 
+        <p> In the synchronous engine, any agent can be scheduled or monitored. 
+          However, this requires direct reference access to the corresponding 
+          agents (as synchronous execution or monitoring is achieved through method 
+          invocation or direct variable access). As a main feature of MadKit is 
+          that an agent developer never manipulates directly other agents by reference 
+          (only with the <tt>AgentAddress</tt>), having direct reference access 
+          to any agent would be a major security and stability problem. Thus, 
+          we <span class="emphasis"><i>require</i></span> that a developer writing 
+          a agent that will be executed in the synchronous engine declares its 
+          intention and allows a direct reference. This is made with a empty Java 
+          interface, the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/ReferenceableAgent.html" target="_top"><tt>ReferenceableAgent</tt></a>, 
+          which does not require any method implementation: it is just here for 
+          typing <span class="emphasis"><i>"yes, I do accept that the class I'm 
+          writing can be manipulated through the synchronous engine"</i></span>. 
+        </p>
+      </dd>
+      <dt><span class="term">The Scheduler Agent</span></dt>
+      <dd> 
+        <p> The <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Scheduler.html" target="_top"><tt>Scheduler</tt></a> 
+          is a regular MadKit agent. It manages a collection of <span class="emphasis"><i>activators</i></span> 
+          to execute synchronous agents. </p>
+      </dd>
+      <dt><span class="term">The Activator class</span></dt>
+      <dd> 
+        <p> This <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Activator.html" target="_top"><tt>Activator</tt></a> 
+          tool class defines a basic scheduling policy. It works in conjunction 
+          with the scheduler to get a list of schedulable agent. An activator 
+          is configured according to a group and a role. On <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Activator.html#update()" target="_top"><tt>update()</tt></a> 
+          operation, it dynamically discovers the implementation classes of the 
+          agents having the given group and roles. These direct references can 
+          be used afterwards to directly invoke operations on the agents. Subclasses 
+          have to implement the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Activator.html#execute()" target="_top"><tt>execute()</tt></a> 
+          abstract operation, which might be invoked by a Scheduler agent. </p>
+      </dd>
+    </dl>
+  </div>
+  <div class="variablelist"> 
+    <dl> 
+      <dt><span class="term">The Watcher agent</span></dt>
+      <dd> 
+        <p>The principle of the <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Watcher.html" target="_top"><tt>Watcher</tt></a> 
+          agent resembles the <tt>Scheduler</tt> one. A <tt>Watcher</tt> manages 
+          a list of <span class="emphasis"><i>probes</i></span>, and combines 
+          their input in something meaningful. But in contrast with the scheduler, 
+          a watcher is not a threaded agent and have to be executed from the outside, 
+          with an associated scheduler. </p>
+      </dd>
+      <dt><span class="term">The Probe class</span></dt>
+      <dd> 
+        <p> The <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Probe.html" target="_top"><tt>Probe</tt></a> 
+          tool class is the basic code for exploring code of a <tt>ReferenceableAgent</tt> 
+          agent. It is configured with a group, and a role. On <a href="../../plugins/madkitkernel/docs/api/madkit/kernel/Probe.html#update()" target="_top"><tt>update()</tt></a> 
+          operation, it dynamically discovers the implementation classes of the 
+          agents having the given group and roles. These direct references can 
+          be used afterwards to directly invoke operations on the agents. Subclasses 
+          have to implement the actual probing mechanism. This mechanism is close 
+          to the probe mechanism implemented in other platforms, like Swarm or 
+          Cormas</p>
+      </dd>
+    </dl>
+  </div>
+  <p></p>
+</div>
+<div class="sect1"> 
+  <div class="titlepage"> 
+    <div> 
+      <h2 class="title" style="clear: both"><a name="IDACWHKG"></a>An example</h2>
+    </div>
+  </div>
+  <p> We will take the example of small ants that walk randomly on the ground. 
+  </p>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h3 class="title"><a name="IDAFWHKG"></a>Defining the agent</h3>
+      </div>
+    </div>
+    <p> In this very simple simulation, we will only have one type of agent: the 
+      ant. We'll start be defining the agent class </p>
+    <p> 
+    <table border="0" bgcolor="#E0E0E0">
+      <tr> 
+        <td> 
+          <pre class="synopsis">
+import madkit.kernel.AbstractAgent;
+import madkit.kernel.ReferenceableAgent;
+
+public class SmallAnt extends AbstractAgent implements ReferenceableAgent
+{
+   public double x = 0;
+   public double y = 0;
+
+   public void activate()
+   {
+      joinGroup("mysimu");
+      requestRole("mysimu", "ant");
+   }
+
+   public void walk()
+   {
+      x=x+(Math.random()-0.5);
+      y=y+(Math.random()-0.5);
+   }
+}
+</pre>
+        </td>
+      </tr>
+    </table>
+    Minimalist, isn't it ? Things to note in this code is that we inherit from 
+    AbstractAgent, and we won't have an associated thread, and the Ant implements 
+    (quite easy: there's nothing to do) the <tt>ReferenceableAgent</tt> interface. 
+    In contrast with "regular" MadKit agents, we don't have to implements a "<tt>live()</tt> 
+    method. We just defined our own <tt>walk()</tt> code. 
+    <p></p>
+  </div>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h3 class="title"><a name="IDAVWHKG"></a>The scheduler and activator</h3>
+      </div>
+    </div>
+    <p>We now have to decide how our small ant will be run. To this end, we're 
+      going to implement our own <tt>Scheduler</tt> and <tt>Activator</tt></p>
+    <div class="sect3"> 
+      <div class="titlepage"> 
+        <div> 
+          <h4 class="title"><a name="IDA1WHKG"></a>The activator</h4>
+        </div>
+      </div>
+      <p>The activator is the basic bloc of synchronous execution in MadKit. In 
+        our example, execution is really simple: we just have to execute the <tt>walk()</tt> 
+        method on our ants</p>
+      <p> 
+      <table border="0" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="synopsis">
+import madkit.kernel.Activator;
+
+public class AntActivator extends Activator
+{
+   public AntActivator(String group, String role)
+   {
+      super(group, role);
+   }  
+
+   public void execute()
+   {
+      for (int i=0; i &lt; agents.length; i++)
+             ((SmallAnt)agents[i]).walk();
+   }
+}
+</pre>
+          </td>
+        </tr>
+      </table>
+      Our implementation is really simple. We refine the mandatory <tt>execute()</tt> 
+      method to implements our own scheduling mechanism: at each step, we invoke 
+      the <tt>walk()</tt> method. The <tt>agents</tt> array is something that 
+      the <tt>Activator</tt> class provides us: it holds references to the agents 
+      appertaining to the given group and role, <span class="emphasis"><i>only 
+      if they implement the <tt>ReferenceableAgent</tt> interface</i></span>. 
+      That's something the <tt>MadKit</tt> kernel built for us. Note that we have 
+      to cast to <tt>SmallAnt</tt> as the element type is <tt>ReferenceableAgent</tt>. 
+      <p></p>
+      <p>In this example, we suppose that the number of ants remain constant. 
+        If not, we would have to call <tt>update()</tt> on the activator. </p>
+    </div>
+  </div>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h3 class="title"><a name="IDA0XHKG"></a>The scheduler</h3>
+      </div>
+    </div>
+    <p> We will do two things in one agent to keep the code small: launching the 
+      ants, and scheduling them. That is not an obligation, and big simulation 
+      system will probably an agent specialized in the configuration of launch 
+      of a simulation, and distinct from the scheduler. </p>
+    <p> 
+    <table border="0" bgcolor="#E0E0E0">
+      <tr> 
+        <td> 
+          <pre class="synopsis">
+import madkit.kernel.Scheduler;
+
+public MySchedulerAgent extends Scheduler
+{
+   public void activate()
+   {
+      foundGroup("mysimu");
+      requestRole("mysimu","scheduler");
+      for (int i = 0; i &lt; 100; i++)
+          launchAgent(new SmallAnt(),"An ant", false);
+   }
+
+   public void live()
+   {
+      AntActivator a1 = new AntActivator("mysimu","ant");
+      addActivator(a1);
+
+      update();
+
+      while(true)
+      {
+         pause(100);
+         a1.execute();
+      }
+   }
+}
+</pre>
+        </td>
+      </tr>
+    </table>
+    We launched our agent for the simulation in the <tt>activate()</tt> method. 
+    Note that although we used the <tt>launchAgent(...)</tt>, the kernel will 
+    not actually "run" the agents by itself as they need to be scheduled. Also, 
+    we precised in this call that we don't want MadKit to try to instantiate a 
+    hypothetical graphical interface for each of these agents (but that's possible 
+    anyway, especially if we want something to control the behavior of these agents). 
+    <p></p>
+    <p>The <tt>live()</tt> method is the real thing: we build an instance of our 
+      tool class <tt>AntActivator</tt> and add it to the collection of activators 
+      managed by our scheduler. Note that the activators are configured with the 
+      group/role mechanism. Then, we call the scheduler <tt>update()</tt> method 
+      which makes the activator gets their agent list according to their configured 
+      group and role.</p>
+    <p> The final part is executing our ants again and again. That's the final 
+      <tt>while</tt> loop were we execute the activator. </p>
+  </div>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h3 class="title"><a name="IDAVYHKG"></a>Observing the system</h3>
+      </div>
+    </div>
+    <p> Our example is now complete and runs well, but there is a small inconvenience: 
+      we can't see anything ! </p>
+    <p>To solve this problem, we could have added some instruction in the ant 
+      to trace its behavior, or access it from the scheduler. However, that is 
+      not really extensible and hard-coding an observation mechanism could be 
+      annoying (what if we want a graphical representation ? and then dump everything 
+      in a DBMS ? and then .. ? and everything at the same time ? etc, etc)</p>
+    <p>The synchronous engine in MadKit introduces a way to observe the system 
+      from the outside. It is very similar to the scheduler/activator mechanism. 
+    </p>
+    <div class="sect3"> 
+      <div class="titlepage"> 
+        <div> 
+          <h4 class="title"><a name="IDA2YHKG"></a>Building an observer</h4>
+        </div>
+      </div>
+      <p> We would like to have a very simple observer: something that gives us 
+        the most extreme points that the ants have reached for each turn. </p>
+      <p>In this example, we will not build our own probe, although that is something 
+        quite easy to do, but just use a generic probe that ship with MadKit in 
+        the <a href="../../plugins/documentation/docs/api/madkit/lib/simulation/package-summary.html" target="_top"><tt>madkit.lib.simulation</tt></a> 
+        package, the <a href="../../plugins/documentation/docs/api/madkit/lib/simulation/NumericProbe.html" target="_top"><tt>NumericProbe</tt></a>, 
+        which already implements some basic operations on numeric attributes. 
+      </p>
+      <p> 
+      <table border="0" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="synopsis">
+import madkit.lib.simulation.NumericProbe;
+import madkit.kernel.Watcher;
+
+public class AntObserver extends Watcher 
+{
+   NumericProbe p1;
+   NumericProbe p2;
+
+   public AntObserver()
+   {
+       p1=new NumericProbe("x", "mysimu", "ant");
+       p2=new NumericProbe("y", "mysimu", "ant");
+
+       addProbe(p1);
+       addProbe(p2);
+   }
+
+   public void activate()
+   {
+      joinGroup("mysimu");
+      requestRole("mysimu","observer");
+      update();
+   }    
+
+   public void observeAnts()
+   {
+      println("Max x and y reached this turn:");
+      println(p1.getMax()+" , "+p2.getMax());
+   }
+}
+</pre>
+          </td>
+        </tr>
+      </table>
+      We just define two numeric probes on the <span class="emphasis"><i>x</i></span> 
+      and <span class="emphasis"><i>y</i></span> properties of our ants. The <tt>NumericProbe</tt> 
+      extends a special probe of the simulation library package that has the ability 
+      to explore through reflection the class of the probed object, so we don't 
+      have anything to do to our own code. Also note that we design the ants only 
+      by their group and role, thus we could even have different implementation 
+      classes, as long as they have a <span class="emphasis"><i>x</i></span> or 
+      <span class="emphasis"><i>y</i></span> property. 
+      <p></p>
+      <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"> 
+        <h3 class="title">Important</h3>
+        <p>In this version of the synchronous engine, the properties that can 
+          be discovered by the reflexive probes are only public fields on the 
+          agents. A future version will support accessors functions (with the 
+          <tt>getXXX()</tt> pattern).</p>
+      </div>
+    </div>
+    <div class="sect3"> 
+      <div class="titlepage"> 
+        <div> 
+          <h4 class="title"><a name="IDA3ZHKG"></a>Executing the observer</h4>
+        </div>
+      </div>
+      <p> The only thing left is to run the observer. To this end, we will modify 
+        the code in our scheduler to execute the observer in addition to the ants. 
+        We won't build another Activator, but just reuse an activator which come 
+        with MadKit, the <a href="../../plugins/documentation/docs/api/madkit/lib/simulation/SingleMethodActivator.html" target="_top"><tt>SingleMethodActivator</tt></a>. 
+        This activator takes as argument a method name, a group and a role and 
+        execute the method that has the given name through reflection. We could 
+        have used this one for the ants but we wanted to show how to build an 
+        activator. </p>
+      <p> Our scheduler agent become: 
+      <table border="0" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="synopsis">
+import madkit.kernel.Scheduler;
+import madkit.lib.simulation.SingleMethodActivator;
+
+public class MySchedulerAgent extends Scheduler
+{
+    public void activate()
+    {
+	foundGroup("mysimu");
+	requestRole("mysimu","scheduler");
+	for (int i = 0; i &lt; 100; i++)
+	    launchAgent(new SmallAnt(),"An ant", false);
+	
+	launchAgent(new AntObserver(),"My observer", true); // a GUI for this one
+    }
+    
+    public void live()
+    {
+	AntActivator a1 = new AntActivator("mysimu","ant");
+	SingleMethodActivator a2 = new SingleMethodActivator("observeAnts","mysimu","observer");
+	
+	addActivator(a1);
+	addActivator(a2);
+
+	update();
+	
+	while(true)
+	    {
+		pause(100);
+		a1.execute();
+		a2.execute();
+	    }
+    }
+}
+	    </pre>
+          </td>
+        </tr>
+      </table>
+      <p></p>
+    </div>
+  </div>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h3 class="title"><a name="IDAK0HKG"></a>Launching the simulation</h3>
+      </div>
+    </div>
+    <p>You just have to start the <tt>MySchedulerAgent</tt>, it will launch the 
+      ants and the observer. You can do this in G-Box mode or with the console 
+      booter, as we don't use graphical interfaces for our agents.</p>
+    <p>For instance, here is a short simulation run in console mode 
+    <table border="0" bgcolor="#E0E0E0">
+      <tr> 
+        <td> 
+          <pre class="screen"><tt>$</tt><b><tt> java madkit.platform.console.Booter --config test_tutorial.scm</tt></b>
+	    Booting MadKit Kernel ...
+	    &lt;Daemon&gt; : MadKit/Aalaadin - by O. Gutknecht and J. Ferber (c) 1997-1999
+	    &lt;Daemon&gt; :     version: 1.4 
+	    &lt;Daemon&gt; : --------------------
+	    &lt;Daemon&gt; : Please file bug reports on http://www.lirmm.fr/madkit/
+	    &lt;Daemon&gt; : MadKit Agent microKernel is up and running
+	    &lt;Daemon&gt; :  (My observer) Max x and y reached this turn:
+	    &lt;Daemon&gt; :  (My observer) 0.4915111386577862 , 0.49222698315252467
+	    &lt;Daemon&gt; :  (My observer) Max x and y reached this turn:
+	    &lt;Daemon&gt; :  (My observer) 0.873452806885152 , 0.9354369551234195
+	    &lt;Daemon&gt; :  (My observer) Max x and y reached this turn:
+	    &lt;Daemon&gt; :  (My observer) 1.2531099361392506 , 1.1749691286640953
+	    &lt;Daemon&gt; :  (My observer) Max x and y reached this turn:
+	    ...
+	  </pre>
+        </td>
+      </tr>
+    </table>
+    <p></p>
+    <div class="sidebar"> 
+      <p>The <tt>test_tutorial.scm</tt> file is just a small initialization file 
+        that launches my scheduler: 
+      <table border="0" bgcolor="#E0E0E0">
+        <tr> 
+          <td> 
+            <pre class="programlisting">
+	      (launch-agent 'MySchedulerAgent 'testAgent)</pre>
+          </td>
+        </tr>
+      </table>
+      <p></p>
+    </div>
+  </div>
+  <div class="sect2"> 
+    <div class="titlepage"> 
+      <div> 
+        <h3 class="title"><a name="IDA20HKG"></a>Final remarks</h3>
+      </div>
+    </div>
+    <p>This simplistic example does not really show the genericity of the Synchronous 
+      Engine. Things are getting really interesting when you have multiple observers 
+      show differing point of views on a system, or different groups being scheduled 
+      independently, with many agents executed according to their roles, etc.. 
+    </p>
+    <p>The <a href="../../plugins/demos/docs/beeworld.html">bees example</a> in the 
+      demo source code shows something more elaborated, while being close to the 
+      ant example. For something more complex, see the <a href="../../plugins/turtlekit/docs/turtlekit.html" target="_top">"TurtleKit"</a> 
+      (a StarLogo-like) simulation packs and the corresponding examples.</p>
+    <p> A final word: the synchronous engine is definitively not restricted to 
+      simulations: actually, most of the "classic" agents could be scheduled in 
+      synchronous mode by just inheriting from <tt>AbstractAgent</tt> instead 
+      of <tt>Agent</tt> and having an activator configured on their <tt>live()</tt> 
+      method.</p>
+    <div class="titlepage"> 
+      <div> 
+        <h2 class="title">&nbsp;</h2>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

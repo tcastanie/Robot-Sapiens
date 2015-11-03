@@ -1,0 +1,410 @@
+<HTML
+><HEAD
+><TITLE
+>The "Turtles" simulation Pack
+    </TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="NEXT"
+TITLE="Demo simulations"
+HREF="demos.html">
+</HEAD
+><BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+><DIV
+CLASS="ARTICLE"
+><DIV
+CLASS="TITLEPAGE"
+><H1
+CLASS="TITLE"
+><A
+NAME="AEN2"
+>The "Turtles" simulation Pack</A
+></H1
+><H3
+CLASS="AUTHOR"
+>Fabien Michel</H3
+><DIV
+><DIV
+CLASS="ABSTRACT"
+><P
+></P
+><P
+>This file documents the <TT
+CLASS="FILENAME"
+>turtles.jar</TT
+> simulation pack.
+      </P
+><P
+></P
+></DIV
+></DIV
+><HR></DIV
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+>
+      <DT
+>1. <A
+HREF="turtlepack.html#AEN12"
+>Summary</A
+></DT
+>
+      <DT
+>2. <A
+HREF="demos.html"
+>Demo simulations</A
+></DT
+>
+      <DD
+><DL
+>
+          <DT
+>2.1. <A
+HREF="demos.html#AEN47"
+>Walkers</A
+></DT
+>
+          <DT
+>2.2. <A
+HREF="demos.html#AEN55"
+>Mosquitoes</A
+></DT
+>
+          <DT
+>2.3. <A
+HREF="demos.html#AEN65"
+>Creation</A
+></DT
+>
+          <DT
+>2.4. <A
+HREF="demos.html#AEN76"
+>OVNI</A
+></DT
+>
+        </DL
+></DD
+>
+      <DT
+>3. <A
+HREF="virus.html"
+>Virus</A
+></DT
+>
+      <DD
+><DL
+>
+          <DT
+>3.1. <A
+HREF="virus.html#AEN89"
+>Synopsis</A
+></DT
+>
+          <DT
+>3.2. <A
+HREF="virus.html#AEN95"
+>Virus transmission simulation</A
+></DT
+>
+          <DT
+>3.3. <A
+HREF="virus.html#AEN101"
+>Observe the simulation</A
+></DT
+>
+          <DT
+>3.4. <A
+HREF="virus.html#AEN108"
+>About the code</A
+></DT
+>
+        </DL
+></DD
+>
+      <DT
+>4. <A
+HREF="gravity.html"
+>Gravity</A
+></DT
+>
+      <DD
+><DL
+>
+          <DT
+>4.1. <A
+HREF="gravity.html#AEN115"
+>Synopsis</A
+></DT
+>
+          <DT
+>4.2. <A
+HREF="gravity.html#AEN123"
+>About the code</A
+></DT
+>
+        </DL
+></DD
+>
+      <DT
+>5. <A
+HREF="gas.html"
+>Gas simulation</A
+></DT
+>
+      <DD
+><DL
+>
+          <DT
+>5.1. <A
+HREF="gas.html#AEN132"
+>Synopsis</A
+></DT
+>
+          <DT
+>5.2. <A
+HREF="gas.html#AEN140"
+>Using the simulation</A
+></DT
+>
+          <DT
+>5.3. <A
+HREF="gas.html#AEN144"
+>About the code</A
+></DT
+>
+        </DL
+></DD
+>
+      <DT
+>6. <A
+HREF="football.html"
+>Soccer</A
+></DT
+>
+      <DD
+><DL
+>
+          <DT
+>6.1. <A
+HREF="football.html#AEN154"
+>Synopsis</A
+></DT
+>
+          <DT
+>6.2. <A
+HREF="football.html#AEN160"
+>About the code</A
+></DT
+>
+        </DL
+></DD
+>
+      <DT
+>7. <A
+HREF="diffusion.html"
+>Patch variable diffusions</A
+></DT
+>
+      <DD
+><DL
+>
+          <DT
+>7.1. <A
+HREF="diffusion.html#AEN172"
+>Synopsis</A
+></DT
+>
+          <DT
+>7.2. <A
+HREF="diffusion.html#AEN178"
+>Initializing the simulation</A
+></DT
+>
+          <DT
+>7.3. <A
+HREF="diffusion.html#AEN182"
+>About the code</A
+></DT
+>
+        </DL
+></DD
+>
+      <DT
+>8. <A
+HREF="termites.html"
+>Termites</A
+></DT
+>
+      <DD
+><DL
+>
+          <DT
+>8.1. <A
+HREF="termites.html#AEN201"
+>Synopsis</A
+></DT
+>
+          <DT
+>8.2. <A
+HREF="termites.html#AEN209"
+>About the code</A
+></DT
+>
+        </DL
+></DD
+></DL
+></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN12"
+>1. Summary</A
+></H1
+><P
+>      This library packages some demonstrations and shows some
+      functionalities of the TurtleKit simulator.
+    </P
+><P
+>This pack includes the following simulations:
+      <P
+></P
+><UL
+><LI
+><DIV
+CLASS="FORMALPARA"
+><P
+><B
+>Demo simulations. </B
+>	      Simple test demonstrations: Walkers, Mosquitoes, Creation and Ovni
+	    </P
+></DIV
+></LI
+><LI
+><DIV
+CLASS="FORMALPARA"
+><P
+><B
+>Virus. </B
+>	      An epidemic simulation.	      
+	    </P
+></DIV
+></LI
+><LI
+><DIV
+CLASS="FORMALPARA"
+><P
+><B
+>Gravity. </B
+>	      Turtles turn around others. No mathematic considerations
+	      here, just simple behaviors to obtain an interesting visual effect.  
+	    </P
+></DIV
+></LI
+><LI
+><DIV
+CLASS="FORMALPARA"
+><P
+><B
+>Gas simulation. </B
+>	      A transcription of a StarLogo project.
+	    </P
+></DIV
+></LI
+><LI
+><DIV
+CLASS="FORMALPARA"
+><P
+><B
+>Soccer. </B
+>	      Turtles love playing soccer too.
+	    </P
+></DIV
+></LI
+><LI
+><DIV
+CLASS="FORMALPARA"
+><P
+><B
+>Patch variable diffusions. </B
+>	      A simple simulation without turtles, to show diffusion in the environment of two patch variables.  
+	    </P
+></DIV
+></LI
+><LI
+><DIV
+CLASS="FORMALPARA"
+><P
+><B
+>Termites. </B
+>	      The transcription of the well known StarLogo project.  
+	    </P
+></DIV
+></LI
+></UL
+>
+    <p></P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="demos.html"
+>Next</A
+></TD
+>
+    </TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Demo simulations</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

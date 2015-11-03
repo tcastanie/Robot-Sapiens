@@ -1,0 +1,290 @@
+<HTML
+><HEAD
+><TITLE
+> Patch variable diffusions</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.42">
+<LINK
+REL="HOME"
+TITLE='The "Turtles" simulation Pack
+    '
+HREF="index.html">
+<LINK
+REL="PREVIOUS"
+TITLE="Soccer"
+HREF="football.html">
+<LINK
+REL="NEXT"
+TITLE="Termites"
+HREF="termites.html">
+</HEAD
+><BODY
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The "Turtles" simulation Pack</TH
+></TR
+><TR
+>
+      <TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="football.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+>
+      <TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="termites.html"
+>Next</A
+></TD
+>
+    </TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN170"
+>7. Patch variable diffusions</A
+></H1
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN172"
+>7.1. Synopsis</A
+></H2
+><DIV
+CLASS="FIGURE"
+><P
+><B
+>Figure 11.  two patch variables views at the same time</B
+></P
+>
+      <P
+><IMG
+SRC="images/tp_diffusion.gif"></P
+>
+    </DIV
+><P
+>   This simulation was made in order to test the diffusion of the patch variables in the environment. At the beginning of the simulation the values of the center patch's variables are settled to a big number. </P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN178"
+>7.2. Initializing the simulation</A
+></H2
+><P
+>	    You can set the diffusion and evaporation coefficients and the value of the center patch of each patch variable (flavor and flavor2) in the Launcher's properties box (<TT
+CLASS="CLASSNAME"
+>Diffusion</TT
+>). So you will obtain different effects during the simulation.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN182"
+>7.3. About the code</A
+></H2
+><P
+>This little demo shows how to initialize and use patch variables: the <TT
+CLASS="CLASSNAME"
+>Flavor</TT
+> class. These jobs have to be done in the <TT
+CLASS="CLASSNAME"
+>Launcher</TT
+> code in the <TT
+CLASS="FUNCTION"
+>initializePatchVariables</TT
+> like in the following example.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>    protected void initializePatchVariables()
+    {
+	PatchVariable a = new PatchVariable("flavor");
+	a.setDiffuseCoef(valueDiff);
+	a.setEvapCoef(valueEvap);
+	addPatchVariable(a);
+	PatchVariable b = new PatchVariable("flavor2");
+	b.setDiffuseCoef(value2Diff);
+	b.setEvapCoef(value2Evap);
+	addPatchVariable(b);
+    }</PRE
+></TD
+></TR
+></TABLE
+><p></P
+><P
+>To view these two diffusions independently, we have made two specials viewers classes: <TT
+CLASS="CLASSNAME"
+>FlavorViewer</TT
+> and <TT
+CLASS="CLASSNAME"
+>FlavorViewer2</TT
+>. In each Viewer we have just overridden the <TT
+CLASS="FUNCTION"
+>paintPatch</TT
+> method in order to make the flavor's concentration visible on the screen.  
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>public class FlavorViewer extends Viewer 
+{
+    public void paintPatch(Graphics g, Patch p,int x,int y,int CellSize)
+    {
+	int a = ((int) p.getFlavorValue("flavor"))%256;
+	g.setColor(new Color(a,a,a));
+	g.fillRect(x,y,CellSize,CellSize);
+    }
+}</PRE
+></TD
+></TR
+></TABLE
+>
+The way the flavor's intensity is interpreted as a specific color has no specific meaning.<p></P
+><P
+>Moreover we have used an <TT
+CLASS="CLASSNAME"
+>Observer</TT
+>, <TT
+CLASS="CLASSNAME"
+>GridInitializer</TT
+>, to setup the center patch at the beginning of the simulation overriding the <TT
+CLASS="FUNCTION"
+>setup</TT
+>. Note that in this simulation there is no turtle.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>public class GridInitializer extends Observer
+{
+double val,val2;
+
+ public GridInitializer (double v, double v2)
+	{
+	 val = v;
+	 val2 = v2;
+	}
+
+public void setup()
+{
+patchGrid[(int) (envWidth/2)][(int)(envHeight/2)].setFlavorValue("flavor", val);
+patchGrid[(int) (envWidth/2)][(int)(envHeight/2)].setFlavorValue("flavor2", val2);
+}	  
+}</PRE
+></TD
+></TR
+></TABLE
+><p></P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+>
+      <TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="football.html"
+>Prev</A
+></TD
+>
+      <TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+>
+      <TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="termites.html"
+>Next</A
+></TD
+>
+    </TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Soccer</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Termites</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

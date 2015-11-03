@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+
+<!-- 
+ MadKit generic.xml
+ Author: F. Michel
+ Version: 2.0
+
+ This is generic part of build.xml files for building MadKit plugins using JAKARTA-ANT http://ant.apache.org/index.html 
+-->
+
+<project name="generic" default="echo">
+
+<!-- 
+     GENERIC PART 
+-->
+	<fileset id="bin.path" dir="${bin.dir}">
+		<include name=""/>
+	</fileset>
+	
+	<target name="echo">
+		  <echo message="This file is the generic part of build.xml files used for compiling madkit plugin project"/>
+	</target>
+
+	<condition property="applet.available">
+		<available file="${jars.dir}/madkitapplet.jar" type="file" />
+	</condition>
+
+	<condition property="check-cfg">
+		<available file="${project.name}.cfg" type="file"/>
+	</condition>
+
+	<condition property="check-desktop">
+		<available file="${jars.dir}/desktop2.jar" type="file"/>
+	</condition>
+
+	<target name="delete-api">
+		<delete dir="docs/api"/>
+	<!--	<delete failonerror="false" includeEmptyDirs="true">
+			<fileset dir="docs" excludes="*"/>
+		</delete> -->
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${build.dir}"/>
+		<javac
+			srcdir="${src.dir}"
+			destdir="${build.dir}"
+			deprecation="on">
+		<classpath>
+			<fileset refid="project.class.path"/>
+		</classpath>
+		</javac>
+		<available property="images.exist" type="dir" file="${src.dir}/${images.dir}"/>
+		<antcall target="copy-images"/>
+		<antcall target="copy-resources"/>
+	</target>
+
+	<target name="copy-images" if="images.exist" description="copy the images directory into the ${buildJars the plugin into the jars.dir directory and create launch file if a cfg file available">
+		<copy todir="${build.dir}/${images.dir}">
+			<fileset dir="${src.dir}/${images.dir}" includes="**/*.jpg,**/*.gif,**/*.png"/>
+		</copy>
+	</target>
+
+	<target name="copy-resources" description="copy the non .java files into the jar">
+		<copy todir="${build.dir}" includeEmptyDirs="false">
+			<fileset dir="${src.dir}" excludes="**/*.jpg,**/*.gif,**/*.png, **/*.java"/>
+		</copy>
+	</target>	
+
+	<target name="jar" depends="compile" description="Jars the plugin into the jars.dir directory and create launch file if a cfg file available">
+		<echo message="****** Creating jar : ${project.name} **********" />
+		<!-- Create property file -->
+		<propertyfile file="build/${project.name}.properties" comment="madkit plugin's properties file" >
+		  	<entry  key="${string.name.var}" value="${project.name}"/>
+		  	<entry  key="${string.author.var}" value="${author}"/>
+		  	<entry  key="${string.version.var}" value="${version}"/>
+		  	<entry  key="${string.depend.var}" value="${depend}"/>
+		  	<entry  key="${string.description.var}" value="${description}"/>
+		  	<entry  key="${string.agents.var}" value="${agents}"/>
+		  	<entry  key="${string.docfile.var}" value="${docfile}"/>
+		</propertyfile>
+		<copy file="build/${project.name}.properties" todir="."/>
+
+		<mkdir dir="${jars.dir}"/>
+
+		<jar destfile="${jars.dir}/${jar.name}"
+			basedir="${build.dir}"
+		/>
+		<antcall target="runners"/>
+		<!-- <delete failonerror="false" file="build/${project.name}.properties"/> -->
+	</target>
+
+	<target name="docs" depends="delete-api">
+		  <javadoc 
+		           destdir="docs/api"
+		           author="true"
+		           version="true"
+		           use="true"
+		           windowtitle="${project.label}">
+
+		    <packageset dir="${src.dir}" defaultexcludes="yes">
+		    </packageset>
+
+		    <doctitle><![CDATA[<h1>${project.label}</h1>]]></doctitle>
+		    <bottom><![CDATA[<i>Copyright &#169; ${author} All Rights Reserved.</i>]]></bottom>
+		    <link href="http://java.sun.com/j2se/1.4.2/docs/api/" />
+    		    <link href="http://www.lirmm.fr/~fmichel/madkit/docs/api/"/>
+		  </javadoc>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="real-clean" depends="delete-api,clean">
+		<delete failonerror="false" file="${jars.dir}/${jar.name}"/>
+		<delete failonerror="false" file="${project.name}.bat"/>
+		<delete failonerror="false" file="${project.name}.sh"/>
+		<delete failonerror="false" file="desktop-${project.name}.sh"/>
+		<delete failonerror="false" file="desktop-${project.name}.bat"/>
+		<delete failonerror="false" file="${project.name}.properties"/>
+		<delete failonerror="false" file="${project.name}.html"/>
+	</target>
+
+	<target name="all-dist" depends="real-clean">
+		<antcall target="bin-dist"/>
+		<antcall target="src-dist"/>
+		<antcall target="docs-dist"/>
+		<antcall target="standalone-dist"/>
+	</target>
+	
+	<target name="runners" if="check-cfg">
+		<antcall target="runners-files">
+			<param name="bootline" value="java -cp ${lib.dir.path}/${console.bootargs} --config ${project.name}.cfg"/>
+			<param name="bin.name" value="${project.name}"/>
+		</antcall>
+		<antcall target="applet"/>
+		<antcall target="desktop-runners"/>
+	</target>
+
+	<target name="desktop-runners" if="check-desktop">
+		<antcall target="runners-files">
+			<param name="bootline" value="java -cp ${lib.dir.path}/${desktop.bootargs} --config ${project.name}.cfg"/>
+			<param name="bin.name" value="desktop-${project.name}"/>
+		</antcall>
+	</target>
+
+	<target name="runners-files">
+		<echo file="${bin.name}.bat" append="false">echo off
+${bootline}
+		</echo>
+		<echo file="${bin.name}.sh" append="false">#!/bin/bash
+${bootline}
+		</echo>
+	</target>
+
+
+	<target name="src-dist">
+		<antcall target="real-clean"/>
+		<concat destfile="readme.txt" >This is ${project.name} plugin sources version ${version} ! expand this archive in your madkit root directory</concat>
+		<zip destfile="${distrib.dir}/${project.name}-${version}-src.zip">
+			<zipfileset dir="." includes="build.xml,${project.name}.cfg,readme.txt" prefix="${plugins.root.path}/${project.name}"/>
+			<zipfileset dir="${src.dir}" includes="**/*" prefix="${plugins.root.path}/${project.name}/${src.dir}"/>
+			<zipfileset dir=".." includes="madkit.properties, generic.xml" prefix="${plugins.root.path}"/>
+			<zipfileset dir="."  includes="${scripts.dir}/**" prefix="${plugins.root.path}/${project.name}" />
+		</zip>
+		<delete failonerror="false" file="readme.txt"/>
+	</target>
+
+	<target name="bin-dist" depends="jar">
+		<concat destfile="readme.txt" >This is ${project.name} plugin version ${version} ! expand this archive in your madkit root directory</concat>
+		<zip destfile="${distrib.dir}/${project.name}-${version}-bin.zip">
+			<zipfileset dir="." includes="${project.name}.bat,${project.name}.sh,${project.name}.cfg,${project.name}.html,readme.txt" prefix="${plugins.root.path}/${project.name}"/>
+			<zipfileset dir="${jars.dir}" includes="${jar.name}" prefix="${lib.dir.name}"/>
+			<zipfileset dir="."  includes="${scripts.dir}/**" prefix="${plugins.root.path}/${project.name}" />
+		</zip>
+		<delete failonerror="false" file="readme.txt"/>
+	</target>
+
+	<target name="docs-dist" depends="docs">
+		<concat destfile="readme.txt" >This is ${project.name} plugin documentation ! expand this archive in your madkit root directory</concat>
+		<zip destfile="${distrib.dir}/${project.name}-${version}-doc.zip">
+			<zipfileset dir="." includes="readme.txt" prefix="${plugins.root.path}/${project.name}"/>
+			<zipfileset dir="docs" includes="**/*" prefix="${plugins.root.path}/${project.name}/docs"/>
+		</zip>
+		<delete failonerror="false" file="readme.txt"/>
+	</target>
+
+	<target name="standalone-dist" depends="real-clean,jar" if="check-cfg">
+		<antcall target="runners">
+			<param name="lib.dir.path" value="${lib.dir.name}"/>
+		</antcall>
+		<antcall target="applet">
+			<param name="lib.dir.path" value="${lib.dir.name}"/>
+		</antcall>
+		<concat destfile="readme.txt" >This is ${project.name} application by ${author}! It runs using the MadKit kernel : https://sourceforge.net/projects/madkit/</concat>
+		<zip destfile="${distrib.dir}/${project.name}-${version}-appli.zip">
+			<zipfileset dir="." includes="${project.name}.html,${project.name}.bat,${project.name}.sh,${project.name}.cfg,readme.txt" prefix="${project.name}-${version}"/>
+			<zipfileset dir="${jars.dir}" includes="madkitapplet.jar,boot.jar,${jar.name}" prefix="${project.name}-${version}/${lib.dir.name}"/>
+			<zipfileset dir="${jars.dir}" includes="${requires}" prefix="${project.name}-${version}/${lib.dir.name}"/>
+			<zipfileset refid="project.class.path" prefix="${project.name}-${version}/${lib.dir.name}"/>
+		</zip>
+		<delete failonerror="false" file="readme.txt"/>
+		<antcall target="desktop-runners"/>
+		<antcall target="applet"/>
+	</target>
+	
+	<target name="plugin-dist-prepare" depends="jar">
+		<property file="${installer.dir}/component.properties"/> 
+		<propertyfile file="${installer.dir}/component.properties" >
+			<entry key="component.number" type="int" default="0" operation="+"/>
+		</propertyfile>
+			
+		<propertyfile file="${installer.dir}/plugins.properties">
+			<entry key="comp.${component.number}.name" value="${project.name}"/>
+		  	<entry  key="comp.${component.number}.version" value="${version}"/>
+		  	<entry  key="comp.${component.number}.depend" value="${depend}"/>
+		  	<entry  key="comp.${component.number}.description" value="${description}"/>
+		  	<entry  key="comp.count" value="${component.number}"/>
+		</propertyfile>
+		<mkdir dir="docs"/>
+	</target>
+	<target name="plugin-dist" depends="plugin-dist-prepare">
+		<zip destfile="${installer.dir}/${project.name}-${version}.zip">
+			<zipfileset dir="." includes="build.xml,${project.name}.bat,${project.name}.sh,${project.name}.cfg" prefix="${plugins.root.path}/${project.name}"/>
+			<zipfileset dir="${jars.dir}" includes="${jar.name}" prefix="${lib.dir.name}"/>
+			<zipfileset dir="${src.dir}" includes="**/*" prefix="${plugins.root.path}/${project.name}/${src.dir}"/>
+			<zipfileset dir="docs" includes="**/*" prefix="${plugins.root.path}/${project.name}/docs"/>
+			<zipfileset refid="project.class.path" prefix="${lib.dir.name}"/>
+			<zipfileset dir="."  includes="${scripts.dir}/**" prefix="${plugins.root.path}/${project.name}" />
+			<zipfileset refid="bin.path" prefix="${bin.dir.name}"/>
+		</zip>
+	</target>
+
+	<target name="applet" if="applet.available">
+		<delete failonerror="false" file="${project.name}.html"/>
+		<xmlproperty file="${project.name}.cfg" keepRoot="false" collapseAttributes="true" />
+		<unzip src="${jars.dir}/madkitapplet.jar" dest="${build.dir}">
+			<patternset>
+				<include name="madkitapplet.template"/>
+			</patternset>
+		</unzip>
+		<move file="${build.dir}/madkitapplet.template" tofile="${project.name}.html">
+			<filterchain>
+				<expandproperties/>
+			</filterchain>
+		</move>
+	</target>
+	
+	<target name="web-dist-prepare" >
+		<mkdir dir="${installer.dir}/web" />
+		<!--<property file="${installer.dir}/web/component.properties"/> 
+		<propertyfile file="${installer.dir}/web/component.properties" >
+			<entry key="component.number" type="int" default="0" operation="+"/>
+		</propertyfile>
+			
+		<propertyfile file="${installer.dir}/web/plugins.properties">
+			<entry key="comp.${component.number}.name" value="${project.name}"/>
+		  	<entry  key="comp.${component.number}.version" value="${version}"/>
+		  	<entry  key="comp.${component.number}.depend" value="${depend}"/>
+		  	<entry  key="comp.${component.number}.description" value="${description}"/>
+		  	<entry  key="comp.count" value="${component.number}"/>
+		</propertyfile>-->
+	</target>
+
+
+	<target name="web-dist" depends="web-dist-prepare">
+	<property name="xmls.dir" value="${installer.dir}/web/xmls"/>
+	<antcall target="web-dist-bin"/>
+	<antcall target="web-dist-src"/>
+	<antcall target="web-dist-doc"/>
+
+	</target>
+
+	<target name="make-plugin-xml" >
+		
+		<mkdir dir="${xmls.dir}" />
+		
+		<delete file="${xmls.dir}/${xml.file.name}"/>
+		<!--Start the plugin's xml file-->
+		<taskdef name="fileinfo" className="org.digitalsoul.ant.FileInfo"/>
+
+		<checksum file="${zip.file}" property="zip.checksum"/>
+		<!-- get the plugins dependencies-->
+		
+		<propertyfile file="${xmls.dir}/plugins.version">
+			<entry key="${plugin.name}.version" value="${version}"/>
+		</propertyfile>
+		<!--<property file="${project.name}.properties"/>-->
+		<property file="${xmls.dir}/plugins.version"/>
+		<script language="beanshell"> <![CDATA[
+			String actions=project.getProperty("madkit.plugin.actions."+project.getProperty("actions.type"));
+			
+			if(actions==null){
+				actions=" ";
+			}
+			
+			System.out.println("actions "+actions);
+			
+			if(project.getProperty("actions.type").equals("doc")){
+				String prjName=project.getProperty("project.name");
+				actions+="<action id=\"docref\" url=\"plugins/"+prjName+"/docs/api/index.html\" name=\""+prjName+" API\" section=\"api\"/>";
+			}
+
+			project.setProperty("actions",actions);
+			
+			String useDep=project.getProperty("xml.dependencies.use");
+			if(useDep==null){
+				project.setProperty("xml.dependencies"," ");
+				return;
+			}
+
+			StringTokenizer stk=new StringTokenizer(project.getProperty("depend"),",");
+			String dep="";
+			while(stk.hasMoreTokens()){
+				String tk=stk.nextToken();
+				tk=tk.trim();
+				dep+="<plugin name=\""+tk+"\" version=\""+project.getProperty(tk+".version")+"\" />\n";
+			}
+			project.setProperty("xml.dependencies",dep);
+		]]> </script>
+
+		<fileinfo path="${zip.file}" rootProperty="zip">
+			<fileparam type="size"/>
+		</fileinfo>
+						   
+<echo file="${xmls.dir}/${xml.file.name}" append="true">&lt;?xml version="1.0"?>
+&lt;plugin name="${plugin.name}" version="${version}">
+
+&lt;author>
+&lt;name>${author}&lt;/name>
+&lt;email> &lt;/email>
+&lt;web> &lt;/web>
+&lt;/author>
+
+&lt;file name="${zip.name}" size="${zip.size}" checksum="${zip.checksum}"/>
+&lt;depends>
+${xml.dependencies}
+
+&lt;/depends>
+&lt;actions>
+${actions}
+&lt;/actions>
+&lt;description>
+${description}
+
+&lt;/description>
+
+&lt;/plugin>
+
+</echo>	
+	</target>
+	
+	<!--make the different package types : bin, src, doc, all -->
+	<target name="web-dist-src" >
+		<property name="xml.file.name" value="${project.name}-src.xml"/>
+		<property name="plugin.name" value="${project.name}-src"/>	
+		<property name="zip.name" value="${project.name}-src-${version}.zip"/>
+		<property name="zip.file" value="${installer.dir}/web/${zip.name}"/>
+		<property name="actions.type" value="src"/>
+		
+		<zip destfile="${zip.file}">
+			<!--include info for stand-alone install-->
+			<zipfileset dir="${xmls.dir}" includes="${xml.file.name}" fullpath="info/plugin.xml"/>
+			<zipfileset dir="." includes="build.xml" prefix="${plugins.root.path}/${project.name}"/>
+			<zipfileset dir=".." includes="generic.xml, madkit.properties" prefix="${plugins.root.path}"/>
+			<zipfileset dir="${src.dir}" includes="**/*" prefix="${plugins.root.path}/${project.name}/${src.dir}"/>
+			<zipfileset dir="."  includes="${scripts.dir}/**" prefix="${plugins.root.path}/${project.name}" />
+		</zip>
+		
+		<property name="xmls.dir" value="${installer.dir}/web/xmls"/>
+		<!--make the plugin xml -->
+		<antcall target="make-plugin-xml"/>
+		<!--insert on line into plugins.xml for this plugin -->
+		<echo file="${xmls.dir}/plugins.xml" append="true">
+&lt;plugin category="sources" location="${zip.name}" desc="${xml.file.name}" name="${plugin.name}" version="${version}"/>
+		</echo>
+
+	</target>
+	
+	<target name="web-dist-bin" >
+		<property name="xml.file.name" value="${project.name}.xml"/>
+		
+		<property name="plugin.name" value="${project.name}"/>	
+
+		<property name="zip.name" value="${project.name}-${version}.zip"/>
+		<property name="zip.file" value="${installer.dir}/web/${zip.name}"/>
+		<property name="xml.dependencies.use" value="true"/>
+		<property name="actions.type" value="bin"/>
+		<zip destfile="${zip.file}">
+			<!--include info for stand-alone install-->
+			<zipfileset dir="${xmls.dir}" includes="${xml.file.name}" fullpath="info/plugin.xml"/>
+			
+			<zipfileset dir="." includes="${project.name}.properties, ${project.name}.bat,${project.name}.sh,${project.name}.cfg" prefix="${plugins.root.path}/${project.name}"/>
+			<zipfileset dir="${jars.dir}" includes="${jar.name}" prefix="${lib.dir.name}"/>
+			<zipfileset dir="${jars.dir}" includes="${zip.extra.inc.bin}" prefix="${zip.extra.inc.bin.prefix}"/>
+			<zipfileset dir="."  includes="${scripts.dir}/**" prefix="${plugins.root.path}/${project.name}" />
+			<zipfileset refid="bin.path" prefix="${bin.dir.name}"/>
+			<zipfileset dir="."  includes="lib/**" />
+		
+		</zip>
+		
+		<!--<property file="../categories/${project.name}.category"/>
+		if not project.category, project.category=unknown-->
+		<script language="beanshell"><![CDATA[
+			String cat=project.getProperty("project.category");
+			if( cat==null){
+				project.setProperty("project.category","unknown");
+			}
+		
+		]]></script>
+		<property name="xmls.dir" value="${installer.dir}/web/xmls"/>
+		<!--make the plugin xml -->
+		<antcall target="make-plugin-xml"/>
+		<!--insert on line into plugins.xml for this plugin -->
+		<echo file="${xmls.dir}/plugins.xml" append="true">
+&lt;plugin category="${project.category}" location="${zip.name}" desc="${xml.file.name}" name="${plugin.name}" version="${version}"/>
+		</echo>
+
+	</target>
+	<target name="web-dist-doc" depends="docs">
+		<property name="xml.file.name" value="${project.name}-doc.xml"/>
+		<property name="plugin.name" value="${project.name}-doc"/>	
+		
+		<property name="zip.name" value="${project.name}-doc-${version}.zip"/>
+		<property name="zip.file" value="${installer.dir}/web/${zip.name}"/>
+		<property name="actions.type" value="doc"/>
+		<zip destfile="${zip.file}">
+			<!--include info for stand-alone install-->
+			<zipfileset dir="${xmls.dir}" includes="${xml.file.name}" fullpath="info/plugin.xml"/>
+			
+			
+			<zipfileset dir="docs" includes="**/*" prefix="${plugins.root.path}/${project.name}/docs"/>
+		</zip>
+		
+		<property name="xmls.dir" value="${installer.dir}/web/xmls"/>
+		<!--make the plugin xml -->
+		<antcall target="make-plugin-xml"/>
+		<!--insert on line into plugins.xml for this plugin -->
+		<echo file="${xmls.dir}/plugins.xml" append="true">
+&lt;plugin category="docs" location="${zip.name}" desc="${xml.file.name}" name="${plugin.name}" version="${version}"/>
+		</echo>
+
+	</target>
+</project>

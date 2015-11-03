@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="tutorial2" description="tutorial2">
+  <formalism-info>
+    <author>Jacques Ferber</author>
+    <author>Ol. Gutknecht</author>
+  </formalism-info>
+
+  <node-types>
+    <node-desc name="round node" class="SEdit.SimpleNode">
+      <icon url="images/place1.gif"/>
+    </node-desc>
+    <node-desc name="rectangular node" class="SEdit.SimpleNode">
+      <icon url="images/transition1.gif"/>
+      <graphic-element class="SEdit.Graphics.GRectangle">
+		<property name="width">80</property>
+		<property name="height">40</property>
+      </graphic-element>
+    </node-desc>
+    <node-desc name="iconic node" class="SEdit.SimpleNode">
+      <icon url="images/monalisa.gif"/>
+	  <property name="label">An Icon</property>
+	  <property name="comment">A beautiful icon, la joconde</property>
+      <graphic-element class="SEdit.Graphics.GIcon">
+		<property name="imageaddress">images/monalisa.gif</property>
+		<property name="width">40</property>
+		<property name="height">40</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+  </node-types>
+  <arrow-types>
+    <arrow-desc name="link1" class="SEdit.SArrow" description="A link from anything to anything">
+      <icon url="images/stdarrow.gif"/>
+      <graphic-element >
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </arrow-desc>
+	<arrow-desc name="link2"
+  		class="SEdit.SArrow" from="round node" to="iconic node"
+  		description="A link from round node to inconic node">
+		<graphic-element >
+			<property name="lineStyle">1</property>
+			<property name="startingForm">2</property>
+			<property name="endingForm">3</property>
+			<property name="displayLabel">false</property>
+        </graphic-element>
+    </arrow-desc>
+	<arrow-desc name="link3"
+  		class="SEdit.SArrow"
+		description="Another link from anything to anything">
+		<graphic-element >
+			<property name="startingForm">4</property>
+			<property name="endingForm">5</property>
+        </graphic-element>
+    </arrow-desc>
+  </arrow-types>
+</formalism>

@@ -1,0 +1,3 @@
+        if (!isGroup(group)) { createGroup(true, group, null, null); }
+        else { requestRole(group, "member", null); }
+	//joinGroup(group);

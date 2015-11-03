@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE formalism SYSTEM "sedit-formalism.dtd">
+<formalism name="Warbot3" description="Warbot3"
+		class="warbot.kernel.WarbotStructure">
+  <formalism-info>
+    <author>Fabien Michel</author>
+	<author>Jacques Ferber </author>
+	<date>16/01/2002</date>
+  </formalism-info>
+  <node-types>
+	<node-desc name="greenMissileLauncher" class="warbot.kernel.RocketLauncher" category="dumb">
+      <icon url="images/world/greenRobot1.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">green</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+
+	  <property name="brainClass">warbot.demo.RastaRocket</property>
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/greenRobot1.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+	<node-desc name="greenDetector" class="warbot.kernel.Explorer"  category="dumb">
+      <icon url="images/world/greenRobotAntenna.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">green</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.demo.Ant</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/greenRobotAntenna.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+    
+	<node-desc name="greenBase" class="warbot.kernel.Home"  category="dumb">
+      <icon url="images/world/greenHome.gif"/>
+	  <property name="team">green</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/greenHome.gif</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+    
+    <node-desc name="redBase" class="warbot.kernel.Home" category="dumb">
+      <icon url="images/world/redHome.gif"/>
+	  <property name="team">red</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+	  <property name="brainClass">warbot.kernel.PythonBrain</property>
+	  <property name="behaviorFileName">plugins/warbot/scripts/home_defender1.py</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/redHome.gif</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+
+    
+    <node-desc name="redMissileLauncher" class="warbot.kernel.RocketLauncher"  category="dumb">
+      <icon url="images/world/redRobot1.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">red</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+	  <property name="brainClass">warbot.demo.HomeKiller</property> -->
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/redRobot1.gif</property>
+		<property name="labelLocation">4</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+	<node-desc name="redDetector" class="warbot.kernel.Explorer"  category="dumb">
+      <icon url="images/world/redRobotAntenna.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">red</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.kernel.PythonBrain</property>
+	  <property name="behaviorFileName">plugins/warbot/scripts/explore1.py</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/redRobotAntenna.gif</property>
+		<property name="labelLocation">4</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+
+	<node-desc name="Food" class="warbot.kernel.Hamburger"  category="objects">
+      <icon url="images/world/hamburger.gif"/>
+      <property name="radius">10</property>
+	  <property name="energy">200</property>
+      <graphic-element class="warbot.kernel.GEntity">
+		<property name="imageaddress">images/world/hamburger.gif</property>
+      </graphic-element>
+    </node-desc>
+	<node-desc name="Wall" class="warbot.kernel.Wall" category="objects">
+      <icon url="images/world/wall.gif"/>
+      <property name="radius">20</property>
+      <graphic-element class="warbot.kernel.GEntity">
+		<property name="imageaddress">images/world/wall.gif</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+
+	<node-desc name="Rocket" class="warbot.kernel.Rocket" category="objects">
+      <icon url="images/world/dynamite.gif"/>
+      <property name="radius">1</property>
+	  <property name="energy">100</property>
+      <graphic-element class="SEdit.Graphics.GOval">
+		<property name="width">2</property>
+		<property name="height">2</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+
+       <node-desc name="privatMissileLauncher" class="warbot.kernel.RocketLauncher" category="Privat">
+      <icon url="images/warbot/cyanrocketlauncher.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">P</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+	  <property name="brainClass">warbot.kernel.PythonBrain</property>
+	  <property name="behaviorFileName">plugins/warbot/scripts/PrivatHomekiller.py</property>
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/warbot/cyanrocketlauncher.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+
+	<node-desc name="privatDetector" class="warbot.kernel.Explorer" category="Privat">
+      <icon url="images/warbot/cyanexplorer.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">P</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.kernel.PythonBrain</property>
+	  <property name="behaviorFileName">plugins/warbot/scripts/PrivatExplore.py</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/warbot/cyanexplorer.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+
+	    <node-desc name="privatBase" class="warbot.kernel.Home" category="Privat">
+      <icon url="images/warbot/cyanHome.gif"/>
+	  <property name="team">P</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+	  <property name="brainClass">warbot.kernel.PythonBrain</property>
+	  <property name="behaviorFileName">plugins/warbot/scripts/PrivatBase.py</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/warbot/cyanHome.gif</property>
+      </graphic-element>
+    </node-desc>
+
+
+
+	    <node-desc name="KKLauncher" class="warbot.kernel.RocketLauncher" category="KKTeam">
+      <icon url="images/warbot/KKTeam/KKLauncher.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">KKTeam</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+	  <property name="brainClass">warbot.demo.KKLauncher</property>
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/warbot/KKTeam/KKLauncher.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+
+	<node-desc name="KKExplorer" class="warbot.kernel.Explorer" category="KKTeam">
+      <icon url="images/warbot/KKTeam/KKWalker.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">KKTeam</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.demo.KKExplorer</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/warbot/KKTeam/KKWalker.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+	<node-desc name="KKase" class="warbot.kernel.Home" category="KKTeam">
+      <icon url="images/warbot/KKTeam/KKhome.gif"/>
+	  <property name="team">KKTeam</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+	  <property name="brainclass">warbot.demo.KKBase</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/warbot/KKTeam/KKhome.gif</property>
+      </graphic-element>
+    </node-desc>
+<!--
+	<node-desc name="remyMissileLauncher" class="warbot.kernel.RocketLauncher" category="REMY">
+      <icon url="images/world/greenRobot1.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">remy</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+	  <property name="brainClass">warbot.perso.Leon</property>
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/greenRobot1.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+	<node-desc name="remyDetector" class="warbot.kernel.Explorer"  category="REMY">
+      <icon url="images/world/greenRobotAntenna.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">remy</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.perso.Jim</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/greenRobotAntenna.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+
+	<node-desc name="remyBase" class="warbot.kernel.Home" category="REMY">
+      <icon url="images/world/greenHome.gif"/>
+	  <property name="team">remy</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+	  <property name="brainClass">warbot.perso.Maison</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/greenHome.gif</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+ -->
+	    <node-desc name="BMissileLauncher" class="warbot.kernel.RocketLauncher" category="BB">
+      <icon url="images/warbot/KKTeam/KBenchLauncher.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">B</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+	  <property name="brainClass">warbot.demo.MyRocket</property>
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/warbot/KKTeam/KBenchLauncher.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+
+	<node-desc name="BDetector" class="warbot.kernel.Explorer"  category="BB">
+      <icon url="images/warbot/KKTeam/KBenchExplorer.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">B</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.demo.MyDetector</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+      <property name="imageaddress">images/warbot/KKTeam/KBenchExplorer.gif</property>
+	  <property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+
+	    <node-desc name="BBase" class="warbot.kernel.Home" category="BB">
+      <icon url="images/warbot/KKTeam/KBenchHome.gif"/>
+	  <property name="team">B</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+	   <property name="brainClass">warbot.demo.MyHome</property>
+	  <graphic-element class="warbot.kernel.GBasicBody">
+	  <property name="imageaddress">images/warbot/KKTeam/KBenchHome.gif</property>
+      </graphic-element>
+    </node-desc>
+
+	<node-desc name="ASMissileLauncher" class="warbot.kernel.RocketLauncher" category="Turtle">
+      <icon url="images/turtle2.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">AS</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+	  <property name="brainClass">warbot.demo.NotreRastaRocket</property>
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/turtle2.gif</property>
+		<property name="labelLocation">4</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+	<node-desc name="ASDetector" class="warbot.kernel.Explorer" category="Turtle">
+      <icon url="images/turtle1.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">AS</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.demo.notreAnt</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/turtle1.gif</property>
+		<property name="labelLocation">4</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+	<node-desc name="ASBase" class="warbot.kernel.Home" category="Turtle">
+      <icon url="images/monalisa.gif"/>
+	  <property name="team">AS</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+	  <!-- <property name="brainClass">warbot.demo.notreHome</property> -->
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/monalisa.gif</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+      <action description="toggle show detection range">
+	<java-method name="toggleShowDetect"/>
+      </action>
+      <action description="toggle show user message">
+	<java-method name="toggleShowUserMessage"/>
+      </action>
+      <action description="toggle show energy level">
+	<java-method name="toggleShowEnergyLevel"/>
+      </action>
+    </node-desc>
+
+	<node-desc name="HALMissileLauncher" class="warbot.kernel.RocketLauncher" category="HAL">
+      <icon url="images/world/boyStupid.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">HAL</property>
+      <property name="detectingrange">80</property>
+	  <property name="energy">4000</property>
+	  <property name="brainClass">warbot.demo.HalLauncher</property>
+	  <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/boyStupid.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+	<node-desc name="HALDetector" class="warbot.kernel.Explorer" category="HAL">
+      <icon url="images/world/girlStupid.gif"/>
+      <property name="radius">12</property>
+	  <property name="team">HAL</property>
+      <property name="detectingrange">130</property>
+	  <property name="energy">1000</property>
+	  <property name="brainClass">warbot.demo.HalDetector</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/girlStupid.gif</property>
+		<property name="labelLocation">4</property>
+      </graphic-element>
+    </node-desc>
+
+	<node-desc name="HALBase" class="warbot.kernel.Home" category="HAL">
+      <icon url="images/world/home.gif"/>
+	  <property name="team">HAL</property>
+      <property name="radius">20</property>
+      <property name="detectingrange">200</property>
+	  <property name="energy">12000</property>
+	  <property name="brainClass">warbot.demo.HalHome</property>
+      <graphic-element class="warbot.kernel.GBasicBody">
+		<property name="imageaddress">images/world/home.gif</property>
+		<property name="displaylabel">false</property>
+      </graphic-element>
+    </node-desc>
+
+  </node-types>
+
+  <property name="worldWidth">1200</property>
+  <property name="worldHeight">800</property>
+  <action description="Start">
+    <icon url="images/run.gif"/>
+    <java-method name="start"/>
+  </action>
+  <action description="Stop">
+    <icon url="images/stop.gif"/>
+    <java-method name="stop"/>
+  </action>
+  <action description="Step">
+    <icon url="images/step.gif"/>
+    <java-method name="step"/>
+  </action>
+  <action description="detect">
+    <java-method name="showDetect"/>
+  </action>
+  <action description="userMessage">
+    <java-method name="showUserMessage"/>
+  </action>
+  <action description="showMessages">
+    <java-method name="showMessages"/>
+  </action>
+  <action description="map">
+    <java-method name="mapViewer"/>
+  </action>
+  <!--<action description="Set delay">
+    <icon url="images/clock.gif"/>
+    <java-method name="modifyDelay"/>
+  </action> -->
+
+</formalism>

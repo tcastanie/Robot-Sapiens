@@ -1,0 +1,1 @@
+ant webdist > errlog.txt
