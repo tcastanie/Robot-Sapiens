@@ -3,9 +3,13 @@ package kernelsim;
 import madkit.kernel.*;
 
 import java.awt.*;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 //import java.lang.reflect.Method;
 import java.util.*;
 
+import robosapiensBrainServer.RobotBrainLocals;
 import smaapp.*;
 
  /** Defines the physical part of a robot. */
@@ -100,6 +104,12 @@ import smaapp.*;
      public NeuronAgent CapIRAgt[]=null; //new NeuronAgent[8];
      public NeuronAgent BaseDirAgt=null,BaseDistAgt=null;
      
+   
+     /// new NeuronAgents
+     public ArrayList<NeuronAgent> sensorNeurons;
+     public ArrayList<NeuronAgent> effectorNeurons;
+     
+     
      public char Situation;
      public char I1,I2;
 
@@ -163,9 +173,58 @@ import smaapp.*;
   public RobotAppPhy(String simGrp)
     {
 	  simulationGroup = simGrp;
+	  readRegistering();
     }
 
- public  void init_coord(int x, int y)
+ private void readRegistering() {
+	 try {
+	        /* string ret = "REGISTERING " + name + "\n";
+	        ret += "SENSORS " + sensors.Length + "\n";
+	        for (int i = 0; i < sensors.Length; i++)
+	            ret += i + " FLOAT\n";
+	        ret += "EFFECTORS " + Wheels.Length + "\n";
+	        for (int i = 0; i < Wheels.Length; i++)
+	            ret += i + " FLOAT\n";
+	        */
+
+	        DataInputStream in = RobotBrainLocals.in.get();
+	        PrintStream out = RobotBrainLocals.out.get();
+	        String line;
+	        line = in.readLine();
+	        System.out.println("reading registering");
+	        if(line.split(" ")[0].equals("REGISTERING"))
+	        {
+		        this.setName(line.split(" ")[1]);
+		        line = in.readLine();
+		        int sensCount = Integer.parseInt(line.split(" ")[1]);
+	        	sensorNeurons = new ArrayList<NeuronAgent>();
+	        	for(int i = 0 ; i < sensCount ; i++)
+	        	{
+	        		line = in.readLine();
+	        		sensorNeurons.add(i, new NeuronAgent());
+	        		sensorNeurons.get(i).setLabel("Sensor "+i);
+	        	}
+		   
+		        line = in.readLine();
+		        int effCount = Integer.parseInt(line.split(" ")[1]);
+	        	effectorNeurons = new ArrayList<NeuronAgent>();
+	        	for(int i = 0 ; i < effCount ; i++)
+	        	{
+	        		line = in.readLine();
+	        		effectorNeurons.add(i, new NeuronAgent());
+	        		effectorNeurons.get(i).setLabel("Effector "+i);
+	        	}
+	        	System.out.println(sensorNeurons.size() + " Sensor found");
+	        	System.out.println(effectorNeurons.size() + " Effector found");
+	        	out.println("REGISTERED : "+this.getName());
+	        }
+	        
+}catch(IOException e){
+	System.out.println(e.getMessage());
+}	
+}
+
+public  void init_coord(int x, int y)
    {
        C.xc=x;
        C.yc=y;

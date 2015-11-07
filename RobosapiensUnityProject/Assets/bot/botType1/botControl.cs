@@ -12,7 +12,7 @@ public class botControl : MonoBehaviour {
     [SerializeField]private GameObject[] sensors = new GameObject[8];
     
     //network
-    public string serverIP = "127.0.0.0";
+    public string serverIP = "127.0.0.1";
     public Int32 port = 28001;
     private TcpClient client;
     private NetworkStream stream;
@@ -28,12 +28,12 @@ public class botControl : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0.0f,0.0f,0.0f);
-        //Connect();
+        Connect();
         currentTorque = new float[Wheels.Length];
     }
 	
 	void Update () {
-        //sendSensorData(sensors);
+        sendSensorData(sensors);
         getEffectorData(currentTorque);
         for(int i = 0; i < Wheels.Length; i++)
             Wheels[i].motorTorque = currentTorque[i];
@@ -43,14 +43,14 @@ public class botControl : MonoBehaviour {
     {
         currentTorque[0] = speedLeft;
         currentTorque[1] = speedRight;
-        /*
+        
         Byte[] Msg = new Byte[BUFF_SIZE];
         String responseData = String.Empty;
         Int32 bytes;
         //while((bytes = stream.Read(Msg, 0, Msg.Length)) != 0);
         bytes = stream.Read(Msg, 0, Msg.Length);
         responseData = System.Text.Encoding.ASCII.GetString(Msg, 0, bytes);
-        Debug.Log("server said : " + responseData);
+        Debug.Log("server said : \n" + responseData);
         string[] respLines = responseData.Split('\n');
         if(respLines[0].Contains("EFFECTORS"))
         {
@@ -59,12 +59,17 @@ public class botControl : MonoBehaviour {
                 currentTorque[int.Parse(respLines[i].Split(' ')[0])] = float.Parse(respLines[i].Split(' ')[1]);
             }
         }
-        */
+        
     }
 
     private void sendSensorData(GameObject[] sensors)
     {
-        throw new NotImplementedException();
+        string msg = "SENSORS "+ sensors.Length+"\n";
+
+        for (int i = 0; i < sensors.Length; i++)
+            msg += i + " "+0.0+"\n";
+        Byte[] rMsg = System.Text.Encoding.ASCII.GetBytes(msg);
+        stream.Write(rMsg, 0, rMsg.Length);
     }
 
     string makeServerRegisterMessage()
