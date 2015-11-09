@@ -13,10 +13,11 @@ public class spawnCubes : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetMouseButtonDown(0)){
-			// print(Input.mousePosition);
-			// print(GetComponent<Transform>().position);
-			// Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,1.0f));
-			Instantiate(cube,GetComponent<Transform>().position,Quaternion.identity);
+			Instantiate(cube,GameObject.Find("cubeSpawner").transform.position,Quaternion.identity);
+		}
+
+		if(Input.GetMouseButtonUp(0)){
+			//Instantiate(cube,GameObject.Find("cubeSpawner").transform.position,Quaternion.identity);
 		}
 	}
 }
