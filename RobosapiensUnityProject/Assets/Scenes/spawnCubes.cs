@@ -4,6 +4,9 @@ using System.Collections;
 public class spawnCubes : MonoBehaviour {
 
 	public GameObject cube;
+	public GameObject cubeFantome;
+
+    Quaternion rotation;
 
 	// Use this for initialization
 	void Start () {
@@ -12,12 +15,15 @@ public class spawnCubes : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetMouseButtonDown(0)){
-			Instantiate(cube,GameObject.Find("cubeSpawner").transform.position,Quaternion.identity);
+
+        rotation = Quaternion.Euler(0, GameObject.Find("cubeSpawner").transform.rotation.eulerAngles.y, 0);
+
+        if (Input.GetMouseButtonDown(0)){
+			Instantiate(cubeFantome,transform.position, rotation);
 		}
 
 		if(Input.GetMouseButtonUp(0)){
-			//Instantiate(cube,GameObject.Find("cubeSpawner").transform.position,Quaternion.identity);
+			Instantiate(cube,transform.position, rotation);
 		}
 	}
 }
