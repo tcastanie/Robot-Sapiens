@@ -1,6 +1,7 @@
 package kernelsim;
 
 import madkit.kernel.*;
+import robosapiensBrainServer.RobotBrainGlobals;
 import smaapp.*;
 //import java.awt.*;
 //import java.lang.reflect.Method;
@@ -111,9 +112,13 @@ import smaapp.*;
           if (!isGroup(simulationGroup)) { createGroup(true, simulationGroup, null, null); }
           else { requestRole(simulationGroup, "member", null); }
           */
-      	createGroupIfAbsent(Global.Community, simulationGroup, false, null);
-        requestRole(Global.Community,simulationGroup, "member", null);
-	  //joinGroup(simulationGroup);
+          createGroupIfAbsent(Global.Community, simulationGroup, false, null);
+          requestRole(Global.Community,simulationGroup, "member", null);
+          requestRole(Global.Community,simulationGroup, "neuron", null);
+          
+          createGroupIfAbsent(RobotBrainGlobals.community,RobotBrainGlobals.BrainGroup , false, null);
+          requestRole(RobotBrainGlobals.community,RobotBrainGlobals.BrainGroup, RobotBrainGlobals.NeuronRole, null);
+  	  //joinGroup(simulationGroup);
 
           System.out.println("ok ...");
 	  requestRole(Global.Community,simulationGroup,role,null);

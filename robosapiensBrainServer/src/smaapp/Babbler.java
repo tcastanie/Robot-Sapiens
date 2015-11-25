@@ -1,12 +1,16 @@
 package smaapp;
 
 import kernelsim.*;
+import madkit.kernel.AgentAddress;
+
 
 //import madkit.kernel.*;
 //import java.awt.*;
 //import java.lang.reflect.Method;
 import java.util.*;
 //import java.io.*;
+
+import robosapiensBrainServer.RobotBrainGlobals;
 
 // ***********************************
 // *** NeuronAgent.java            ***
@@ -283,7 +287,19 @@ public Vector generateValuesToTry(int n)
 	  		{ // Toutes les valeurs ont été essayées pour le moteur
 	  			//System.out.println("Impact de("+currentMotor.getLabel()+"): ");
 	  			
-	  			nsch.sendMessage(currentMotor.getAgentAddressIn(Global.Community, nsch.simgroup,  "scheduler"),new NeuralMessage(currentMotor.getFirstValue()));
+	  			//System.out.println(currentMotor);
+	  			//System.out.println(nsch);
+	  			
+	  			//nsch.requestRole(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nschRole);	  			
+	  			AgentAddress a = currentMotor.getAgentAddressIn(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.NeuronRole);
+//	  			AgentAddress a = currentMotor.getAgentAddressIn(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nschRole);
+//	  			AgentAddress a = currentMotor.getAgentAddressIn(Global.Community, nsch.simgroup,  "scheduler");
+	  			NeuralMessage m = new NeuralMessage(currentMotor.getFirstValue());
+	  			
+	  			System.out.println(nsch);
+	  			System.out.println(a);
+	  			System.out.println(m);
+	  			nsch.sendMessage(a,m);
 	  			
 	  			//currentMotor.setLastValueAsFirstValue();
 	  			
@@ -364,6 +380,7 @@ public Vector generateValuesToTry(int n)
 		  		for (int i=0;i<ValuesToTry.size();i++)
 		  		{	System.out.println("Babbler.execute:VectorValue(i="+i+")="+((Double)ValuesToTry.elementAt(i)).doubleValue());
 		  		}*/
+	  			System.out.println(ValuesToTry.size());
 	  			updateSensorsValues(); // Reviendre: pas déjà appelé ???
 		  		Double vtt=(Double)(ValuesToTry.elementAt(0));
 	  			ValueToTry=vtt.doubleValue();

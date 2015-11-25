@@ -4,11 +4,14 @@ import kernelsim.*;
 import madkit.kernel.*;
 import madkit.message.StringMessage;
 
+
 //import java.awt.*;
 //import java.lang.reflect.Method;
 //import java.util.*;
 import java.io.*;
 import java.util.Vector;
+
+import robosapiensBrainServer.RobotBrainGlobals;
 
 /*import java.util.*;
 
@@ -249,7 +252,7 @@ public class NeuronAgent extends NeuralAgent {
 
 		// 060208 NeuralMessage msg= (NeuralMessage)(nextMessage());
 		Message m = nextMessage();
-
+		//System.out.println("runMe neuron <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		while (m != null) // while (msg != null)
 		{
 			if (m.getClass() == NeuralMessage.class) {
@@ -319,6 +322,7 @@ public class NeuronAgent extends NeuralAgent {
 	 * DriveManager
 	 */
 	public String runMeDriveMan() {
+		//System.out.println("rumMeDriveMAn");
 		if (drivenumber == 0) {
 			drivenumber = nsch.getDriveSize();
 		}
@@ -372,9 +376,12 @@ public class NeuronAgent extends NeuralAgent {
 							for (int i = 0; i < Babble.MotorGroup.size(); i++)
 								s += (((NeuronAgent) Babble.MotorGroup.get(i))
 										.getLabel());
-							sendMessage(nsch.getAgentAddressIn(
-									Global.Community, simulationGroup,
-									"scheduler"), new CreateAgentMessage(
+							AgentAddress a = nsch.getAgentAddressIn(
+									RobotBrainGlobals.community, 
+									RobotBrainGlobals.BrainGroup,
+									RobotBrainGlobals.nschRole);
+							System.out.println(a);
+							sendMessage(a, new CreateAgentMessage(
 									nsch.neurongroup, s, Babble.MotorGroup));
 							// Phase=PHASE_SATISFYING;
 							// Babble.Babbler_State=Babble.BABBLER_ZOMBIE;

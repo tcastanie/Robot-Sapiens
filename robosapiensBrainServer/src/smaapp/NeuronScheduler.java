@@ -8,6 +8,7 @@ import madkit.simulation.activator.*;
 import java.io.*;
 import java.util.*;
 
+import robosapiensBrainServer.RobotBrainGlobals;
 //import smaapp.*;
 import kernelsim.*;
 
@@ -74,6 +75,7 @@ public class NeuronScheduler extends Scheduler {
 	public void activate() {
 		System.out.println("Activation neuroscheduler dans groupe " + simgroup
 				+ " & " + neurongroup);
+		/*
 		neurlive = new TurboMethodActivator("runMe", Global.Community,
 				neurongroup, "neuron");
 		addActivator(neurlive);
@@ -81,15 +83,16 @@ public class NeuronScheduler extends Scheduler {
 		sensorObserver = new TurboMethodActivator("observe", Global.Community,
 				neurongroup, "sensor observer");
 		addActivator(sensorObserver);
-
+*/
 		// println("Neuron scheduler activated");
 		createGroupIfAbsent(Global.Community, simgroup, false, null);
+		createGroupIfAbsent(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup,  false, null);
 		/*
 		 * if (!isGroup(simgroup)) { createGroup(true, simgroup, null, null); }
 		 * else { requestRole(simgroup, "member", null); }
 		 */
-		requestRole(Global.Community, simgroup, "scheduler", null);
-
+		requestRole(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nschRole, null);
+		requestRole(Global.Community, simgroup, role, null);
 		createGroupIfAbsent(Global.Community, neurongroup, false, null);
 		requestRole(Global.Community, neurongroup, "member", null);
 
@@ -157,8 +160,18 @@ public class NeuronScheduler extends Scheduler {
 
 			if (PlayState == PLAY) {
 				pause(10); // 050602
-				neurlive.execute(); // runMe des neurones
-				sensorObserver.execute(); // observe des viewers
+				//System.out.println("nsch - play");
+				for(int i = 0 ; i < DriveManagers.size(); i ++)
+					DriveManagers.get(i).runMe();
+				for(int i = 0 ; i < Drives.size(); i ++)
+					Drives.get(i).runMe();
+				for(int i = 0 ; i < Sensors.size(); i ++)
+					Sensors.get(i).runMe();
+				for(int i = 0 ; i < Actors.size(); i ++)
+					Actors.get(i).runMe();
+				
+				//neurlive.execute(); // runMe des neurones
+				//sensorObserver.execute(); // observe des viewers
 
 			} // if (PlayState==PLAY)
 			else { // On ne passera ici qu'au début de la simulation, avant que

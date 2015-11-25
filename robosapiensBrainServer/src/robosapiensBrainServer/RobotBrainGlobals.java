@@ -8,7 +8,11 @@ public class RobotBrainGlobals {
 	public static String BrainGroup = "BrainGroup";
 	public static String ManagementGroup = "ManagementGroup";
 	public static String BrainRole = "BrainRole";
+	public static String NeuronRole = "NeuronRole";
 	public static String CommRole = "CommRole";
+	public static String nschRole = "nschRole";
+	
+	
 	public static ArrayList<Socket> sockets = new ArrayList<Socket>();
 	
 	

@@ -12,9 +12,11 @@ import madkit.kernel.Scheduler;
 import madkit.simulation.activator.GenericBehaviorActivator;
 
 public class RobotBrainScheduler extends Scheduler{
-	
+
 	private GenericBehaviorActivator<AbstractAgent> brainActivator;
+	private GenericBehaviorActivator<AbstractAgent> neuronActivator;
 	private GenericBehaviorActivator<AbstractAgent> commActivator;
+	private GenericBehaviorActivator<AbstractAgent> nschActivator;
 	
 	    @Override
 	   protected void activate() {
@@ -48,7 +50,12 @@ public class RobotBrainScheduler extends Scheduler{
 	        addActivator(commActivator);
 	        brainActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.BrainRole, "doStep");
 	        addActivator(brainActivator);
-	
+	        nschActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nschRole, "live");
+	        addActivator(nschActivator);
+/*	        neuronActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.NeuronRole, "runMe");
+	        addActivator(neuronActivator);
+*/
+
 	        // 4 : we are done, because Scheduler already defines a live method
 	        // calling the execution of the activator. We will override it later.
 	        // here we just slow down the simulation to not flood the console
