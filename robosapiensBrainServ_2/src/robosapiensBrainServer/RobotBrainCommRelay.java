@@ -16,7 +16,7 @@ public class RobotBrainCommRelay extends AbstractAgent{
 	PrintStream out;
 	
 	public String doStep() {
-		// System.out.println("doing comms");
+		System.out.println("doing comms");
 		// ///////////////IN<<<<<<<<<<<<<<<<<<<
 		try {
 			String line;
@@ -28,7 +28,7 @@ public class RobotBrainCommRelay extends AbstractAgent{
 			{
 				line = in.readLine();
 				double valtemp = Double.parseDouble(line.split(" ")[1]);
-
+				System.out.println("sensor "+ i + " = " + valtemp);
 				sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole, new DoubleMessage(valtemp, "Input " + i));
 			}
 

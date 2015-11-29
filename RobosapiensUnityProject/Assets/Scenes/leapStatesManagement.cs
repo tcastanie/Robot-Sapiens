@@ -60,7 +60,7 @@ public class leapStatesManagement : MonoBehaviour {
                     //grabbedObj.GetComponent<Rigidbody>().Sleep();
                     //grabbedObj.transform.parent = GameObject.FindGameObjectsWithTag("MainCamera")[0].transform;
                     grabbedObj.GetComponent<Rigidbody>().isKinematic = false;
-                    grabbedObj.transform.parent.position = PHands[0].palm.transform.position - grabbedObj.GetComponentsInParent ;// + PHands[0].transform.position;
+                    grabbedObj.transform.parent.position = PHands[0].palm.transform.position;// - grabbedObj.GetComponentsInParent ;// + PHands[0].transform.position;
                     grabbedObj.transform.parent.rotation = PHands[0].palm.transform.rotation;
                     grabbedObj.GetComponent<Rigidbody>().isKinematic = true;
 

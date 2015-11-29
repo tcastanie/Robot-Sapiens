@@ -67,9 +67,16 @@ public class botControl : MonoBehaviour {
         string msg = "SENSORS "+ sensors.Length+"\n";
 
         for (int i = 0; i < sensors.Length; i++)
-            msg += i + " "+0.0+"\n";
+            msg += i + " "+getNormalisedSensorData(sensors[i]) +"\n";
         Byte[] rMsg = System.Text.Encoding.ASCII.GetBytes(msg);
         stream.Write(rMsg, 0, rMsg.Length);
+    }
+
+    private float getNormalisedSensorData(GameObject sensor)
+    {
+        IRDetectorScript scr = sensor.GetComponent<IRDetectorScript>();
+        return  (scr.distance / scr.maxDistance);
+
     }
 
     string makeServerRegisterMessage()
