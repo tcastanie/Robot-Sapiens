@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cubeFantome : MonoBehaviour {
+public class objectFantome : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
