@@ -11,13 +11,12 @@ public class spawnCubes : MonoBehaviour {
     public GameObject murFantome;
     public GameObject healthPack;
     public GameObject healthPackFantome;
-
-    int idObjet;            //0 = cube, 1 = mur, 2 = healthPack
+    
     Quaternion rotation;
     private bool hover = false;
 
     void Start() {
-        idObjet = 0;
+        varGlobales.idObjet = 0;
         //myLeap.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
     }
 
@@ -26,27 +25,29 @@ public class spawnCubes : MonoBehaviour {
         hover = true;
     }
 
-
-
-    // Update is called once per frame
-
-
-
     void Update() {
 
         if (Input.GetKeyDown(KeyCode.C)) {
-            if (idObjet == 0 || idObjet == 1) {
-                idObjet += 1;
+            if (varGlobales.idObjet == 0 || varGlobales.idObjet == 1) {
+                varGlobales.idObjet += 1;
             }
             else {
-                idObjet = 0;
+                varGlobales.idObjet = 0;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.X)) {
+            if (varGlobales.idObjet == 1 || varGlobales.idObjet == 2) {
+                varGlobales.idObjet -= 1;
+            }
+            else {
+                varGlobales.idObjet = 2;
             }
         }
 
         rotation = Quaternion.Euler(0, GameObject.Find("cubeSpawner").transform.rotation.eulerAngles.y, 0);
 
         if (Input.GetMouseButtonDown(0)) {
-            switch (idObjet) {
+            switch (varGlobales.idObjet) {
                 case 0:
                     Instantiate(cubeFantome, transform.position, rotation);
                     hover = false;
@@ -65,7 +66,7 @@ public class spawnCubes : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonUp(0)) {
-            switch (idObjet) {
+            switch (varGlobales.idObjet) {
                 case 0:
                     Instantiate(cube, transform.position, rotation);
                     break;
