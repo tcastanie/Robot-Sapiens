@@ -21,5 +21,9 @@ public class NeuralNetGlobals {
 	public static int INVALID_ID = -1;
 	public static  int MAX_POPULATION = 15;
 
-
+	public static double inputFailureThreshold = 0.98;
+	public static double fitnessIncreseStep = 0.00001;
+	public static double fitnessReward = 0.1;
+	
+	public static GeneticAlgorithm genAlg;
 }

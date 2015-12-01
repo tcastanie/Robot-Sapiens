@@ -19,7 +19,7 @@ public class RobotBrainCommRelay extends AbstractAgent{
 	neuralNetMessage msgInit = null;
 	
 	public String doStep() {
-		System.out.println("doing comms");
+		//System.out.println("doing comms");
 		if(msgInit != null)
 		{
 			System.out.println(msgInit.name);
@@ -76,7 +76,7 @@ public class RobotBrainCommRelay extends AbstractAgent{
 				if(nnM.name.contains(NeuralNetGlobals.messOutput))
 				{
 						for(int i = 0 ; i < nnM.val.size();i++)
-							outVal.set(i, (2.0*(nnM.val.get(i))-1.0));
+							outVal.set(i, nnM.val.get(i));
 				}
 			}
 		}

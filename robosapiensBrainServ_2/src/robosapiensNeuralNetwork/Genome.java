@@ -12,6 +12,7 @@ public class Genome {
 
 	public double fitness;
 	public int ID;
-	ArrayList<Double> weights;
+	ArrayList<Double> weights = new ArrayList<Double>();
+	public int index;
 
 }

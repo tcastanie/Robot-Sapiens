@@ -6,7 +6,8 @@ using System.Net.Sockets;
 public class botControl : MonoBehaviour {
 
     //Sensors Effectors
-    public int maxTorque = 30;
+    public float maxTorque = 30.0f;
+    public float topSpeed = 10.0f;
     [SerializeField]private WheelCollider[] Wheels = new WheelCollider[2];
     private float[] currentTorque;
     [SerializeField]private GameObject[] sensors = new GameObject[8];
@@ -35,8 +36,9 @@ public class botControl : MonoBehaviour {
 	void Update () {
         sendSensorData(sensors);
         getEffectorData(currentTorque);
-        for(int i = 0; i < Wheels.Length; i++)
-            Wheels[i].motorTorque = currentTorque[i] * maxTorque;
+        float speed = rb.velocity.sqrMagnitude;
+        for (int i = 0; i < Wheels.Length; i++)
+            Wheels[i].motorTorque = currentTorque[i] * maxTorque * (1.0f-(speed/topSpeed));
     }
 
     private void getEffectorData(float[] currentTorque)

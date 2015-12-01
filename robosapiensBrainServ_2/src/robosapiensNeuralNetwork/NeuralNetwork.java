@@ -47,7 +47,7 @@ public class NeuralNetwork {
 	void SetInput(ArrayList<Double> in)
 	{
 		inputs = in;
-		System.out.println(inputs);
+		//System.out.println(inputs);
 	}
 
 	double GetOutput(int ID)
@@ -213,35 +213,19 @@ public class NeuralNetwork {
 		}
 	}
 */
-	void CreateNet(int numOfHiddenLayers, int numOfInputs, int neuronsPerHidden, int numOfOutputs)
-	{
-		System.out.println("new net with : \n "+numOfHiddenLayers+" hiddenlayers of "+neuronsPerHidden + " neurons");
-		inputAmount = numOfInputs;
-		outputAmount = numOfOutputs;
-	
-		for (int i = 0; i < numOfHiddenLayers; i++)
-		{
-			NLayer layer = new NLayer();
-			layer.PopulateLayer(neuronsPerHidden, numOfInputs);
-			hiddenLayers.add(layer);
-		}
-	
-		outputLayer = new NLayer();
-		outputLayer.PopulateLayer(neuronsPerHidden, numOfOutputs);		
-	}
-	
+
 
 	void ReleaseNet()
 	{
 		if (inputLayer != null)
 		{
 			
-			inputLayer = null;
+			inputLayer=new NLayer();
 		}
 		if (outputLayer != null)
 		{
 			
-			outputLayer = null;
+			outputLayer=new NLayer();
 		}
 		/*
 		for (int i = 0; i < hiddenLayers.size(); i++)
@@ -254,7 +238,7 @@ public class NeuralNetwork {
 		}*/
 		if (hiddenLayers != null)
 		{
-			hiddenLayers.clear();
+			hiddenLayers= new ArrayList<NLayer>();
 		}
 	}
 
@@ -286,15 +270,36 @@ public class NeuralNetwork {
 		return genome;
 	}
 
-	void FromGenome(Genome genome, int numOfInputs, int neuronsPerHidden, int numOfOutputs)
+	void CreateNet(int numOfHiddenLayers, int numOfInputs, int neuronsPerHidden, int numOfOutputs)
+	{
+		System.out.println("new net with : \n "+numOfHiddenLayers+" hiddenlayers of "+neuronsPerHidden + " neurons");
+		inputAmount = numOfInputs;
+		outputAmount = numOfOutputs;
+	
+		for (int i = 0; i < numOfHiddenLayers; i++)
+		{
+			NLayer layer = new NLayer();
+			layer.PopulateLayer(neuronsPerHidden, numOfInputs);
+			hiddenLayers.add(layer);
+		}
+	
+		outputLayer = new NLayer();
+		outputLayer.PopulateLayer(neuronsPerHidden, numOfOutputs);		
+	}
+	
+	
+	void FromGenome(Genome genome, int numOfInputs, int neuronsPerHidden,int numOfHiddenLayers ,int numOfOutputs)
 	{		
 		ReleaseNet();
-	
+		ArrayList<Neuron> neurons;
 		outputAmount = numOfOutputs;
 		inputAmount = numOfInputs;
 		int weightsForHidden = numOfInputs * neuronsPerHidden;
+		for (int x = 0; x < numOfHiddenLayers; x++)
+		{
 		NLayer hidden = new NLayer();
-		ArrayList<Neuron> neurons = new ArrayList<Neuron>((neuronsPerHidden));
+		hidden.totalInputs = numOfInputs;
+		neurons = new ArrayList<Neuron>((neuronsPerHidden));
 //		neurons.resize(neuronsPerHidden);
 		for (int i = 0; i < neuronsPerHidden; i++)
 		{
@@ -309,10 +314,10 @@ public class NeuralNetwork {
 		}
 		hidden.LoadLayer(neurons);
 		this.hiddenLayers.add(hidden);
-	
+		}	
 		// Clear weights and reasign the weights to the output.
 		int weightsForOutput = neuronsPerHidden * numOfOutputs;
-		neurons.clear();
+		neurons= new ArrayList<Neuron>(numOfOutputs);
 		//neurons.resize(numOfOutputs);
 		for (int i = 0; i < numOfOutputs; i++)
 		{
@@ -326,6 +331,7 @@ public class NeuralNetwork {
 			neurons.get(i).Initilise(weights, neuronsPerHidden);
 		}
 		outputLayer = new NLayer();
+		outputLayer.totalInputs = numOfOutputs;
 		this.outputLayer.LoadLayer(neurons);
 	}
 

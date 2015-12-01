@@ -15,6 +15,9 @@ public class NNAgent extends AbstractAgent{
 	boolean init = false;
 	boolean hasComm = false;
 	boolean hasMotiv = false;
+	boolean backingOut = false;
+	int backoutTimer = 0;
+	Genome currentGenome;
 	
 	public NNAgent()
 	{
@@ -25,18 +28,47 @@ public class NNAgent extends AbstractAgent{
 	{
 		//System.out.println("doing NN");
 		handleMessages();
-		if(init && hasComm && hasMotiv)
+		if(init && hasComm && hasMotiv&& !backingOut)
 		{
 			System.out.println("doing init NN");
 			neuralNet.ReleaseNet();
 			neuralNet.CreateNet(NeuralNetGlobals.nHiddenLayer, sensorCount + 1, NeuralNetGlobals.hiddenLayerSize, outputs.size());
+			System.out.println("mine : " + neuralNet.ToGenome().weights.size());
+			currentGenome = NeuralNetGlobals.genAlg.GetNextGenome();
+			System.out.println("his  : " + currentGenome.weights.size());
+			
+
+			neuralNet.FromGenome(currentGenome, sensorCount + 1, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
+			System.out.println("his2 : " + neuralNet.ToGenome().weights.size());
+			
+			System.out.println(neuralNet.GetTotalOutputs());
+			
 			init = false;
 			hasComm = false;
 			hasMotiv = false;
 		}
+		else if (backingOut)
+		{
+			if(checkInputFailure() || backoutTimer > 0)
+				backOut();
+			else
+				backingOut = false;
+		}
 		else if(!init)
 		{
+			currentGenome.fitness += NeuralNetGlobals.fitnessIncreseStep;
 			neuralNet.SetInput(inputs);
+			if(checkInputFailure())
+			{
+				System.out.println("failure detected");
+				backingOut = true;
+				NeuralNetGlobals.genAlg.SetGenomeFitness(currentGenome.fitness, currentGenome.index);
+				currentGenome = NeuralNetGlobals.genAlg.GetNextGenome();
+				neuralNet.FromGenome(currentGenome, sensorCount + 1, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
+				reverseOutput();
+				backoutTimer = 50;
+				return;
+			}
 			neuralNet.Update();
 			for(int i = 0 ; i < outputs.size(); i++)
 				outputs.set(i, neuralNet.GetOutput(i));
@@ -45,6 +77,31 @@ public class NNAgent extends AbstractAgent{
 		}			
 	}
 	
+	private void reverseOutput() {
+		double val = -outputs.get(0);
+		for(int i = 0 ; i < outputs.size(); i++)
+			outputs.set(i,val);
+	}
+
+	private void backOut() {
+		if(checkInputFailure()&&backoutTimer == 0)
+		{
+			reverseOutput();
+			backoutTimer = 50;
+		}
+			
+		sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup, RobotBrainGlobals.CommRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));
+		sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));	
+		backoutTimer--;
+	}
+
+	private boolean checkInputFailure() {
+		for(double d : inputs)
+			if(d > NeuralNetGlobals.inputFailureThreshold)
+				return true;
+		return false;
+	}
+
 	private void handleMessages() {
 
 		for(Message m : nextMessages(null))

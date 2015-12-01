@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import robosapiensNeuralNetwork.GenomeManager;
 import madkit.kernel.Madkit;
 
 public class robosapiensBrainServer {
@@ -12,6 +13,9 @@ public class robosapiensBrainServer {
 	public static void main(String[] args) {
 		System.out.println("hello world!");
 		System.out.println("listening on : " + RobotServerGlobals.port);
+		
+		new Thread(new GenomeManager()).start();
+		
 		ServerSocket serverSocket;
 		try {
 			serverSocket = new ServerSocket(RobotServerGlobals.port);

@@ -127,9 +127,9 @@ public class NLayer {
 		neurons = in;
 	}
 	*/
-	public void LoadLayer(ArrayList<Neuron> neurons) {
-		totalNeurons = neurons.size();
-		neurons = neurons;
+	public void LoadLayer(ArrayList<Neuron> neuronsin) {
+		totalNeurons = neuronsin.size();
+		neurons = neuronsin;
 	}
 
 

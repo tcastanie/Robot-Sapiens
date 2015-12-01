@@ -14,8 +14,8 @@ public class GeneticAlgorithm {
 	int genomeID;
 	int generation;
 	int totalGenomeWeights;
-	ArrayList<Genome> population;
-	ArrayList<Integer> crossoverSplits;
+	ArrayList<Genome> population = new ArrayList<Genome>();
+	ArrayList<Integer> crossoverSplits = new ArrayList<Integer>();
 	
 	public GeneticAlgorithm()
 	{
@@ -25,12 +25,12 @@ public class GeneticAlgorithm {
 		generation = 1;
 	}
 
-	public Genome GetNextGenome()
+	public synchronized Genome GetNextGenome()
 	{
 		currentGenome++;
 		if (currentGenome >= population.size())
 			return null;
-
+		population.get(currentGenome).index = currentGenome;
 		return population.get(currentGenome);
 	}
 
@@ -208,7 +208,7 @@ public class GeneticAlgorithm {
 			genome.ID = genomeID;
 			genome.fitness = 0.0f;
 			//genome.weights.resize(totalWeights);
-			genome.weights.clear();
+			genome.weights = new ArrayList<Double>();
 			for (int j = 0; j < totalWeights; j++)
 			{
 				genome.weights.add(utils.RandomClamped());
