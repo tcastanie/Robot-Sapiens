@@ -1,3 +1,9 @@
+/*
+ * based on code by Matthew Robbins
+ * 
+ * https://github.com/matthewrdev/Neural-Network
+ */
+
 package robosapiensNeuralNetwork;
 
 import java.util.ArrayList;
@@ -10,7 +16,7 @@ public class Neuron {
 	public void Populate(int numOfInputs)
 	{
 		this.numInputs = numOfInputs;
-
+		weights = new ArrayList<Double>();
 		// Initilise the weights
 		for (int i = 0; i < numOfInputs; i++)
 		{

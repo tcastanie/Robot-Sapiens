@@ -10,7 +10,7 @@ public class IRDetectorScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         emitter = transform.Find("tip").transform;
-        Debug.Log(emitter.name);
+//        Debug.Log(emitter.name);
 	}
 	
 	// Update is called once per frame
@@ -19,13 +19,13 @@ public class IRDetectorScript : MonoBehaviour {
         //Debug.Log(emitter.TransformDirection(Vector3.up));
         if (Physics.Raycast(emitter.position, emitter.TransformDirection(Vector3.up),out hit, maxDistance))
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             distance = hit.distance;
         }
         else
         {
             distance = maxDistance;
         }
-        Debug.Log(distance);
+//        Debug.Log(distance);
     }
 }

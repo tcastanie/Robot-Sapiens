@@ -1,3 +1,9 @@
+/*
+ * based on code by Matthew Robbins
+ * 
+ * https://github.com/matthewrdev/Neural-Network
+ */
+
 package robosapiensNeuralNetwork;
 
 import java.util.ArrayList;
@@ -6,7 +12,7 @@ public class NLayer {
 
 	int totalNeurons;
 	int totalInputs;
-	ArrayList<Neuron> neurons;
+	ArrayList<Neuron> neurons = new ArrayList<Neuron>();
 	
 	public void Evaluate(ArrayList<Double> inputs, ArrayList<Double> outputs) {
 		int inputIndex = 0;
@@ -34,10 +40,11 @@ public class NLayer {
 	}
 
 	public void PopulateLayer(int numOfNeurons, int numOfInputs) {
+		
 		totalInputs = numOfInputs;
 		totalNeurons = numOfNeurons;
 		this.neurons = new ArrayList<Neuron>(numOfNeurons);
-		for (int i = 0; i < neurons.size(); i++)
+		for (int i = 0; i < numOfNeurons; i++)
 		{
 			neurons.add(new Neuron());
 			

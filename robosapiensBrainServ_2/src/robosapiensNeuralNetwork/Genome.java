@@ -1,3 +1,9 @@
+/*
+ * based on code by Matthew Robbins
+ * 
+ * https://github.com/matthewrdev/Neural-Network
+ */
+
 package robosapiensNeuralNetwork;
 
 import java.util.ArrayList;

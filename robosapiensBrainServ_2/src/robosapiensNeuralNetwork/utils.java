@@ -1,3 +1,8 @@
+/*
+ * based on code by Matthew Robbins
+ * 
+ * https://github.com/matthewrdev/Neural-Network
+ */ 
 
 package robosapiensNeuralNetwork;
 

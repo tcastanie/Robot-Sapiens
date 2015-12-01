@@ -1,14 +1,20 @@
+/*
+ * based on code by Matthew Robbins
+ * 
+ * https://github.com/matthewrdev/Neural-Network
+ */
+
 package robosapiensNeuralNetwork;
 import java.util.ArrayList;
 
 public class NeuralNetwork {
 	private int inputAmount;
 	private int outputAmount;
-	private ArrayList<Double> inputs;
+	private ArrayList<Double> inputs = new ArrayList<Double>();
 	private NLayer inputLayer;
-	private ArrayList<NLayer> hiddenLayers;
+	private ArrayList<NLayer> hiddenLayers = new ArrayList<NLayer>();
 	private NLayer outputLayer;
-	private ArrayList<Double> outputs;
+	private ArrayList<Double> outputs = new ArrayList<Double>();
 	
 	
 	public NeuralNetwork()
@@ -41,6 +47,7 @@ public class NeuralNetwork {
 	void SetInput(ArrayList<Double> in)
 	{
 		inputs = in;
+		System.out.println(inputs);
 	}
 
 	double GetOutput(int ID)
@@ -208,6 +215,7 @@ public class NeuralNetwork {
 */
 	void CreateNet(int numOfHiddenLayers, int numOfInputs, int neuronsPerHidden, int numOfOutputs)
 	{
+		System.out.println("new net with : \n "+numOfHiddenLayers+" hiddenlayers of "+neuronsPerHidden + " neurons");
 		inputAmount = numOfInputs;
 		outputAmount = numOfOutputs;
 	
@@ -219,7 +227,7 @@ public class NeuralNetwork {
 		}
 	
 		outputLayer = new NLayer();
-		outputLayer.PopulateLayer(numOfOutputs, neuronsPerHidden);		
+		outputLayer.PopulateLayer(neuronsPerHidden, numOfOutputs);		
 	}
 	
 
@@ -244,7 +252,10 @@ public class NeuralNetwork {
 				hiddenLayers[i] = NULL;
 			}
 		}*/
-		hiddenLayers.clear();
+		if (hiddenLayers != null)
+		{
+			hiddenLayers.clear();
+		}
 	}
 
 	int GetNumOfHiddenLayers()

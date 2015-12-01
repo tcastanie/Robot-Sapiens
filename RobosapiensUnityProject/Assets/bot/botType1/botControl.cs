@@ -36,7 +36,7 @@ public class botControl : MonoBehaviour {
         sendSensorData(sensors);
         getEffectorData(currentTorque);
         for(int i = 0; i < Wheels.Length; i++)
-            Wheels[i].motorTorque = currentTorque[i];
+            Wheels[i].motorTorque = currentTorque[i] * maxTorque;
     }
 
     private void getEffectorData(float[] currentTorque)
@@ -50,7 +50,7 @@ public class botControl : MonoBehaviour {
         //while((bytes = stream.Read(Msg, 0, Msg.Length)) != 0);
         bytes = stream.Read(Msg, 0, Msg.Length);
         responseData = System.Text.Encoding.ASCII.GetString(Msg, 0, bytes);
-        Debug.Log("server said : \n" + responseData);
+        //Debug.Log("server said : \n" + responseData);
         string[] respLines = responseData.Split('\n');
         if(respLines[0].Contains("EFFECTORS"))
         {
@@ -107,7 +107,7 @@ public class botControl : MonoBehaviour {
             // Read the first batch of the TcpServer response bytes.
             Int32 bytes = stream.Read(rMsg, 0, rMsg.Length);
             responseData = System.Text.Encoding.ASCII.GetString(rMsg, 0, bytes);
-            Debug.Log("bot server said : " + responseData);
+            //Debug.Log("bot server said : " + responseData);
         }
         catch (ArgumentNullException e)
         {

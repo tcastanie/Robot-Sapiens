@@ -15,9 +15,11 @@ public class RobotBrainScheduler extends Scheduler{
 
 	private GenericBehaviorActivator<AbstractAgent> neuralNetActivator;
 	private GenericBehaviorActivator<AbstractAgent> commActivator;
+	private GenericBehaviorActivator<AbstractAgent> motivatorActivator;
 	
 	RobotBrainCommRelay commsAgent;
 	NNAgent	NNetAgent;
+	MotivationalAgent motivator;
 	
 	    @Override
 	   protected void activate() {
@@ -36,7 +38,6 @@ public class RobotBrainScheduler extends Scheduler{
 				e.printStackTrace();
 			}
 			
-			System.out.println(RobotBrainLocals.in.get());
 			
 	        // 1 : create the simulation group
 	    	createGroup(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup);
@@ -46,13 +47,20 @@ public class RobotBrainScheduler extends Scheduler{
 	    	commsAgent = new RobotBrainCommRelay();
 	    	commsAgent.setInOut(RobotBrainLocals.in.get(),RobotBrainLocals.out.get());
 	    	NNetAgent = new NNAgent();
+	    	motivator = new MotivationalAgent();
 
-	    	launchAgent(commsAgent);
-	    	launchAgent(NNetAgent);
+	    	System.out.println("launching brain agents");
 	    	
+	    	launchAgent(NNetAgent);
+	    	launchAgent(commsAgent);
+	    	launchAgent(motivator);
+	    	
+	    	System.out.println("starting activators");
 	        // 3 : initialize the activator on the correct (1) CGR location and (2) behavior
 	        commActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup, RobotBrainGlobals.CommRole, "doStep");
 	        addActivator(commActivator);
+	        motivatorActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, "doStep");
+	        addActivator(motivatorActivator);
 	        neuralNetActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole, "doStep");
 	        addActivator(neuralNetActivator);
 /*	        neuronActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.NeuronRole, "runMe");
@@ -64,6 +72,7 @@ public class RobotBrainScheduler extends Scheduler{
 	        // here we just slow down the simulation to not flood the console
 	        //setDelay(300);
 	        
+	        System.out.println("start sim");
 	        setSimulationState(SimulationState.RUNNING);
 	       
 	    }
