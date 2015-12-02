@@ -12,6 +12,7 @@ public class NNAgent extends AbstractAgent{
 	ArrayList<Double> inputs = new ArrayList<Double>();
 	ArrayList<Double> outputs = new ArrayList<Double>();
 	int sensorCount = 0;
+	int motivatorCount = 0;
 	boolean init = false;
 	boolean hasComm = false;
 	boolean hasMotiv = false;
@@ -32,13 +33,13 @@ public class NNAgent extends AbstractAgent{
 		{
 			System.out.println("doing init NN");
 			neuralNet.ReleaseNet();
-			neuralNet.CreateNet(NeuralNetGlobals.nHiddenLayer, sensorCount + 1, NeuralNetGlobals.hiddenLayerSize, outputs.size());
+			neuralNet.CreateNet(NeuralNetGlobals.nHiddenLayer, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize, outputs.size());
 			System.out.println("mine : " + neuralNet.ToGenome().weights.size());
 			currentGenome = NeuralNetGlobals.genAlg.GetNextGenome();
 			System.out.println("his  : " + currentGenome.weights.size());
 			
 
-			neuralNet.FromGenome(currentGenome, sensorCount + 1, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
+			neuralNet.FromGenome(currentGenome, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
 			System.out.println("his2 : " + neuralNet.ToGenome().weights.size());
 			
 			System.out.println(neuralNet.GetTotalOutputs());
@@ -64,9 +65,10 @@ public class NNAgent extends AbstractAgent{
 				backingOut = true;
 				NeuralNetGlobals.genAlg.SetGenomeFitness(currentGenome.fitness, currentGenome.index);
 				currentGenome = NeuralNetGlobals.genAlg.GetNextGenome();
-				neuralNet.FromGenome(currentGenome, sensorCount + 1, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
+				neuralNet.FromGenome(currentGenome, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
 				reverseOutput();
 				backoutTimer = 50;
+				sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(null, NeuralNetGlobals.messReInit));							
 				return;
 			}
 			neuralNet.Update();
@@ -118,7 +120,7 @@ public class NNAgent extends AbstractAgent{
 					}
 					else
 					{
-						inputs.set(sensorCount, nnM.val.get(0));
+						inputs.set(sensorCount + (int)Math.round(nnM.val.get(1)), nnM.val.get(0));
 					}
 					
 				}
@@ -139,6 +141,7 @@ public class NNAgent extends AbstractAgent{
 					else
 					{
 						hasMotiv = true;
+						motivatorCount++;
 						inputs.add(0.0);
 					}
 				}

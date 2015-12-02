@@ -20,6 +20,7 @@ public class RobotBrainScheduler extends Scheduler{
 	RobotBrainCommRelay commsAgent;
 	NNAgent	NNetAgent;
 	MotivationalAgent motivator;
+	basicExplorationMotivator explMotivator;
 	
 	    @Override
 	   protected void activate() {
@@ -48,12 +49,14 @@ public class RobotBrainScheduler extends Scheduler{
 	    	commsAgent.setInOut(RobotBrainLocals.in.get(),RobotBrainLocals.out.get());
 	    	NNetAgent = new NNAgent();
 	    	motivator = new MotivationalAgent();
-
+	    	explMotivator = new basicExplorationMotivator();
+	    	
 	    	System.out.println("launching brain agents");
 	    	
 	    	launchAgent(NNetAgent);
 	    	launchAgent(commsAgent);
 	    	launchAgent(motivator);
+	    	launchAgent(explMotivator);
 	    	
 	    	System.out.println("starting activators");
 	        // 3 : initialize the activator on the correct (1) CGR location and (2) behavior
