@@ -152,7 +152,7 @@ public class NeuralNetwork {
 					totalWeights = 0;
 					totalInputs = 0;
 					currentNeuron = 0;
-					neurons.clear();
+					neurons = new ArrayList<Neuron>();
 					type = "HIDDEN";
 				}else if(ligne == "</NLayer>"){
 					//FIN LAYER
@@ -167,7 +167,7 @@ public class NeuralNetwork {
 				}else if(ligne == "<Neuron>"){
 					//DEBUT NEURONE
 					//On réinit les poids
-					weights.clear();
+					weights = new ArrayList<Double>();
 				}else if(ligne == "</Neuron>"){
 					//FIN NEURONE
 					Neuron n = new Neuron();
