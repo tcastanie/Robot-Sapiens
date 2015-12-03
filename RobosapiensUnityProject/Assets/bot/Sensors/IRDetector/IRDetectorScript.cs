@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class IRDetectorScript : MonoBehaviour {
-    public float maxDistance = 100.0F;
-    public float distance = 0.0f;
+    public float maxDistance = 100.0f;
+    public float distance = 50.0f;
     private RaycastHit hit;
     private Transform emitter;
 

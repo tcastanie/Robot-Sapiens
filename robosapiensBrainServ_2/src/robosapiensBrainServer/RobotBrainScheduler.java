@@ -49,7 +49,9 @@ public class RobotBrainScheduler extends Scheduler{
 	    	commsAgent.setInOut(RobotBrainLocals.in.get(),RobotBrainLocals.out.get());
 	    	NNetAgent = new NNAgent();
 	    	motivator = new MotivationalAgent();
+	    	motivator.id = 0;
 	    	explMotivator = new basicExplorationMotivator();
+	    	explMotivator.id = 1;
 	    	
 	    	System.out.println("launching brain agents");
 	    	

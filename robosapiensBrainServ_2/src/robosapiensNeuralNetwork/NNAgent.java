@@ -33,11 +33,12 @@ public class NNAgent extends AbstractAgent{
 		{
 			System.out.println("doing init NN");
 			neuralNet.ReleaseNet();
+			
 			neuralNet.CreateNet(NeuralNetGlobals.nHiddenLayer, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize, outputs.size());
 			System.out.println("mine : " + neuralNet.ToGenome().weights.size());
 			currentGenome = NeuralNetGlobals.genAlg.GetNextGenome();
 			System.out.println("his  : " + currentGenome.weights.size());
-			
+			currentGenome.fitness = 0.0;
 
 			neuralNet.FromGenome(currentGenome, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
 			System.out.println("his2 : " + neuralNet.ToGenome().weights.size());
@@ -61,21 +62,29 @@ public class NNAgent extends AbstractAgent{
 			neuralNet.SetInput(inputs);
 			if(checkInputFailure())
 			{
-				System.out.println("failure detected");
+				System.out.println(inputs);
 				backingOut = true;
+				double bonnus = 0.0;
+				for(int i = sensorCount ; i < sensorCount + motivatorCount; i++)
+					if(inputs.get(i) < NeuralNetGlobals.inputFailureThreshold)
+						bonnus += 0.6;
+				System.out.println("bonnus :" + bonnus);
+				currentGenome.fitness += bonnus;
+				System.out.println("failure detected , fitness : " + currentGenome.fitness);
 				NeuralNetGlobals.genAlg.SetGenomeFitness(currentGenome.fitness, currentGenome.index);
 				currentGenome = NeuralNetGlobals.genAlg.GetNextGenome();
 				neuralNet.FromGenome(currentGenome, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
-				reverseOutput();
-				backoutTimer = 50;
-				sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(null, NeuralNetGlobals.messReInit));							
+				outputs.set(0, outputs.get(0) > 0.0 ? -1.0 : 1.0);
+				outputs.set(1, outputs.get(0));
+				backoutTimer = 200;
+				broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(null, NeuralNetGlobals.messReInit));							
 				return;
 			}
 			neuralNet.Update();
 			for(int i = 0 ; i < outputs.size(); i++)
-				outputs.set(i, neuralNet.GetOutput(i));
+				outputs.set(i, (2.0*neuralNet.GetOutput(i))-1.0);
 			sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup, RobotBrainGlobals.CommRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));
-			sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));						
+			broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));						
 		}			
 	}
 	
@@ -90,10 +99,21 @@ public class NNAgent extends AbstractAgent{
 		{
 			reverseOutput();
 			backoutTimer = 50;
+			System.out.println("backout switch");
 		}
-			
-		sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup, RobotBrainGlobals.CommRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));
-		sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));	
+		if(backoutTimer > 100)	
+		{
+			ArrayList<Double> outputsHalt = new ArrayList<Double>();
+			for(int i = 0 ;i < outputs.size(); i++)
+				outputsHalt.add(0.0);
+			sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup, RobotBrainGlobals.CommRole, new neuralNetMessage(outputsHalt, NeuralNetGlobals.messOutput));
+			//broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));	
+		}
+		else
+		{
+			sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup, RobotBrainGlobals.CommRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));
+			//broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));				
+		}
 		backoutTimer--;
 	}
 
@@ -120,6 +140,7 @@ public class NNAgent extends AbstractAgent{
 					}
 					else
 					{
+						//System.out.println("ROUNDING " + nnM.val.get(1) + " to " + (int)Math.round(nnM.val.get(1)));
 						inputs.set(sensorCount + (int)Math.round(nnM.val.get(1)), nnM.val.get(0));
 					}
 					

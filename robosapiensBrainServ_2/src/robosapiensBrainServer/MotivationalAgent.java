@@ -23,9 +23,9 @@ public class MotivationalAgent extends AbstractAgent{
 		else
 		{
 		//System.out.println("doing Motivator");
-		Message m = nextMessage();
-		if(m != null)
-		{
+			Message m;
+			while((m = nextMessage()) != null)
+			{
 		if(m.getClass() == neuralNetMessage.class)
 		{
 			neuralNetMessage nnm = (neuralNetMessage)m;
@@ -39,17 +39,29 @@ public class MotivationalAgent extends AbstractAgent{
 
 				val = Math.min(val, 1.0);
 				val = Math.max(val, 0.0);
-				ArrayList<Double> outMsg = new ArrayList<>();
-				outMsg.add(val);
-				outMsg.add((double)id);				
-				sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole, new neuralNetMessage(outMsg, NeuralNetGlobals.messInput));						
+				sendMsg();		
+			}else if(nnm.name.contains(NeuralNetGlobals.messReInit))
+			{
+				System.out.println("reinit motivator : " + val);
+				val = 0.0;
+				sendMsg();
 			}			
 		}
 		}
 		}
 		return "doStep";
 	}
-
+	
+	private void sendMsg() {
+		ArrayList<Double> outMsg = new ArrayList<>();
+		outMsg.add(val);
+		outMsg.add((double) id);
+		// System.out.println("expl mot : " + val + "\tfor " +
+		// Math.abs(outvals.get(0) - outvals.get(1) ));
+		sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole,
+				new neuralNetMessage(outMsg, NeuralNetGlobals.messInput));
+		
+	}
 	public void activate()
 	{
 		requestRole(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole);

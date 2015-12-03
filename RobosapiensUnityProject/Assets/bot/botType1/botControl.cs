@@ -72,6 +72,8 @@ public class botControl : MonoBehaviour {
             msg += i + " "+getNormalisedSensorData(sensors[i]) +"\n";
         Byte[] rMsg = System.Text.Encoding.ASCII.GetBytes(msg);
         stream.Write(rMsg, 0, rMsg.Length);
+
+        Debug.Log(msg);
     }
 
     private float getNormalisedSensorData(GameObject sensor)

@@ -222,7 +222,12 @@ public class GeneticAlgorithm {
 	void BreedPopulation()
 	{
 		ArrayList<Genome> bestGenomes = new ArrayList<Genome>();
-
+		System.out.println("==============================================");
+		System.out.println("==============================================");
+		System.out.println("====== Breeding new generation : " + generation);
+		System.out.println("==============================================");
+		System.out.println("==============================================");
+		
 		// Find the 4 best genomes.
 		this.GetBestCases(4, bestGenomes);
 

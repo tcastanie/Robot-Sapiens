@@ -24,6 +24,7 @@ public class NLayer {
 			// Sum the weights to the activation value.
 			// We do the sizeof the weights - 1 so that we can add in the bias to the 
 			// activation afterwards.
+			//System.out.println(inputs.size());
 			for (int j = 0; j < neurons.get(i).numInputs - 1; j++)
 			{
 				activation += inputs.get(inputIndex)* neurons.get(i).weights.get(j);
@@ -49,6 +50,7 @@ public class NLayer {
 			neurons.add(new Neuron());
 			
 			neurons.get(i).Populate(numOfInputs);
+			//System.out.println(" neuron n weights : " + neurons.get(i).weights.size());
 		}
 	}
 
