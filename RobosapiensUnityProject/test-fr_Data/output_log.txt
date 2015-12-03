@@ -2,20 +2,20 @@ Initialize engine version: 5.2.1f1 (44735ea161b3)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: AMD Radeon HD 7570M (ID=0x6841)
-    Vendor:   ATI
-    VRAM:     1003 MB
+    Renderer: NVIDIA GeForce GTX 770 (ID=0x1184)
+    Vendor:   NVIDIA
+    VRAM:     1990 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: D:\git\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading D:\git\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: D:\git\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading D:\git\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: D:\git\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading D:\git\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: D:\git\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading D:\git\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: D:\git\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.047 seconds
-desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
+Platform assembly: D:\fac\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\fac\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\fac\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\fac\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\fac\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\fac\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\fac\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\fac\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\fac\Robot-Sapiens\RobosapiensUnityProject\test-fr_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.043 seconds
+desktop: 1680x1050 120Hz; virtual: 1680x1050 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
