@@ -5,6 +5,17 @@
  */
 
 package robosapiensNeuralNetwork;
+import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class NeuralNetwork {
@@ -21,6 +32,7 @@ public class NeuralNetwork {
 	{
 //		: inputLayer(NULL)
 //		, outputLayer(NULL)
+		this.ExportNet("lol.txt");
 		
 	}
 
@@ -61,6 +73,7 @@ public class NeuralNetwork {
 	{
 		return outputAmount;
 	}
+	
 /*
 	void ExportNet(String filename)
 	{
@@ -82,8 +95,125 @@ public class NeuralNetwork {
 		file << "</NeuralNetwork>" << endl;
 	
 		file.close();
+	} */
+	
+	public void ExportNet(String filename){
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(filename);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedWriter bw = new BufferedWriter (fw);
+		PrintWriter fout = new PrintWriter (bw); 
+		fout.println("<NeuralNetwork>"); 
+		fout.println("TotalOuputs="+this.outputAmount); 
+		fout.println("TotalInputs="+this.inputAmount); 
+		for(int i = 0; i < this.hiddenLayers.size(); i++){
+			this.hiddenLayers.get(i).SaveLayer(fout, "Hidden");
+		}
+		this.outputLayer.SaveLayer(fout, "Output");
+		fout.println("</NeuralNetwork>");
+		fout.close();
 	}
-
+	
+	public void loadNet(String filename){
+		InputStream ips = null;
+		try {
+			ips = new FileInputStream(filename);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		InputStreamReader ipsr=new InputStreamReader(ips);
+		BufferedReader br=new BufferedReader(ipsr);
+		String ligne;
+		float weight = 0.0f;
+		int totalNeurons = 0;
+		int totalWeights = 0;
+		int totalInputs = 0;
+		int currentNeuron = 0;
+		ArrayList<Neuron> neurons = new ArrayList<Neuron>();
+		ArrayList<Double> weights = new ArrayList<Double>();
+		String type = "HIDDEN";
+		try {
+			while ((ligne=br.readLine())!=null){
+				if(ligne == "<NeuralNetwork>"){
+					//DEBUT PROG					
+				}else if(ligne == "</NeuralNetwork>"){
+					//FIN PROG
+					break;
+				}else if(ligne == "<NLayer>"){
+					//DEBUT LAYER
+					//on réinit tout
+					weight = 0.0f;
+					totalNeurons = 0;
+					totalWeights = 0;
+					totalInputs = 0;
+					currentNeuron = 0;
+					neurons.clear();
+					type = "HIDDEN";
+				}else if(ligne == "</NLayer>"){
+					//FIN LAYER
+					//On add le layer
+					NLayer layer = new NLayer();
+					layer.SetNeurons(neurons, neurons.size(), totalInputs);
+					if(type == "HIDDEN"){
+						this.hiddenLayers.add(layer);
+					}else if(type == "OUTPUT"){
+						this.outputLayer = layer;
+					}
+				}else if(ligne == "<Neuron>"){
+					//DEBUT NEURONE
+					//On réinit les poids
+					weights.clear();
+				}else if(ligne == "</Neuron>"){
+					//FIN NEURONE
+					Neuron n = new Neuron();
+					n.Initilise(weights, totalInputs);
+					neurons.add(n);		
+					currentNeuron++; //?
+				}else{
+					//SINON ON RECUPERE LES VALEURS
+					String[] parts = ligne.split("=");
+					if(parts.length > 1){					
+						if(parts[0] == "Type"){
+							if(parts[1] == "Hidden"){
+								type = "HIDDEN";
+							}else if(parts[1] == "Output"){
+								type = "OUTPUT";
+							}
+						}else if(parts[0] == "Inputs"){
+							totalInputs = Integer.parseInt(parts[1]);
+						}else if(parts[0] == "Neurons"){
+							totalNeurons = Integer.parseInt(parts[1]);
+						}else if(parts[0] == "Weights"){
+							totalWeights = Integer.parseInt(parts[1]);
+						}else if(parts[0] == "W"){
+							weight = Float.parseFloat(parts[1]);
+						}else if(parts[0] == "TotalOuputs"){
+							outputAmount = Integer.parseInt(parts[1]);
+						}else if(parts[0] == "TotalInputs"){
+							inputAmount = Integer.parseInt(parts[1]);
+						}
+					}
+				}
+				
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			ips.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/*
 	void NeuralNet::LoadNet(char* filename)
 	{
 		FILE* file = fopen(filename,"rt");
@@ -272,7 +402,6 @@ public class NeuralNetwork {
 
 	void CreateNet(int numOfHiddenLayers, int numOfInputs, int neuronsPerHidden, int numOfOutputs)
 	{
-		System.out.println("from scratch : ");
 		System.out.println("new net with : \n "+numOfHiddenLayers+" hiddenlayers of "+neuronsPerHidden + " neurons");
 		inputAmount = numOfInputs;
 		outputAmount = numOfOutputs;
@@ -291,7 +420,6 @@ public class NeuralNetwork {
 	
 	void FromGenome(Genome genome, int numOfInputs, int neuronsPerHidden,int numOfHiddenLayers ,int numOfOutputs)
 	{		
-		System.out.println("from genome : ");
 		ReleaseNet();
 		ArrayList<Neuron> neurons;
 		outputAmount = numOfOutputs;
@@ -313,7 +441,6 @@ public class NeuralNetwork {
 				weights.add(genome.weights.get(i * neuronsPerHidden + j));
 			}
 			neurons.get(i).Initilise(weights, numOfInputs);
-			//System.out.println(" neuron n weights : " + neurons.get(i).weights.size());
 		}
 		hidden.LoadLayer(neurons);
 		this.hiddenLayers.add(hidden);
@@ -322,17 +449,16 @@ public class NeuralNetwork {
 		int weightsForOutput = neuronsPerHidden * numOfOutputs;
 		neurons= new ArrayList<Neuron>(numOfOutputs);
 		//neurons.resize(numOfOutputs);
-		for (int i = 0; i < neuronsPerHidden; i++)
+		for (int i = 0; i < numOfOutputs; i++)
 		{
 			neurons.add(new Neuron());
 			ArrayList<Double> weights = new ArrayList<Double>((numOfInputs + 1));
 			//weights.resize(neuronsPerHidden + 1);
-			for (int j = 0; j < numOfOutputs + 1; j++)
+			for (int j = 0; j < neuronsPerHidden + 1; j++)
 			{
 				weights.add(genome.weights.get(i * neuronsPerHidden + j));
 			}
-			neurons.get(i).Initilise(weights, numOfOutputs);
-			//System.out.println(" neuron n weights : " + neurons.get(i).weights.size());
+			neurons.get(i).Initilise(weights, neuronsPerHidden);
 		}
 		outputLayer = new NLayer();
 		outputLayer.totalInputs = numOfOutputs;

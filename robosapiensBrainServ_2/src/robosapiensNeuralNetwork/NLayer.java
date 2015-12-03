@@ -6,6 +6,7 @@
 
 package robosapiensNeuralNetwork;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class NLayer {
@@ -24,7 +25,6 @@ public class NLayer {
 			// Sum the weights to the activation value.
 			// We do the sizeof the weights - 1 so that we can add in the bias to the 
 			// activation afterwards.
-			//System.out.println(inputs.size());
 			for (int j = 0; j < neurons.get(i).numInputs - 1; j++)
 			{
 				activation += inputs.get(inputIndex)* neurons.get(i).weights.get(j);
@@ -50,7 +50,6 @@ public class NLayer {
 			neurons.add(new Neuron());
 			
 			neurons.get(i).Populate(numOfInputs);
-			//System.out.println(" neuron n weights : " + neurons.get(i).weights.size());
 		}
 	}
 
@@ -99,6 +98,23 @@ public class NLayer {
 		totalInputs = numOfInputs;
 		totalNeurons = numOfNeurons;
 		this.neurons = neurons;
+	}
+	
+	void SaveLayer(PrintWriter fout, String layerType){
+		fout.println("<NLayer>");
+		fout.println("Type="+layerType);
+		fout.println("Inputs="+this.totalInputs);
+		fout.println("Neurons="+this.neurons.size());
+		fout.println("-Build-");
+		for(int i = 0; i < this.neurons.size(); i++){
+			fout.println("<Neuron>");
+			fout.println("Weights="+this.neurons.get(i).weights.size());
+			for(int j = 0; j < this.neurons.get(i).weights.size(); j++){
+				fout.println("W="+this.neurons.get(i).weights.get(j));
+			}
+			fout.println("</Neuron>");
+		}
+		fout.println("</NLayer>");
 	}
 
 	/*
