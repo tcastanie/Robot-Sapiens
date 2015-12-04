@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IRDetectorScript : MonoBehaviour {
+public class IRDetectorScript : sensorScript {
     public float maxDistance = 100.0f;
     public float distance = 50.0f;
     private RaycastHit hit;
@@ -26,6 +26,7 @@ public class IRDetectorScript : MonoBehaviour {
         {
             distance = maxDistance;
         }
+        normalizedValue = distance / maxDistance;
 //        Debug.Log(distance);
     }
 }

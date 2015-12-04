@@ -76,10 +76,10 @@ public class botControl : MonoBehaviour {
         Debug.Log(msg);
     }
 
-    private float getNormalisedSensorData(GameObject sensor)
+    private double getNormalisedSensorData(GameObject sensor)
     {
-        IRDetectorScript scr = sensor.GetComponent<IRDetectorScript>();
-        return  (scr.distance / scr.maxDistance);
+        sensorScript scr = sensor.GetComponent<sensorScript>();
+        return  (scr.normalizedValue);
 
     }
 
