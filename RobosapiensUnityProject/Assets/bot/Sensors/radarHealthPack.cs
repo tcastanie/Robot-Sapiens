@@ -39,7 +39,7 @@ public class radarHealthPack : MonoBehaviour {
         }
         //Debug.Log(idPlusProche);
         if (smallestDist >= distanceMax) {
-            retour = -1;
+            retour = 0;
         } else {
             Vector3 targetDir = healthPacks[idPlusProche].transform.position - transform.position;
             Vector3 forward = transform.forward;
