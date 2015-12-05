@@ -32,7 +32,7 @@ public class NeuralNetwork {
 	{
 //		: inputLayer(NULL)
 //		, outputLayer(NULL)
-		this.ExportNet("lol.txt");
+		//this.ExportNet("lol.txt");
 		
 	}
 

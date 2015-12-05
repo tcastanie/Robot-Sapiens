@@ -20,7 +20,9 @@ public class cubeInteraction : MonoBehaviour
             }
             else
             {
+                GameObject obj = leapStatesManagement.grabbedObj;
                 leapStatesManagement.grabbedObj = null;
+                leapStatesManagement.detachOject(obj);
             }
         }
 

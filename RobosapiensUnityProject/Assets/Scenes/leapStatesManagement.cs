@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Leap;
+using System;
 
 public class leapStatesManagement : MonoBehaviour {
 
@@ -72,5 +73,11 @@ public class leapStatesManagement : MonoBehaviour {
             }
         }
         
+    }
+
+    internal static void detachOject(GameObject obj)
+    {
+        obj.transform.parent.position = new Vector3(obj.transform.parent.position);
+        obj.transform.parent.rotation = new Vector3(obj.transform.parent.rotation);
     }
 }
