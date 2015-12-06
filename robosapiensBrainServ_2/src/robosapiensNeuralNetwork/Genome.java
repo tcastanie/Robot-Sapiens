@@ -52,6 +52,7 @@ public class Genome {
 	public boolean load(String path)
 	{
 		File  f = new File(path);
+		System.out.println("loading genome :"+path);
 		if(f.exists())
 		{
 			InputStream ips = null;
@@ -69,6 +70,8 @@ public class Genome {
 			try {
 				ligne=br.readLine();
 				name = ligne.split(" ")[0];
+				System.out.println(" genome name :"+name);
+				
 				ID = Integer.parseInt(ligne.split(" ")[1]);
 				while ((ligne=br.readLine())!=null){
 					weights.add(Double.parseDouble(ligne));

@@ -40,7 +40,32 @@ public class botControl : MonoBehaviour {
         getEffectorData(currentTorque);
         float speed = rb.velocity.sqrMagnitude;
         for (int i = 0; i < Wheels.Length; i++)
-            Wheels[i].motorTorque = currentTorque[i] * maxTorque * (1.0f-(speed/topSpeed));
+        {
+            /*
+            if (currentTorque[i] <= 0.001 && currentTorque[i] >= -0.001)
+            {
+                Debug.Log("Brake ! " + currentTorque[i]);
+                Wheels[i].brakeTorque = 90.0f;
+            }
+            else
+            {
+                Wheels[i].brakeTorque = 0.0f;
+            }*/
+            /*
+            if ((Wheels[i].motorTorque > 0 && currentTorque[i] < 0)|| (Wheels[i].motorTorque < 0 && currentTorque[i] > 0))
+            {
+                Debug.Log("Brake ! " + currentTorque[i]);
+                Wheels[i].brakeTorque = 90.0f;
+            }
+            else
+            {
+                Wheels[i].brakeTorque = 0.0f;
+            }*/
+            /*
+               Debug.Log((float)((1.0 - Math.Abs(currentTorque[i])) ));
+            Wheels[i].brakeTorque = (float)((1.0 - Math.Abs(currentTorque[i]))*0.1);*/
+            Wheels[i].motorTorque = currentTorque[i] * maxTorque * (1.0f - (speed / topSpeed));
+        }
     }
 
     private void sendReward()

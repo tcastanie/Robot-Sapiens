@@ -34,7 +34,7 @@ public class GeneticAlgorithm {
 	{
 		if(in != null && in.generation != generation)
 		{
-			population.add(in);
+			population.add(0,in);currentGenome++;
 		}
 		currentGenome++;
 		if (currentGenome >= population.size())

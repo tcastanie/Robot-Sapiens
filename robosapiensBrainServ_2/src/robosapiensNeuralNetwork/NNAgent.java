@@ -98,7 +98,7 @@ public class NNAgent extends AbstractAgent{
 		System.out.println("output size : "+ outputs.size());
 		outputs.set(0, outputs.get(0) > 0.0 ? -1.0 : 1.0);
 		outputs.set(1, outputs.get(0));
-		backoutTimer = 200;
+		backoutTimer = 250;
 		broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(null, NeuralNetGlobals.messReInit));							
 		return;
 	}
@@ -136,10 +136,10 @@ public class NNAgent extends AbstractAgent{
 		if(checkInputFailure()&&backoutTimer == 0)
 		{
 			reverseOutput();
-			backoutTimer = 50;
+			backoutTimer = 140;
 			System.out.println("backout switch");
 		}
-		if(backoutTimer > 100)	
+		if(backoutTimer > 150)	
 		{
 			ArrayList<Double> outputsHalt = new ArrayList<Double>();
 			for(int i = 0 ;i < outputs.size(); i++)
