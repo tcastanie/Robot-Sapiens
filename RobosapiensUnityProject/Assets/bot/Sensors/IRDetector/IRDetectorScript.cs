@@ -10,14 +10,16 @@ public class IRDetectorScript : abstractSensorScript{
     // Use this for initialization
     void Start () {
         emitter = transform.Find("tip").transform;
-//        Debug.Log(emitter.name);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        //Debug.Log(emitter.name);
+        //Debug.DrawRay(emitter.position, emitter.TransformDirection(Vector3.up) * 200, Color.red, 200.0f);
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         //Debug.Log(emitter.TransformDirection(Vector3.up));
-        Debug.DrawRay(emitter.position, emitter.TransformDirection(Vector3.up), Color.red, 1.5f);
+        Debug.DrawRay(emitter.position, emitter.TransformDirection(Vector3.up)*200, Color.red, 200.0f);
         if (Physics.Raycast(emitter.position, emitter.TransformDirection(Vector3.up),out hit, maxDistance))
         {
             //Debug.Log("hit");
