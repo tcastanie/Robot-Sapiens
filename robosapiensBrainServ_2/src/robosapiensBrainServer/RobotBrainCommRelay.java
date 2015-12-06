@@ -11,8 +11,9 @@ import madkit.kernel.Message;
 
 
 public class RobotBrainCommRelay extends AbstractAgent{
-	
+
 	ArrayList<Double> outVal;
+	ArrayList<String> outMotiv;
 	int inSize,outSize;
 	DataInputStream in;
 	PrintStream out;
@@ -74,7 +75,12 @@ public class RobotBrainCommRelay extends AbstractAgent{
 
 		// ////////////////OUT>>>>>>>>>>>>>>>>>
 		handleMessages();
-		String msg = "EFFECTORS ";
+		String msg = "MOTIVATOR ";
+		msg += outMotiv.size() + "\n";
+		for (int i = 0; i < outMotiv.size(); i++) {
+			msg += i + " " + outMotiv.get(i) + "\n";
+		}		
+		msg += "EFFECTORS ";
 		msg += outVal.size() + "\n";
 
 		for (int i = 0; i < outVal.size(); i++) {
@@ -100,6 +106,14 @@ public class RobotBrainCommRelay extends AbstractAgent{
 				{
 						for(int i = 0 ; i < nnM.val.size();i++)
 							outVal.set(i, nnM.val.get(i));
+				}
+			}
+			else if(m.getClass() == externalMotivatorMessage.class)
+			{
+				externalMotivatorMessage nnM = (externalMotivatorMessage)m;
+				if(nnM.name.contains(NeuralNetGlobals.messInput))
+				{
+						outMotiv = nnM.val;
 				}
 			}
 		}

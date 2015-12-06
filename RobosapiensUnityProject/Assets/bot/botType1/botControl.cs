@@ -69,25 +69,30 @@ public class botControl : MonoBehaviour {
         responseData = System.Text.Encoding.ASCII.GetString(Msg, 0, bytes);
         //Debug.Log("server said : \n" + responseData);
         string[] respLines = responseData.Split('\n');
-        int pos = 0;
-        if (respLines[0].Contains("MOTIVATORS"))
+        int pos = 1;
+        if (respLines[0].Contains("MOTIVATOR"))
         {
             for (int i = 1; i < int.Parse(respLines[0].Split(' ')[1]) + 1; i++)
             {
+                //Debug.Log("motiv");
                 ((motivators[int.Parse(respLines[i].Split(' ')[0])].GetComponent<abstractMotivatorScript>())).sendControlMessage(respLines[i].Split(' ')[1]);
                 pos = i;
             }
-        }
-        if (respLines[pos].Contains("EFFECTORS"))
-        {
-            for(int i = pos+1; i < pos +int.Parse(respLines[pos].Split(' ')[1])+1;i++)
+            if (respLines[pos + 1].Contains("EFFECTORS"))
             {
-                //Debug.Log(respLines[i].Split(' ')[0]);
-                currentTorque[int.Parse(respLines[i].Split(' ')[0])] = (float)Double.Parse(respLines[i].Split(' ')[1]);
-                //Debug.Log(currentTorque[int.Parse(respLines[i].Split(' ')[0])]);
+                //            Debug.Log("found effect");
+
+                for (int i = pos + 2; i < pos + 2 + int.Parse(respLines[pos + 1].Split(' ')[1]); i++)
+                {
+                    //              Debug.Log("effect");
+                    //             Debug.Log(respLines[i].Split(' ')[1]);
+                    currentTorque[int.Parse(respLines[i].Split(' ')[0])] = (float)Double.Parse(respLines[i].Split(' ')[1]);
+                    //Debug.Log(currentTorque[int.Parse(respLines[i].Split(' ')[0])]);
+                }
             }
+
         }
-        
+
     }
 
     private void sendSensorData(GameObject[] sensors)
