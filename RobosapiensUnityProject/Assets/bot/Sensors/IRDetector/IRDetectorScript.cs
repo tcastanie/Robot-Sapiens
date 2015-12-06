@@ -19,11 +19,11 @@ public class IRDetectorScript : abstractSensorScript{
     void Update () {
 
         //Debug.Log(emitter.TransformDirection(Vector3.up));
-        Debug.DrawRay(emitter.position, emitter.TransformDirection(Vector3.up)*200, Color.red, 200.0f);
         if (Physics.Raycast(emitter.position, emitter.TransformDirection(Vector3.up),out hit, maxDistance))
         {
             //Debug.Log("hit");
             distance = hit.distance;
+            Debug.DrawLine(emitter.position, hit.point);
         }
         else
         {

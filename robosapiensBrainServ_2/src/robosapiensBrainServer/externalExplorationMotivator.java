@@ -8,7 +8,7 @@ import robosapiensNeuralNetwork.NeuralNetGlobals;
 public class externalExplorationMotivator extends abstractExternalMotivator{
 	double rewardBig = 3.0;
 	double rewardSmall = NeuralNetGlobals.fitnessIncreseStep;
-	int failureTime = 5000;
+	int failureTime = 3000;
 	int counter = 0;
 	
 	public String doStep() {

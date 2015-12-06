@@ -66,6 +66,7 @@ public class NNAgent extends AbstractAgent{
 		{
 			currentGenome.fitness += NeuralNetGlobals.fitnessIncreseStep;
 			neuralNet.SetInput(inputs);
+			//System.out.println(inputs);
 			if(checkInputFailure())
 			{
 				doNextGenome();
