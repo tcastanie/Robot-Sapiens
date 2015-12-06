@@ -23,12 +23,26 @@ import robosapiensBrainServer.RobotServerGlobals;
 public class Genome {
 
 	public String name = "nameless";
-	public double fitness;
-	public int ID;
+	public double fitness = 0.0;
+	public int ID = -1;
 	ArrayList<Double> weights = new ArrayList<Double>();
 	public int index=-1;
 	public int generation=0;
 
+	public Genome()
+	{
+		
+	}
+
+	public Genome(Genome g, int idin, int genin, int indexin)
+	{
+		weights = g.weights;
+		ID = g.ID;
+		fitness = 0.0;
+		generation = genin;
+		index = indexin;
+	}
+	
 	public void save(String path)
 	{
 		FileWriter fw = null;
@@ -72,7 +86,7 @@ public class Genome {
 				name = ligne.split(" ")[0];
 				System.out.println(" genome name :"+name);
 				
-				ID = Integer.parseInt(ligne.split(" ")[1]);
+				//ID = Integer.parseInt(ligne.split(" ")[1]);
 				while ((ligne=br.readLine())!=null){
 					weights.add(Double.parseDouble(ligne));
 				}

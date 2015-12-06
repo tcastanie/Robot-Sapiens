@@ -15,7 +15,7 @@ public class RobotBrainLauncher implements Runnable{
 	public void run() {
 
 		// r.initNsch();
-		String[] args2 = { "--launchAgents", "robosapiensBrainServer.RobotBrainScheduler,true" }; // This
+		String[] args2 = { "--launchAgents", "robosapiensBrainServer.RobotBrainScheduler,false" }; // This
 																			// agent
 																			// with
 																			// GUI

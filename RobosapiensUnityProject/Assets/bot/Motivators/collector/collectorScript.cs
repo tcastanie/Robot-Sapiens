@@ -39,7 +39,7 @@ public class collectorScript : MonoBehaviour {
             if (distCart(xPlayer, yPlayer, xHP, yHP) < distPickUp)
             {
                 Destroy(healthPacks[i]);
-                scr.addReward(50.0);
+                scr.addReward(25.0);
             }
         }
     }

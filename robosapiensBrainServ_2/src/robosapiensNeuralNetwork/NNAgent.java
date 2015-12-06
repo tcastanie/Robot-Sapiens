@@ -137,7 +137,7 @@ public class NNAgent extends AbstractAgent{
 		{
 			reverseOutput();
 			backoutTimer = 140;
-			System.out.println("backout switch");
+			//System.out.println("backout switch");
 		}
 		if(backoutTimer > 150)	
 		{

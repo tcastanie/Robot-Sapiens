@@ -8,6 +8,8 @@ package robosapiensNeuralNetwork;
 
 import java.util.ArrayList;
 
+import utils.topGenomeList;
+
 public class GeneticAlgorithm {
 	int currentGenome;
 	int totalPopulation;
@@ -15,6 +17,7 @@ public class GeneticAlgorithm {
 	int generation;
 	int totalGenomeWeights;
 	ArrayList<Genome> population = new ArrayList<Genome>();
+	topGenomeList Top10OfAllTimes = new topGenomeList(10);
 	ArrayList<Integer> crossoverSplits = new ArrayList<Integer>();
 	
 	public GeneticAlgorithm()
@@ -34,6 +37,11 @@ public class GeneticAlgorithm {
 	{
 		if(in != null && in.generation != generation)
 		{
+			if(in.ID == -1)
+			{
+				in.ID = genomeID;
+				genomeID++;
+			}
 			population.add(0,in);currentGenome++;
 		}
 		currentGenome++;
@@ -41,6 +49,11 @@ public class GeneticAlgorithm {
 			return null;
 		population.get(currentGenome).index = currentGenome;
 		population.get(currentGenome).generation = generation;
+		if(population.get(currentGenome).ID == -1)
+		{
+			population.get(currentGenome).ID = genomeID;
+			genomeID++;
+		}
 		return population.get(currentGenome);
 	}
 
@@ -231,12 +244,22 @@ public class GeneticAlgorithm {
 
 	void BreedPopulation()
 	{
+		for(Genome g : population)
+			Top10OfAllTimes.add(g);
 		ArrayList<Genome> bestGenomes = new ArrayList<Genome>();
+	
 		System.out.println("==============================================");
 		System.out.println("==============================================");
 		System.out.println("====== Breeding new generation : " + generation);
 		System.out.println("==============================================");
 		System.out.println("==============================================");
+		System.out.println("============= TOP 10 ALL TIMES ===============");
+		int num = 1;
+		for(Genome g : Top10OfAllTimes)
+		{
+			System.out.println(num + " fit: "+ g.fitness + " ID : "+g.ID);
+			num++;
+		}
 		
 		// Find the 4 best genomes.
 		this.GetBestCases(4, bestGenomes);
@@ -300,7 +323,11 @@ public class GeneticAlgorithm {
 
 			children.add(this.CreateNewGenome(bestGenomes.get(0).weights.size()));
 		}
-
+		for(Genome g : Top10OfAllTimes)
+		{
+			population.add(new Genome(g,genomeID,generation+1,-1));
+			genomeID++;
+		}
 		ClearPopulation();
 		population = children;
 
