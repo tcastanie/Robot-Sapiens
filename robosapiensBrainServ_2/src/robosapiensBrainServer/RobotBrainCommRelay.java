@@ -17,14 +17,17 @@ public class RobotBrainCommRelay extends AbstractAgent{
 	DataInputStream in;
 	PrintStream out;
 	neuralNetMessage msgInit = null;
+	stringMessage msgRegistering = null;
 	
 	public String doStep() {
 		//System.out.println("doing comms");
 		if(msgInit != null)
 		{
 			System.out.println(msgInit.name);
-        	System.out.println(sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole, msgInit));			
+        	System.out.println(sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole, msgInit));
+        	System.out.println(sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole, msgRegistering));			
         	msgInit = null;
+        	msgRegistering = null;
 		}
 		else
 		{
@@ -32,7 +35,10 @@ public class RobotBrainCommRelay extends AbstractAgent{
 		try {
 			String line;
 			ArrayList<Double> msgList = new ArrayList<Double>();
-			
+			ArrayList<Double> rwdList = new ArrayList<Double>();
+			ArrayList<String> motivMsgList = new ArrayList<String>();
+
+			///GET SENSOR VALUES
 			while (!(line = in.readLine()).split(" ")[0].equals("SENSORS"))
 				;
 			int num = Integer.parseInt(line.split(" ")[1]);
@@ -44,7 +50,24 @@ public class RobotBrainCommRelay extends AbstractAgent{
 				msgList.add(1.0 - valtemp);
 			}
 			sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole, new neuralNetMessage(msgList, NeuralNetGlobals.messInput + " " +NeuralNetGlobals.sensors));						
-	        } catch (IOException e) {
+			///GET MOTIVATOR VALUES
+			while (!(line = in.readLine()).split(" ")[0].equals("MOTIVATORS"))
+				;
+			num = Integer.parseInt(line.split(" ")[1]);
+			//System.out.println(line);
+			for (int i = 0; i < num; i++)
+			{
+				line = in.readLine();
+				//System.out.println(line);
+				motivMsgList.add(line);
+			}
+			broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.externalMotivatorRole, new externalMotivatorMessage(motivMsgList, NeuralNetGlobals.messInput + " " +NeuralNetGlobals.motivator));
+			while (!(line = in.readLine()).split(" ")[0].equals("REWARDS"))
+				;
+			rwdList.add(Double.parseDouble(line.split(" ")[1]));
+			sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole, new neuralNetMessage(rwdList, NeuralNetGlobals.messReward));						
+
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -104,7 +127,8 @@ public class RobotBrainCommRelay extends AbstractAgent{
 			        System.out.println("reading registering");
 			        if(line.split(" ")[0].equals("REGISTERING"))
 			        {
-				        this.setName(line.split(" ")[1]);
+				        msgRegistering = new stringMessage(NeuralNetGlobals.messInit,line.split(" ")[1]);
+				        
 				        line = in.readLine();
 				        inSize = Integer.parseInt(line.split(" ")[1]);
 			        	for(int i = 0 ; i < inSize ; i++)
@@ -112,7 +136,8 @@ public class RobotBrainCommRelay extends AbstractAgent{
 			        		line = in.readLine();
 			        	}
 				   
-				        line = in.readLine();
+			        	while (!(line = in.readLine()).split(" ")[0].equals("EFFECTORS"))
+							;
 				        outSize = Integer.parseInt(line.split(" ")[1]);
 			        	outVal = new ArrayList<Double>();
 			        	for(int i = 0 ; i < outSize ; i++)

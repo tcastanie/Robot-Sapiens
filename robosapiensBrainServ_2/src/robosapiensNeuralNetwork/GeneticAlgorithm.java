@@ -25,12 +25,22 @@ public class GeneticAlgorithm {
 		generation = 1;
 	}
 
-	public synchronized Genome GetNextGenome()
+	public synchronized boolean injectGenome(Genome in)
 	{
+		population.add(in);return true;
+	}
+	
+	public synchronized Genome GetNextGenome(Genome in)
+	{
+		if(in != null && in.generation != generation)
+		{
+			population.add(in);
+		}
 		currentGenome++;
 		if (currentGenome >= population.size())
 			return null;
 		population.get(currentGenome).index = currentGenome;
+		population.get(currentGenome).generation = generation;
 		return population.get(currentGenome);
 	}
 
@@ -68,7 +78,7 @@ public class GeneticAlgorithm {
 	
 	public Genome GetGenome(int index)
 	{
-		if (index >= totalPopulation)
+		if (index >= population.size())
 			return null;
 
 		return population.get(index);
@@ -91,7 +101,7 @@ public class GeneticAlgorithm {
 
 	int GetTotalPopulation()
 	{
-		return totalPopulation;
+		return population.size();
 	}
 
 	void GenerateCrossoverSplits(int neuronsPerHidden, int inputs, int outputs)
@@ -114,7 +124,7 @@ public class GeneticAlgorithm {
 			// Find the best cases for cross breeding based on fitness score.
 			double bestFitness = 0;
 			int bestIndex = -1;
-			for (int i = 0; i < this.totalPopulation; i++)
+			for (int i = 0; i < this.population.size(); i++)
 			{
 				if (population.get(i).fitness > bestFitness)
 				{
@@ -325,12 +335,18 @@ public class GeneticAlgorithm {
 			}
 		}
 	}
-	
-	void SetGenomeFitness(double fitness, int index)
+/*	
+	void SetGenomeFitness(double fitness, int index, int generationin)
 	{
-		if (index >= population.size())
-			return;
-
-		population.get(index).fitness = fitness;
-	}
+		if(generation != generationin)
+		{
+			injectGenome(in)
+		}
+		else
+		{
+			if (index >= population.size())
+				return;
+			population.get(index).fitness = fitness;			
+		}
+	}*/
 }

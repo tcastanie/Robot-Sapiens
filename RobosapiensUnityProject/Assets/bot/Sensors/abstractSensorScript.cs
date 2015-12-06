@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class sensorScript : MonoBehaviour {
+public class abstractSensorScript : MonoBehaviour {
     public double normalizedValue = 0.5;
-
 
 	// Use this for initialization
 	void Start () {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class radarHealthPack : MonoBehaviour {
+public class radarHealthPack : abstractSensorScript{
 
     public float distanceMax;//la distance max de détection
 
@@ -22,7 +22,7 @@ public class radarHealthPack : MonoBehaviour {
     }
 
     float radar(float distMax) {
-        //return -1 si pas de health_pack en dessous de distanceMax
+        //return 0 si pas de health_pack en dessous de distanceMax
         //return float de 0 en faisant face, à 0.5 en tournant le dos au health_pack
         float retour;
         GameObject[] healthPacks = GameObject.FindGameObjectsWithTag("health_pack");
@@ -58,7 +58,8 @@ public class radarHealthPack : MonoBehaviour {
         //affiche le résultat de radar dans la console
         xPlayer = GetComponent<Transform>().position.x;//récupère les coordonnées x et z du robot
         yPlayer = GetComponent<Transform>().position.z;
-        float rep = radar( distanceMax );
-        Debug.Log("réponse radar HP :" + rep);
-	}
+        //float rep = radar( distanceMax );
+        normalizedValue = 1.0 - radar(distanceMax);
+        //Debug.Log("réponse radar HP :" + rep);
+    }
 }

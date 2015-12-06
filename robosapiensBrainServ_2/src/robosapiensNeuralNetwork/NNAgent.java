@@ -1,9 +1,13 @@
 package robosapiensNeuralNetwork;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import robosapiensBrainServer.RobotBrainGlobals;
+import robosapiensBrainServer.RobotServerGlobals;
 import robosapiensBrainServer.neuralNetMessage;
+import robosapiensBrainServer.stringMessage;
 import madkit.kernel.AbstractAgent;
 import madkit.kernel.Message;
 
@@ -18,7 +22,9 @@ public class NNAgent extends AbstractAgent{
 	boolean hasMotiv = false;
 	boolean backingOut = false;
 	int backoutTimer = 0;
+	String botName = "newbie";
 	Genome currentGenome;
+	double bestFitness = 0.0;
 	
 	public NNAgent()
 	{
@@ -29,14 +35,14 @@ public class NNAgent extends AbstractAgent{
 	{
 		//System.out.println("doing NN");
 		handleMessages();
-		if(init && hasComm && hasMotiv&& !backingOut)
+		if(init && hasComm && !backingOut)
 		{
 			System.out.println("doing init NN");
 			neuralNet.ReleaseNet();
 			
 			neuralNet.CreateNet(NeuralNetGlobals.nHiddenLayer, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize, outputs.size());
 			System.out.println("mine : " + neuralNet.ToGenome().weights.size());
-			currentGenome = NeuralNetGlobals.genAlg.GetNextGenome();
+			currentGenome = initGenome(botName);
 			System.out.println("his  : " + currentGenome.weights.size());
 			currentGenome.fitness = 0.0;
 
@@ -62,22 +68,7 @@ public class NNAgent extends AbstractAgent{
 			neuralNet.SetInput(inputs);
 			if(checkInputFailure())
 			{
-				System.out.println(inputs);
-				backingOut = true;
-				double bonnus = 0.0;
-				for(int i = sensorCount ; i < sensorCount + motivatorCount; i++)
-					if(inputs.get(i) < NeuralNetGlobals.inputFailureThreshold)
-						bonnus += 0.6;
-				System.out.println("bonnus :" + bonnus);
-				currentGenome.fitness += bonnus;
-				System.out.println("failure detected , fitness : " + currentGenome.fitness);
-				NeuralNetGlobals.genAlg.SetGenomeFitness(currentGenome.fitness, currentGenome.index);
-				currentGenome = NeuralNetGlobals.genAlg.GetNextGenome();
-				neuralNet.FromGenome(currentGenome, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
-				outputs.set(0, outputs.get(0) > 0.0 ? -1.0 : 1.0);
-				outputs.set(1, outputs.get(0));
-				backoutTimer = 200;
-				broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(null, NeuralNetGlobals.messReInit));							
+				doNextGenome();
 				return;
 			}
 			neuralNet.Update();
@@ -88,6 +79,52 @@ public class NNAgent extends AbstractAgent{
 		}			
 	}
 	
+	private void doNextGenome() {
+		System.out.println(inputs);
+		backingOut = true;
+		System.out.println("failure detected , fitness : " + currentGenome.fitness);
+		//NeuralNetGlobals.genAlg.SetGenomeFitness(currentGenome.fitness, currentGenome.index);
+		if(currentGenome.fitness>bestFitness)
+		{
+			bestFitness = currentGenome.fitness;
+			currentGenome.name = botName;
+			if(!botName.equals("noSave"))
+				currentGenome.save(RobotServerGlobals.botSavePath+"/"+botName+"/"+botName+RobotServerGlobals.genomeFileExtension);
+		}				
+		/// changing genomes
+		currentGenome = NeuralNetGlobals.genAlg.GetNextGenome(currentGenome);
+		neuralNet.FromGenome(currentGenome, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
+		System.out.println("output size : "+ outputs.size());
+		outputs.set(0, outputs.get(0) > 0.0 ? -1.0 : 1.0);
+		outputs.set(1, outputs.get(0));
+		backoutTimer = 200;
+		broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(null, NeuralNetGlobals.messReInit));							
+		return;
+	}
+
+	private Genome initGenome(String nem) {
+
+		if(nem.equals("noSave"))
+			return NeuralNetGlobals.genAlg.GetNextGenome(null);
+		else
+		{
+			Genome gen = new Genome();
+			if(gen.load(RobotServerGlobals.botSavePath+"/"+nem+"/"+nem+RobotServerGlobals.genomeFileExtension))
+				return gen;
+			else
+			{
+				File  f = new File(RobotServerGlobals.botSavePath+"/"+nem);
+				f.mkdirs();
+				f = new File(RobotServerGlobals.botSavePath+"/"+nem+"/"+nem+RobotServerGlobals.genomeFileExtension);
+				
+				try {
+					f.createNewFile();
+				} catch (IOException e) {e.printStackTrace();}
+				return NeuralNetGlobals.genAlg.GetNextGenome(null);
+			}
+		}
+	}
+
 	private void reverseOutput() {
 		double val = -outputs.get(0);
 		for(int i = 0 ; i < outputs.size(); i++)
@@ -166,8 +203,26 @@ public class NNAgent extends AbstractAgent{
 						inputs.add(0.0);
 					}
 				}
+				else if(nnM.name.contains(NeuralNetGlobals.messReward))
+				{
+					if(currentGenome!=null)
+						currentGenome.fitness += nnM.val.get(0);
+					else
+						System.out.println("reward ignored : "+nnM.val.get(0));
+				}else if(nnM.name.contains(NeuralNetGlobals.messFailure))
+				{
+					doNextGenome();
+				}
 			}
-		}
+			else if(m.getClass() == stringMessage.class)
+			{
+				stringMessage nnM = (stringMessage)m;
+				if(nnM.name.contains(NeuralNetGlobals.messInit))
+				{
+					botName = nnM.val;
+				}
+			}
+		}	
 	}
 
 	public void activate()

@@ -12,10 +12,10 @@ public class RobotBrainGlobals {
 	public static String CommRole = "CommRole";
 	public static String nnRole = "nnRole";
 	public static String motivatorRole = "motivatorRole";
+	public static String externalMotivatorRole = "externalMotivatorRole";
 	
 	public static ArrayList<Socket> sockets = new ArrayList<Socket>();
 
-	
-	
+
 	
 }

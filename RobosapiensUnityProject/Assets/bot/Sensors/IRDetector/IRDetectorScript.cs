@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IRDetectorScript : sensorScript {
+public class IRDetectorScript : abstractSensorScript{
     public float maxDistance = 100.0f;
     public float distance = 50.0f;
     private RaycastHit hit;
@@ -17,6 +17,7 @@ public class IRDetectorScript : sensorScript {
 	void Update () {
 
         //Debug.Log(emitter.TransformDirection(Vector3.up));
+        Debug.DrawRay(emitter.position, emitter.TransformDirection(Vector3.up), Color.red, 1.5f);
         if (Physics.Raycast(emitter.position, emitter.TransformDirection(Vector3.up),out hit, maxDistance))
         {
             //Debug.Log("hit");

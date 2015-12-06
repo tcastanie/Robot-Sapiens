@@ -77,7 +77,7 @@ public class leapStatesManagement : MonoBehaviour {
 
     internal static void detachOject(GameObject obj)
     {
-        obj.transform.parent.position = new Vector3(obj.transform.parent.position);
-        obj.transform.parent.rotation = new Vector3(obj.transform.parent.rotation);
+        //obj.transform.parent.position = new Vector3(obj.transform.parent.position);
+        //obj.transform.parent.rotation = new Vector3(obj.transform.parent.rotation);
     }
 }

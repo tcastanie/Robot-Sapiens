@@ -19,9 +19,11 @@ public class RobotBrainScheduler extends Scheduler{
 	
 	RobotBrainCommRelay commsAgent;
 	NNAgent	NNetAgent;
+	externalExplorationMotivator explorer;
+	/*
 	MotivationalAgent motivator;
 	basicExplorationMotivator explMotivator;
-	
+	*/
 	    @Override
 	   protected void activate() {
 	
@@ -48,26 +50,31 @@ public class RobotBrainScheduler extends Scheduler{
 	    	commsAgent = new RobotBrainCommRelay();
 	    	commsAgent.setInOut(RobotBrainLocals.in.get(),RobotBrainLocals.out.get());
 	    	NNetAgent = new NNAgent();
+	    	explorer = new externalExplorationMotivator();
+	    	/*
 	    	motivator = new MotivationalAgent();
 	    	motivator.id = 0;
 	    	explMotivator = new basicExplorationMotivator();
 	    	explMotivator.id = 1;
-	    	
+	    	*/
 	    	System.out.println("launching brain agents");
 	    	
 	    	launchAgent(NNetAgent);
 	    	launchAgent(commsAgent);
-	    	launchAgent(motivator);
-	    	launchAgent(explMotivator);
+	    	launchAgent(explorer);
+	    	
+/*	    	launchAgent(motivator);
+	    	launchAgent(explMotivator);*/
 	    	
 	    	System.out.println("starting activators");
 	        // 3 : initialize the activator on the correct (1) CGR location and (2) behavior
 	        commActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup, RobotBrainGlobals.CommRole, "doStep");
 	        addActivator(commActivator);
-	        motivatorActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, "doStep");
-	        addActivator(motivatorActivator);
 	        neuralNetActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.nnRole, "doStep");
 	        addActivator(neuralNetActivator);
+	        motivatorActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, "doStep");
+	        addActivator(motivatorActivator);
+	        
 /*	        neuronActivator = new GenericBehaviorActivator<AbstractAgent>(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.NeuronRole, "runMe");
 	        addActivator(neuronActivator);
 */

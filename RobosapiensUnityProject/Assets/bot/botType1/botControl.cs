@@ -6,12 +6,14 @@ using System.Net.Sockets;
 public class botControl : MonoBehaviour {
 
     //Sensors Effectors
+    public string BotName = "robob";
     public float maxTorque = 30.0f;
     public float topSpeed = 10.0f;
     [SerializeField]private WheelCollider[] Wheels = new WheelCollider[2];
     private float[] currentTorque;
     [SerializeField]private GameObject[] sensors = new GameObject[8];
-    
+    [SerializeField]private GameObject[] motivators = new GameObject[1];
+
     //network
     public string serverIP = "127.0.0.1";
     public Int32 port = 28001;
@@ -21,9 +23,7 @@ public class botControl : MonoBehaviour {
     //Settings
     private Rigidbody rb;
 
-    //Debug
-    public float speedRight = 0.5f;
-    public float speedLeft = 0.5f;
+    double reward = 0;
 
     void Start()
     {
@@ -35,16 +35,31 @@ public class botControl : MonoBehaviour {
 	
 	void Update () {
         sendSensorData(sensors);
+        sendMotivatorData(motivators);
+        sendReward();
         getEffectorData(currentTorque);
         float speed = rb.velocity.sqrMagnitude;
         for (int i = 0; i < Wheels.Length; i++)
             Wheels[i].motorTorque = currentTorque[i] * maxTorque * (1.0f-(speed/topSpeed));
     }
 
+    private void sendReward()
+    {
+        string msg = "REWARDS " + reward + "\n";
+        Byte[] rMsg = System.Text.Encoding.ASCII.GetBytes(msg);
+        stream.Write(rMsg, 0, rMsg.Length);
+        reward = 0.0;
+    }
+
+    internal void addReward(double v)
+    {
+        reward += v;
+    }
+
     private void getEffectorData(float[] currentTorque)
     {
-        currentTorque[0] = speedLeft;
-        currentTorque[1] = speedRight;
+        currentTorque[0] = 0.0f;
+        currentTorque[1] = 0.0f;
         
         Byte[] Msg = new Byte[BUFF_SIZE];
         String responseData = String.Empty;
@@ -54,7 +69,14 @@ public class botControl : MonoBehaviour {
         responseData = System.Text.Encoding.ASCII.GetString(Msg, 0, bytes);
         //Debug.Log("server said : \n" + responseData);
         string[] respLines = responseData.Split('\n');
-        if(respLines[0].Contains("EFFECTORS"))
+        if (respLines[0].Contains("MOTIVATORS"))
+        {
+            for (int i = 1; i < int.Parse(respLines[0].Split(' ')[1]) + 1; i++)
+            {
+                ((motivators[int.Parse(respLines[i].Split(' ')[0])].GetComponent<abstractMotivatorScript>())).sendControlMessage(respLines[i].Split(' ')[1]);
+            }
+        }
+        if (respLines[0].Contains("EFFECTORS"))
         {
             for(int i = 1; i < int.Parse(respLines[0].Split(' ')[1])+1;i++)
             {
@@ -66,29 +88,50 @@ public class botControl : MonoBehaviour {
 
     private void sendSensorData(GameObject[] sensors)
     {
-        string msg = "SENSORS "+ sensors.Length+"\n";
+        string msg = "SENSORS " + sensors.Length + "\n";
 
         for (int i = 0; i < sensors.Length; i++)
-            msg += i + " "+getNormalisedSensorData(sensors[i]) +"\n";
+            msg += i + " " + getNormalisedSensorData(sensors[i]) + "\n";
         Byte[] rMsg = System.Text.Encoding.ASCII.GetBytes(msg);
         stream.Write(rMsg, 0, rMsg.Length);
 
-        Debug.Log(msg);
+        //Debug.Log(msg);
+    }
+
+    string getMotivatorMessage(GameObject motivator)
+    {
+        abstractMotivatorScript scr = motivator.GetComponent<abstractMotivatorScript>();
+        return (scr.state);
+    }
+
+    private void sendMotivatorData(GameObject[] motivators)
+    {
+        string msg = "MOTIVATORS " + motivators.Length + "\n";
+
+        for (int i = 0; i < motivators.Length; i++)
+            msg += i + " " + getMotivatorMessage(motivators[i]) + "\n";
+        Byte[] rMsg = System.Text.Encoding.ASCII.GetBytes(msg);
+        stream.Write(rMsg, 0, rMsg.Length);
+
+        //Debug.Log(msg);
     }
 
     private double getNormalisedSensorData(GameObject sensor)
     {
-        sensorScript scr = sensor.GetComponent<sensorScript>();
+        abstractSensorScript scr = sensor.GetComponent<abstractSensorScript>();
         return  (scr.normalizedValue);
 
     }
 
     string makeServerRegisterMessage()
     {
-        string ret = "REGISTERING " + name + "\n";
+        string ret = "REGISTERING " + BotName + "\n";
         ret += "SENSORS " + sensors.Length + "\n";
         for (int i = 0; i < sensors.Length; i++)
             ret += i + " FLOAT\n";
+        ret += "MOTIVATORS " + motivators.Length + "\n";
+        for (int i = 0; i < motivators.Length; i++)
+            ret += i + " STRING\n";
         ret += "EFFECTORS " + Wheels.Length + "\n";
         for (int i = 0; i < Wheels.Length; i++)
             ret += i + " FLOAT\n";

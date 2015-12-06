@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class motivScript : MonoBehaviour {
+public class motivScript : abstractMotivatorScript{
 
     //L'algo retourne 2 quand le robot va sur une nouvelle case -> très très très gratifiant !!!
     //L'algo reoutrne 1 quand le robot reste sur sa case -> peu gratifiant
@@ -15,8 +15,33 @@ public class motivScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
+        state = "REWARD_0";
 	}
+
+    new public void  sendControlMessage(string msg)
+    {
+        switch (msg)
+        {
+            case "RUN":
+                {
+                    
+                    break;
+                }
+            case "STOP":
+                {
+                    break;
+                }
+            case "REINIT":
+                {
+                    list.Clear();
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
+        }
+    }
 
     int explo(float x, float y) {
         int r;
@@ -40,7 +65,33 @@ public class motivScript : MonoBehaviour {
 	void Update () {
         xRobot = GetComponent<Transform>().position.x;//récupère les coordonnées x et z du robot
         yRobot = GetComponent<Transform>().position.z;;
+        switch(explo(xRobot, yRobot))
+        {
+            case 0:
+                {
+                    state = "REWARD_0";
+                    break;
+                }
+            case 1:
+                {
+                    state = "REWARD_1";
+                    break;
+                }
+            case 2:
+                {
+                    state = "REWARD_2";
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
+        }
+
+
+        /*
         int prout = explo(xRobot, yRobot);
         Debug.Log(prout);
+        */
     }
 }
