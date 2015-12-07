@@ -1,0 +1,1376 @@
+<zuiprezi>
+  <version>10</version>
+  <zui-table>
+    <settings>
+      
+      <autoplay>
+        
+        <delay>4000</delay>
+        
+      </autoplay>
+      
+      <bounds x="-22870.868644106195" y="-12760.479059071919" width="45741.73728821239" height="25520.958118143837"/>
+      <aspectratio>off</aspectratio>
+      <languages>
+        <language>fr</language>
+      </languages>
+      <mode type="normal"/>
+    </settings>
+    <object id="0_175847130" type="button" x="-13457.568456594694" y="-2903.4960151583455" r="0" s="10.92282235225887" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="31_95982358" type="button" x="-3326.6275013667855" y="456.8068989166286" r="0" s="10.92286283962955" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+      <meta>
+        <parentTemplate>impact</parentTemplate>
+        <notModifiedByUser>from-template</notModifiedByUser>
+      </meta>
+    </object>
+    <object id="39_95982358" type="button" x="0" y="0" r="0" s="42.60594009706818" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1074.6268656716418</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>impact</parentTemplate>
+        <notModifiedByUser>from-template</notModifiedByUser>
+      </meta>
+    </object>
+    <object id="44_95982358" type="text" x="-3279.284803765916" y="-2541.8198208245176" r="-1.6017276158877867e-31" s="24.080245655928817" class="head head-background">
+      <height>54.375</height>
+      <width>241.03344353621245</width>
+      <p align="center">
+        <text color="16711680"><![CDATA[Le cerveau comme société d'agents]]></text>
+      </p>
+      <layout>
+        <layout-element role="title"/>
+      </layout>
+    </object>
+    <object id="58_95982358" type="shape" x="-15262.659418984142" y="2234.8095515714926" r="52.209308213104634" s="23.28239854838392" class="line3">
+      <geom type="line">
+        <sp>-131.12169946448392 -41.255059271638174</sp>
+        <ep>131.12169946448392 -41.255059271638174</ep>
+        <b>82.51011854327635</b>
+        <t>8</t>
+      </geom>
+      <meta>
+        <parentTemplate>impact</parentTemplate>
+        <notModifiedByUser>from-template</notModifiedByUser>
+      </meta>
+    </object>
+    <object id="0_30863873" type="text" x="-10546.4166387644" y="10985.512138872611" r="0" s="75.96746953241431" class="head head-background">
+      <style font-family="Orbitron" fontFamily="custom-orbitron"/>
+      <style font-family="Orbitron" fontFamily="custom-orbitron"/>
+      <height>24</height>
+      <width>289.96415154447726</width>
+      <p>
+        <text><![CDATA[Robot Sapiens]]></text>
+      </p>
+    </object>
+    <object id="1_175847130" type="text" x="-18295.294714771477" y="9244.504445241793" r="0" s="51.74777064001647" class="head">
+      <style font-family="LeagueGothic" fontFamily="custom-leaguegothic"/>
+      <style font-family="LeagueGothic" fontFamily="custom-leaguegothic"/>
+      <height>28.8</height>
+      <width>126.16124245513949</width>
+      <p>
+        <text color="3355443"><![CDATA[Sociétés Virtuelles]]></text>
+      </p>
+    </object>
+    <object id="2_175847130" type="text" x="15570.932790425017" y="-9058.257731675154" r="0" s="43.454828161975975" class="head head-background">
+      <height>81.5625</height>
+      <width>250.56920628951195</width>
+      <p align="right">
+        <text weight="normal"><![CDATA[François Suro]]></text>
+      </p>
+      <p align="right">
+        <text weight="normal"><![CDATA[Thibaut Castanié]]></text>
+      </p>
+      <p align="right">
+        <text weight="normal"><![CDATA[Vincent Bazia]]></text>
+      </p>
+    </object>
+    <object id="3_175847130" type="text" x="16972.218846569463" y="-11440.439255389809" r="0" s="25.83843202639357" class="strong">
+      <height>27.1875</height>
+      <width>308.75</width>
+      <p align="right">
+        <text color="3355443"><![CDATA[M2 IMAGINA]]></text>
+      </p>
+    </object>
+    <object id="1_144117274" type="text" x="-13457.6" y="-5251.35" r="0" s="22.963361412797855" class="body body-background">
+      <height>54.375</height>
+      <width>323.2997643425342</width>
+      <p align="center">
+        <text><![CDATA[Réseau neuronal & algorithme génétique]]></text>
+      </p>
+    </object>
+    <object id="2_144117274" type="button" x="-6066.050110929831" y="1099.1092106433907" r="0" s="2.843310818312564" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="6_144117274" type="button" x="-3566.8130235451563" y="3231.3747441016226" r="0" s="2.8433108183125646" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="8_144117274" type="text" x="-6066.050110929831" y="980.8441715490712" r="0" s="4.477346800427058" class="body body-background">
+      <height>27.1875</height>
+      <width>-374.4609375</width>
+      <p>
+        <text><![CDATA[encapsule le réseau neural]]></text>
+      </p>
+    </object>
+    <object id="9_144117274" type="text" x="-6069.591538420442" y="1325.7605700424342" r="-1.6017276158877867e-31" s="4.477346800427058" class="body body-background">
+      <height>27.1875</height>
+      <width>583.989961180722</width>
+      <p>
+        <text><![CDATA[décide de l'échec basé sur les capteurs]]></text>
+      </p>
+    </object>
+    <object id="10_144117274" type="text" x="-6152.069520767547" y="1728.5047516390496" r="0" s="4.918604746080052" class="body body-background">
+      <height>27.1875</height>
+      <width>-244.83984375</width>
+      <p>
+        <text><![CDATA[procédure Backout]]></text>
+      </p>
+    </object>
+    <object id="11_144117274" type="shape" x="-3231.2026050523773" y="-269.8865078820693" r="2.09758280416425" s="14.911273644673921" class="line3">
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <geom type="arrow">
+        <sp>-150.66014286264956 24.99867124756559</sp>
+        <ep>150.66014286264954 24.99867124756559</ep>
+        <b>-49.99734249513118</b>
+        <t>7</t>
+      </geom>
+    </object>
+    <object id="12_144117274" type="shape" x="-3230.8961309955403" y="38.032591426553154" r="2.1367485079132593" s="14.911273644673926" class="line3">
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <geom type="arrow">
+        <sp>112.66488651390272 21.295294435093968</sp>
+        <ep>-112.66488651390272 21.29529443509392</ep>
+        <b>42.59058887018789</b>
+        <t>7</t>
+      </geom>
+    </object>
+    <object id="13_144117274" type="text" x="-2586.7839923260126" y="-759.3014627843746" r="6.989797744518492" s="7.651841123924001" class="body">
+      <height>27.1875</height>
+      <width>346.88091827641784</width>
+      <p>
+        <text color="16711680" weight="bold"><![CDATA[Valeurs des actionneurs]]></text>
+      </p>
+    </object>
+    <object id="14_144117274" type="text" x="-2842.18615122119" y="221.5807566543308" r="6.989797744518489" s="7.651841123924001" class="body">
+      <height>27.1875</height>
+      <width>346.88091827641784</width>
+      <p>
+        <text color="16711680" weight="bold"><![CDATA[Valeurs des capteurs]]></text>
+      </p>
+    </object>
+    <object id="16_144117274" type="shape" x="-1516.1462972750296" y="3384.905697980163" r="-36.52640470489498" s="5.43413762561003" class="line3">
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <geom type="arrow">
+        <sp>-216.76706584555896 -36.71531246679855</sp>
+        <ep>216.76706584555896 -36.71531246679855</ep>
+        <b>73.4306249335971</b>
+        <t>7</t>
+      </geom>
+    </object>
+    <object id="17_144117274" type="text" x="-1149.049591559582" y="3587.5677932887643" r="-30.539309489906028" s="7.651841123923997" class="body">
+      <height>27.1875</height>
+      <width>346.88091827641784</width>
+      <p>
+        <text color="16711680" weight="bold"><![CDATA[Messages de control]]></text>
+      </p>
+    </object>
+    <object id="18_144117274" type="shape" x="-1693.4192862315867" y="3044.358526133627" r="147.44583911662895" s="14.911273644673926" class="line3">
+      <style gradEndAlpha="1" gradEndColor="16744448" gradStartAlpha="1" borderColor="16744448" color="16744448" gradStartColor="16744448"/>
+      <style gradEndAlpha="1" gradEndColor="16744448" gradStartAlpha="1" borderColor="16744448" color="16744448" gradStartColor="16744448"/>
+      <geom type="arrow">
+        <sp>-48.10514751576431 9.886723944623263</sp>
+        <ep>48.10514751576431 9.886723944623263</ep>
+        <b>-19.773447889246526</b>
+        <t>7</t>
+      </geom>
+    </object>
+    <object id="19_144117274" type="text" x="-1572.854383787214" y="2614.4563182613024" r="-27.39152305144804" s="6.26828552059788" class="body">
+      <height>54.375</height>
+      <width>272.3118453895597</width>
+      <p>
+        <text color="16711680" weight="bold"><![CDATA[Valeurs des motivateurs]]></text>
+      </p>
+    </object>
+    <object id="21_144117274" type="shape" x="-5588.766749945104" y="2999.654838347919" r="40.9896494208816" s="5.43413762561003" class="line3">
+      <style gradEndAlpha="1" gradEndColor="16744448" gradStartAlpha="1" borderColor="16744448" color="16744448" gradStartColor="16744448"/>
+      <style gradEndAlpha="1" gradEndColor="16744448" gradStartAlpha="1" borderColor="16744448" color="16744448" gradStartColor="16744448"/>
+      <geom type="arrow">
+        <sp>-197.98654209938357 -18.92382029677006</sp>
+        <ep>197.98654209938357 -18.92382029677006</ep>
+        <b>37.84764059354012</b>
+        <t>7</t>
+      </geom>
+    </object>
+    <object id="22_144117274" type="text" x="-5681.898423658922" y="3290.6004591090573" r="40.506300167470265" s="7.651841123924001" class="body">
+      <height>27.1875</height>
+      <width>346.88091827641784</width>
+      <p>
+        <text color="16711680" weight="bold"><![CDATA[Messages de control]]></text>
+      </p>
+    </object>
+    <object id="23_144117274" type="shape" x="-5214.114613959682" y="2602.8006518452935" r="-140.8472554412733" s="14.91127364467393" class="line3">
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <geom type="arrow">
+        <sp>-38.27432426881844 6.107259836911024</sp>
+        <ep>38.27432426881845 6.107259836911024</ep>
+        <b>-12.214519673822048</b>
+        <t>7</t>
+      </geom>
+    </object>
+    <object id="24_144117274" type="text" x="-4522.4537023252415" y="2345.039319116175" r="17.90601157453424" s="6.26828552059788" class="body">
+      <height>54.375</height>
+      <width>272.3118453895597</width>
+      <p>
+        <text color="16711680" weight="bold"><![CDATA[récompenses]]></text>
+      </p>
+      <p>
+        <text color="16711680" weight="bold"><![CDATA[échecs]]></text>
+      </p>
+    </object>
+    <object id="3_144117274" type="text" x="-6094.987301346526" y="494.8764439231204" r="-1.601727615887786e-31" s="10.712577573493602" class="head head-background">
+      <style font-family="AbrilFatface" fontFamily="custom-abrilfatface"/>
+      <style font-family="AbrilFatface" fontFamily="custom-abrilfatface"/>
+      <height>32.376</height>
+      <width>196.07025154113825</width>
+      <p align="center">
+        <text color="16775176"><![CDATA[Neural Net Agent]]></text>
+      </p>
+      <layout>
+        <layout-element role="title"/>
+      </layout>
+    </object>
+    <object id="5_144117274" type="text" x="-756.1921637915939" y="1099.8547743256236" r="-1.6017276158877858e-31" s="9.146682715416876" class="head head-background">
+      <style font-family="AbrilFatface" fontFamily="custom-abrilfatface"/>
+      <style font-family="AbrilFatface" fontFamily="custom-abrilfatface"/>
+      <height>64.752</height>
+      <width>206.2292801556773</width>
+      <p align="center">
+        <text color="16775176"><![CDATA[Communication Agent]]></text>
+      </p>
+      <layout>
+        <layout-element role="title"/>
+      </layout>
+    </object>
+    <object id="25_144117274" type="text" x="-3549.860579493459" y="2661.8106886052196" r="-1.601727615887786e-31" s="10.712577573493602" class="head head-background">
+      <style font-family="AbrilFatface" fontFamily="custom-abrilfatface"/>
+      <style font-family="AbrilFatface" fontFamily="custom-abrilfatface"/>
+      <height>32.376</height>
+      <width>140.80513587804597</width>
+      <p align="center">
+        <text color="16775176"><![CDATA[Motivators]]></text>
+      </p>
+      <layout>
+        <layout-element role="title"/>
+      </layout>
+    </object>
+    <object id="26_144117274" type="text" x="-752.8165685342065" y="1731.5336040981215" r="0" s="4.477346800427058" class="body body-background">
+      <height>27.1875</height>
+      <width>327.16024634097295</width>
+      <p>
+        <text><![CDATA[en charge de la socket]]></text>
+      </p>
+    </object>
+    <object id="27_144117274" type="text" x="-3219.254983510885" y="615.2849786038614" r="11.811787043452814" s="7.651841123923998" class="body">
+      <height>54.375</height>
+      <width>346.88091827641784</width>
+      <p align="center">
+        <text color="16711680" weight="bold"><![CDATA[déclaration de la structure]]></text>
+      </p>
+    </object>
+    <object id="15_144117274" type="text" x="-3513.8458334534726" y="3121.3575032420117" r="0" s="4.477346800427058" class="body body-background">
+      <height>27.1875</height>
+      <width>340.5536160745717</width>
+      <p>
+        <text><![CDATA["capteur" avec logique]]></text>
+      </p>
+    </object>
+    <object id="20_144117274" type="text" x="-3549.5122915019747" y="3448.9241701189735" r="0" s="4.477346800427058" class="body body-background">
+      <height>27.1875</height>
+      <width>540.611910760971</width>
+      <p>
+        <text><![CDATA[peut récompenser ou échouer le réseau]]></text>
+      </p>
+    </object>
+    <object id="28_144117274" type="text" x="-3557.60110205456" y="3857.2288576066726" r="0" s="2.765021407366254" class="body body-background">
+      <height>54.375</height>
+      <width>755.5371042156751</width>
+      <p>
+        <text><![CDATA[entièrement interne ou associé a un élément physique ]]></text>
+      </p>
+      <p>
+        <text><![CDATA[(ex :capteur, ordinateur embarqué ...)]]></text>
+      </p>
+    </object>
+    <object id="29_144117274" type="text" x="301.29672399663104" y="415.84669360634757" r="0" s="6.268285520597878" class="body body-background">
+      <height>27.1875</height>
+      <width>87.8905648950543</width>
+      <p align="right">
+        <text color="7326720"><![CDATA[unique]]></text>
+      </p>
+    </object>
+    <object id="30_144117274" type="text" x="-6071.804981060907" y="-255.69641863444326" r="0" s="7.651841123924004" class="body body-background">
+      <height>27.1875</height>
+      <width>87.8905648950543</width>
+      <p align="right">
+        <text color="7326720"><![CDATA[unique]]></text>
+      </p>
+    </object>
+    <object id="31_144117274" type="text" x="-2684.266443778065" y="2077.2887617339993" r="0" s="7.651841123924004" class="body body-background">
+      <height>27.1875</height>
+      <width>87.8905648950543</width>
+      <p align="right">
+        <text color="7326720"><![CDATA[0 .. N]]></text>
+      </p>
+    </object>
+    <object id="11_175847130" type="text" x="16345.448118115319" y="3880.186878721425" r="0" s="29.923316756824477" class="head head-background">
+      <height>27.1875</height>
+      <width>-187.23046875</width>
+      <p>
+        <text><![CDATA[Environnement]]></text>
+      </p>
+    </object>
+    <object id="12_175847130" type="image" x="10947.26269501029" y="6814.71617621729" r="0" s="7.404851564676996">
+      <source w="548" h="625">4081694300<url>4081694300.png</url></source>
+      <sourceUrl>2015-12-07_19-15-41.png</sourceUrl>
+    <resource><id>4081694300</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/4/4/2/5c976f274fa1495060392809a313e22377c41.png</url></resource></object>
+    <object id="10_175847130" type="text" x="10946.508969036666" y="3880.186878721424" r="0" s="29.923316756824477" class="head head-background">
+      <height>27.1875</height>
+      <width>-72.01171875</width>
+      <p>
+        <text><![CDATA[Robot]]></text>
+      </p>
+    </object>
+    <object id="13_175847130" type="image" x="16346.270364632002" y="6503.427349110005" r="0" s="5.851817593293138">
+      <source w="1029" h="633">4081707380<url>4081707380.png</url></source>
+      <sourceUrl>2015-12-07_19-33-19.png</sourceUrl>
+    <resource><id>4081707380</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/8/c/4/6745071139bbc0e38a0e6ba249130a2b51407.png</url></resource></object>
+    <object id="4_175847130" type="button" x="16281.096752168614" y="6496.506774261263" r="0" s="6.378418598631991" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>944.7419342019052</w>
+        <h>600</h>
+      </size>
+    </object>
+    <object id="35_144117274" type="text" x="-8216.7" y="-8447.35" r="0" s="70.79823289320366" class="head head-background">
+      <height>27.1875</height>
+      <width>-172.828125</width>
+      <p>
+        <text color="16744448"><![CDATA[Serveur Java]]></text>
+      </p>
+    </object>
+    <object id="36_144117274" type="text" x="13777.229643801402" y="1640.7299699942787" r="0" s="75.4721888583947" class="head head-background">
+      <height>27.1875</height>
+      <width>-72.01171875</width>
+      <p>
+        <text color="16744448"><![CDATA[Unity]]></text>
+      </p>
+    </object>
+    <object id="44_175847130" type="image" x="13815.7" y="10264.55" r="0" s="7.985583202294479">
+      <source w="676" h="246">4082241938<mask x="0" y="0" w="243" h="246"/>
+      <url>4082241938.png</url></source>
+      <sourceUrl>unity-logo.png</sourceUrl>
+    <resource><id>4082241938</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/c/1/9/eb6d512261a8f17d3dc69020f4d5936c2e208.png</url></resource></object>
+    <object id="38_144117274" type="text" x="5041.6" y="1953.75" r="11.811787043452814" s="36.173804836950985" class="head">
+      <height>27.1875</height>
+      <width>-86.4140625</width>
+      <p>
+        <text color="16711680"><![CDATA[SOCKET]]></text>
+      </p>
+    </object>
+    <object id="39_144117274" type="button" x="-10793.125731263272" y="5038.71430529638" r="0" s="5.216611552920252" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="42_144117274" type="text" x="-619.0822036262107" y="-4237.243439950625" r="0" s="22.963361412797852" class="body body-background">
+      <height>54.375</height>
+      <width>110.8065566628578</width>
+      <p align="right">
+        <text color="7326720"><![CDATA[1..N Threads]]></text>
+      </p>
+    </object>
+    <object id="43_144117274" type="text" x="-13968.04659027408" y="4974.319970061855" r="0" s="22.963361412797852" class="body body-background">
+      <height>54.375</height>
+      <width>87.8905648950543</width>
+      <p align="right">
+        <text color="7326720"><![CDATA[threadunique]]></text>
+      </p>
+    </object>
+    <object id="15_175847130" type="button" x="11085.739364795278" y="6607.529526303588" r="0" s="1.005042296518348" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>3418.053632253551</w>
+        <h>3251.3160674410246</h>
+      </size>
+    </object>
+    <object id="16_175847130" type="text" x="10914.204461319761" y="6370.946015059199" r="0" s="2.9483737364041085" class="body body-background">
+      <height>27.1875</height>
+      <width>755.0401340479768</width>
+      <p>
+        <text><![CDATA[Plateau circulaire pour supporter différents modules]]></text>
+      </p>
+    </object>
+    <object id="17_175847130" type="text" x="10374.409811497337" y="6658.1038321193155" r="0" s="2.9483737364041085" class="body body-background">
+      <height>27.1875</height>
+      <width>-388.86328125</width>
+      <p>
+        <text><![CDATA[Deux roues pour se déplacer]]></text>
+      </p>
+    </object>
+    <object id="18_175847130" type="button" x="11310.932503235168" y="5742.554344230795" r="0" s="0.3293094404073844" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1453.730007202489</w>
+        <h>716.3845508787144</h>
+      </size>
+    </object>
+    <object id="19_175847130" type="button" x="11269.41946190006" y="5711.554805387918" r="0" s="0.20313981204202106" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="20_175847130" type="button" x="11144.634654801715" y="5793.539026476684" r="0" s="0.14505509083869936" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="21_175847130" type="button" x="11397.465924659798" y="5770.981519018938" r="0" s="0.14523804184174707" class="circle">
+      <style gradEndAlpha="1" gradEndColor="8028290" color="8028290" borderColor="8028290" gradStartAlpha="1" gradStartColor="8028290"/>
+      <style gradEndAlpha="1" gradEndColor="8028290" color="8028290" borderColor="8028290" gradStartAlpha="1" gradStartColor="8028290"/>
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="22_175847130" type="button" x="11487.685108939277" y="5688.153167842451" r="0" s="0.14929585658009548" class="circle">
+      <style gradEndAlpha="1" gradEndColor="8028290" color="8028290" borderColor="8028290" gradStartAlpha="1" gradStartColor="8028290"/>
+      <style gradEndAlpha="1" gradEndColor="8028290" color="8028290" borderColor="8028290" gradStartAlpha="1" gradStartColor="8028290"/>
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="23_175847130" type="image" x="11269.44628846361" y="5654.389300092532" r="0" s="0.04012624820836293">
+      <source w="386" h="663">4082007317<url>4082007317.png</url></source>
+      <sourceUrl>2015-12-07_19-18-54.png</sourceUrl>
+    <resource><id>4082007317</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/8/c/02486d70ad0d5fff8adf77bef600bfd11a815.png</url></resource></object>
+    <object id="24_175847130" type="image" x="11325.633133770232" y="5710.507624856096" r="90" s="0.04012624820836293">
+      <source w="386" h="663">4082007317<url>4082007317.png</url></source>
+      <sourceUrl>2015-12-07_19-18-54.png</sourceUrl>
+    <resource><id>4082007317</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/8/c/02486d70ad0d5fff8adf77bef600bfd11a815.png</url></resource></object>
+    <object id="25_175847130" type="image" x="11269.172206291387" y="5770.051976772502" r="180" s="0.04012624820836293">
+      <source w="386" h="663">4082007317<url>4082007317.png</url></source>
+      <sourceUrl>2015-12-07_19-18-54.png</sourceUrl>
+    <resource><id>4082007317</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/8/c/02486d70ad0d5fff8adf77bef600bfd11a815.png</url></resource></object>
+    <object id="26_175847130" type="image" x="11211.340867951405" y="5710.713186485266" r="-90" s="0.04012624820836293">
+      <source w="386" h="663">4082007317<url>4082007317.png</url></source>
+      <sourceUrl>2015-12-07_19-18-54.png</sourceUrl>
+    <resource><id>4082007317</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/8/c/02486d70ad0d5fff8adf77bef600bfd11a815.png</url></resource></object>
+    <object id="27_175847130" type="image" x="11229.84141457675" y="5667.134121101108" r="-45" s="0.04012624820836294">
+      <source w="386" h="663">4082007317<url>4082007317.png</url></source>
+      <sourceUrl>2015-12-07_19-18-54.png</sourceUrl>
+    <resource><id>4082007317</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/8/c/02486d70ad0d5fff8adf77bef600bfd11a815.png</url></resource></object>
+    <object id="28_175847130" type="image" x="11308.160395290739" y="5669.2582579358705" r="45" s="0.04012624820836294">
+      <source w="386" h="663">4082007317<url>4082007317.png</url></source>
+      <sourceUrl>2015-12-07_19-18-54.png</sourceUrl>
+    <resource><id>4082007317</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/8/c/02486d70ad0d5fff8adf77bef600bfd11a815.png</url></resource></object>
+    <object id="29_175847130" type="image" x="11310.695655383843" y="5750.93474525964" r="135" s="0.04012624820836291">
+      <source w="386" h="663">4082007317<url>4082007317.png</url></source>
+      <sourceUrl>2015-12-07_19-18-54.png</sourceUrl>
+    <resource><id>4082007317</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/8/c/02486d70ad0d5fff8adf77bef600bfd11a815.png</url></resource></object>
+    <object id="30_175847130" type="image" x="11224.222730046089" y="5750.0439781999" r="-135.00000000000006" s="0.04012624820836292">
+      <source w="386" h="663">4082007317<url>4082007317.png</url></source>
+      <sourceUrl>2015-12-07_19-18-54.png</sourceUrl>
+    <resource><id>4082007317</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/8/c/02486d70ad0d5fff8adf77bef600bfd11a815.png</url></resource></object>
+    <object id="31_175847130" type="text" x="11272.846288463603" y="5711.900031285022" r="0" s="0.47637911266441724" class="body">
+      <height>54.375</height>
+      <width>-172.828125</width>
+      <p align="center">
+        <text color="3355443"><![CDATA[8 détecteurs]]></text>
+      </p>
+      <p align="center">
+        <text color="3355443"><![CDATA[de distance]]></text>
+      </p>
+    </object>
+    <object id="32_175847130" type="text" x="11122.314908572524" y="5677.500439357583" r="0" s="0.6598222530905816" class="strong strong-background">
+      <height>27.1875</height>
+      <width>-100.81640625</width>
+      <p>
+        <text><![CDATA[Modules]]></text>
+      </p>
+    </object>
+    <object id="34_175847130" type="image" x="11143.98517412652" y="5804.175207214816" r="0" s="0.0908898256634446">
+      <source w="468" h="721">4082055074<url>4082055074.png</url></source>
+      <sourceUrl>2015-12-07_19-18-31.png</sourceUrl>
+    <resource><id>4082055074</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/1/2/1/ddba709d697a9f4a0bbf718682368e0e4ee71.png</url></resource></object>
+    <object id="35_175847130" type="text" x="11143.257727619604" y="5758.253878314548" r="0" s="0.4330719206040155" class="body">
+      <height>54.375</height>
+      <width>-172.828125</width>
+      <p align="center">
+        <text color="3355443"><![CDATA[Radar à ]]></text>
+      </p>
+      <p align="center">
+        <text color="3355443"><![CDATA[packs de vie]]></text>
+      </p>
+    </object>
+    <object id="0_175848381" type="button" x="-15372.9" y="-2260.3499999999995" r="0" s="4.332826845001583" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="36_175847130" type="image" x="11398.333429953556" y="5783.207921039416" r="0" s="0.10514517255769859">
+      <source w="507" h="596">4082062823<url>4082062823.png</url></source>
+      <sourceUrl>2015-12-07_19-17-06.png</sourceUrl>
+    <resource><id>4082062823</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/1/e/9/798b5370c16c5b936f10855094f8c7f21c2f1.png</url></resource></object>
+    <object id="37_175847130" type="text" x="11398.094041172119" y="5738.53252696635" r="0" s="0.4330719206040155" class="body">
+      <height>54.375</height>
+      <width>-187.23046875</width>
+      <p align="center">
+        <text color="3355443"><![CDATA[Motivateur]]></text>
+      </p>
+      <p align="center">
+        <text color="3355443"><![CDATA[d'exploration]]></text>
+      </p>
+    </object>
+    <object id="1_175848381" type="button" x="-11416.7" y="-2260.3500000000004" r="0" s="4.285120702298824" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="38_175847130" type="text" x="11487.68421809969" y="5656.513436927297" r="0" s="0.34411515210333393" class="body">
+      <height>54.375</height>
+      <width>231.81703532433252</width>
+      <p align="center">
+        <text color="3355443"><![CDATA[Récupérateur de]]></text>
+      </p>
+      <p align="center">
+        <text color="3355443"><![CDATA[packs de vie]]></text>
+      </p>
+    </object>
+    <object id="39_175847130" type="image" x="11488.712026245546" y="5700.640666655909" r="0" s="0.0915532518389336">
+      <source w="634" h="651">4082068073<url>4082068073.png</url></source>
+      <sourceUrl>2015-12-07_19-16-40.png</sourceUrl>
+    <resource><id>4082068073</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/5/8/23c05e2014c6c80f72f39670dc995c9081697.png</url></resource></object>
+    <object id="2_175848381" type="text" x="-11416.550000000001" y="-3057.050000000001" r="0" s="10.712577573493602" class="body body-background">
+      <height>27.1875</height>
+      <width>275.8154638756765</width>
+      <p align="center">
+        <text><![CDATA[Réseau de neurones]]></text>
+      </p>
+    </object>
+    <object id="3_175848381" type="button" x="-12239.800000000001" y="-2116.3" r="0" s="1.699806644676661" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="4_175848381" type="text" x="-12285.938755109353" y="-2617.0295823618226" r="0" s="3.841599999999997" class="body body-background">
+      <height>27.1875</height>
+      <width>-100.81640625</width>
+      <p>
+        <text><![CDATA[Neurone]]></text>
+      </p>
+    </object>
+    <object id="5_175848381" type="image" x="-12239.888755109356" y="-2027.9795823618201" r="0" s="2.6560886625335853">
+      <source w="420" h="200">4082095331<url>4082095331.png</url></source>
+      <sourceUrl>neurone.png</sourceUrl>
+    <resource><id>4082095331</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/6/2/7/7dd57f1592f16463e64734fbf9971467bb2f9.png</url></resource></object>
+    <object id="5_175847130" type="button" x="13711.95564917545" y="5676.044223743153" r="0" s="0.9363512281775522" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>631.1952466691387</w>
+        <h>473.3964350018541</h>
+      </size>
+    </object>
+    <object id="6_175847130" type="button" x="14941.635980676994" y="6908.083164730759" r="0" s="3.3259131437511567" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>921.0428392308266</w>
+        <h>587.1214314173711</h>
+      </size>
+    </object>
+    <object id="8_175847130" type="text" x="15292.904056219" y="6875.9735417101165" r="0" s="3.4623433264523493" class="body body-background">
+      <height>54.375</height>
+      <width>609.5</width>
+      <p align="center">
+        <text><![CDATA[Objets mobiles ajoutés par l'utilisateur via un menu et le ]]></text>
+        <text weight="bold" style="italic"><![CDATA[Leap Motion]]></text>
+      </p>
+    </object>
+    <object id="14_175847130" type="image" x="15955.15510486349" y="7429.208406351154" r="0" s="0.5075080954198428">
+      <source w="1200" h="1029">4082135156<mask x="0" y="0" w="1200" h="1028"/>
+      <url>4082135156.png</url></source>
+      <sourceUrl>http%3A%2F%2F0103.static.prezi.com.s3.amazonaws.com%2Fmedia%2Fb%2Fb%2Fc%2F20160abe6a6c3fb8e53f1ee7cf073b0c69d7c.png</sourceUrl>
+    <resource><id>4082135156</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/b/b/c/20160abe6a6c3fb8e53f1ee7cf073b0c69d7c.png</url></resource></object>
+    <object id="6_175848381" type="button" x="-10627.750000000005" y="-2116.3" r="0" s="1.7920279669525834" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="33_175847130" type="image" x="15005.1554877654" y="7443.785386334659" r="0" s="0.9178991078694173">
+      <source w="1001" h="500">4082136086<mask x="55" y="0" w="866" h="183"/>
+      <url>4082136086.jpg</url></source>
+      <sourceUrl>lmc-4254f1637d0a1452c4b055166c83d66c.jpg</sourceUrl>
+    <resource><id>4082136086</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/3/6/3/705da9b364bed9b0ff2088650b7910d415412.jpg</url></resource></object>
+    <object id="7_175848381" type="text" x="-10627.678755109353" y="-2513.8295823618223" r="0" s="3.8415999999999975" class="body body-background">
+      <height>27.1875</height>
+      <width>253.04616893301363</width>
+      <p align="center">
+        <text><![CDATA[Réseau en couche]]></text>
+      </p>
+    </object>
+    <object id="40_175847130" type="image" x="13934.124766342846" y="7443.76200243482" r="0" s="3.183308876005996">
+      <source w="304" h="104">4082143031<mask x="0" y="4" w="299" h="100"/>
+      <url>4082143031.png</url></source>
+      <sourceUrl>http%3A%2F%2F0103.static.prezi.com.s3.amazonaws.com%2Fmedia%2F6%2F6%2Fc%2F131fc6330a53bca28d58d0ac41aacd612c1cf.png</sourceUrl>
+    <resource><id>4082143031</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/6/6/c/131fc6330a53bca28d58d0ac41aacd612c1cf.png</url></resource></object>
+    <object id="41_175847130" type="image" x="13712.95737441407" y="5722.156117175759" r="0" s="0.436931991060635">
+      <source w="1081" h="626">4082158097<url>4082158097.png</url></source>
+      <sourceUrl>2015-12-07_21-28-47.png</sourceUrl>
+    <resource><id>4082158097</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/6/9/0/d6522b3888fb3900253a07a426200f291ea95.png</url></resource></object>
+    <object id="42_175847130" type="text" x="13706.242361194498" y="5519.609391899703" r="0" s="0.9707380878162939" class="body">
+      <height>27.1875</height>
+      <width>435.1554885614453</width>
+      <p>
+        <text><![CDATA[Obstacles naturels inamovibles]]></text>
+      </p>
+    </object>
+    <object id="43_175847130" type="text" x="16344.749999999996" y="-4681.350000000001" r="0" s="43.454828161975975" class="body">
+      <height>27.1875</height>
+      <width>-216.03515625</width>
+      <p>
+        <text color="3355443"><![CDATA[8 décembre 2015]]></text>
+      </p>
+    </object>
+    <object id="9_175848381" type="image" x="-10627.728755109356" y="-1966.479582361821" r="0" s="0.9222386699436497">
+      <source w="1058" h="655">4082198735<url>4082198735.jpg</url></source>
+      <sourceUrl>reseau.jpg</sourceUrl>
+    <resource><id>4082198735</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/5/e/2/b70f60d2dd8c568a7ae4787115bb7c17c4fb8.jpg</url></resource></object>
+    <object id="34_144117274" type="button" x="-8215.65" y="-1548.9" r="0" s="26.679399379578157" class="circle">
+      <style gradEndAlpha="1" gradEndColor="3355443" color="3355443" borderColor="3355443" gradStartAlpha="1" gradStartColor="3355443"/>
+      <style gradEndAlpha="1" gradEndColor="3355443" color="3355443" borderColor="3355443" gradStartAlpha="1" gradStartColor="3355443"/>
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="41_144117274" type="shape" x="-8540.757726413338" y="1972.373446466977" r="131.66798526141196" s="23.282398548383917" class="line3">
+      <geom type="line">
+        <sp>74.4350694133138 -9.773521077925658</sp>
+        <ep>-74.43506941331381 -9.773521077925693</ep>
+        <b>-19.54704215585135</b>
+        <t>8</t>
+      </geom>
+    </object>
+    <object id="37_144117274" type="shape" x="4231.879911915969" y="2579.900694937819" r="15.000000000000002" s="24.982331197925593" class="line3">
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <geom type="line">
+        <sp>-160.01082230956897 11.215854053858767</sp>
+        <ep>160.010822309569 11.215854053858767</ep>
+        <b>-22.43170810771753</b>
+        <t>8</t>
+      </geom>
+    </object>
+    <object id="73_95982358" type="shape" x="4488.933194467921" y="1411.854485750252" r="12.053266835847005" s="24.982331197925582" class="line3">
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <style gradEndAlpha="1" gradEndColor="16744448" color="16744448" borderColor="16744448" gradStartAlpha="1" gradStartColor="16744448"/>
+      <geom type="line">
+        <sp>-171.29366217247843 12.478884421576659</sp>
+        <ep>171.29366217247843 12.478884421576659</ep>
+        <b>-24.957768843153314</b>
+        <t>8</t>
+      </geom>
+      <meta>
+        <parentTemplate>impact</parentTemplate>
+        <notModifiedByUser>from-template</notModifiedByUser>
+      </meta>
+    </object>
+    <object id="10_175848381" type="text" x="-15373.35" y="-3245.4500000000007" r="0" s="10.712577573493602" class="body body-background">
+      <height>27.1875</height>
+      <width>154.04654353840584</width>
+      <p align="center">
+        <text><![CDATA[Génétique]]></text>
+      </p>
+    </object>
+    <object id="44_144117274" type="text" x="4241.988368033475" y="2760.8194228729235" r="11.811787043452814" s="9.146682715416876" class="head">
+      <height>27.1875</height>
+      <width>-302.44921875</width>
+      <p>
+        <text color="4420372"><![CDATA[chaines de caractères]]></text>
+      </p>
+    </object>
+    <object id="11_175848381" type="button" x="-16285.650000000003" y="-2310.100000000001" r="0" s="1.7187305499740175" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="12_175848381" type="text" x="-14590.632618149448" y="-2624.3046494044493" r="0" s="8.431911146089302" class="body body-background">
+      <height>27.1875</height>
+      <width>-86.4140625</width>
+      <p align="center">
+        <text><![CDATA[Génome]]></text>
+      </p>
+    </object>
+    <object id="13_175848381" type="text" x="-14590.658289808533" y="-2328.819364496815" r="0" s="2.9037753263793156" class="body body-background">
+      <height>27.1875</height>
+      <width>-201.6328125</width>
+      <p>
+        <text><![CDATA[- N°Génération]]></text>
+      </p>
+    </object>
+    <object id="14_175848381" type="text" x="-14507.28735839701" y="-2201.2777336736244" r="0" s="3.072853916213304" class="body body-background">
+      <height>27.1875</height>
+      <width>-244.83984375</width>
+      <p>
+        <text><![CDATA[- Réseau neuronal]]></text>
+      </p>
+    </object>
+    <object id="15_175848381" type="text" x="-14684.283743970882" y="-2069.9180291926086" r="0" s="3.072853916213304" class="body body-background">
+      <height>27.1875</height>
+      <width>-129.62109375</width>
+      <p>
+        <text><![CDATA[- fitness]]></text>
+      </p>
+    </object>
+    <object id="16_175848381" type="button" x="-14625.3" y="-2310.2499999999995" r="0" s="1.461586852004128" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="17_175848381" type="text" x="-16175.699999999999" y="-2645.2499999999995" r="0" s="4.780594309103685" class="body body-background">
+      <height>54.375</height>
+      <width>147.6116406908883</width>
+      <p align="center">
+        <text><![CDATA[Algorithme]]></text>
+      </p>
+      <p align="center">
+        <text><![CDATA[génétique]]></text>
+      </p>
+    </object>
+    <object id="18_175848381" type="text" x="-14617.79591584739" y="-1933.4461136829648" r="0" s="3.0728539162133037" class="body body-background">
+      <height>27.1875</height>
+      <width>-172.828125</width>
+      <p>
+        <text><![CDATA[- Sauvegarde]]></text>
+      </p>
+    </object>
+    <object id="45_144117274" type="shape" x="-8221.836395543245" y="-918.035726757641" r="-147.37553773575982" s="23.28239854838391" class="line3">
+      <geom type="line">
+        <sp>72.80186572841465 -9.773521077925666</sp>
+        <ep>-72.80186572841465 -9.773521077925684</ep>
+        <b>-19.54704215585135</b>
+        <t>8</t>
+      </geom>
+    </object>
+    <object id="46_144117274" type="text" x="-7952.4" y="-898.7" r="11.811787043452814" s="16.402401009141325" class="head">
+      <height>27.1875</height>
+      <width>-115.21875</width>
+      <p>
+        <text color="16711680"><![CDATA[Contient]]></text>
+      </p>
+    </object>
+    <object id="40_144117274" type="text" x="-10248.429379610174" y="3772.5141842128655" r="0" s="22.963361412797852" class="body body-background">
+      <height>27.1875</height>
+      <width>-201.6328125</width>
+      <p>
+        <text><![CDATA[Genome manager]]></text>
+      </p>
+    </object>
+    <object id="47_144117274" type="text" x="-8677.699999999999" y="2087.05" r="-30.539309489906028" s="16.402401009141325" class="head">
+      <height>27.1875</height>
+      <width>-115.21875</width>
+      <p>
+        <text color="16711680"><![CDATA[Alimente]]></text>
+      </p>
+    </object>
+    <object id="48_144117274" type="text" x="-16856.35" y="-6824.001715214051" r="0" s="22.963361412797852" class="body body-background">
+      <height>27.1875</height>
+      <width>110.8065566628578</width>
+      <p align="right">
+        <text color="7326720"><![CDATA[Classes]]></text>
+      </p>
+    </object>
+    <object id="19_175848381" type="text" x="-16175.799999999996" y="-2388.8999999999996" r="0" s="2.9037753263793156" class="head head-background">
+      <height>27.1875</height>
+      <width>416.0579468381569</width>
+      <p align="center">
+        <text><![CDATA[Conception des générations]]></text>
+      </p>
+    </object>
+    <object id="49_144117274" type="text" x="-10451.605855183954" y="4774.47191808918" r="0" s="7.651841123924004" class="body body-background">
+      <height>54.375</height>
+      <width>534.3621959023797</width>
+      <p>
+        <text><![CDATA[Liste de genomes générés et partagés entre les threads]]></text>
+      </p>
+    </object>
+    <object id="50_144117274" type="text" x="-10493.042882002143" y="5675.94412903377" r="0" s="7.651841123924001" class="body body-background">
+      <height>54.375</height>
+      <width>523.4749519843323</width>
+      <p>
+        <text><![CDATA[génères une nouvelle population sur son temps d'éxécution]]></text>
+      </p>
+    </object>
+    <object id="4_144117274" type="button" x="-768.5871600087276" y="1371.9389206107835" r="0" s="2.843310818312564" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+    </object>
+    <object id="70_95982358" type="button" x="13776.75" y="5828.5" r="0" s="16.061789264016955" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+      <meta>
+        <parentTemplate>impact</parentTemplate>
+        <notModifiedByUser>from-template</notModifiedByUser>
+      </meta>
+    </object>
+    <object id="20_175848381" type="text" x="-16163.76652843133" y="-2151.0837936589164" r="0" s="2.0741252331280826" class="body body-background">
+      <height>135.9375</height>
+      <width>591.1056420468427</width>
+      <p>
+        <text><![CDATA[- Les 10 meilleurs depuis toujours]]></text>
+      </p>
+      <p>
+        <text><![CDATA[- Le meilleur de la génération précédente ]]></text>
+      </p>
+      <p>
+        <text><![CDATA[- Croisement 4 meilleurs (12 fils) ]]></text>
+      </p>
+      <p indent="1">
+        <text><![CDATA[+ Mutation]]></text>
+      </p>
+      <p>
+        <text><![CDATA[- Restants poids aléatoires]]></text>
+      </p>
+    </object>
+    <object id="52_144117274" type="button" x="-3316.75" y="1584.65" r="0" s="9.448011802979027" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1180.859916782247</w>
+        <h>600</h>
+      </size>
+    </object>
+    <object id="53_144117274" type="button" x="-11338.75" y="4908.65" r="0" s="8.679449783197928" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1180.859916782247</w>
+        <h>600</h>
+      </size>
+    </object>
+    <object id="54_144117274" type="button" x="-7679.15" y="458.2" r="0" s="13.92135226961007" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1180.859916782247</w>
+        <h>600</h>
+      </size>
+    </object>
+    <object id="55_144117274" type="button" x="2940.2" y="1628.35" r="0" s="10.640383351890584" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1180.859916782247</w>
+        <h>600</h>
+      </size>
+    </object>
+    <object id="56_144117274" type="button" x="-11321.95" y="467.55" r="0" s="17.613021798477046" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1180.859916782247</w>
+        <h>600</h>
+      </size>
+    </object>
+  </zui-table>
+  <background>
+    <layer depth="39.81004115597249" fadescale="0.055262439729227605">
+      <object id="background4082225606" type="image" x="0" y="0" r="0" s="90.91558225050231">
+        <source w="1366" h="853">4082225606<url>4082225606.jpg</url></source>
+        <sourceUrl>wallhaven-133138.jpg</sourceUrl>
+      <resource><id>4082225606</id><url>http://0103.static.prezi.com.s3.amazonaws.com/media/7/5/7/ed26a95744421576fac5527b4c5bbdb0819a5.jpg</url></resource></object>
+    </layer>
+  </background>
+  <path>
+    <s>
+      <eagle o="39_95982358"/>
+    </s>
+    <s>
+      <eagle o="34_144117274"/>
+    </s>
+    <s>
+      <eagle o="0_175847130"/>
+    </s>
+    <s>
+      <eagle o="1_175848381"/>
+    </s>
+    <s>
+      <eagle o="3_175848381"/>
+    </s>
+    <s>
+      <eagle o="6_175848381"/>
+    </s>
+    <s>
+      <eagle o="0_175848381"/>
+    </s>
+    <s>
+      <eagle o="11_175848381"/>
+    </s>
+    <s>
+      <eagle o="16_175848381"/>
+    </s>
+    <s>
+      <eagle o="56_144117274"/>
+    </s>
+    <s>
+      <eagle o="53_144117274"/>
+    </s>
+    <s>
+      <eagle o="31_95982358"/>
+    </s>
+    <s>
+      <eagle o="54_144117274"/>
+    </s>
+    <s>
+      <eagle o="52_144117274"/>
+    </s>
+    <s>
+      <eagle o="6_144117274"/>
+    </s>
+    <s>
+      <eagle o="55_144117274"/>
+    </s>
+    <s>
+      <eagle o="70_95982358"/>
+    </s>
+    <s>
+      <eagle o="15_175847130"/>
+    </s>
+    <s>
+      <buildin o="16_175847130"/>
+    </s>
+    <s>
+      <buildin o="17_175847130"/>
+    </s>
+    <s>
+      <eagle o="18_175847130"/>
+    </s>
+    <s>
+      <buildin o="19_175847130"/>
+    </s>
+    <s>
+      <buildin o="20_175847130"/>
+    </s>
+    <s>
+      <buildin o="21_175847130"/>
+    </s>
+    <s>
+      <buildin o="22_175847130"/>
+    </s>
+    <s>
+      <eagle o="19_175847130"/>
+    </s>
+    <s>
+      <buildin o="31_175847130"/>
+    </s>
+    <s>
+      <eagle o="20_175847130"/>
+    </s>
+    <s>
+      <buildin o="35_175847130"/>
+    </s>
+    <s>
+      <eagle o="21_175847130"/>
+    </s>
+    <s>
+      <buildin o="37_175847130"/>
+    </s>
+    <s>
+      <eagle o="22_175847130"/>
+    </s>
+    <s>
+      <buildin o="38_175847130"/>
+    </s>
+    <s>
+      <eagle o="4_175847130"/>
+    </s>
+    <s>
+      <eagle o="5_175847130"/>
+    </s>
+    <s>
+      <eagle o="6_175847130"/>
+    </s>
+    <s>
+      <buildin o="8_175847130"/>
+    </s>
+    <s>
+      <buildin o="40_175847130"/>
+    </s>
+    <s>
+      <buildin o="33_175847130"/>
+    </s>
+    <s>
+      <buildin o="14_175847130"/>
+    </s>
+    <s>
+      <eagle o="4_175847130"/>
+    </s>
+    <s>
+      <eagle o="39_95982358"/>
+    </s>
+  </path>
+  <style type="text/css"><![CDATA[
+@font-face
+{
+	src: url('LiberationMonoPR-Regular.keg');
+	fontFamily: body;
+	font-class: body;
+	font-style: normal;
+	font-weight: normal;
+	font-family: LiberationMonoPR;
+}
+
+@font-face
+{
+	src: url('AbrilFatface-Regular.keg');
+	fontFamily: custom-abrilfatface;
+	font-class: custom-abrilfatface;
+	font-style: normal;
+	font-weight: normal;
+	font-family: AbrilFatface;
+}
+
+@font-face
+{
+	src: url('LeagueGothic-Regular.keg');
+	fontFamily: custom-leaguegothic;
+	font-class: custom-leaguegothic;
+	font-style: normal;
+	font-weight: normal;
+	font-family: LeagueGothic;
+}
+
+@font-face
+{
+	src: url('Orbitron-Regular.keg');
+	fontFamily: custom-orbitron;
+	font-class: custom-orbitron;
+	font-style: normal;
+	font-weight: normal;
+	font-family: Orbitron;
+}
+
+@font-face
+{
+	src: url('LiberationMonoPR-Bold.keg');
+	fontFamily: head;
+	font-class: head;
+	font-style: normal;
+	font-weight: bold;
+	font-family: LiberationMonoPR;
+}
+
+@font-face
+{
+	src: url('LiberationMonoPR-BoldItalic.keg');
+	fontFamily: strong;
+	font-class: strong;
+	font-style: italic;
+	font-weight: bold;
+	font-family: LiberationMonoPR;
+}
+
+@font-face
+{
+	src: url('LiberationMonoPR-Italic.keg');
+	font-style: italic;
+	font-weight: normal;
+	font-family: LiberationMonoPR;
+}
+
+@font-face
+{
+	src: url('LeagueGothic-Italic.keg');
+	font-style: italic;
+	font-weight: normal;
+	font-family: LeagueGothic;
+}
+
+@font-face
+{
+	src: url('Orbitron-Bold.keg');
+	font-style: normal;
+	font-weight: bold;
+	font-family: Orbitron;
+}
+
+.line1
+{
+	borderColor: #b2b2b2;
+	color: #e3f251;
+	gradEndColor: #b2b2b2;
+	gradStartColor: #b2b2b2;
+}
+
+.line2
+{
+	borderColor: #595959;
+	color: #595959;
+	gradEndColor: #595959;
+	gradStartColor: #595959;
+}
+
+.line3
+{
+	color: #fec06c;
+	gradEndColor: #fec06c;
+	gradStartColor: #fec06c;
+}
+
+.line4
+{
+	borderColor: #333;
+	color: #333;
+	gradEndColor: #333;
+	gradStartColor: #333;
+}
+
+.line5
+{
+	color: #191919;
+	gradEndColor: #191919;
+	gradStartColor: #191919;
+}
+
+.poly1
+{
+	borderAlpha: 1;
+	borderColor: #b2b2b2;
+	borderThickness: 9;
+	color: #8c8c8c;
+	gradEndAlpha: 1;
+	gradEndColor: #b2b2b2;
+	gradStartAlpha: 1;
+	gradStartColor: #b2b2b2;
+}
+
+.poly2
+{
+	borderColor: #595959;
+	color: #8c8c8c;
+	gradEndColor: #595959;
+	gradStartColor: #595959;
+}
+
+.poly3
+{
+	borderAlpha: 1;
+	borderColor: #fec06c;
+	borderThickness: 9;
+	color: #8c8c8c;
+	gradEndColor: #fec06c;
+	gradStartColor: #fec06c;
+}
+
+.poly4
+{
+	color: #8c8c8c;
+	gradEndColor: #333;
+	gradStartColor: #333;
+}
+
+.poly5
+{
+	borderAlpha: 1;
+	borderColor: #191919;
+	borderThickness: 9;
+	color: #8c8c8c;
+	gradEndColor: #191919;
+	gradStartColor: #191919;
+}
+
+Background
+{
+	gradEnd: #a6a6a6;
+	gradStart: #a6a6a6;
+}
+
+Grid
+{
+	color: #cfcfcf;
+}
+
+ZArrow
+{
+	gradEndColor: #f000b4;
+	gradStartColor: #f000b4;
+	lockTintAlpha: 0;
+	thickness: 7;
+}
+
+ZCircle
+{
+	gradEndAlpha: 1;
+	gradStartAlpha: 1;
+	lockTintAlpha: 0;
+	radius: 0;
+	thickness: 100;
+}
+
+ZCurveLine
+{
+	color: #ff9286;
+}
+
+ZFrame.bracket
+{
+	borderAlpha: 0;
+	borderThickness: 0;
+	gradEndAlpha: 1;
+	gradEndColor: #333;
+	gradStartAlpha: 1;
+	gradStartColor: #333;
+	padding: 1.03;
+	thickness: 8;
+}
+
+ZFrame.circle
+{
+	borderAlpha: 0;
+	borderThickness: 0;
+	gradEndAlpha: 1;
+	gradEndColor: #404040;
+	gradStartAlpha: 1;
+	gradStartColor: #404040;
+	padding: 1.03;
+	thickness: 8;
+}
+
+ZFrame.roundrect
+{
+	borderColor: #fff;
+	borderThickness: 20;
+	gradEndColor: #b2b2b2;
+	gradStartColor: #b2b2b2;
+	padding: 1.03;
+	radius: 3;
+}
+
+ZLabel
+{
+	lockTintAlpha: 0.15;
+	padding: 1.2;
+}
+
+ZLabel.body
+{
+	color: #f6f6f6;
+	fontFamily: body;
+}
+
+ZLabel.body-background
+{
+	background-alpha: 0.9;
+	background-color: #191919;
+	background-padding: 5;
+}
+
+ZLabel.head
+{
+	color: #f6f6f6;
+	fontFamily: head;
+}
+
+ZLabel.head-background
+{
+	background-alpha: 0.9;
+	background-color: #404040;
+	background-padding: 5;
+}
+
+ZLabel.strong
+{
+	color: #f6f6f6;
+	fontFamily: strong;
+}
+
+ZLabel.strong-background
+{
+	background-alpha: 0.9;
+	background-color: #191919;
+	background-padding: 5;
+}
+
+ZLine
+{
+	color: #f000b4;
+	lockTintAlpha: 0;
+}
+
+ZMarker
+{
+	color: #318bff;
+	gradEndAlpha: 0.5;
+	gradStartAlpha: 0.5;
+}
+
+ZPoly
+{
+	borderAlpha: 1;
+	gradEndAlpha: 1;
+	gradStartAlpha: 1;
+	lockTintAlpha: 0;
+	radius: 0;
+	thickness: 100;
+}
+
+]]></style>
+  <hash>-19e7da39</hash>
+<sync><oid>siubg9-zwrgn</oid><title>robosapiens</title><hash>-19e7da39</hash></sync><config>csmuZarsJbbEESY+YRJcdSELyS0AbNQSFpFqXF83QSsqlU4nnRbUqBC4YOeLi71Xw34okyb+j9aJxl7PvotWQpP6zdvWzt325iK0Cx/o4046w2Ahw5vdrxlimKfC5xE5sIqbj0gnOigK5zpqSMIvytI5BxWzbVaBFeZ3qeILpgzgQUSoWvBK35QLUGAtghIbUVK+/T08BOxKGvt3NWQRylhbmltHyz3ZMw+SASN1gbRO/RLt9A1ojfznQXZ9QrBOoDm5aHNI8B7LMrwY4gzGABO5gDm45wJg9c4EC6HfVaY9oJgBfvrcCiI7g1t+Twyf40TJD60I195tZ98oSbVA/A==</config></zuiprezi>
