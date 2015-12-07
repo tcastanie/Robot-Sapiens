@@ -53,6 +53,7 @@ public class externalExplorationMotivator extends abstractExternalMotivator{
 					neuralNetMessage nnm = (neuralNetMessage) m;
 					if (nnm.name.contains(NeuralNetGlobals.messReInit)) 
 					{
+						//System.out.println("reciver REINIT ORDER\n\n\n\n");
 						counter = 0;
 						outMsg = "REINIT";
 					}
@@ -80,6 +81,7 @@ public class externalExplorationMotivator extends abstractExternalMotivator{
 	private void sendCtrlMsg(String msg) {
 		ArrayList<String> out = new ArrayList<String>();
 		out.add(msg);
+		
 		sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.CommRole,
 				new externalMotivatorMessage(out, NeuralNetGlobals.messInput));		
 	}

@@ -99,8 +99,9 @@ public class botControl : MonoBehaviour {
         {
             for (int i = 1; i < int.Parse(respLines[0].Split(' ')[1]) + 1; i++)
             {
-                //Debug.Log("motiv");
-                ((motivators[int.Parse(respLines[i].Split(' ')[0])].GetComponent<abstractMotivatorScript>())).sendControlMessage(respLines[i].Split(' ')[1]);
+               
+                motivScript scr = motivators[int.Parse(respLines[i].Split(' ')[0])].GetComponent<motivScript>();
+                scr.sendMYControlMessage(respLines[i].Split(' ')[1]);
                 pos = i;
             }
             if (respLines[pos + 1].Contains("EFFECTORS"))
@@ -134,7 +135,7 @@ public class botControl : MonoBehaviour {
 
     string getMotivatorMessage(GameObject motivator)
     {
-        abstractMotivatorScript scr = motivator.GetComponent<abstractMotivatorScript>();
+        motivScript scr = motivator.GetComponent<motivScript>();
         return (scr.state);
     }
 

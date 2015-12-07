@@ -18,8 +18,9 @@ public class motivScript : abstractMotivatorScript{
         state = "REWARD_0";
 	}
 
-    new public void  sendControlMessage(string msg)
+    new public void sendMYControlMessage(string msg)
     {
+     
         switch (msg)
         {
             case "RUN":
@@ -33,6 +34,7 @@ public class motivScript : abstractMotivatorScript{
                 }
             case "REINIT":
                 {
+                 
                     list.Clear();
                     break;
                 }
@@ -53,10 +55,10 @@ public class motivScript : abstractMotivatorScript{
             list.Add(coordCase);
         }
         else if (list[list.Count - 1] == coordCase) {
-            r = 1;
+            r = 0;
         }
         else {
-            r = 0;
+            r = 1;
         }
         return r;
     }

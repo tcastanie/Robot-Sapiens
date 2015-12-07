@@ -6,6 +6,7 @@ public class IRDetectorScript : abstractSensorScript{
     public float distance = 50.0f;
     private RaycastHit hit;
     private Transform emitter;
+   // public double normalizedValue = 0.5;
 
     // Use this for initialization
     void Start () {

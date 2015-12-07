@@ -21,8 +21,9 @@ public class GenomeManager implements Runnable{
 	public void run() {
 		while(true)
 		{
-		if (NeuralNetGlobals.genAlg.GetCurrentGenomeIndex() >= NeuralNetGlobals.MAX_GENOME_POPULATION - 1)
+		if (NeuralNetGlobals.genAlg.GetCurrentGenomeIndex() >= NeuralNetGlobals.genAlg.population.size()-1)
 		{
+			System.out.println("went through "+NeuralNetGlobals.genAlg.population.size()+" genomes");
 			NeuralNetGlobals.genAlg.BreedPopulation();
 		}
 		else

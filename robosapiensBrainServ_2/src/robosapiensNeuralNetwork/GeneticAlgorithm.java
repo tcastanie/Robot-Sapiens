@@ -46,7 +46,11 @@ public class GeneticAlgorithm {
 		}
 		currentGenome++;
 		if (currentGenome >= population.size())
-			return null;
+		{
+			System.out.println("thread synch probkem : breeading pop anyway");
+			BreedPopulation();
+			currentGenome = 0;
+		}
 		population.get(currentGenome).index = currentGenome;
 		population.get(currentGenome).generation = generation;
 		if(population.get(currentGenome).ID == -1)

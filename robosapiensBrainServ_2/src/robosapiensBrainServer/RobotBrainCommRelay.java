@@ -113,7 +113,7 @@ public class RobotBrainCommRelay extends AbstractAgent{
 				externalMotivatorMessage nnM = (externalMotivatorMessage)m;
 				if(nnM.name.contains(NeuralNetGlobals.messInput))
 				{
-						outMotiv = nnM.val;
+					outMotiv = nnM.val;
 				}
 			}
 		}

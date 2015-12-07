@@ -9,7 +9,7 @@ public class abstractMotivatorScript : MonoBehaviour {
 	
 	}
 	
-    public void sendControlMessage(string msg)
+    public void sendMYControlMessage(string msg)
     {
 
     }

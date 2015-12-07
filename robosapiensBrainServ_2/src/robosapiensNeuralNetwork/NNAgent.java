@@ -94,11 +94,16 @@ public class NNAgent extends AbstractAgent{
 		}				
 		/// changing genomes
 		currentGenome = NeuralNetGlobals.genAlg.GetNextGenome(currentGenome);
+		if(currentGenome == null)
+		{
+			System.out.println("ERROR : GENOME NULL");
+			System.exit(0);
+		}
 		neuralNet.FromGenome(currentGenome, sensorCount + motivatorCount, NeuralNetGlobals.hiddenLayerSize,NeuralNetGlobals.nHiddenLayer, outputs.size());
 		System.out.println("output size : "+ outputs.size());
 		outputs.set(0, outputs.get(0) > 0.0 ? -1.0 : 1.0);
 		outputs.set(1, outputs.get(0));
-		backoutTimer = 250;
+		backoutTimer = 500;
 		broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(null, NeuralNetGlobals.messReInit));							
 		return;
 	}
@@ -136,14 +141,22 @@ public class NNAgent extends AbstractAgent{
 		if(checkInputFailure()&&backoutTimer == 0)
 		{
 			reverseOutput();
-			backoutTimer = 140;
+			backoutTimer = 330;
 			//System.out.println("backout switch");
 		}
-		if(backoutTimer > 150)	
+		if(backoutTimer > 320)	
 		{
 			ArrayList<Double> outputsHalt = new ArrayList<Double>();
 			for(int i = 0 ;i < outputs.size(); i++)
 				outputsHalt.add(0.0);
+			sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup, RobotBrainGlobals.CommRole, new neuralNetMessage(outputsHalt, NeuralNetGlobals.messOutput));
+			//broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));	
+		}
+		else if(backoutTimer > 300)	
+		{
+			ArrayList<Double> outputsHalt = new ArrayList<Double>();
+			outputsHalt.add(0.0);
+			outputsHalt.add(0.7);
 			sendMessage(RobotBrainGlobals.community, RobotBrainGlobals.ManagementGroup, RobotBrainGlobals.CommRole, new neuralNetMessage(outputsHalt, NeuralNetGlobals.messOutput));
 			//broadcastMessage(RobotBrainGlobals.community, RobotBrainGlobals.BrainGroup, RobotBrainGlobals.motivatorRole, new neuralNetMessage(outputs, NeuralNetGlobals.messOutput));	
 		}
