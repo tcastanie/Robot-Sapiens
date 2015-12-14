@@ -17,7 +17,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
-        [SerializeField] private MouseLook m_MouseLook;
+        [SerializeField]
+        private MouseLook m_MouseLook;
+        [SerializeField]
+        private TrackIRManager m_HeadLook;
         [SerializeField] private bool m_UseFovKick;
         [SerializeField] private FOVKick m_FovKick = new FOVKick();
         [SerializeField] private bool m_UseHeadBob;
@@ -54,16 +57,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
-			m_MouseLook.Init(transform , m_Camera.transform);
+            m_MouseLook.Init(transform, m_Camera.transform);
+            m_HeadLook.Init(transform, m_Camera.transform);
         }
 
 
         // Update is called once per frame
         private void Update()
         {
+
+            //Debug.Log("doing regular");
             RotateView();
             // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump && !m_CharacterController.isGrounded)
+            if (!m_Jump && !m_Jumping)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
@@ -94,6 +100,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+            //Debug.Log("doing fixed");
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
@@ -234,7 +241,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            if(m_HeadLook.active && m_HeadLook.running)
+                m_HeadLook.LookRotation(transform, m_Camera.transform);
+            else
+            {
+                m_MouseLook.LookRotation(transform, m_Camera.transform);
+                Debug.Log("back to mouse");
+            }
         }
 
 
