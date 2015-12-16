@@ -11,18 +11,19 @@ public class cubeInteraction : MonoBehaviour
         {
             if (leapStatesManagement.leapIndex)
             {
-                Destroy(gameObject);
+                Destroy(gameObject.transform.parent.gameObject);
             }
             else if (leapStatesManagement.leapPalm)
             {
                 Debug.Log("palm action");
-                leapStatesManagement.grabbedObj = gameObject;
+                leapStatesManagement.grabbedObj = gameObject.transform.parent.gameObject;
             }
             else
             {
+                /*
                 GameObject obj = leapStatesManagement.grabbedObj;
                 leapStatesManagement.grabbedObj = null;
-                leapStatesManagement.detachOject(obj);
+                leapStatesManagement.detachOject(obj);*/
             }
         }
 

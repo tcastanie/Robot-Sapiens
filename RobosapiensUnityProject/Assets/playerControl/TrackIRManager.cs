@@ -33,27 +33,33 @@ public class TrackIRManager : MonoBehaviour{
         if (trackIRclient != null && !running)
         {                        // Start tracking
             status = trackIRclient.TrackIR_Enhanced_Init();
-            running = true;
+            if(status != null)
+                running = true;
         }
     }
 
     private void Update()
     {
-        TrackIRClient.LPTRACKIRDATA temptid = trackIRclient.client_HandleTrackIRData(); // Data for head tracking
-        if (lastSig == temptid.wPFrameSignature)
+        if (running)
         {
-            if (counter < timeout)
-                counter++;
+            TrackIRClient.LPTRACKIRDATA temptid = trackIRclient.client_HandleTrackIRData(); // Data for head tracking
+            if (lastSig == temptid.wPFrameSignature)
+            {
+                if (counter < timeout)
+                    counter++;
+                else
+                    active = false;
+            }
             else
-                active = false;
+            {
+                tid = temptid;
+                counter = 0;
+                active = true;
+                lastSig = tid.wPFrameSignature;
+            }
         }
         else
-        {
-            tid = temptid;
-            counter = 0;
-            active = true;
-            lastSig = tid.wPFrameSignature;
-        }
+            active = false;
     }
 
     void StopCamera()

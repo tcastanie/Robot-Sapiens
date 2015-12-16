@@ -10,10 +10,14 @@ public class objectFantome : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = GameObject.Find("cubeSpawner").transform.position;
-        transform.rotation = Quaternion.Euler(0, GameObject.Find("cubeSpawner").transform.rotation.eulerAngles.y, 0);
-        if (Input.GetMouseButtonUp(0)){
-            Destroy(gameObject);
+        if(!leapStatesManagement.onPlacement)
+        {
+            transform.position = GameObject.Find("cubeSpawner").transform.position;
+            transform.rotation = Quaternion.Euler(0, GameObject.Find("cubeSpawner").transform.rotation.eulerAngles.y, 0);
+            if (Input.GetMouseButtonUp(0))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

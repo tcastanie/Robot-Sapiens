@@ -20,28 +20,39 @@ public class spawnCubes : MonoBehaviour {
         //myLeap.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
     }
 
-    void onHover() {
-        Debug.Log("hover");
-        hover = true;
+    public void cycleObjectsForward()
+    {
+        if (varGlobales.idObjet == 0 || varGlobales.idObjet == 1)
+        {
+            varGlobales.idObjet += 1;
+        }
+        else
+        {
+            varGlobales.idObjet = 0;
+        }
+
     }
+
+    public void cycleObjectsBackwards()
+    {
+        if (varGlobales.idObjet == 1 || varGlobales.idObjet == 2)
+        {
+            varGlobales.idObjet -= 1;
+        }
+        else
+        {
+            varGlobales.idObjet = 2;
+        }
+    }
+
 
     void Update() {
 
         if (Input.GetKeyDown(KeyCode.C)) {
-            if (varGlobales.idObjet == 0 || varGlobales.idObjet == 1) {
-                varGlobales.idObjet += 1;
-            }
-            else {
-                varGlobales.idObjet = 0;
-            }
+            cycleObjectsForward();
         }
         else if (Input.GetKeyDown(KeyCode.X)) {
-            if (varGlobales.idObjet == 1 || varGlobales.idObjet == 2) {
-                varGlobales.idObjet -= 1;
-            }
-            else {
-                varGlobales.idObjet = 2;
-            }
+            cycleObjectsBackwards();
         }
 
         rotation = Quaternion.Euler(0, GameObject.Find("cubeSpawner").transform.rotation.eulerAngles.y, 0);

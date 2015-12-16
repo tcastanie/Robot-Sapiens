@@ -246,7 +246,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
             {
                 m_MouseLook.LookRotation(transform, m_Camera.transform);
-                Debug.Log("back to mouse");
+                //Debug.Log("back to mouse");
             }
         }
 
