@@ -7,7 +7,7 @@ public class cubeInteraction : MonoBehaviour
 
     void OnTriggerEnter(Collider c)
     {
-        if (c.transform.parent && c.transform.parent.parent && c.transform.parent.parent.gameObject.tag.Equals("leap_hand"))
+        if (c.transform.parent && c.transform.parent.parent && c.transform.parent.parent.gameObject.tag.Equals("leap_hand") && !leapStatesManagement.onPlacement && !leapStatesManagement.onMenu && leapStatesManagement.timerInactive <= 0)
         {
             if (leapStatesManagement.leapIndex)
             {
@@ -17,6 +17,7 @@ public class cubeInteraction : MonoBehaviour
             {
                 Debug.Log("palm action");
                 leapStatesManagement.grabbedObj = gameObject.transform.parent.gameObject;
+                leapStatesManagement.timerInactive = leapStatesManagement.leapWaitGeneral;
             }
             else
             {
