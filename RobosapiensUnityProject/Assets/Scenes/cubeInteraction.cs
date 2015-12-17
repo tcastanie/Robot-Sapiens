@@ -15,7 +15,7 @@ public class cubeInteraction : MonoBehaviour
             }
             else if (leapStatesManagement.leapPalm)
             {
-                Debug.Log("palm action");
+                //Debug.Log("palm action");
                 leapStatesManagement.grabbedObj = gameObject.transform.parent.gameObject;
                 leapStatesManagement.timerInactive = leapStatesManagement.leapWaitGeneral;
             }

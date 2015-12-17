@@ -71,7 +71,7 @@ public class leapStatesManagement : MonoBehaviour {
                 leapPalm = false;
                 leapFist = false;
                 leapIndex = true;
-                Debug.Log("index");
+                //Debug.Log("index");
             }
             else if (Hand.Pointables.Extended().Count >= 3)
             {
@@ -79,11 +79,11 @@ public class leapStatesManagement : MonoBehaviour {
                 leapPalm = false;
                 leapFist = false;
                 leapPalm = true;
-                Debug.Log("palm");
+                //Debug.Log("palm");
             }
             else if(Hand.Pointables.Extended().Count == 0)
             {
-                Debug.Log("fist");
+                //Debug.Log("fist");
                 if (grabbedObj != null)
                 {
                     Rigidbody rb = grabbedObj.GetComponent<Rigidbody>();
@@ -174,7 +174,7 @@ public class leapStatesManagement : MonoBehaviour {
                 }
                 if (PHands != null && PHands.Length > 0)
                 {
-                    Debug.Log("moving ghost");
+                    //Debug.Log("moving ghost");
                     // Debug.Log(grabbedObj.transform.Find("attachPoint").transform.localPosition);
 
                     ghostObject.transform.position = PHands[0].palm.transform.position;//grabbedObj.transform.Find("attachPoint").transform.localPosition;// - grabbedObj.GetComponentsInParent ;// + PHands[0].transform.position;

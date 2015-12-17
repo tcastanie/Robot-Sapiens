@@ -90,9 +90,6 @@ public class TrackIRManager : MonoBehaviour{
     {
         if (running)
         {
-            //data = trackIRclient.client_TestTrackIRData();          // Data for debugging output, can be removed if not debugging/testing
-            //TrackIRClient.LPTRACKIRDATA tid = trackIRclient.client_HandleTrackIRData(); // Data for head tracking
-            //Vector3 rot = camera.transform.localRotation.eulerAngles;
             Vector3 rot = new Vector3();
             rot.y = -tid.fNPYaw * YSensitivity;
             rot.x = tid.fNPPitch *XSensitivity;
