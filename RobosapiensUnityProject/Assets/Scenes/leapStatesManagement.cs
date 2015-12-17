@@ -25,7 +25,7 @@ public class leapStatesManagement : MonoBehaviour {
     private int timer = 0;
     private int leapWait = 40;
     public static int timerInactive = 0;
-    public static int leapWaitGeneral = 40;
+    public static int leapWaitGeneral = 20;
 
     // Use this for initialization
     void Start () {
@@ -256,7 +256,7 @@ public class leapStatesManagement : MonoBehaviour {
                                         ((GameObject)Instantiate(spCubeScript.cube, PHands[0].palm.transform.position, PHands[0].palm.transform.rotation)).transform.Translate(new Vector3(0.0f, -1.6f, 0.0f));
                                         break;
                                     case 1:
-                                        ((GameObject)Instantiate(spCubeScript.mur, PHands[0].palm.transform.position, PHands[0].palm.transform.rotation)).transform.Translate(new Vector3(0.0f, -3.1f, 0.0f));
+                                        ((GameObject)Instantiate(spCubeScript.mur, PHands[0].palm.transform.position, PHands[0].palm.transform.rotation)).transform.Translate(new Vector3(0.0f, -1.6f, 0.0f));
                                         break;
                                     case 2:
                                         ((GameObject)Instantiate(spCubeScript.healthPack, PHands[0].palm.transform.position, PHands[0].palm.transform.rotation)).transform.Translate(new Vector3(0.0f, -1.6f, 0.0f));
@@ -340,7 +340,7 @@ public class leapStatesManagement : MonoBehaviour {
             obj.transform.rotation = new Quaternion(PHands[0].palm.transform.rotation.x, PHands[0].palm.transform.rotation.y, PHands[0].palm.transform.rotation.z, PHands[0].palm.transform.rotation.w);
 
             if (grabbedObj.name.Contains("Mur"))
-                obj.transform.Translate(new Vector3(0.0f, -3.2f, 0.0f));
+                obj.transform.Translate(new Vector3(0.0f, -1.6f, 0.0f));
             else if (grabbedObj.name.Contains("Cube"))
                 obj.transform.Translate(new Vector3(0.0f, -1.6f, 0.0f));
             else if (grabbedObj.name.Contains("Pack"))
