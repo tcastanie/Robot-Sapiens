@@ -9,7 +9,7 @@ public class AbstractMusicManager : MonoBehaviour {
     private GameObject[] objects;
 
     // Use this for initialization
-    void Start () {
+    public void Start () {
         objects = GameObject.FindGameObjectsWithTag(tagOfSources);
 	}
 	
@@ -22,12 +22,12 @@ public class AbstractMusicManager : MonoBehaviour {
         applyParameters();
 	}
 
-    void probeObject(GameObject obj)
+    public virtual void probeObject(GameObject obj)
     {
 
     }
 
-    void applyParameters()
+    public virtual void applyParameters()
     {
 
     }

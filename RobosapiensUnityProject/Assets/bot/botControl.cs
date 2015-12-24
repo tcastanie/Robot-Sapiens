@@ -23,6 +23,7 @@ public class botControl : MonoBehaviour {
     //Settings
     private Rigidbody rb;
 
+    public botVoiceBox voice = null;
     double reward = 0;
 
     void Start()
@@ -66,6 +67,8 @@ public class botControl : MonoBehaviour {
             Wheels[i].brakeTorque = (float)((1.0 - Math.Abs(currentTorque[i]))*0.1);*/
             Wheels[i].motorTorque = currentTorque[i] * maxTorque * (1.0f - (speed / topSpeed));
         }
+        if (voice != null)
+            voice.doVoice();
     }
 
     private void sendReward()
