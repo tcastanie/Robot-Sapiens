@@ -6,90 +6,106 @@ using System.Runtime.InteropServices;
 
 public class botVoiceBox : MonoBehaviour {
 
+    //dsp
+    DSP sine;
+    double frequency;
     float minDist = 5.0f;
-    float maxDist = 50.0f;
-    int SampleFrequency = 44100;
-    int SampleSize = 2;
-    double amplitude = 1.0;
-    double frequency = 440.0;
-    double phase = 1.0;
-    int channels = 2;
+    float maxDist = 30.0f;
     // Use this for initialization
- 
+    int offsetWave;
     FMOD.Channel channel;
- 
+    FMOD.System lowlevel = null;
     private const float DISTANCEFACTOR = 1.0f;
 
-    private FMOD.SOUND_PCMREADCALLBACK pcmreadcallback = new FMOD.SOUND_PCMREADCALLBACK(PCMREADCALLBACK);
-    private FMOD.SOUND_PCMSETPOSCALLBACK pcmsetposcallback = new FMOD.SOUND_PCMSETPOSCALLBACK(PCMSETPOSCALLBACK);
+    FMOD.VECTOR lastPos;
+    public float[] etab;
 
     void Start () {
+        etab = ((botControl)gameObject.GetComponent<botControl>()).emoTab;
         FMOD.VECTOR pos1 = new FMOD.VECTOR();
         pos1.x = gameObject.transform.position.x; pos1.y = gameObject.transform.position.y; pos1.z = gameObject.transform.position.z;
+        lastPos = pos1;
         FMOD.VECTOR vel1 = new FMOD.VECTOR();
         vel1.x = 0.0f; vel1.y = 0.0f; vel1.z = 0.0f;
-        FMOD.System lowlevel = null;
-        FMODUnity.RuntimeManager.StudioSystem.getLowLevelSystem(out lowlevel);
-
-        FMOD.CREATESOUNDEXINFO soundinfo = new FMOD.CREATESOUNDEXINFO();
-       
-        soundinfo.pcmsetposcallback = PCMSETPOSCALLBACK;
-        soundinfo.pcmreadcallback = PCMREADCALLBACK;
-        soundinfo.decodebuffersize = 3000;
-        soundinfo.length =(uint) (SampleFrequency * channels * sizeof(short) * 5);
-        soundinfo.format = FMOD.SOUND_FORMAT.PCM16;
-        soundinfo.defaultfrequency = SampleFrequency;
-        soundinfo.numchannels = channels;
         
-        FMOD.RESULT result;
-        FMOD.Sound sound;
-        result = lowlevel.createSound("", FMOD.MODE.OPENUSER | FMOD.MODE._3D | FMOD.MODE._3D_LINEARROLLOFF, ref soundinfo, out sound);
-        result = sound.setMode(FMOD.MODE.LOOP_NORMAL);
-        result = lowlevel.playSound(sound, null, true, out channel);
+        FMODUnity.RuntimeManager.StudioSystem.getLowLevelSystem(out lowlevel);
+        System.Random random = new System.Random();
 
+        offsetWave = random.Next(0, 5);
+        switch (random.Next(0, 5))
+        {
+            case 0:
+                {
+                    frequency = 220f;
+                    break;
+                }
+            case 1:
+                {
+                    frequency = 440f;
+                    break;
+                }
+            case 2:
+                {
+                    frequency = 880f;
+                    break;
+                }
+            case 3:
+                {
+                    frequency = 1760f;
+                    break;
+                }
+            case 4:
+                {
+                    frequency = 110f;
+                    break;
+                }
+            case 5:
+                {
+                    frequency = 3520f;
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
+        }
+
+      
+        lowlevel.createDSPByType(DSP_TYPE.OSCILLATOR, out sine);
+        sine.setParameterFloat(1, (float)frequency);
+
+        lowlevel.playDSP(sine, null, true, out channel);
+        channel.setMode(MODE._3D |MODE._3D_LINEARROLLOFF);
         channel.set3DMinMaxDistance(minDist * DISTANCEFACTOR, maxDist * DISTANCEFACTOR);
         channel.set3DAttributes(ref pos1, ref vel1, ref vel1);
+        channel.setVolume(0.3f);
         channel.setPaused(false);
     }
 
-    private static float t1 = 0, t2 = 0;        // time
-    private static float v1 = 0, v2 = 0;        // velocity
 
-
-    private static FMOD.RESULT PCMREADCALLBACK(IntPtr soundraw, IntPtr data, uint datalen)
-    {
-        unsafe
-        {
-            uint count;
-
-            short* stereo16bitbuffer = (short*)data.ToPointer();
-
-            for (count = 0; count < (datalen >> 2); count++)        // >>2 = 16bit stereo (4 bytes per sample)
-            {
-                *stereo16bitbuffer++ = (short)(Math.Sin(t1) * 32767.0f);    // left channel
-                *stereo16bitbuffer++ = (short)(Math.Sin(t2) * 32767.0f);    // right channel
-
-                t1 += 0.01f + v1;
-                t2 += 0.0142f + v2;
-                v1 += (float)(Math.Sin(t1) * 0.002f);
-                v2 += (float)(Math.Sin(t2) * 0.002f);
-            }
-        }
-        return FMOD.RESULT.OK;
-    }
-
-    private static FMOD.RESULT PCMSETPOSCALLBACK(IntPtr soundraw, int subsound, uint pcmoffset, FMOD.TIMEUNIT postype)
-    {
-        /*
-            This is useful if the user calls Sound::setTime or Sound::setPosition and you want to seek your data accordingly.
-        */
-
-        return FMOD.RESULT.OK;
-    }
-    // Update is called once per frame
     void Update () {
-	
-	}
+        channel.setPaused(true);
+        FMOD.VECTOR pos1 = new FMOD.VECTOR();
+        pos1.x = gameObject.transform.position.x; pos1.y = gameObject.transform.position.y; pos1.z = gameObject.transform.position.z;
+        FMOD.VECTOR vel1 = new FMOD.VECTOR();
+        FMOD.VECTOR v2 = new FMOD.VECTOR();
+        v2.x = 0.0f; v2.y = 0.0f; v2.z = 0.0f;
+        vel1.x = pos1.x - lastPos.x; vel1.y = pos1.y - lastPos.y; vel1.z = pos1.z - lastPos.z;
+
+        lastPos = pos1;
+        //UnityEngine.Debug.Log(etab);
+
+        double myFreq = frequency;
+        myFreq += frequency * etab[0] + frequency * etab[1];
+        myFreq = (myFreq % 1000.0f) + 80.0f;
+        sine.setParameterFloat(1, (float)myFreq);
+        sine.setParameterInt(0, (int)((Math.Round(5*etab[0])+offsetWave))%5);
+        channel.set3DMinMaxDistance(minDist * DISTANCEFACTOR, maxDist * DISTANCEFACTOR);
+        channel.set3DAttributes(ref pos1, ref vel1, ref vel1);
+        channel.setVolume(0.4f*etab[3]);
+        channel.setPaused(false);
+        //lowlevel.update();
+    }
 
     internal void doVoice()
     {

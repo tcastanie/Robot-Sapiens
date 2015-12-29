@@ -25,6 +25,7 @@ public class botControl : MonoBehaviour {
 
     public botVoiceBox voice = null;
     double reward = 0;
+    public float[] emoTab = new float[4];
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class botControl : MonoBehaviour {
         rb.centerOfMass = new Vector3(0.0f,0.0f,0.0f);
         Connect();
         currentTorque = new float[Wheels.Length];
+        emoTab[0] = 0.5f; emoTab[1] = 0.5f; emoTab[2] = 0.5f; emoTab[3] = 0.5f;
     }
 	
 	void Update () {
@@ -42,33 +44,22 @@ public class botControl : MonoBehaviour {
         float speed = rb.velocity.sqrMagnitude;
         for (int i = 0; i < Wheels.Length; i++)
         {
-            /*
-            if (currentTorque[i] <= 0.001 && currentTorque[i] >= -0.001)
-            {
-                Debug.Log("Brake ! " + currentTorque[i]);
-                Wheels[i].brakeTorque = 90.0f;
-            }
-            else
-            {
-                Wheels[i].brakeTorque = 0.0f;
-            }*/
-            /*
-            if ((Wheels[i].motorTorque > 0 && currentTorque[i] < 0)|| (Wheels[i].motorTorque < 0 && currentTorque[i] > 0))
-            {
-                Debug.Log("Brake ! " + currentTorque[i]);
-                Wheels[i].brakeTorque = 90.0f;
-            }
-            else
-            {
-                Wheels[i].brakeTorque = 0.0f;
-            }*/
-            /*
-               Debug.Log((float)((1.0 - Math.Abs(currentTorque[i])) ));
-            Wheels[i].brakeTorque = (float)((1.0 - Math.Abs(currentTorque[i]))*0.1);*/
             Wheels[i].motorTorque = currentTorque[i] * maxTorque * (1.0f - (speed / topSpeed));
         }
+        compEmo();
         if (voice != null)
             voice.doVoice();
+    }
+
+    private void compEmo()
+    {
+        emoTab[0] = (Wheels[0].motorTorque / (maxTorque * 2.0f)) + 0.5f;
+        emoTab[1] = (Wheels[1].motorTorque / (maxTorque * 2.0f)) + 0.5f;
+        emoTab[2] = 0.0f;
+        for (int i = 0; i < sensors.Length; i++)
+            emoTab[2] += (float)((float)getNormalisedSensorData(sensors[i])/ (float)sensors.Length);
+        emoTab[3] = 0.5f;
+
     }
 
     private void sendReward()

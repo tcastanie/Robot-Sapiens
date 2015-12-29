@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class IRDetectorScript : abstractSensorScript{
-    public float maxDistance = 100.0f;
-    public float distance = 50.0f;
+    public float maxDistance = 30.0f;
+    public float distance = 15.0f;
     private RaycastHit hit;
     private Transform emitter;
     int layerMask = 1 << 8;
