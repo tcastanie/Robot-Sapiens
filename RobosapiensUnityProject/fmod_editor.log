@@ -26,8 +26,8 @@
 [LOG] Thread::initThread                       : - Stacksize 65536.  Stack pointer 0000000000000000 : usesemaphore = 0 : sleeptime = 1
 [LOG] Thread::callback                         : * FMOD Studio load thread started
 [LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)
-[ERR] FMOD_OS_File_Open                        : GetLastError = 00000020 (filename = ..\ProjetSon\musique\fmodProjMusique\Build\Desktop\Master Bank.bank)
-[ERR] BankLoader::openBankFile                 : Failed to open file '..\ProjetSon\musique\fmodProjMusique\Build\Desktop\Master Bank.bank'
+[LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)
+[LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)
 [LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)
 [LOG] Thread::callback                         : * FMOD Studio load thread finished
 [LOG] Thread::close                            : FMOD Studio load thread thread destroyed
