@@ -115,11 +115,12 @@ public class NNAgent extends AbstractAgent{
 		else
 		{
 			Genome gen = new Genome();
-			if(gen.load(RobotServerGlobals.botSavePath+"/"+nem+"/"+nem+RobotServerGlobals.genomeFileExtension))
+			File f  = new File(RobotServerGlobals.botSavePath+"/"+nem+"/"+nem+RobotServerGlobals.genomeFileExtension);
+			if(f.exists() && f.length()> 0&&gen.load(RobotServerGlobals.botSavePath+"/"+nem+"/"+nem+RobotServerGlobals.genomeFileExtension))
 				return gen;
 			else
 			{
-				File  f = new File(RobotServerGlobals.botSavePath+"/"+nem);
+				f = new File(RobotServerGlobals.botSavePath+"/"+nem);
 				f.mkdirs();
 				f = new File(RobotServerGlobals.botSavePath+"/"+nem+"/"+nem+RobotServerGlobals.genomeFileExtension);
 				
