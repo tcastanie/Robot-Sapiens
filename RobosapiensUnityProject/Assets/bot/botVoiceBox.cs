@@ -102,7 +102,7 @@ public class botVoiceBox : MonoBehaviour {
         sine.setParameterInt(0, (int)((Math.Round(5*etab[0])+offsetWave))%5);
         channel.set3DMinMaxDistance(minDist * DISTANCEFACTOR, maxDist * DISTANCEFACTOR);
         channel.set3DAttributes(ref pos1, ref vel1, ref vel1);
-        channel.setVolume(0.4f*etab[3]);
+        channel.setVolume(0.4f*etab[2]);
         channel.setPaused(false);
         //lowlevel.update();
     }

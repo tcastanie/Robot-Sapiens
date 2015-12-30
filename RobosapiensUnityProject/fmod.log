@@ -36,58 +36,54 @@
 [LOG] Thread::initThread                       : Initializing FMOD nonblocking thread (0).  priority 1
 [LOG] Thread::initThread                       : - Stacksize 81920.  Stack pointer 0000000000000000 : usesemaphore = 1 : sleeptime = 0
 [LOG] Thread::callback                         : * FMOD nonblocking thread (0) started
-[LOG] SystemI::createSound                     : setdata soundi = 000000003585C6C8 : node = 0000000021570510
-[LOG] SystemI::createSound                     : add node to async list : head = 0000000021570C70.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003585C6C8
+[LOG] SystemI::createSound                     : setdata soundi = 000000002D1FD4E8 : node = 000000002D1FD690
+[LOG] SystemI::createSound                     : add node to async list : head = 000000002D1FD930.  list count = 0
 [LOG] SystemI::createSound                     : filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
 [LOG] SystemI::createSoundInternal             :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] OutputSoftware::createSample             :     lengthpcm 0, lengthbytes 0, channels 0, format 0, freq 0, mode 00000000
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 216
-ls 0, format 0, freq 0, mode 00000000
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6415072
-de = 00000000210BE840
+: node = 000000002D1FEB30
+[LOG] SystemI::createSound                     :     add node to async list : head = 000000002D1FD930.  list count = 0
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14688
-[LOG] SystemI::createSound                     :     add node to async list : head = 0000000021570C70.  list count = 0
+[LOG] SystemI::createSound                     :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000000021570618
- to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-nels 0, format 0, freq 0, mode 00000000
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-8 : node = 00000000216171C0
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-0000000021570C70.  list count = 1
-[LOG] SystemI::createSound                     :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
-[LOG] SystemI::createSoundInternal             :     Format has 1 subsounds.
-[LOG] SystemI::createSoundInternal             :     Create as FMOD_CREATESAMPLE
-Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     Multi-sample sound (1 subsounds), create a sample container.
-[LOG] OutputSoftware::createSample             :     lengthpcm 0, lengthbytes 0, channels 0, format 0, freq 0, mode 00000000
-[LOG] SystemI::createSound                     :     setdata soundi = 000000003585C538 : node = 00000000328F4DA0
-[LOG] SystemI::createSample                    :     mode 0a010202 length 9792226 samples, lengthbytes 538176
-unt = 2
-[LOG] SystemI::createSound                     :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
-[LOG] SystemI::createSample                    :     output = 000000002D278338
 [LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] OutputSoftware::createSample             :     lengthpcm 9792226, lengthbytes 538176, channels 2, format 2, freq 48000, mode 0a01020a
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000002D1FD798
+0, freq 0, mode 00000000
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+8 : node = 000000002D1FF600
+[LOG] SystemI::createSound                     :     add node to async list : head = 000000002D1FD930.  list count = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSound                     :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     Format has 1 subsounds.
 [LOG] OutputSoftware::createSample             :     lengthpcm 0, lengthbytes 0, channels 0, format 0, freq 0, mode 00000000
-[LOG] SystemI::createSound                     :     setdata soundi = 000000003585B728 : node = 0000000034894D10
+[LOG] SystemI::createSound                     :     setdata soundi = 000000001ED6FBD8 : node = 000000001ED6FD80
+
+[LOG] SystemI::createSoundInternal             :     creating subsound 0/1
+[LOG] SystemI::createSound                     :     add node to async list : head = 000000002D1FD930.  list count = 2
+[LOG] SystemI::createSample                    :     mode 0a010202 length 9792226 samples, lengthbytes 538176
+[LOG] SystemI::createSound                     :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSample                    :     output = 000000002D104DB8
+ channels 0, format 0, freq 0, mode 00000000
+[LOG] OutputSoftware::createSample             :     lengthpcm 9792226, lengthbytes 538176, channels 2, format 2, freq 48000, mode 0a01020a
+[LOG] SystemI::createSound                     :     add node to async list : head = 000000002D1FD930.  list count = 3
 [LOG] SystemI::createSoundInternal             :     done.  OpenState now = FMOD_OPENSTATE_READY.
 
-[LOG] SystemI::createSound                     :     add node to async list : head = 0000000021570C70.  list count = 3
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003585C6C8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000002D1FD4E8
 [LOG] SystemI::createSound                     : filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-p/Master Bank.bank : mode 0a010202
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000002D1FE988
+[LOG] OutputSoftware::createSample             :     lengthpcm 0, lengthbytes 0, channels 0, format 0, freq 0, mode 00000000
+esktop/Master Bank.bank : mode 0a010202
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 216
-ls 0, format 0, freq 0, mode 00000000
-[LOG] SystemI::createSound                     :     setdata soundi = 000000003585BA48 : node = 0000000034894E50
+[LOG] SystemI::createSound                     :     setdata soundi = 000000002D1FF728 : node = 000000002D1FF8D0
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 6415072
+002D1FD930.  list count = 3
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14688
-000021570C70.  list count = 3
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000210BE948
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000002D1FEC38
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
@@ -97,19 +93,19 @@ ls 0, format 0, freq 0, mode 00000000
 [LOG] SystemI::createSoundInternal             :     creating subsound 0/1
 [LOG] SystemI::createSample                    :     mode 0a010202 length 9792226 samples, lengthbytes 1469024
 [LOG] SystemI::createSample                    :     channels = 2
-[LOG] SystemI::createSample                    :     output = 000000002D278338
+[LOG] SystemI::createSample                    :     output = 000000002D104DB8
 [LOG] OutputSoftware::createSample             :     lengthpcm 9792226, lengthbytes 1469024, channels 2, format 2, freq 48000, mode 0a01020a
 [LOG] SystemI::createSoundInternal             :     done.  OpenState now = FMOD_OPENSTATE_READY.
 
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003585C3A8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000002D1FE988
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000002D1FF458
 [WRN] SoundSourceInstrumentInstance::startChannelIfReady : Loading delay exceeded, sound may play at incorrect time
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003585BEF8
 [LOG] SystemI::createSoundInternal             :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 216
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 6415072
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14688
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000216172C8
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000002D1FF708
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
@@ -119,19 +115,19 @@ ls 0, format 0, freq 0, mode 00000000
 [LOG] SystemI::createSoundInternal             :     creating subsound 0/1
 [LOG] SystemI::createSample                    :     mode 0a010202 length 9792226 samples, lengthbytes 405504
 [LOG] SystemI::createSample                    :     channels = 2
-[LOG] SystemI::createSample                    :     output = 000000002D278338
+[LOG] SystemI::createSample                    :     output = 000000002D104DB8
 [LOG] OutputSoftware::createSample             :     lengthpcm 9792226, lengthbytes 405504, channels 2, format 2, freq 48000, mode 0a01020a
 [LOG] SystemI::createSoundInternal             :     done.  OpenState now = FMOD_OPENSTATE_READY.
 
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003585BEF8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003585C538
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000002D1FF458
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000001ED6FBD8
 [LOG] SystemI::createSoundInternal             :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 216
 [WRN] SoundSourceInstrumentInstance::startChannelIfReady :     Loading delay exceeded, sound may play at incorrect time
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 216
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 6415072
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14688
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000328F4EA8
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000001ED6FE88
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
@@ -141,19 +137,19 @@ ls 0, format 0, freq 0, mode 00000000
 [LOG] SystemI::createSoundInternal             :     creating subsound 0/1
 [LOG] SystemI::createSample                    :     mode 0a010202 length 9792226 samples, lengthbytes 346944
 [LOG] SystemI::createSample                    :     channels = 2
-[LOG] SystemI::createSample                    :     output = 000000002D278338
+[LOG] SystemI::createSample                    :     output = 000000002D104DB8
 [LOG] OutputSoftware::createSample             :     lengthpcm 9792226, lengthbytes 346944, channels 2, format 2, freq 48000, mode 0a01020a
 [LOG] SystemI::createSoundInternal             :     done.  OpenState now = FMOD_OPENSTATE_READY.
 
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003585C538
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003585B728
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000001ED6FBD8
+[WRN] SoundSourceInstrumentInstance::startChannelIfReady : Loading delay exceeded, sound may play at incorrect time
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000001ED702A8
 [LOG] SystemI::createSoundInternal             :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 216
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 6415072
-[WRN] SoundSourceInstrumentInstance::startChannelIfReady :     Loading delay exceeded, sound may play at incorrect time
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14688
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000000034894E18
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000001ED70558
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
@@ -163,19 +159,19 @@ ls 0, format 0, freq 0, mode 00000000
 [LOG] SystemI::createSoundInternal             :     creating subsound 0/1
 [LOG] SystemI::createSample                    :     mode 0a010202 length 9792226 samples, lengthbytes 1544640
 [LOG] SystemI::createSample                    :     channels = 2
-[LOG] SystemI::createSample                    :     output = 000000002D278338
+[LOG] SystemI::createSample                    :     output = 000000002D104DB8
 [LOG] OutputSoftware::createSample             :     lengthpcm 9792226, lengthbytes 1544640, channels 2, format 2, freq 48000, mode 0a01020a
 [LOG] SystemI::createSoundInternal             :     done.  OpenState now = FMOD_OPENSTATE_READY.
 
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003585B728
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000003585BA48
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000001ED702A8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000002D1FF728
+[WRN] SoundSourceInstrumentInstance::startChannelIfReady : Loading delay exceeded, sound may play at incorrect time
 [LOG] SystemI::createSoundInternal             :     filename = D:\git\Robot-Sapiens\ProjetSon\musique\fmodProjMusique\Build\Desktop/Master Bank.bank : mode 0a010202
-[WRN] SoundSourceInstrumentInstance::startChannelIfReady :     Loading delay exceeded, sound may play at incorrect time
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 216
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 6415072
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14688
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000000034894F58
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000002D1FF9D8
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
@@ -185,14 +181,12 @@ ls 0, format 0, freq 0, mode 00000000
 [LOG] SystemI::createSoundInternal             :     creating subsound 0/1
 [LOG] SystemI::createSample                    :     mode 0a010202 length 9792226 samples, lengthbytes 2100384
 [LOG] SystemI::createSample                    :     channels = 2
-[LOG] SystemI::createSample                    :     output = 000000002D278338
+[LOG] SystemI::createSample                    :     output = 000000002D104DB8
 [LOG] OutputSoftware::createSample             :     lengthpcm 9792226, lengthbytes 2100384, channels 2, format 2, freq 48000, mode 0a01020a
 [LOG] SystemI::createSoundInternal             :     done.  OpenState now = FMOD_OPENSTATE_READY.
 
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000003585BA48
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000002D1FF728
 [WRN] SoundSourceInstrumentInstance::startChannelIfReady : Loading delay exceeded, sound may play at incorrect time
-[LOG] SystemI::mixerSuspend                    : Suspending output.
-[LOG] SystemI::mixerResume                     : Resuming output.
 [WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
 [WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
 [WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
@@ -283,398 +277,30 @@ ls 0, format 0, freq 0, mode 00000000
 [WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
 [WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
 [WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[LOG] SystemI::mixerSuspend                    : Suspending output.
-[LOG] SystemI::mixerResume                     : Resuming output.
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[WRN] ChannelI::forceVirtual                   : Ignoring force virtual since channel just went real
-[LOG] SoundI::release                          : (null) (000000003585C6C8)
-[LOG] SoundI::release                          : release subsounds. (000000003585C6C8)
-[LOG] SoundI::release                          :     (null) (000000003585BBD8)
-[LOG] SoundI::release                          : release codec. (000000003585C6C8)
-[LOG] SoundI::release                          : (null) (000000003585C3A8)
-[LOG] SoundI::release                          : release subsounds. (000000003585C3A8)
-[LOG] SoundI::release                          :     (null) (000000003585B8B8)
-[LOG] SoundI::release                          : release codec. (000000003585C3A8)
-[LOG] SoundI::release                          : (null) (000000003585BEF8)
-[LOG] SoundI::release                          : release subsounds. (000000003585BEF8)
-[LOG] SoundI::release                          :     (null) (000000003585B598)
-[LOG] SoundI::release                          : release codec. (000000003585BEF8)
-[LOG] SoundI::release                          : (null) (000000003585C538)
-[LOG] SoundI::release                          : release subsounds. (000000003585C538)
-[LOG] SoundI::release                          :     (null) (000000003585BD68)
-[LOG] SoundI::release                          : release codec. (000000003585C538)
-[LOG] SoundI::release                          : (null) (000000003585B728)
-[LOG] SoundI::release                          : release subsounds. (000000003585B728)
-[LOG] SoundI::release                          :     (null) (000000003585C088)
-[LOG] SoundI::release                          : release codec. (000000003585B728)
-[LOG] SoundI::release                          : (null) (000000003585BA48)
-[LOG] SoundI::release                          : release subsounds. (000000003585BA48)
-[LOG] SoundI::release                          :     (null) (000000003585C218)
-[LOG] SoundI::release                          : release codec. (000000003585BA48)
+[LOG] SoundI::release                          : (null) (000000002D1FD4E8)
+[LOG] SoundI::release                          : release subsounds. (000000002D1FD4E8)
+[LOG] SoundI::release                          :     (null) (000000001ED70578)
+[LOG] SoundI::release                          : release codec. (000000002D1FD4E8)
+[LOG] SoundI::release                          : (null) (000000002D1FE988)
+[LOG] SoundI::release                          : release subsounds. (000000002D1FE988)
+[LOG] SoundI::release                          :     (null) (000000002D1F8808)
+[LOG] SoundI::release                          : release codec. (000000002D1FE988)
+[LOG] SoundI::release                          : (null) (000000002D1FF458)
+[LOG] SoundI::release                          : release subsounds. (000000002D1FF458)
+[LOG] SoundI::release                          :     (null) (000000002D075F58)
+[LOG] SoundI::release                          : release codec. (000000002D1FF458)
+[LOG] SoundI::release                          : (null) (000000001ED6FBD8)
+[LOG] SoundI::release                          : release subsounds. (000000001ED6FBD8)
+[LOG] SoundI::release                          :     (null) (000000002D076328)
+[LOG] SoundI::release                          : release codec. (000000001ED6FBD8)
+[LOG] SoundI::release                          : (null) (000000001ED702A8)
+[LOG] SoundI::release                          : release subsounds. (000000001ED702A8)
+[LOG] SoundI::release                          :     (null) (000000002D0766F8)
+[LOG] SoundI::release                          : release codec. (000000001ED702A8)
+[LOG] SoundI::release                          : (null) (000000002D1FF728)
+[LOG] SoundI::release                          : release subsounds. (000000002D1FF728)
+[LOG] SoundI::release                          :     (null) (000000002D076AC8)
+[LOG] SoundI::release                          : release codec. (000000002D1FF728)
 [LOG] Thread::callback                         : * FMOD Studio update thread finished
 [LOG] Thread::close                            : FMOD Studio update thread thread destroyed
 [LOG] Thread::callback                         : * FMOD Studio load thread finished
