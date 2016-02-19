@@ -36,6 +36,6 @@ public class IRDetectorScript : abstractSensorScript{
             distance = maxDistance;
         }
         normalizedValue = distance / maxDistance;
-//        Debug.Log(distance);
+       
     }
 }

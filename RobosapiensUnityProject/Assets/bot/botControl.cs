@@ -24,16 +24,24 @@ public class botControl : MonoBehaviour {
     private Rigidbody rb;
 
     public botVoiceBox voice = null;
-    double reward = 0;
+    double reward = 50;
     public float[] emoTab = new float[4];
+
+    public static int botCount = 0;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0.0f,0.0f,0.0f);
+        if (BotName.Equals("1"))
+        {
+            botCount++;
+            BotName = (botCount).ToString();
+        }
         Connect();
         currentTorque = new float[Wheels.Length];
         emoTab[0] = 0.5f; emoTab[1] = 0.5f; emoTab[2] = 0.5f; emoTab[3] = 0.5f;
+       
     }
 	
 	void Update () {

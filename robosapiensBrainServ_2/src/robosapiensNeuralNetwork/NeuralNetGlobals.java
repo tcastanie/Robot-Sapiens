@@ -11,7 +11,7 @@ public class NeuralNetGlobals {
 	public static String motivator = "motivator";
 
 	// TYPE 1
-	public static int nHiddenLayer = 1;
+	public static int nHiddenLayer = 2;
 	public static int hiddenLayerSize = 12;
 	public static int FEELER_COUNT = 9;
 
@@ -24,7 +24,7 @@ public class NeuralNetGlobals {
 	*/
 	
 	public static int NN_OUTPUT_COUNT = 2;
-	public static int MAX_GENOME_POPULATION = 20;
+	public static int MAX_GENOME_POPULATION = 50;
 	
 	
 	

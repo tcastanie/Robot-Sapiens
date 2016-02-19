@@ -162,6 +162,7 @@ public class GeneticAlgorithm {
 					}
 				}
 			}
+			
 
 			if (bestIndex != -1)
 			{
@@ -266,7 +267,7 @@ public class GeneticAlgorithm {
 		}
 		
 		// Find the 4 best genomes.
-		this.GetBestCases(4, bestGenomes);
+		this.GetBestCases(8, bestGenomes);
 
 		// Breed them with each other twice to form 3*2 + 2*2 + 1*2 = 12 children
 		ArrayList<Genome> children = new ArrayList<Genome>();
@@ -322,10 +323,25 @@ public class GeneticAlgorithm {
 
 		// For the remainding n population, add some random kiddies.
 		int remainingChildren = (totalPopulation - children.size());
+		boolean mutants = false;
 		for (int i = 0; i < remainingChildren; i++)
 		{
-
-			children.add(this.CreateNewGenome(bestGenomes.get(0).weights.size()));
+			if(mutants)
+			{
+				baby1 = new Genome();
+				baby2 = new Genome();
+				CrossBreed(bestGenomes.get((int)(Math.random()*bestGenomes.size())), bestGenomes.get((int)(Math.random()*bestGenomes.size())), baby1, baby2);
+				Mutate(baby1);
+				Mutate(baby2);
+				children.add(baby1);
+				children.add(baby2);
+				mutants = !mutants;		
+			}
+			else
+			{
+				children.add(this.CreateNewGenome(bestGenomes.get(0).weights.size()));
+				mutants = !mutants;		
+			}
 		}
 		for(Genome g : Top10OfAllTimes)
 		{
@@ -338,6 +354,7 @@ public class GeneticAlgorithm {
 		currentGenome = -1;
 		generation++;
 	}
+
 
 	void ClearPopulation()
 	{

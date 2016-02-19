@@ -4,7 +4,7 @@ using System;
 
 public class radarHealthPack : abstractSensorScript{
 
-    public float distanceMax;//la distance max de détection
+    public int distanceMax = 2;//la distance max de détection
 
     float xPlayer, yPlayer;//la position x et z du robot
 
@@ -26,6 +26,7 @@ public class radarHealthPack : abstractSensorScript{
         //return float de 0 en faisant face, à 0.5 en tournant le dos au health_pack
         float retour;
         GameObject[] healthPacks = GameObject.FindGameObjectsWithTag("health_pack");
+        //Debug.Log(healthPacks.Length);
         float smallestDist = distMax;
         int idPlusProche = 0;
         for(int i = 0; i<healthPacks.Length; i++) {
@@ -38,7 +39,9 @@ public class radarHealthPack : abstractSensorScript{
             }
         }
         //Debug.Log(idPlusProche);
-        if (smallestDist >= distanceMax) {
+        //Debug.Log(smallestDist);
+        //Debug.Log(distMax);
+        if (smallestDist >= distMax) {
             retour = 0;
         } else {
             Vector3 targetDir = healthPacks[idPlusProche].transform.position - transform.position;
@@ -59,7 +62,7 @@ public class radarHealthPack : abstractSensorScript{
         xPlayer = GetComponent<Transform>().position.x;//récupère les coordonnées x et z du robot
         yPlayer = GetComponent<Transform>().position.z;
         //float rep = radar( distanceMax );
-        normalizedValue = 1.0 - radar(distanceMax);
-        //Debug.Log("réponse radar HP :" + rep);
+        normalizedValue = 1.0f - (radar((float)distanceMax) * 0.70f);
+        
     }
 }
